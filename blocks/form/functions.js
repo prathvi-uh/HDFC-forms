@@ -61,7 +61,7 @@ function maskMobileNumber(mobileNumber) {
  * @param {scope} globals
  */
 function startOtpTimer(globals) {
-  const timerField = globals.form.login_otp_panel.timer;
+  const timerField = globals.form.otp_verification.timer.value;
   let seconds = 30;
 
   if (!timerField) {
@@ -107,7 +107,7 @@ function startOtpTimer(globals) {
  * @param {scope} globals
  */
 function stopOtpTimer(globals) {
-  const timerField = globals.form.login_otp_panel.timer;
+  const timerField =globals.form.otp_verification.timer.value;
 
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
