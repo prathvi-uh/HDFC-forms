@@ -56,7 +56,74 @@ function maskMobileNumber(mobileNumber) {
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
 
+/* timer function */
+/**
+ * @param {scope} globals
+ */
+function startOtpTimer(globals) {
+  const timerField = globals.form.login_otp_panel.timer;
+  let seconds = 30;
+
+  if (!timerField) {
+    return '00:30';
+  }
+
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+    window.otpTimerInterval = null;
+  }
+
+  globals.functions.setProperty(timerField, {
+    value: '00:30',
+  });
+
+  window.otpTimerInterval = setInterval(() => {
+    seconds -= 1;
+
+    if (seconds >= 10) {
+      globals.functions.setProperty(timerField, {
+        value: `00:${seconds}`,
+      });
+    } else if (seconds >= 0) {
+      globals.functions.setProperty(timerField, {
+        value: `00:0${seconds}`,
+      });
+    }
+
+    if (seconds <= 0) {
+      clearInterval(window.otpTimerInterval);
+      window.otpTimerInterval = null;
+
+      globals.functions.setProperty(timerField, {
+        value: 'Time expired',
+      });
+    }
+  }, 1000);
+
+  return '00:30';
+}
+
+/**
+ * @param {scope} globals
+ */
+function stopOtpTimer(globals) {
+  const timerField = globals.form.login_otp_panel.timer;
+
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+    window.otpTimerInterval = null;
+  }
+
+  if (timerField) {
+    globals.functions.setProperty(timerField, {
+      value: 'Validated',
+    });
+  }
+
+  return 'Validated';
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer,
 };

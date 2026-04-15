@@ -266,3 +266,56 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+
+/* mine header */
+.header {
+  background: #03164a;
+  min-height: 72px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  border-radius: 0;
+}
+
+.header::before {
+  content: "HDFC BANK";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a2d7c;
+  color: #fff;
+  font-size: 14px;      
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  height: 28px;         
+  padding: 0 14px 0 24px; 
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: inset 10px 0 0 #e21b23; 
+
+/* right secure pill */
+.header::after {
+  content: "100% SAFE";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #39b56a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 4px 10px;
+  line-height: 1;
+}
+
+/* hide any inner text */
+.header > * {
+  display: none;
+}
+}
