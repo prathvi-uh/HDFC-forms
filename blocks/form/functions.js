@@ -113,14 +113,6 @@ function stopOtpTimer(globals) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
   }
-
-  if (timerField) {
-    globals.functions.setProperty(timerField, {
-      value: 'Validated',
-    });
-  }
-
-  return 'Validated';
 }
 
 // eslint-disable-next-line import/prefer-default-export
