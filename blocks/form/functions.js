@@ -56,12 +56,60 @@ function maskMobileNumber(mobileNumber) {
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
 
-/* timer function */
+window.otpTimerInterval = window.otpTimerInterval || null;
+window.otpResendAttemptsLeft = typeof window.otpResendAttemptsLeft === 'number'
+  ? window.otpResendAttemptsLeft
+  : 3;
+
 /**
+ * Updates attempts text
+ * Change path if needed
  * @param {scope} globals
+ * @returns {string}
+ */
+function updateOtpAttemptsInfo(globals) {
+  const attemptsField = globals.form.otp_verification.attempts_info;
+
+  if (attemptsField) {
+    globals.functions.setProperty(attemptsField, {
+      value: `${window.otpResendAttemptsLeft} attempt(s) left`,
+    });
+  }
+
+  return '';
+}
+
+/**
+ * Initialize attempts and hide resend button
+ * Change paths if needed
+ * @param {scope} globals
+ * @returns {string}
+ */
+function initOtpAttempts(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+
+  window.otpResendAttemptsLeft = 3;
+  updateOtpAttemptsInfo(globals);
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: false,
+      enabled: false,
+    });
+  }
+
+  return '';
+}
+
+/**
+ * Start 30-second timer
+ * Change paths if needed
+ * @param {scope} globals
+ * @returns {string}
  */
 function startOtpTimer(globals) {
   const timerField = globals.form.otp_verification.timer;
+  const resendBtn = globals.form.otp_verification.resend_otp;
   let seconds = 30;
 
   if (!timerField) {
@@ -73,9 +121,18 @@ function startOtpTimer(globals) {
     window.otpTimerInterval = null;
   }
 
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: false,
+      enabled: false,
+    });
+  }
+
   globals.functions.setProperty(timerField, {
     value: '00:30',
   });
+
+  updateOtpAttemptsInfo(globals);
 
   window.otpTimerInterval = setInterval(() => {
     seconds -= 1;
@@ -95,8 +152,16 @@ function startOtpTimer(globals) {
       window.otpTimerInterval = null;
 
       globals.functions.setProperty(timerField, {
-        value: 'Time expired',
+        value: '00:00',
       });
+
+      if (resendBtn) {
+        const canResend = window.otpResendAttemptsLeft > 0;
+        globals.functions.setProperty(resendBtn, {
+          visible: canResend,
+          enabled: canResend,
+        });
+      }
     }
   }, 1000);
 
@@ -104,18 +169,47 @@ function startOtpTimer(globals) {
 }
 
 /**
+ * Stop timer only
  * @param {scope} globals
+ * @returns {string}
  */
 function stopOtpTimer(globals) {
-  const timerField =globals.form.otp_verification.timer;
-
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
   }
+
+  return '';
 }
 
+/**
+ * Handle resend click:
+ * reduce attempts, hide resend button, restart timer
+ * Change paths if needed
+ * @param {scope} globals
+ * @returns {string}
+ */
+function handleResendOtp(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+
+  if (window.otpResendAttemptsLeft > 0) {
+    window.otpResendAttemptsLeft -= 1;
+  }
+
+  updateOtpAttemptsInfo(globals);
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: false,
+      enabled: false,
+    });
+  }
+
+  startOtpTimer(globals);
+
+  return '';
+}
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, updateOtpAttemptsInfo, initOtpAttempts, startOtpTimer, stopOtpTimer, handleResendOtp,
 };
