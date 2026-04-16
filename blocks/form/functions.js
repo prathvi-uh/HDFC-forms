@@ -62,6 +62,8 @@ window.otpWrongAttempts =
 
 /**
  * Start 30 sec timer
+ * @param {scope} globals
+ * @returns {string}
  */
 function startOtpTimer(globals) {
   const timerField = globals.form.otp_verification.timer;
@@ -116,6 +118,8 @@ function startOtpTimer(globals) {
 
 /**
  * Stop timer
+ * @param {scope} globals
+ * @returns {string}
  */
 function stopOtpTimer(globals) {
   if (window.otpTimerInterval) {
@@ -127,8 +131,12 @@ function stopOtpTimer(globals) {
 }
 
 /**
- * Resend OTP (handles attempts)
- * 3 -> 2 -> 1 -> No attempts left
+ * Resend OTP helper
+ * Click 1 -> 2 attempts left
+ * Click 2 -> 1 attempt left
+ * Click 3 -> No attempts left
+ * @param {scope} globals
+ * @returns {string}
  */
 function handleResendOtp(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
@@ -138,12 +146,10 @@ function handleResendOtp(globals) {
   const validateBtn = globals.form.otp_verification.validate_otp;
   const messageField = globals.form.otp_verification.validation_message;
 
-  // 🔻 Reduce attempts
   if (window.otpWrongAttempts > 0) {
     window.otpWrongAttempts -= 1;
   }
 
-  // 🔥 Update attempts text
   if (attemptsField) {
     attemptsField.value =
       window.otpWrongAttempts > 0
@@ -151,12 +157,10 @@ function handleResendOtp(globals) {
         : 'No attempts left';
   }
 
-  // clear message
   if (messageField) {
     messageField.value = '';
   }
 
-  // 🚫 No attempts → stop everything
   if (window.otpWrongAttempts === 0) {
     stopOtpTimer(globals);
 
@@ -176,7 +180,6 @@ function handleResendOtp(globals) {
     return '';
   }
 
-  // restart timer
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
@@ -185,9 +188,9 @@ function handleResendOtp(globals) {
   }
 
   startOtpTimer(globals);
-
   return '';
 }
+
 /**
  * @param {scope} globals
  */
@@ -200,5 +203,5 @@ function debugForm(globals) {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleResendOtp, startOtpTimer, stopOtpTimer, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, debugForm,
 };
