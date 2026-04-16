@@ -87,7 +87,6 @@ function updateAttemptsInfo(globals) {
  * also auto-initializes attempts display if needed
  */
 function startOtpTimer(globals) {
-  const otpPanel = globals.form.otp_verification;
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
 
@@ -99,13 +98,6 @@ function startOtpTimer(globals) {
 
   if (typeof window.otpResendAttemptsLeft !== 'number') {
     window.otpResendAttemptsLeft = 3;
-  }
-
-  // show OTP panel only when timer starts
-  if (otpPanel) {
-    globals.functions.setProperty(otpPanel, {
-      visible: true,
-    });
   }
 
   updateAttemptsInfo(globals);
@@ -201,7 +193,6 @@ function handleResendOtp(globals) {
  * stops timer and resets attempts for next use
  */
 function handleOtpSuccess(globals) {
-  const otpPanel = globals.form.otp_verification;
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
 
@@ -224,15 +215,9 @@ function handleOtpSuccess(globals) {
     });
   }
 
-  // hide OTP panel again after success
-  if (otpPanel) {
-    globals.functions.setProperty(otpPanel, {
-      visible: false,
-    });
-  }
-
   return '';
 }
+
 /**
  * @param {scope} globals
  */
