@@ -218,6 +218,10 @@ function handleOtpSuccess(globals) {
   return '';
 }
 
+/**
+ * @param {scope} globals
+ */
+
 function handleOtpInvalid(globals) {
   // decrease attempts on invalid OTP
   if (typeof window.otpResendAttemptsLeft !== 'number') {
