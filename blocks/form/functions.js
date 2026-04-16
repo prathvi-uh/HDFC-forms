@@ -243,6 +243,20 @@ function handleInvalidOtp(globals) {
   return '';
 }
 
+function validateOtpAndHandle(globals) {
+  const messageField = globals.form.otp_verification.validation_message;
+
+  if (
+    messageField &&
+    typeof messageField.value === 'string' &&
+    messageField.value.toLowerCase().includes('invalid')
+  ) {
+    handleInvalidOtp(globals);
+  }
+
+  return '';
+}
+
 /**
  * @param {scope} globals
  */
