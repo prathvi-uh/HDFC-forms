@@ -223,6 +223,18 @@ function handleOtpSuccess(globals) {
  */
 
 function handleOtpInvalid(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+  const timerField = globals.form.otp_verification.timer;
+
+  // timer stop
+  stopOtpTimer();
+
+  if (timerField) {
+    globals.functions.setProperty(timerField, {
+      value: '00:00',
+    });
+  }
+
   // decrease attempts on invalid OTP
   if (typeof window.otpResendAttemptsLeft !== 'number') {
     window.otpResendAttemptsLeft = 3;
@@ -232,7 +244,7 @@ function handleOtpInvalid(globals) {
     window.otpResendAttemptsLeft -= 1;
   }
 
-  // update UI
+  // update attempts UI
   updateAttemptsInfo(globals);
 
   // keep submit enabled so user can retry
@@ -241,11 +253,13 @@ function handleOtpInvalid(globals) {
     { enabled: true }
   );
 
-  // disable resend until user clicks again / next flow
-  globals.functions.setProperty(
-    globals.form.otp_verification.resend_otp,
-    { visible: true, enabled: window.otpResendAttemptsLeft > 0 }
-  );
+  // show resend immediately
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: true,
+      enabled: window.otpResendAttemptsLeft > 0,
+    });
+  }
 
   // clear entered OTP
   globals.functions.setProperty(
@@ -253,9 +267,7 @@ function handleOtpInvalid(globals) {
     { value: '' }
   );
 
-  /**
-   * If attempts finished → update message
-   */
+  // if attempts finished
   if (window.otpResendAttemptsLeft <= 0) {
     globals.functions.setProperty(
       globals.form.otp_verification.attempt_info,
