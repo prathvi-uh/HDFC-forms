@@ -218,7 +218,12 @@ function handleOtpSuccess(globals) {
   return '';
 }
 
-function handleRetryOtp(globals) {
+function handleInvalidOtp(globals) {
+  const timerField = globals.form.otp_verification.timer;
+  const resendBtn = globals.form.otp_verification.resend_otp;
+
+  stopOtpTimer();
+
   if (typeof window.otpResendAttemptsLeft !== 'number') {
     window.otpResendAttemptsLeft = 3;
   }
@@ -229,7 +234,18 @@ function handleRetryOtp(globals) {
 
   updateAttemptsInfo(globals);
 
-  startOtpTimer(globals);
+  if (timerField) {
+    globals.functions.setProperty(timerField, {
+      value: '00:00',
+    });
+  }
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: window.otpResendAttemptsLeft > 0,
+      enabled: window.otpResendAttemptsLeft > 0,
+    });
+  }
 
   return '';
 }
@@ -246,5 +262,5 @@ function debugForm(globals) {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleRetryOtp, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleInvalidOtp, debugForm,
 };
