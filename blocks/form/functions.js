@@ -217,8 +217,13 @@ function handleOtpSuccess(globals) {
 
   return '';
 }
+function handleInvalidOtp() {
+  const globals = window.globals;
 
-function handleInvalidOtp(globals) {
+  if (!globals) {
+    return '';
+  }
+
   const resendBtn = globals.form.otp_verification.resend_otp;
   const timerField = globals.form.otp_verification.timer;
 
