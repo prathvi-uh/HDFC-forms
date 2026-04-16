@@ -66,7 +66,7 @@ window.otpResendAttemptsLeft =
  * internal helper
  */
 function updateAttemptsInfo(globals) {
-  const attemptsField = globals.form.otp_verification.attempts_info;
+  const attemptsField = globals.form.otp_verification.attempt_info;
 
   if (!attemptsField) {
     return '';
