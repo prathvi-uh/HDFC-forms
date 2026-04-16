@@ -218,6 +218,31 @@ function handleOtpSuccess(globals) {
   return '';
 }
 
+function handleInvalidOtp(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+
+  stopOtpTimer();
+
+  if (typeof window.otpResendAttemptsLeft !== 'number') {
+    window.otpResendAttemptsLeft = 3;
+  }
+
+  if (window.otpResendAttemptsLeft > 0) {
+    window.otpResendAttemptsLeft -= 1;
+  }
+
+  updateAttemptsInfo(globals);
+
+  if (resendBtn && window.otpResendAttemptsLeft > 0) {
+    globals.functions.setProperty(resendBtn, {
+      visible: true,
+      enabled: true,
+    });
+  }
+
+  return '';
+}
+
 /**
  * @param {scope} globals
  */
@@ -230,5 +255,5 @@ function debugForm(globals) {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleInvalidOtp, debugForm,
 };
