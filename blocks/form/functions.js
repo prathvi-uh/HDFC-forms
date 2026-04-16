@@ -243,15 +243,16 @@ function handleInvalidOtp(globals) {
   return '';
 }
 
-function validateOtpAndHandle(globals) {
-  const messageField = globals.form.otp_verification.validation_message;
+function validateOtpAndHandle(field) {
+  const form = field.form;
+  const messageField = form.otp_verification.validation_message;
 
   if (
     messageField &&
     typeof messageField.value === 'string' &&
     messageField.value.toLowerCase().includes('invalid')
   ) {
-    handleInvalidOtp(globals);
+    handleInvalidOtp({ form: form, functions: field.form.functions });
   }
 
   return '';
@@ -269,5 +270,5 @@ function debugForm(globals) {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleInvalidOtp, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleInvalidOtp, validateOtpAndHandle, debugForm,
 };
