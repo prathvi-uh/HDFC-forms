@@ -56,179 +56,51 @@ function maskMobileNumber(mobileNumber) {
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
 
-window.otpTimerInterval = window.otpTimerInterval || null;
-window.otpWrongAttempts = typeof window.otpWrongAttempts === 'number' ? window.otpWrongAttempts : 3;
- 
-/**
- * Initialize OTP state
- * @param {scope} globals
- * @returns {string}
- */
-function initOtpState(globals) {
-  const attemptsField = globals.form.otp_verification.attempts_info;
+function handleResendOtp(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
-  const validateBtn = globals.form.otp_verification.validate_otp;
-  const timerField = globals.form.otp_verification.timer;
- 
-  window.otpWrongAttempts = 3;
- 
-  if (window.otpTimerInterval) {
-    clearInterval(window.otpTimerInterval);
-    window.otpTimerInterval = null;
-  }
- 
-  if (attemptsField) {
-    globals.functions.setProperty(attemptsField, {
-      value: '3 attempts left',
-    });
-  }
- 
-  if (resendBtn) {
-    globals.functions.setProperty(resendBtn, {
-      visible: false,
-      enabled: false,
-    });
-  }
- 
-  if (validateBtn) {
-    globals.functions.setProperty(validateBtn, {
-      enabled: true,
-    });
-  }
- 
-  if (timerField) {
-    globals.functions.setProperty(timerField, {
-      value: '',
-    });
-  }
- 
-  return '';
-}
- 
-/**
- * Start 30 sec timer
- * @param {scope} globals
- * @returns {string}
- */
-function startOtpTimer(globals) {
-  const timerField = globals.form.otp_verification.timer;
-  const resendBtn = globals.form.otp_verification.resend_otp;
- 
-  let seconds = 30;
- 
-  if (!timerField) {
-    return '';
-  }
- 
-  if (window.otpTimerInterval) {
-    clearInterval(window.otpTimerInterval);
-    window.otpTimerInterval = null;
-  }
- 
-  if (resendBtn) {
-    globals.functions.setProperty(resendBtn, {
-      visible: false,
-      enabled: false,
-    });
-  }
- 
-  globals.functions.setProperty(timerField, {
-    value: '00:30',
-  });
- 
-  window.otpTimerInterval = setInterval(() => {
-    seconds -= 1;
- 
-    if (seconds >= 10) {
-      globals.functions.setProperty(timerField, {
-        value: `00:${seconds}`,
-      });
-    } else if (seconds >= 0) {
-      globals.functions.setProperty(timerField, {
-        value: `00:0${seconds}`,
-      });
-    }
- 
-    if (seconds <= 0) {
-      clearInterval(window.otpTimerInterval);
-      window.otpTimerInterval = null;
- 
-      globals.functions.setProperty(timerField, {
-        value: '00:00',
-      });
- 
-      if (resendBtn) {
-        globals.functions.setProperty(resendBtn, {
-          visible: true,
-          enabled: true,
-        });
-      }
-    }
-  }, 1000);
- 
-  return '';
-}
- 
-/**
- * Stop timer only
- * @param {scope} globals
- * @returns {string}
- */
-function stopOtpTimer(globals) {
-  if (window.otpTimerInterval) {
-    clearInterval(window.otpTimerInterval);
-    window.otpTimerInterval = null;
-  }
- 
-  return '';
-}
- 
-/**
- * Reduce attempts when wrong OTP entered
- * @param {scope} globals
- * @returns {string}
- */
-function reduceWrongOtpAttempts(globals) {
   const attemptsField = globals.form.otp_verification.attempts_info;
   const validateBtn = globals.form.otp_verification.validate_otp;
- 
+
+  // 🔴 Reduce attempts on resend click
   if (window.otpWrongAttempts > 0) {
     window.otpWrongAttempts -= 1;
   }
- 
+
+  // ✅ Update UI
   if (attemptsField) {
     globals.functions.setProperty(attemptsField, {
       value: `${window.otpWrongAttempts} attempts left`,
+      visible: true
     });
   }
- 
-  if (window.otpWrongAttempts === 0 && validateBtn) {
-    globals.functions.setProperty(validateBtn, {
-      enabled: false,
-    });
+
+  // ❌ Disable everything if no attempts left
+  if (window.otpWrongAttempts === 0) {
+    if (resendBtn) {
+      globals.functions.setProperty(resendBtn, {
+        enabled: false
+      });
+    }
+
+    if (validateBtn) {
+      globals.functions.setProperty(validateBtn, {
+        enabled: false
+      });
+    }
+
+    return '';
   }
- 
-  return '';
-}
- 
-/**
- * Resend OTP helper
- * Hides resend button and restarts timer
- * @param {scope} globals
- * @returns {string}
- */
-function handleResendOtp(globals) {
-  const resendBtn = globals.form.otp_verification.resend_otp;
- 
+
+  // 🔁 Normal resend flow
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
-      enabled: false,
+      enabled: false
     });
   }
- 
+
   startOtpTimer(globals);
- 
+
   return '';
 }
  
