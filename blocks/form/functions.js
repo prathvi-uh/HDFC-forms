@@ -233,12 +233,18 @@ function handleResendOtp(globals) {
   }
 
   if (attemptsField) {
+    const text =
+      window.otpWrongAttempts > 0
+        ? `${window.otpWrongAttempts} attempts left`
+        : 'No attempts left';
+
     globals.functions.setProperty(attemptsField, {
-      value:
-        window.otpWrongAttempts > 0
-          ? `${window.otpWrongAttempts} attempts left`
-          : 'No attempts left',
+      value: text,
+      visible: true
     });
+
+    // 🔥 force update
+    attemptsField.value = text;
   }
 
   if (window.otpWrongAttempts === 0) {
