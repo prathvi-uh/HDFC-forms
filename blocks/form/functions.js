@@ -222,29 +222,23 @@ function handleInvalidOtp(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
   const timerField = globals.form.otp_verification.timer;
 
-  // ensure attempts exist
   if (typeof window.otpResendAttemptsLeft !== 'number') {
     window.otpResendAttemptsLeft = 3;
   }
 
-  // decrease attempts
   if (window.otpResendAttemptsLeft > 0) {
     window.otpResendAttemptsLeft -= 1;
   }
 
   updateAttemptsInfo(globals);
-
-  // stop timer immediately
   stopOtpTimer();
 
-  // set timer to 00:00
   if (timerField) {
     globals.functions.setProperty(timerField, {
       value: '00:00',
     });
   }
 
-  // show resend button ONLY if attempts left
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: window.otpResendAttemptsLeft > 0,
