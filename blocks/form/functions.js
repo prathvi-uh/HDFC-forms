@@ -55,10 +55,9 @@ function maskMobileNumber(mobileNumber) {
   // Mask first 5 digits and keep the rest
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
-
 window.otpTimerInterval = window.otpTimerInterval || null;
 window.otpWrongAttempts = typeof window.otpWrongAttempts === 'number' ? window.otpWrongAttempts : 3;
- 
+
 /**
  * Initialize OTP state
  * @param {scope} globals
@@ -69,42 +68,49 @@ function initOtpState(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
   const validateBtn = globals.form.otp_verification.validate_otp;
   const timerField = globals.form.otp_verification.timer;
- 
+  const messageField = globals.form.otp_verification.validation_message;
+
   window.otpWrongAttempts = 3;
- 
+
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
   }
- 
+
   if (attemptsField) {
     globals.functions.setProperty(attemptsField, {
       value: '3 attempts left',
     });
   }
- 
+
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
       enabled: false,
     });
   }
- 
+
   if (validateBtn) {
     globals.functions.setProperty(validateBtn, {
       enabled: true,
     });
   }
- 
+
   if (timerField) {
     globals.functions.setProperty(timerField, {
       value: '',
     });
   }
- 
+
+  if (messageField) {
+    globals.functions.setProperty(messageField, {
+      value: '',
+    });
+  }
+
   return '';
 }
- 
+
 /**
  * Start 30 sec timer
  * @param {scope} globals
@@ -113,32 +119,32 @@ function initOtpState(globals) {
 function startOtpTimer(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
- 
+
   let seconds = 30;
- 
+
   if (!timerField) {
     return '';
   }
- 
+
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
   }
- 
+
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
       enabled: false,
     });
   }
- 
+
   globals.functions.setProperty(timerField, {
     value: '00:30',
   });
- 
+
   window.otpTimerInterval = setInterval(() => {
     seconds -= 1;
- 
+
     if (seconds >= 10) {
       globals.functions.setProperty(timerField, {
         value: `00:${seconds}`,
@@ -148,15 +154,15 @@ function startOtpTimer(globals) {
         value: `00:0${seconds}`,
       });
     }
- 
+
     if (seconds <= 0) {
       clearInterval(window.otpTimerInterval);
       window.otpTimerInterval = null;
- 
+
       globals.functions.setProperty(timerField, {
         value: '00:00',
       });
- 
+
       if (resendBtn) {
         globals.functions.setProperty(resendBtn, {
           visible: true,
@@ -165,10 +171,10 @@ function startOtpTimer(globals) {
       }
     }
   }, 1000);
- 
+
   return '';
 }
- 
+
 /**
  * Stop timer only
  * @param {scope} globals
@@ -179,59 +185,118 @@ function stopOtpTimer(globals) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
   }
- 
+
   return '';
 }
- 
+
 /**
  * Reduce attempts when wrong OTP entered
  * @param {scope} globals
- * @returns {string}
+ * @returns {number}
  */
 function reduceWrongOtpAttempts(globals) {
   const attemptsField = globals.form.otp_verification.attempts_info;
   const validateBtn = globals.form.otp_verification.validate_otp;
- 
+
   if (window.otpWrongAttempts > 0) {
     window.otpWrongAttempts -= 1;
   }
- 
+
   if (attemptsField) {
     globals.functions.setProperty(attemptsField, {
-      value: `${window.otpWrongAttempts} attempts left`,
+      value: `${window.otpWrongAttempts} ${window.otpWrongAttempts === 1 ? 'attempt' : 'attempts'} left`,
     });
   }
- 
+
   if (window.otpWrongAttempts === 0 && validateBtn) {
     globals.functions.setProperty(validateBtn, {
       enabled: false,
     });
   }
- 
+
+  return window.otpWrongAttempts;
+}
+
+/**
+ * Handle invalid OTP
+ * @param {scope} globals
+ * @returns {number}
+ */
+function handleInvalidOtp(globals) {
+  const messageField = globals.form.otp_verification.validation_message;
+  const attemptsLeft = reduceWrongOtpAttempts(globals);
+
+  if (messageField) {
+    globals.functions.setProperty(messageField, {
+      value: 'Invalid OTP',
+    });
+  }
+
+  return attemptsLeft;
+}
+
+/**
+ * Handle valid OTP
+ * @param {scope} globals
+ * @returns {string}
+ */
+function handleValidOtp(globals) {
+  const messageField = globals.form.otp_verification.validation_message;
+
+  if (messageField) {
+    globals.functions.setProperty(messageField, {
+      value: 'OTP validated successfully',
+    });
+  }
+
+  stopOtpTimer(globals);
   return '';
 }
- 
+
 /**
  * Resend OTP helper
- * Hides resend button and restarts timer
+ * Hides resend button, resets attempts and restarts timer
  * @param {scope} globals
  * @returns {string}
  */
 function handleResendOtp(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
- 
+  const validateBtn = globals.form.otp_verification.validate_otp;
+  const attemptsField = globals.form.otp_verification.attempts_info;
+  const messageField = globals.form.otp_verification.validation_message;
+
+  window.otpWrongAttempts = 3;
+
+  if (attemptsField) {
+    globals.functions.setProperty(attemptsField, {
+      value: '3 attempts left',
+    });
+  }
+
+  if (validateBtn) {
+    globals.functions.setProperty(validateBtn, {
+      enabled: true,
+    });
+  }
+
+  if (messageField) {
+    globals.functions.setProperty(messageField, {
+      value: '',
+    });
+  }
+
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
       enabled: false,
     });
   }
- 
+
   startOtpTimer(globals);
- 
+
   return '';
 }
- 
+
 /**
  * @param {scope} globals
  */
@@ -241,7 +306,6 @@ function debugForm(globals) {
   console.log('myForm', window.myForm);
   return '';
 }
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, initOtpState, startOtpTimer, stopOtpTimer,reduceWrongOtpAttempts, handleResendOtp, debugForm,
