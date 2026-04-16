@@ -266,34 +266,42 @@ function handleOtpInvalid(globals) {
   return '';
 }
 
-function handleOtpValidated(globals) {
-  const timerField = globals.form.otp_verification.timer;
-  const resendBtn = globals.form.otp_verification.resend_otp;
+function handleOtpValidated(field) {
+  const form = field.form;
+  const functions = form.functions;
+
+  const messageField = form.otp_verification.validation_message;
+
+  if (
+    messageField &&
+    messageField.value &&
+    messageField.value.toLowerCase().includes('invalid')
+  ) {
+    return ''; // skip if invalid
+  }
 
   stopOtpTimer();
 
   window.otpResendAttemptsLeft = 3;
 
-  if (timerField) {
-    globals.functions.setProperty(timerField, {
-      value: '',
-    });
-  }
+  functions.setProperty(
+    form.otp_verification.timer,
+    { value: '' }
+  );
 
-  if (resendBtn) {
-    globals.functions.setProperty(resendBtn, {
-      visible: false,
-      enabled: false,
-    });
-  }
+  functions.setProperty(
+    form.otp_verification.resend_otp,
+    { visible: false, enabled: false }
+  );
 
-  globals.functions.setProperty(
-    globals.form.otp_verification.attempt_info,
+  functions.setProperty(
+    form.otp_verification.attempt_info,
     { value: '' }
   );
 
   return '';
 }
+
 /**
  * @param {scope} globals
  */
