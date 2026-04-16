@@ -227,26 +227,28 @@ function handleResendOtp(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
   const attemptsField = globals.form.otp_verification.attempts_info;
   const validateBtn = globals.form.otp_verification.validate_otp;
+  const messageField = globals.form.otp_verification.validation_message;
 
+  // 🔻 Reduce attempts on each resend click
   if (window.otpWrongAttempts > 0) {
     window.otpWrongAttempts -= 1;
   }
 
+  // 🔥 Update attempts UI (USE .value only)
   if (attemptsField) {
-    const text =
+    attemptsField.visible = true;
+    attemptsField.value =
       window.otpWrongAttempts > 0
-        ? `${window.otpWrongAttempts} attempts left`
+        ? `${window.otpWrongAttempts} ${window.otpWrongAttempts === 1 ? 'attempt' : 'attempts'} left`
         : 'No attempts left';
-
-    globals.functions.setProperty(attemptsField, {
-      value: text,
-      visible: true
-    });
-
-    // 🔥 force update
-    attemptsField.value = text;
   }
 
+  // clear error message
+  if (messageField) {
+    messageField.value = '';
+  }
+
+  // 🚫 If no attempts left → disable everything
   if (window.otpWrongAttempts === 0) {
     if (resendBtn) {
       globals.functions.setProperty(resendBtn, {
@@ -264,6 +266,7 @@ function handleResendOtp(globals) {
     return '';
   }
 
+  // 🔁 Otherwise restart timer
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
@@ -275,7 +278,6 @@ function handleResendOtp(globals) {
 
   return '';
 }
-
 /**
  * @param {scope} globals
  */
