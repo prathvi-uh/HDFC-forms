@@ -180,7 +180,23 @@ function handleResendOtp(globals) {
  }
  
  updateAttemptsInfo(globals);
- 
+
+if (window.otpResendAttemptsLeft <= 0) {
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: false,
+      enabled: false,
+    });
+  }
+  // Show alert on localhost
+  alert('Maximum attempts reached');
+  // Navigate after user clicks OK
+  if (globals.form.personal_loan_offer) {
+    globals.functions.navigateTo(globals.form.personal_loan_offer);
+  }
+  return '';
+}
+
  if (resendBtn) {
  globals.functions.setProperty(resendBtn, {
  visible: false,
