@@ -21,105 +21,29 @@ footer .footer p {
 }
 
 /* footer for form */
-/* ===== Page layout ===== */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: #efefef;
-}
-
-/* Make page content take available height */
-main {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-/* Franklin/AEM wrappers */
-main .section,
-main .default-content-wrapper {
-  width: 100%;
-}
-
-/* ===== Kill old default footer spacing ===== */
-footer {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #03164a !important;
-  font-size: 12px;
-  flex-shrink: 0;
-}
-
-footer .footer {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  background: transparent !important;
-}
-
-footer .footer > div {
-  margin: 0 !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  padding: 20px 16px !important;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-/* Footer text */
-footer .footer,
-footer .footer * {
-  color: #fff !important;
-  font-size: 12px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Default text if empty */
-footer .footer:empty::before {
-  content: "© Copyright HDFC Bank Ltd.";
+.footer {
+  background: #03164a;
   color: #fff;
-  display: block;
   text-align: center;
+  font-size: 12px;        
+  padding: 24px 16px;  
+  line-height: 1.6;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-/* Remove paragraph spacing */
-footer .footer p,
-footer .footer div,
-footer .footer span {
-  margin: 0 !important;
+ 
+/* show default text if empty */
+.footer:empty::before {
+  content: "© Copyright HDFC Bank Ltd.";
 }
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  footer .footer > div {
-    padding: 18px 14px !important;
-  }
-
-  footer .footer,
-  footer .footer * {
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 480px) {
-  footer .footer > div {
-    padding: 16px 12px !important;
-  }
-
-  footer .footer,
-  footer .footer * {
-    font-size: 10px;
-    line-height: 1.4;
-  }
+ 
+/* style inner content */
+.footer * {
+  color: #fff;
+  margin: 0;
+  font-size: 12px;
 }
