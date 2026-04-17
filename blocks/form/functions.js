@@ -63,10 +63,8 @@ window.otpResendAttemptsLeft =
  : 3;
  
 /**
- * internal helper
- */
-/**
  * @param {scope} globals
+ * @returns {string}
  */
 
 function updateAttemptsInfo(globals) {
@@ -87,8 +85,11 @@ function updateAttemptsInfo(globals) {
 }
  
 /**
- * Start 30 sec timer
- * also auto-initializes attempts display if needed
+ * Start timer
+ */
+/**
+ * @param {scope} globals
+ * @returns {string}
  */
 function startOtpTimer(globals) {
  const timerField = globals.form.otp_verification.timer;
@@ -152,9 +153,13 @@ function startOtpTimer(globals) {
 }
  
 /**
- * Stop timer manually
+ * Stop timer 
  */
-function stopOtpTimer() {
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
+function stopOtpTimer(globals) {
  if (window.otpTimerInterval) {
  clearInterval(window.otpTimerInterval);
  window.otpTimerInterval = null;
@@ -164,10 +169,12 @@ function stopOtpTimer() {
 }
  
 /**
- * Handle resend click
+ * Handle resend
 /**
  * @param {scope} globals
- */
+ * @returns {string}
+*/
+
 function handleResendOtp(globals) {
  const resendBtn = globals.form.otp_verification.resend_otp;
  
@@ -219,11 +226,11 @@ if (window.otpResendAttemptsLeft <= 0) {
 }
  
 /**
- * Call when OTP is verified successfully
- * stops timer and resets attempts for next use
+ * Call when OTP is verified successfully stop timer
  */
 /**
  * @param {scope} globals
+ * @returns {string}
  */
 function handleOtpSuccess(globals) {
  const timerField = globals.form.otp_verification.timer;
