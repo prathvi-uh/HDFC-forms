@@ -192,7 +192,7 @@ if (window.otpResendAttemptsLeft <= 0) {
   alert('Maximum attempts reached');
   // Navigate after user clicks OK
   if (globals.form.personal_loan_offer) {
-    globals.functions.navigateTo(globals.form.personal_loan_offer);
+    globals.functions.setCurrentForm(globals.form.personal_loan_offer);
   }
   return '';
 }
