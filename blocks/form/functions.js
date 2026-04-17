@@ -56,57 +56,67 @@ function maskMobileNumber(mobileNumber) {
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
 
+// =============================
+// GLOBAL TIMER (only timer in window)
+// =============================
 window.otpTimerInterval = window.otpTimerInterval || null;
-window.otpResendAttemptsLeft =
-  typeof window.otpResendAttemptsLeft === 'number'
-    ? window.otpResendAttemptsLeft
-    : 3;
 
-/**
- * internal helper
- */
+
+// =============================
+// HELPER: Update Attempts UI
+// =============================
 function updateAttemptsInfo(globals) {
   const attemptsField = globals.form.otp_verification.attempt_info;
 
-  if (!attemptsField) {
-    return '';
+  let attempts = globals.form.$properties.otpAttempts;
+
+  if (typeof attempts !== 'number') {
+    attempts = 3;
+    globals.functions.setProperty(globals.form, {
+      properties: { otpAttempts: 3 }
+    });
   }
 
-  globals.functions.setProperty(attemptsField, {
-    value:
-      window.otpResendAttemptsLeft > 0
-        ? `${window.otpResendAttemptsLeft}/3`
-        : 'No attempts left',
-  });
+  if (attemptsField) {
+    globals.functions.setProperty(attemptsField, {
+      value: attempts > 0 ? `${attempts}/3` : 'No attempts left',
+    });
+  }
 
   return '';
 }
 
-/**
- * Start 30 sec timer
- * also auto-initializes attempts display if needed
- */
+
+// =============================
+// START TIMER (30 sec)
+// =============================
 function startOtpTimer(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
 
   let seconds = 30;
 
-  if (!timerField) {
-    return '';
-  }
+  if (!timerField) return '';
 
-  if (typeof window.otpResendAttemptsLeft !== 'number') {
-    window.otpResendAttemptsLeft = 3;
+  // initialize attempts if not present
+  let attempts = globals.form.$properties.otpAttempts;
+
+  if (typeof attempts !== 'number') {
+    attempts = 3;
+    globals.functions.setProperty(globals.form, {
+      properties: { otpAttempts: 3 }
+    });
   }
 
   updateAttemptsInfo(globals);
 
+  // clear old timer
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
   }
 
+  // hide resend button
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
@@ -114,10 +124,12 @@ function startOtpTimer(globals) {
     });
   }
 
+  // set initial timer
   globals.functions.setProperty(timerField, {
     value: '00:30',
   });
 
+  // start countdown
   window.otpTimerInterval = setInterval(() => {
     seconds -= 1;
 
@@ -135,7 +147,10 @@ function startOtpTimer(globals) {
         value: '00:00',
       });
 
-      if (resendBtn && window.otpResendAttemptsLeft > 0) {
+      // show resend only if attempts left
+      let attempts = globals.form.$properties.otpAttempts || 0;
+
+      if (resendBtn && attempts > 0) {
         globals.functions.setProperty(resendBtn, {
           visible: true,
           enabled: true,
@@ -147,32 +162,34 @@ function startOtpTimer(globals) {
   return '';
 }
 
-/**
- * Stop timer manually
- */
+
+// =============================
+// STOP TIMER
+// =============================
 function stopOtpTimer() {
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
   }
-
   return '';
 }
 
-/**
- * Handle resend click
- * 3/3 -> 2/3 -> 1/3 -> No attempts left
- */
+
+// =============================
+// HANDLE RESEND CLICK
+// =============================
 function handleResendOtp(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
 
-  if (typeof window.otpResendAttemptsLeft !== 'number') {
-    window.otpResendAttemptsLeft = 3;
+  let attempts = globals.form.$properties.otpAttempts || 3;
+
+  if (attempts > 0) {
+    attempts -= 1;
   }
 
-  if (window.otpResendAttemptsLeft > 0) {
-    window.otpResendAttemptsLeft -= 1;
-  }
+  globals.functions.setProperty(globals.form, {
+    properties: { otpAttempts: attempts }
+  });
 
   updateAttemptsInfo(globals);
 
@@ -188,17 +205,20 @@ function handleResendOtp(globals) {
   return '';
 }
 
-/**
- * Call when OTP is verified successfully
- * stops timer and resets attempts for next use
- */
+
+// =============================
+// OTP SUCCESS
+// =============================
 function handleOtpSuccess(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
 
   stopOtpTimer();
 
-  window.otpResendAttemptsLeft = 3;
+  // reset attempts
+  globals.functions.setProperty(globals.form, {
+    properties: { otpAttempts: 3 }
+  });
 
   updateAttemptsInfo(globals);
 
@@ -218,48 +238,66 @@ function handleOtpSuccess(globals) {
   return '';
 }
 
-function handleInvalidOtp(globals) {
-  const timerField = globals.form.otp_verification.timer;
-  const resendBtn = globals.form.otp_verification.resend_otp;
 
-  stopOtpTimer();
+// =============================
+// HANDLE OTP RESPONSE (MAIN)
+// =============================
+function handleOtpResponse(globals) {
+  const msgField = globals.form.otp_verification.validation_message;
+  const msg = msgField ? msgField.value : '';
 
-  if (typeof window.otpResendAttemptsLeft !== 'number') {
-    window.otpResendAttemptsLeft = 3;
+  if (!msg) return '';
+
+  if (msg.toLowerCase().includes("invalid")) {
+    return handleInvalidOtp(globals);
   }
 
-  if (window.otpResendAttemptsLeft > 0) {
-    window.otpResendAttemptsLeft -= 1;
-  }
-
-  updateAttemptsInfo(globals);
-
-  if (timerField) {
-    globals.functions.setProperty(timerField, {
-      value: '00:00',
-    });
-  }
-
-  if (resendBtn) {
-    globals.functions.setProperty(resendBtn, {
-      visible: window.otpResendAttemptsLeft > 0,
-      enabled: window.otpResendAttemptsLeft > 0,
-    });
+  if (msg.toLowerCase().includes("valid")) {
+    return handleOtpSuccess(globals);
   }
 
   return '';
 }
 
-function handleValidationMessage(globals) {
-  const msgField = globals.form.otp_verification.validation_message;
-  const msg = msgField && msgField.value ? String(msgField.value).trim() : '';
 
-  if (msg === 'OTP validated successfully') {
-    return handleOtpSuccess(globals);
+// =============================
+// INVALID OTP HANDLER
+// =============================
+function handleInvalidOtp(globals) {
+  const timerField = globals.form.otp_verification.timer;
+  const resendBtn = globals.form.otp_verification.resend_otp;
+  const attemptsField = globals.form.otp_verification.attempt_info;
+
+  stopOtpTimer();
+
+  let attempts = globals.form.$properties.otpAttempts || 3;
+
+  if (attempts > 0) {
+    attempts -= 1;
   }
 
-  if (msg === 'Invalid OTP') {
-    return handleInvalidOtp(globals);
+  globals.functions.setProperty(globals.form, {
+    properties: { otpAttempts: attempts }
+  });
+
+  // update attempts UI
+  if (attemptsField) {
+    globals.functions.setProperty(attemptsField, {
+      value: attempts > 0 ? attempts + "/3" : "No attempts left"
+    });
+  }
+
+  if (timerField) {
+    globals.functions.setProperty(timerField, {
+      value: "00:00"
+    });
+  }
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: attempts > 0,
+      enabled: attempts > 0
+    });
   }
 
   return '';
@@ -277,5 +315,5 @@ function debugForm(globals) {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleInvalidOtp, handleValidationMessage, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleInvalidOtp,debugForm,
 };
