@@ -20,20 +20,38 @@ footer .footer p {
 }
 
 /* footer for form */
+/* Page layout */
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content should take remaining space */
+.main-content {
+  flex: 1;
+}
+
+/* Footer */
 .footer {
   background: #03164a;
   color: #fff;
   text-align: center;
-  font-size: 12px;        
-  padding: 24px 16px;   
+  font-size: 12px;
+  padding: 24px 16px;
   line-height: 1.6;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  width: 100%;
   border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: auto;
+  box-sizing: border-box;
 }
 
 /* show default text if empty */
@@ -46,4 +64,31 @@ footer .footer p {
   color: #fff;
   margin: 0;
   font-size: 12px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .footer {
+    padding: 20px 14px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .footer * {
+    font-size: 11px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .footer {
+    padding: 16px 12px;
+    font-size: 10px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .footer * {
+    font-size: 10px;
+  }
 }
