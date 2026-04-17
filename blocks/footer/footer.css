@@ -1,3 +1,4 @@
+/*
 footer {
   background-color: var(--light-color);
   font-size: var(--body-font-size-xs);
@@ -18,13 +19,15 @@ footer .footer p {
     padding: 40px 32px 24px;
   }
 }
+*/
 
 /* footer for form */
+/* ===== Page layout ===== */
 html,
 body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
@@ -34,88 +37,89 @@ body {
   background: #efefef;
 }
 
+/* Make page content take available height */
 main {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
-/* If Franklin/AEM adds wrappers inside main */
-main > .section,
-main > .default-content-wrapper {
+/* Franklin/AEM wrappers */
+main .section,
+main .default-content-wrapper {
   width: 100%;
 }
 
-/* Full-width footer wrapper */
-footer.footer-wrapper {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background: #03164a;
+/* ===== Kill old default footer spacing ===== */
+footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #03164a !important;
+  font-size: 12px;
   flex-shrink: 0;
 }
 
-/* Inner footer block */
-footer.footer-wrapper .footer.block {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 20px 16px;
-  box-sizing: border-box;
-  background: transparent;
-  text-align: center;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+footer .footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: transparent !important;
 }
 
-/* Default text if footer is empty */
-footer.footer-wrapper .footer.block:empty::before {
+footer .footer > div {
+  margin: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 20px 16px !important;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Footer text */
+footer .footer,
+footer .footer * {
+  color: #fff !important;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Default text if empty */
+footer .footer:empty::before {
   content: "© Copyright HDFC Bank Ltd.";
   color: #fff;
-  font-size: 12px;
-  line-height: 1.5;
+  display: block;
+  text-align: center;
 }
 
-/* Text styling */
-footer.footer-wrapper .footer.block,
-footer.footer-wrapper .footer.block * {
-  color: #fff;
-  font-size: 12px;
-  line-height: 1.5;
-  margin: 0;
+/* Remove paragraph spacing */
+footer .footer p,
+footer .footer div,
+footer .footer span {
+  margin: 0 !important;
 }
 
-/* Remove unwanted margins from p/span/div inside footer */
-footer.footer-wrapper .footer.block p,
-footer.footer-wrapper .footer.block div,
-footer.footer-wrapper .footer.block span {
-  margin: 0;
-}
-
-/* Tablet */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-  footer.footer-wrapper .footer.block {
-    padding: 18px 14px;
+  footer .footer > div {
+    padding: 18px 14px !important;
   }
 
-  footer.footer-wrapper .footer.block,
-  footer.footer-wrapper .footer.block *,
-  footer.footer-wrapper .footer.block:empty::before {
+  footer .footer,
+  footer .footer * {
     font-size: 11px;
   }
 }
 
-/* Mobile */
 @media (max-width: 480px) {
-  footer.footer-wrapper .footer.block {
-    padding: 16px 12px;
+  footer .footer > div {
+    padding: 16px 12px !important;
   }
 
-  footer.footer-wrapper .footer.block,
-  footer.footer-wrapper .footer.block *,
-  footer.footer-wrapper .footer.block:empty::before {
+  footer .footer,
+  footer .footer * {
     font-size: 10px;
     line-height: 1.4;
   }
