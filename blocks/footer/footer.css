@@ -20,75 +20,103 @@ footer .footer p {
 }
 
 /* footer for form */
-/* Page layout */
-html, body {
-  height: 100%;
+html,
+body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
 }
 
 body {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  background: #efefef;
 }
 
-/* Main content should take remaining space */
-.main-content {
-  flex: 1;
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Footer */
-.footer {
-  background: #03164a;
-  color: #fff;
-  text-align: center;
-  font-size: 12px;
-  padding: 24px 16px;
-  line-height: 1.6;
+/* If Franklin/AEM adds wrappers inside main */
+main > .section,
+main > .default-content-wrapper {
   width: 100%;
-  border-radius: 0;
+}
+
+/* Full-width footer wrapper */
+footer.footer-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #03164a;
+  flex-shrink: 0;
+}
+
+/* Inner footer block */
+footer.footer-wrapper .footer.block {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px 16px;
+  box-sizing: border-box;
+  background: transparent;
+  text-align: center;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
-  box-sizing: border-box;
 }
 
-/* show default text if empty */
-.footer:empty::before {
+/* Default text if footer is empty */
+footer.footer-wrapper .footer.block:empty::before {
   content: "© Copyright HDFC Bank Ltd.";
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
-/* style inner content */
-.footer * {
+/* Text styling */
+footer.footer-wrapper .footer.block,
+footer.footer-wrapper .footer.block * {
   color: #fff;
-  margin: 0;
   font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Remove unwanted margins from p/span/div inside footer */
+footer.footer-wrapper .footer.block p,
+footer.footer-wrapper .footer.block div,
+footer.footer-wrapper .footer.block span {
+  margin: 0;
 }
 
 /* Tablet */
 @media (max-width: 768px) {
-  .footer {
-    padding: 20px 14px;
-    font-size: 11px;
-    line-height: 1.5;
+  footer.footer-wrapper .footer.block {
+    padding: 18px 14px;
   }
 
-  .footer * {
+  footer.footer-wrapper .footer.block,
+  footer.footer-wrapper .footer.block *,
+  footer.footer-wrapper .footer.block:empty::before {
     font-size: 11px;
   }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
-  .footer {
+  footer.footer-wrapper .footer.block {
     padding: 16px 12px;
-    font-size: 10px;
-    line-height: 1.4;
-    text-align: center;
   }
 
-  .footer * {
+  footer.footer-wrapper .footer.block,
+  footer.footer-wrapper .footer.block *,
+  footer.footer-wrapper .footer.block:empty::before {
     font-size: 10px;
+    line-height: 1.4;
   }
 }
