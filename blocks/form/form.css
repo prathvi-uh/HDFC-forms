@@ -1007,3 +1007,36 @@ main .form form .field-mobile input {
 main .form form .field-mobile input::placeholder {
   color: #9ca3af;
 }
+
+/* DOB FIELD WRAPPER */
+main .form form .field-date-of-birth {
+  max-width: 420px;
+}
+
+/* INPUT SAME AS MOBILE */
+main .form form .field-date-of-birth input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #e1e4ea;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+
+  font-size: 16px;
+  color: #4a4a4a;
+
+  padding: 0 16px;
+}
+
+/* PLACEHOLDER */
+main .form form .field-date-of-birth input::placeholder {
+  color: #9ca3af;
+}
+
+/* FOCUS (same as mobile) */
+main .form form .field-date-of-birth input:focus {
+  outline: none;
+  border-color: #cfd5df;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
