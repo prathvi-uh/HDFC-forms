@@ -1053,3 +1053,9 @@ main .form form .field-date-of-birth input::placeholder {
   color: #9ca3af;
   font-weight: 400;
 }
+
+/* ONLY change header background */
+main .form form .field-loan-accordion legend.field-label.accordion-legend,
+main .form form .field-personal-loan-offer legend.field-label {
+  background: #d6deee; /* slightly darker */
+}
