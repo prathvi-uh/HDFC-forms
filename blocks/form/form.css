@@ -1053,3 +1053,112 @@ main .form form .field-date-of-birth input::placeholder {
   color: #9ca3af;
   font-weight: 400;
 }
+
+/* =========================
+   ACCORDION CARD STYLE
+   ========================= */
+
+/* outer panel */
+main .form form .field-loan-accordion .panel-wrapper {
+  background: #f3f6fd;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* header */
+main .form form .field-loan-accordion legend.field-label.accordion-legend {
+  background: #dfe8fb;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e3a8a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* arrow icon (optional styling) */
+main .form form .field-loan-accordion legend.field-label.accordion-legend::after {
+  content: "⌃";
+  font-size: 18px;
+  transform: rotate(180deg);
+  color: #1e3a8a;
+}
+
+/* =========================
+   CONTENT AREA
+   ========================= */
+
+main .form form .field-loan-details {
+  padding: 20px;
+  background: #ffffff;
+}
+
+/* grid layout like image */
+main .form form .field-loan-details {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* each field */
+main .form form .field-loan-details .text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* label (small grey text) */
+main .form form .field-loan-details .field-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* value (main bold text) */
+main .form form .field-loan-details input {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  pointer-events: none;
+}
+
+/* remove input look completely */
+main .form form .field-loan-details input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* =========================
+   PERSONAL DETAILS SECTION
+   ========================= */
+
+main .form form .field-personal-loan-offer {
+  background: #f3f6fd;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+main .form form .field-personal-loan-offer legend.field-label {
+  background: #dfe8fb;
+  padding: 16px 20px;
+  font-weight: 600;
+  color: #1e3a8a;
+}
+
+/* details grid */
+main .form form .field-personal-loan-offer .panel-wrapper {
+  padding: 20px;
+  background: #fff;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  main .form form .field-loan-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
