@@ -947,3 +947,64 @@ main .form form .field-otp-verification .field-entered-otp input:-webkit-autofil
     background-position: 14px center;
   }
 }
+
+/* MOBILE FIELD WRAPPER */
+main .form form .field-mobile {
+  position: relative;
+  max-width: 420px;
+}
+
+/* INPUT STYLING */
+main .form form .field-mobile input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #e1e4ea;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+
+  font-size: 16px;
+  color: #4a4a4a;
+
+  /* space for flag + +91 */
+  padding-left: 90px;
+}
+
+/* FAKE FLAG */
+main .form form .field-mobile::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 14px;
+  background: url("https://flagcdn.com/w20/in.png") no-repeat center;
+  background-size: cover;
+}
+
+/* COUNTRY CODE */
+main .form form .field-mobile::after {
+  content: "+91";
+  position: absolute;
+  left: 42px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+
+/* DIVIDER LINE */
+main .form form .field-mobile input {
+  background-image: linear-gradient(#e1e4ea, #e1e4ea);
+  background-repeat: no-repeat;
+  background-size: 1px 60%;
+  background-position: 70px center;
+}
+
+/* REMOVE +91 FROM PLACEHOLDER (optional but recommended) */
+main .form form .field-mobile input::placeholder {
+  color: #9ca3af;
+}
