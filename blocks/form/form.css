@@ -908,7 +908,7 @@ main .form form .field-otp-verification .field-entered-otp input {
   /* 6-slot visual guide */
   background-image: radial-gradient(circle, #e5e7eb 2px, transparent 2px);
   background-size: 46px 44px;
-  background-repeat: repeat-x;
+  background-repeat: no-repeat, no-repeat; 
   background-position: 20px center;
 
   overflow: hidden;
