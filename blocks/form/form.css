@@ -836,3 +836,35 @@ main .form form .field-otp-verification .field-timer input:active {
   box-shadow: none;
   background: transparent;
 }
+
+/* make Attempts look like plain text (not textbox) */
+main .form form .field-otp-verification .field-attempt-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* label style */
+main .form form .field-otp-verification .field-attempt-info .field-label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b6b6b;
+}
+
+/* convert input to text */
+main .form form .field-otp-verification .field-attempt-info input {
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: auto !important;
+  width: auto !important;
+  max-width: max-content;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b6b6b;
+  pointer-events: none;
+}
