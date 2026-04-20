@@ -1053,3 +1053,95 @@ main .form form .field-date-of-birth input::placeholder {
   color: #9ca3af;
   font-weight: 400;
 }
+
+/* =========================
+   ACCORDION CARD LOOK
+   ========================= */
+
+/* outer card */
+main .form form .field-loan-accordion .panel-wrapper {
+  background: #f3f6fd;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* header (NO font changes) */
+main .form form .field-loan-accordion legend.field-label.accordion-legend {
+  background: #dfe8fb;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* arrow */
+main .form form .field-loan-accordion legend.field-label.accordion-legend::after {
+  content: "⌃";
+  transform: rotate(180deg);
+}
+
+/* =========================
+   CONTENT AREA
+   ========================= */
+
+main .form form .field-loan-details {
+  padding: 20px;
+  background: #fff;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* each field layout */
+main .form form .field-loan-details .text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* remove input box look ONLY */
+main .form form .field-loan-details input {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  pointer-events: none;
+  box-shadow: none !important;
+}
+
+/* remove focus styles */
+main .form form .field-loan-details input:focus {
+  outline: none;
+}
+
+/* =========================
+   PERSONAL DETAILS CARD
+   ========================= */
+
+main .form form .field-personal-loan-offer {
+  background: #f3f6fd;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+main .form form .field-personal-loan-offer legend.field-label {
+  background: #dfe8fb;
+  padding: 16px 20px;
+}
+
+/* inner content */
+main .form form .field-personal-loan-offer .panel-wrapper {
+  padding: 20px;
+  background: #fff;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+  main .form form .field-loan-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
