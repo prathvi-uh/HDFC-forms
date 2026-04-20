@@ -1057,7 +1057,7 @@ main .form form .field-date-of-birth input::placeholder {
 /* ONLY change header background */
 main .form form .field-loan-accordion legend.field-label.accordion-legend,
 main .form form .field-personal-loan-offer legend.field-label {
-  background: #6177a4; /* slightly darker */
+  background: #dfe7f6; /* slightly darker */
 }
 
 /* add lock icon before "Loan Details" */
