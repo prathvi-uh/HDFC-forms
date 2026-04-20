@@ -792,3 +792,164 @@ main div.form-wrapper {
 main .form form select[multiple] {
     height: calc(42px + 50px);
 }
+
+/*capstone styles */
+/* OTP section only */
+main .form form .field-otp-verification {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 0.7fr;
+  gap: 24px 32px;
+  align-items: start;
+}
+
+/* remove default full-width behavior inside this OTP panel */
+main .form form .field-otp-verification.field-wrapper.col-12 {
+  grid-column: span 12;
+}
+
+main .form form .field-otp-verification > .field-wrapper {
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+/* heading */
+main .form form .field-otp-verification > legend.field-label {
+  grid-column: 1 / -1;
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #4a4a4a;
+  margin-bottom: 8px;
+}
+
+/* first row */
+main .form form .field-otp-verification .field-entered-otp {
+  grid-column: 1;
+}
+
+main .form form .field-otp-verification .field-timer {
+  grid-column: 2;
+}
+
+main .form form .field-otp-verification .field-otp-submit {
+  grid-column: 3;
+  align-self: end;
+}
+
+/* second row */
+main .form form .field-otp-verification .field-validation-message {
+  grid-column: 1 / 3;
+}
+
+main .form form .field-otp-verification .field-attempt-info {
+  grid-column: 3;
+}
+
+/* third row */
+main .form form .field-otp-verification .field-resend-otp {
+  grid-column: 1;
+  margin-top: 8px;
+}
+
+/* labels */
+main .form form .field-otp-verification .field-label {
+  display: block;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #5a5a5a;
+  margin-bottom: 10px;
+}
+
+/* inputs */
+main .form form .field-otp-verification input,
+main .form form .field-otp-verification textarea,
+main .form form .field-otp-verification select {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #97a3b3;
+  border-radius: 4px;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 0 16px;
+  font-size: 18px;
+  color: #4a4a4a;
+}
+
+/* timer should look display-like */
+main .form form .field-otp-verification .field-timer input {
+  background: #fff;
+  color: #5a5a5a;
+}
+
+/* validation message field should look like a status box, not editable input */
+main .form form .field-otp-verification .field-validation-message input,
+main .form form .field-otp-verification .field-validation-message textarea {
+  height: 56px;
+  background: #fff;
+  color: #5a5a5a;
+}
+
+/* attempts field */
+main .form form .field-otp-verification .field-attempt-info input {
+  height: 56px;
+}
+
+/* buttons */
+main .form form .field-otp-verification .button-wrapper button,
+main .form form .field-otp-verification .button-wrapper .button {
+  min-width: 160px;
+  height: 56px;
+  border: 0;
+  border-radius: 4px;
+  background: #6f97dc;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0 24px;
+  cursor: pointer;
+}
+
+main .form form .field-otp-verification .field-otp-submit button,
+main .form form .field-otp-verification .field-otp-submit .button {
+  width: 100%;
+  min-width: 0;
+}
+
+main .form form .field-otp-verification .field-resend-otp button,
+main .form form .field-otp-verification .field-resend-otp .button {
+  width: 200px;
+}
+
+/* optional: hide empty validation label if you don't want text above message box */
+main .form form .field-otp-verification .field-validation-message > .field-label:empty {
+  display: none;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  main .form form .field-otp-verification {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  main .form form .field-otp-verification .field-entered-otp,
+  main .form form .field-otp-verification .field-timer,
+  main .form form .field-otp-verification .field-otp-submit,
+  main .form form .field-otp-verification .field-validation-message,
+  main .form form .field-otp-verification .field-attempt-info,
+  main .form form .field-otp-verification .field-resend-otp {
+    grid-column: 1;
+  }
+
+  main .form form .field-otp-verification .field-otp-submit button,
+  main .form form .field-otp-verification .field-resend-otp button,
+  main .form form .field-otp-verification .field-otp-submit .button,
+  main .form form .field-otp-verification .field-resend-otp .button {
+    width: 100%;
+  }
+}
