@@ -1046,11 +1046,11 @@ main .form form .field-consent-marketing .field-label br {
 
 /* terms text */
 main .form form .field-terms-privacy-text {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 main .form form .field-terms-privacy-text p {
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.45;
   color: #444;
   margin: 0;
