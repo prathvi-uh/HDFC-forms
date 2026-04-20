@@ -1008,3 +1008,64 @@ main .form form .field-mobile input {
 main .form form .field-mobile input::placeholder {
   color: #9ca3af;
 }
+
+/* consent checkbox rows */
+main .form form .field-consent-collection-processing,
+main .form form .field-consent-marketing {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* checkbox size */
+main .form form .field-consent-collection-processing input[type="checkbox"],
+main .form form .field-consent-marketing input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  margin: 2px 0 0;
+}
+
+/* consent text */
+main .form form .field-consent-collection-processing .field-label,
+main .form form .field-consent-marketing .field-label {
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: #444;
+  margin: 0;
+  display: block;
+}
+
+/* make long label look compact */
+main .form form .field-consent-collection-processing .field-label br,
+main .form form .field-consent-marketing .field-label br {
+  display: none;
+}
+
+/* terms text */
+main .form form .field-terms-privacy-text {
+  margin-top: 10px;
+}
+
+main .form form .field-terms-privacy-text p {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #444;
+  margin: 0;
+}
+
+/* terms links */
+main .form form .field-terms-privacy-text a {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* optional: keep consent block narrower like reference */
+main .form form .field-consent-collection-processing,
+main .form form .field-consent-marketing,
+main .form form .field-terms-privacy-text {
+  max-width: 760px;
+}
