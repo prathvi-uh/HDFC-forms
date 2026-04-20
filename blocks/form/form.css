@@ -794,39 +794,35 @@ main .form form select[multiple] {
 }
 
 /*capstone styles */
-/* OTP section only */
+/* OTP panel */
 main .form form .field-otp-verification {
   border: 0;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 0.7fr;
-  gap: 24px 32px;
-  align-items: start;
+  grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr) 220px;
+  column-gap: 24px;
+  row-gap: 18px;
+  align-items: end;
 }
 
-/* remove default full-width behavior inside this OTP panel */
-main .form form .field-otp-verification.field-wrapper.col-12 {
-  grid-column: span 12;
-}
-
-main .form form .field-otp-verification > .field-wrapper {
-  margin: 0;
-  width: 100%;
-  min-width: 0;
-}
-
-/* heading */
+/* title */
 main .form form .field-otp-verification > legend.field-label {
   grid-column: 1 / -1;
   font-size: 24px;
-  line-height: 1.3;
   font-weight: 700;
+  line-height: 1.3;
   color: #4a4a4a;
-  margin-bottom: 8px;
+  margin: 0 0 4px;
 }
 
-/* first row */
+/* reset child wrappers inside OTP panel */
+main .form form .field-otp-verification > .field-wrapper {
+  margin: 0;
+  min-width: 0;
+}
+
+/* place fields */
 main .form form .field-otp-verification .field-entered-otp {
   grid-column: 1;
 }
@@ -840,101 +836,103 @@ main .form form .field-otp-verification .field-otp-submit {
   align-self: end;
 }
 
-/* second row */
 main .form form .field-otp-verification .field-validation-message {
   grid-column: 1 / 3;
 }
 
 main .form form .field-otp-verification .field-attempt-info {
   grid-column: 3;
+  align-self: start;
 }
 
-/* third row */
 main .form form .field-otp-verification .field-resend-otp {
   grid-column: 1;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 /* labels */
 main .form form .field-otp-verification .field-label {
   display: block;
   font-size: 18px;
-  line-height: 1.4;
   font-weight: 500;
-  color: #5a5a5a;
+  color: #555;
   margin-bottom: 10px;
 }
 
-/* inputs */
+/* normal input size */
 main .form form .field-otp-verification input,
-main .form form .field-otp-verification textarea,
-main .form form .field-otp-verification select {
+main .form form .field-otp-verification textarea {
   width: 100%;
-  height: 56px;
-  border: 1px solid #97a3b3;
+  height: 52px;
+  box-sizing: border-box;
+  border: 1px solid #9aa7b7;
   border-radius: 4px;
   background: #fff;
-  box-sizing: border-box;
   padding: 0 16px;
   font-size: 18px;
   color: #4a4a4a;
 }
 
-/* timer should look display-like */
-main .form form .field-otp-verification .field-timer input {
-  background: #fff;
-  color: #5a5a5a;
-}
-
-/* validation message field should look like a status box, not editable input */
+/* make validation box shorter */
 main .form form .field-otp-verification .field-validation-message input,
 main .form form .field-otp-verification .field-validation-message textarea {
-  height: 56px;
-  background: #fff;
-  color: #5a5a5a;
+  height: 44px;
 }
 
-/* attempts field */
+/* attempts should not look oversized */
 main .form form .field-otp-verification .field-attempt-info input {
-  height: 56px;
+  height: 48px;
+  max-width: 100%;
 }
 
 /* buttons */
 main .form form .field-otp-verification .button-wrapper button,
 main .form form .field-otp-verification .button-wrapper .button {
-  min-width: 160px;
-  height: 56px;
+  height: 52px;
+  min-width: 180px;
+  padding: 0 24px;
   border: 0;
   border-radius: 4px;
   background: #6f97dc;
   color: #fff;
   font-size: 18px;
   font-weight: 700;
-  padding: 0 24px;
+  line-height: 1;
   cursor: pointer;
 }
 
+/* submit button exact size */
 main .form form .field-otp-verification .field-otp-submit button,
 main .form form .field-otp-verification .field-otp-submit .button {
-  width: 100%;
-  min-width: 0;
+  width: 220px;
+  min-width: 220px;
 }
 
+/* resend button */
 main .form form .field-otp-verification .field-resend-otp button,
 main .form form .field-otp-verification .field-resend-otp .button {
-  width: 200px;
+  width: 170px;
+  min-width: 170px;
 }
 
-/* optional: hide empty validation label if you don't want text above message box */
+/* hide empty validation label if present */
 main .form form .field-otp-verification .field-validation-message > .field-label:empty {
   display: none;
+}
+
+/* if framework widths are fighting your layout, neutralize them here */
+main .form form .field-otp-verification > .col-3,
+main .form form .field-otp-verification > .col-4,
+main .form form .field-otp-verification > .col-6,
+main .form form .field-otp-verification > .col-12 {
+  grid-column: auto;
+  width: auto;
 }
 
 /* mobile */
 @media (max-width: 768px) {
   main .form form .field-otp-verification {
     grid-template-columns: 1fr;
-    gap: 20px;
   }
 
   main .form form .field-otp-verification .field-entered-otp,
@@ -947,9 +945,10 @@ main .form form .field-otp-verification .field-validation-message > .field-label
   }
 
   main .form form .field-otp-verification .field-otp-submit button,
-  main .form form .field-otp-verification .field-resend-otp button,
   main .form form .field-otp-verification .field-otp-submit .button,
+  main .form form .field-otp-verification .field-resend-otp button,
   main .form form .field-otp-verification .field-resend-otp .button {
     width: 100%;
+    min-width: 0;
   }
 }
