@@ -1057,6 +1057,12 @@ main .form form .field-date-of-birth input::placeholder {
 /* =========================
    ACCORDION CARD LOOK
    ========================= */
+/* HEADER BACKGROUND (slightly darker) */
+main .form form .field-loan-accordion legend.field-label.accordion-legend,
+main .form form .field-personal-loan-offer legend.field-label {
+  background: #d3dbea; /* darker than current */
+  padding: 14px 20px;  /* slightly reduced height */
+}
 
 /* outer card */
 main .form form .field-loan-accordion .panel-wrapper {
