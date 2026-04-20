@@ -891,27 +891,43 @@ main .form form .field-otp-verification .field-entered-otp input {
   width: 320px;
   max-width: 320px;
   height: 44px;
+  box-sizing: border-box;
   border: 1px solid #d9dce3;
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
 
   font-size: 22px;
   font-weight: 500;
   color: #6b7280;
-  letter-spacing: 28px;
+  letter-spacing: 26px;
   line-height: 44px;
-  padding: 0 18px;
+  padding: 0 16px;
   text-align: left;
-
-  /* 6-slot visual guide */
-  background-image: radial-gradient(circle, #e5e7eb 2px, transparent 2px);
-  background-size: 46px 44px;
-  background-repeat: repeat-x;
-  background-position: 20px center;
-
   overflow: hidden;
+
+  background-image:
+    radial-gradient(circle, #e5e7eb 2px, transparent 2px),
+    radial-gradient(circle, #e5e7eb 2px, transparent 2px),
+    radial-gradient(circle, #e5e7eb 2px, transparent 2px),
+    radial-gradient(circle, #e5e7eb 2px, transparent 2px),
+    radial-gradient(circle, #e5e7eb 2px, transparent 2px),
+    radial-gradient(circle, #e5e7eb 2px, transparent 2px);
+  background-size:
+    6px 6px,
+    6px 6px,
+    6px 6px,
+    6px 6px,
+    6px 6px,
+    6px 6px;
+  background-repeat: no-repeat;
+  background-position:
+    34px center,
+    86px center,
+    138px center,
+    190px center,
+    242px center,
+    294px center;
 }
 
 main .form form .field-otp-verification .field-entered-otp input::placeholder {
@@ -923,27 +939,4 @@ main .form form .field-otp-verification .field-entered-otp input:focus {
   outline: none;
   border-color: #cfd5df;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
-main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill,
-main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill:hover,
-main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #fff inset;
-  -webkit-text-fill-color: #6b7280;
-}
-
-@media (max-width: 768px) {
-  main .form form .field-otp-verification .field-entered-otp {
-    max-width: 100%;
-  }
-
-  main .form form .field-otp-verification .field-entered-otp input {
-    width: 100%;
-    max-width: 320px;
-    font-size: 20px;
-    letter-spacing: 22px;
-    padding: 0 14px;
-    background-size: 38px 44px;
-    background-position: 14px center;
-  }
 }
