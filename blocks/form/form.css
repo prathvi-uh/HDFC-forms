@@ -871,7 +871,7 @@ main .form form .field-otp-verification .field-attempt-info input {
 
 /* OTP input wrapper */
 main .form form .field-otp-verification .field-entered-otp {
-  max-width: 620px;
+  max-width: 320px;
 }
 
 /* label */
