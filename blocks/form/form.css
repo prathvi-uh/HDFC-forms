@@ -1107,15 +1107,6 @@ main .form form .field-loan-details .text-wrapper {
   flex-direction: column;
 }
 
-/* remove input box look ONLY */
-main .form form .field-loan-details input {
-  border: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-  pointer-events: none;
-  box-shadow: none !important;
-}
-
 /* remove focus styles */
 main .form form .field-loan-details input:focus {
   outline: none;
