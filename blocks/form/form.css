@@ -800,6 +800,7 @@ main .form form .field-otp-verification .field-timer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  font-weight: 700;
 }
 
 main .form form .field-otp-verification .field-timer .field-label {
