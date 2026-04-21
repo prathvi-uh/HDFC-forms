@@ -797,27 +797,22 @@ main .form form select[multiple] {
 main .form form .field-otp-verification .field-timer {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 8px;
 }
 
 main .form form .field-otp-verification .field-timer .field-label {
   white-space: nowrap;
-  margin-bottom: 6px;
+  margin: 0; /* remove bottom margin */
   font-size: 18px;
   font-weight: 500;
   color: #555;
-}
-
-main .form form .field-otp-verification .field-timer input {
-  display: inline-block !important;
-  width: auto !important;
-  flex: 0 0 auto;
+  display: inline-block;
 }
 
 main .form form .field-otp-verification .field-timer input {
   border: 0;
-  margin-left: 6px;
   outline: 0;
   background: transparent;
   box-shadow: none;
@@ -825,13 +820,15 @@ main .form form .field-otp-verification .field-timer input {
   margin: 0;
   height: auto;
   min-height: auto;
-  width: auto;
+  width: auto !important;
   max-width: max-content;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.4;
   color: #a0aab5;
   pointer-events: none;
+  display: inline-block !important;
+  flex: 0 0 auto;
 }
 
 /* remove focus/input styles from generic form css */
