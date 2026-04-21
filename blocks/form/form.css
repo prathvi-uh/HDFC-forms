@@ -796,7 +796,7 @@ main .form form select[multiple] {
 /*capstone styles */
 main .form form .field-otp-verification .field-timer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
 }
 
