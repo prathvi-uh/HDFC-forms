@@ -20,11 +20,8 @@ footer .footer p {
   }
 }
 
-/* form wrapper / block */
 .form-block {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  min-height: calc(100vh - 88px);
 }
 
 /* your existing footer */
