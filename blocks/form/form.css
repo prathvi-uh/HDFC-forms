@@ -841,19 +841,18 @@ main .form form .field-otp-verification .field-timer input:active {
   background: transparent;
 }
 
-/* make Attempts look like plain text (not textbox) */
+/* make Attempts look like: 3/3 attempts left */
 main .form form .field-otp-verification .field-attempt-info {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;          /* 🔥 column → row */
+  align-items: center;
+  justify-content: flex-end;    /* keep it right aligned */
+  gap: 4px;
 }
 
-/* label style */
+/* hide "Attempts" label */
 main .form form .field-otp-verification .field-attempt-info .field-label {
-  margin-bottom: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #6b6b6b;
+  display: none;                /* 🔥 remove label */
 }
 
 /* convert input to text */
@@ -868,9 +867,17 @@ main .form form .field-otp-verification .field-attempt-info input {
   width: auto !important;
   max-width: max-content;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;             /* slightly bold like UI */
   color: #6b6b6b;
   pointer-events: none;
+}
+
+/* add "attempts left" text */
+main .form form .field-otp-verification .field-attempt-info::after {
+  content: " attempts left";    /* 🔥 adds text */
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b6b6b;
 }
 
 /* OTP input wrapper */
