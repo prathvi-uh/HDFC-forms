@@ -794,16 +794,6 @@ main .form form select[multiple] {
 }
 
 /*capstone styles */
-
-/* make "Resend OTP in" look like plain text, not textbox */
-
-.text-wrapper.field-timer {
-  font-weight: 400;
-}
-
-.text-wrapper.field-timer::after {
-  font-weight: 700;
-}
 main .form form .field-otp-verification .field-timer {
   display: flex;
   flex-direction: column;
@@ -829,7 +819,7 @@ main .form form .field-otp-verification .field-timer input {
   width: auto;
   max-width: max-content;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.4;
   color: #a0aab5;
   pointer-events: none;
