@@ -810,6 +810,12 @@ main .form form .field-otp-verification .field-timer .field-label {
 }
 
 main .form form .field-otp-verification .field-timer input {
+  display: inline-block !important;
+  width: auto !important;
+  flex: 0 0 auto;
+}
+
+main .form form .field-otp-verification .field-timer input {
   border: 0;
   margin-left: 6px;
   outline: 0;
