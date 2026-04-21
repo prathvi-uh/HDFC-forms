@@ -282,6 +282,7 @@ header nav .nav-tools {
   border-radius: 0;
 }
 
+/* left logo */
 .header::before {
   content: "HDFC BANK";
   display: inline-flex;
@@ -298,8 +299,9 @@ header nav .nav-tools {
   box-sizing: border-box;
   position: relative;
   box-shadow: inset 10px 0 0 #e21b23; 
+}
 
-/* right secure pill */
+/* ✅ FIXED: right secure pill (moved outside) */
 .header::after {
   content: "100% SAFE";
   display: inline-flex;
@@ -312,10 +314,13 @@ header nav .nav-tools {
   border-radius: 12px;
   padding: 4px 10px;
   line-height: 1;
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* hide any inner text */
 .header > * {
   display: none;
-}
 }
