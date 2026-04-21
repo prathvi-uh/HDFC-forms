@@ -798,7 +798,6 @@ main .form form .field-otp-verification .field-timer {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  gap: 15px;
 }
 
 main .form form .field-otp-verification .field-timer .field-label {
@@ -810,6 +809,7 @@ main .form form .field-otp-verification .field-timer .field-label {
 
 main .form form .field-otp-verification .field-timer input {
   border: 0;
+  margin-left: 6px;
   outline: 0;
   background: transparent;
   box-shadow: none;
