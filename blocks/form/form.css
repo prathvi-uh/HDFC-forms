@@ -1054,3 +1054,25 @@ main .form form .field-date-of-birth input::placeholder {
   font-weight: 400;
 }
 
+/* hide original plain text */
+main .form form .field-terms-privacy-text p {
+  font-size: 0;
+  margin: 0;
+  position: relative;
+}
+
+/* black part */
+main .form form .field-terms-privacy-text p::before {
+  content: "For full details read our ";
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+}
+
+/* blue bold part */
+main .form form .field-terms-privacy-text p::after {
+  content: "Terms & Conditions | Privacy Policy";
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d4ed8;
+}
