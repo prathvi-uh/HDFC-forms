@@ -52,7 +52,7 @@ footer .footer {
   margin: 0;
   box-sizing: border-box;
 
-  min-height: 80px;   /* 🔥 controls thickness */
+  min-height: 50px;   /* 🔥 controls thickness */
 }
 
 /* REMOVE height dependency from inner div */
