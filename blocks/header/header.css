@@ -271,7 +271,7 @@ header nav .nav-tools {
 /* mine header */
 .header {
   background: #03164a;
-  min-height: 72px;
+  min-height: 50px;
   padding: 0 48px;
   display: flex;
   align-items: center;
