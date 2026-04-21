@@ -872,14 +872,6 @@ main .form form .field-otp-verification .field-attempt-info input {
   pointer-events: none;
 }
 
-/* add "attempts left" text */
-main .form form .field-otp-verification .field-attempt-info::after {
-  content: " attempts left";    /* 🔥 adds text */
-  font-size: 14px;
-  font-weight: 400;
-  color: #6b6b6b;
-}
-
 /* OTP input wrapper */
 main .form form .field-otp-verification .field-entered-otp {
   max-width: 620px;
