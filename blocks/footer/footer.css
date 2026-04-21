@@ -20,35 +20,51 @@ footer .footer p {
   }
 }
 
+/*cap tooter */
+
 .form-block {
-  min-height: calc(100vh - 88px);
+  padding-bottom: 72px; /* reserve space for footer */
+  box-sizing: border-box;
 }
 
-/* your existing footer */
-.footer {
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+  margin: 0;
+}
+
+footer .footer {
   background: #03164a;
   color: #fff;
   text-align: center;
   font-size: 12px;
-  padding: 24px 16px;
   line-height: 1.6;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto; /* pushes footer to bottom */
+  width: 100%;
+  margin: 0;
 }
 
-/* show default text if empty */
-.footer:empty::before {
+footer .footer > div {
+  width: 100%;
+  max-width: none;
+  padding: 24px 16px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+footer .footer:empty::before {
   content: "© Copyright HDFC Bank Ltd.";
 }
 
-/* style inner content */
-.footer * {
+footer .footer,
+footer .footer * {
   color: #fff;
-  margin: 0;
   font-size: 12px;
+  margin: 0;
 }
