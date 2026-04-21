@@ -58,3 +58,71 @@ main .form fieldset.accordion  fieldset.accordion-collapse {
 main .form fieldset.accordion {
     row-gap: 0;
 }
+
+/* ACCORDION FIX */
+/* add space between accordion sections */
+main .form form .panel-wrapper {
+  margin-bottom: 20px;
+}
+
+/* keep header full width, but do not break accordion body */
+main .form form .field-loan-details > legend.field-label.accordion-legend,
+main .form form .field-personal-details > legend.field-label.accordion-legend {
+  background: #e3ebfb;
+  padding: 14px 18px 14px 42px;
+  border-radius: 12px 12px 0 0;
+  position: relative;
+  grid-column: 1 / -1;
+  box-sizing: border-box;
+}
+
+/* lock icon */
+main .form form .field-loan-details > legend.field-label.accordion-legend::before,
+main .form form .field-personal-details > legend.field-label.accordion-legend::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background: url("https://cdn-icons-png.flaticon.com/512/3064/3064197.png") no-repeat center;
+  background-size: contain;
+}
+
+/* light background only for expanded body */
+main .form form .field-loan-details,
+main .form form .field-personal-details {
+  background: #f8faff;
+  border: 1px solid #edf0f5;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+/* keep existing inner layout visible */
+main .form form .field-loan-details > .text-wrapper,
+main .form form .field-personal-details > .text-wrapper,
+main .form form .field-loan-details > .date-wrapper,
+main .form form .field-personal-details > .date-wrapper {
+  display: block;
+}
+
+/* apply to ALL fields inside both accordions */
+main .form form .field-loan-details > .text-wrapper,
+main .form form .field-personal-details > .text-wrapper {
+  position: relative;
+  padding-left: 12px;
+}
+
+/* blue vertical line */
+main .form form .field-loan-details > .text-wrapper::before,
+main .form form .field-personal-details > .text-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: #3b82f6; /* blue */
+  border-radius: 2px;
+}
