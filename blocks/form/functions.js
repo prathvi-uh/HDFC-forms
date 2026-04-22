@@ -57,6 +57,8 @@ function maskMobileNumber(mobileNumber) {
 }
 
 window.otpTimerInterval = window.otpTimerInterval || null;
+window.otpInvalidObserver = window.otpInvalidObserver || null;
+window.otpInvalidHandled = window.otpInvalidHandled || false;
 
 window.otpResendAttemptsLeft =
   typeof window.otpResendAttemptsLeft === 'number'
@@ -100,6 +102,88 @@ function updateAttemptsInfo(globals) {
  * @param {scope} globals
  * @returns {string}
  */
+function stopOtpTimer(globals) {
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+    window.otpTimerInterval = null;
+  }
+
+  return '';
+}
+
+/**
+ * Watch page for invalid OTP message
+ * No extra rule-editor function needed
+ * @param {scope} globals
+ * @returns {string}
+ */
+function initOtpInvalidWatcher(globals) {
+  if (window.otpInvalidObserver) {
+    return '';
+  }
+
+  window.otpInvalidObserver = new MutationObserver(() => {
+    const pageText = document.body ? document.body.innerText : '';
+    const resendBtn = globals.form.otp_verification.resend_otp;
+
+    const hasInvalidOtpMessage =
+      pageText.includes('Invalid OTP') ||
+      pageText.includes('invalid OTP') ||
+      pageText.includes('Invalid otp');
+
+    if (hasInvalidOtpMessage && !window.otpInvalidHandled) {
+      window.otpInvalidHandled = true;
+      window.otpTimerExpired = false;
+
+      stopOtpTimer(globals);
+
+      if (window.otpResendAttemptsLeft > 0) {
+        window.otpResendAttemptsLeft -= 1;
+      }
+
+      updateAttemptsInfo(globals);
+
+      if (resendBtn) {
+        globals.functions.setProperty(resendBtn, {
+          visible: window.otpResendAttemptsLeft > 0,
+          enabled: window.otpResendAttemptsLeft > 0,
+        });
+      }
+
+      if (window.otpResendAttemptsLeft <= 0) {
+        alert('Maximum attempts reached');
+
+        if (globals.form.otp_verification) {
+          globals.functions.setProperty(globals.form.otp_verification, {
+            visible: false,
+          });
+        }
+
+        if (globals.form.personal_loan_offer) {
+          globals.functions.setProperty(globals.form.personal_loan_offer, {
+            visible: true,
+          });
+        }
+      }
+    }
+  });
+
+  if (document.body) {
+    window.otpInvalidObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+  }
+
+  return '';
+}
+
+/**
+ * Start timer
+ * @param {scope} globals
+ * @returns {string}
+ */
 function startOtpTimer(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
@@ -115,12 +199,12 @@ function startOtpTimer(globals) {
   }
 
   window.otpTimerExpired = false;
+  window.otpInvalidHandled = false;
+
+  initOtpInvalidWatcher(globals);
   updateAttemptsInfo(globals);
 
-  if (window.otpTimerInterval) {
-    clearInterval(window.otpTimerInterval);
-    window.otpTimerInterval = null;
-  }
+  stopOtpTimer(globals);
 
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
@@ -143,8 +227,7 @@ function startOtpTimer(globals) {
     }
 
     if (seconds <= 0) {
-      clearInterval(window.otpTimerInterval);
-      window.otpTimerInterval = null;
+      stopOtpTimer(globals);
 
       window.otpTimerExpired = true;
 
@@ -167,20 +250,7 @@ function startOtpTimer(globals) {
 }
 
 /**
- * Only stop timer. Do not set expired state here.
- * @param {scope} globals
- * @returns {string}
- */
-function stopOtpTimer(globals) {
-  if (window.otpTimerInterval) {
-    clearInterval(window.otpTimerInterval);
-    window.otpTimerInterval = null;
-  }
-
-  return '';
-}
-
-/**
+ * Handle resend
  * @param {scope} globals
  * @returns {string}
  */
@@ -196,6 +266,8 @@ function handleResendOtp(globals) {
   }
 
   window.otpTimerExpired = false;
+  window.otpInvalidHandled = false;
+
   updateAttemptsInfo(globals);
 
   if (window.otpResendAttemptsLeft <= 0) {
@@ -248,6 +320,7 @@ function handleOtpSuccess(globals) {
 
   window.otpResendAttemptsLeft = 3;
   window.otpTimerExpired = false;
+  window.otpInvalidHandled = false;
 
   updateAttemptsInfo(globals);
 
