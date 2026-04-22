@@ -793,18 +793,36 @@ main .form form select[multiple] {
     height: calc(42px + 50px);
 }
 
-/*capstone styles */
+/* ================= OTP VERIFICATION ================= */
+
+main .form form .field-otp-verification {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  row-gap: 20px;
+}
+
+/* OTP full row */
+main .form form .field-otp-verification .field-entered-otp {
+  grid-column: span 12;
+  max-width: 360px;
+}
+
+/* TIMER */
 main .form form .field-otp-verification .field-timer {
+  grid-column: 1 / span 5 !important;
+  justify-self: start;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
+  white-space: nowrap;
 }
 
 main .form form .field-otp-verification .field-timer .field-label {
   white-space: nowrap;
-  margin: 0; /* remove bottom margin */
+  margin: 0;
   font-size: 18px;
   font-weight: 500;
   color: #555;
@@ -831,7 +849,6 @@ main .form form .field-otp-verification .field-timer input {
   flex: 0 0 auto;
 }
 
-/* remove focus/input styles from generic form css */
 main .form form .field-otp-verification .field-timer input:focus,
 main .form form .field-otp-verification .field-timer input:hover,
 main .form form .field-otp-verification .field-timer input:active {
@@ -841,47 +858,20 @@ main .form form .field-otp-verification .field-timer input:active {
   background: transparent;
 }
 
-/* ================= OTP VERIFICATION ================= */
-
-/* parent grid */
-main .form form .field-otp-verification {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  align-items: center;
-  row-gap: 20px;
-}
-
-/* OTP stays full width */
-main .form form .field-otp-verification .field-entered-otp {
-  grid-column: span 12;
-  max-width: 360px;
-}
-
-/* TIMER */
-main .form form .field-otp-verification .field-timer {
-  grid-column: 7 / span 3 !important;
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
 /* ATTEMPTS */
 main .form form .field-otp-verification .field-attempt-info {
-  grid-column: 10 / span 2 !important;
+  grid-column: 6 / span 3 !important;
   justify-self: start;
   display: flex;
   align-items: center;
   white-space: nowrap;
-  margin-left: 8px;
+  margin-left: 12px;
 }
 
-/* hide attempts label */
 main .form form .field-otp-verification .field-attempt-info .field-label {
   display: none;
 }
 
-/* attempts text */
 main .form form .field-otp-verification .field-attempt-info input {
   border: 0 !important;
   outline: 0 !important;
@@ -894,20 +884,19 @@ main .form form .field-otp-verification .field-attempt-info input {
   max-width: max-content !important;
   min-width: 0 !important;
   display: inline-block !important;
-
   font-size: 14px;
   font-weight: 600;
   color: #5f6b7a;
   pointer-events: none;
 }
 
-/* SUBMIT below */
-main .form form .field-otp-submit {
+/* SUBMIT below, left aligned */
+main .form form .field-otp-verification .field-otp-submit {
   grid-column: span 12 !important;
-  justify-self: center;
+  justify-self: start;
 }
 
-/* LABEL */
+/* OTP LABEL */
 main .form form .field-otp-verification .field-entered-otp .field-label {
   margin-bottom: 8px;
   font-size: 18px;
@@ -915,7 +904,7 @@ main .form form .field-otp-verification .field-entered-otp .field-label {
   color: #3f4a5a;
 }
 
-/* OTP INPUT STYLE */
+/* OTP INPUT */
 main .form form .field-otp-verification .field-entered-otp input {
   width: 360px;
   max-width: 360px;
@@ -934,20 +923,17 @@ main .form form .field-otp-verification .field-entered-otp input {
   text-align: left;
 }
 
-/* placeholder */
 main .form form .field-otp-verification .field-entered-otp input::placeholder {
   color: #c2c9d3;
   letter-spacing: 34px;
 }
 
-/* focus */
 main .form form .field-otp-verification .field-entered-otp input:focus {
   outline: none;
   border-color: #d8dee8;
   box-shadow: none;
 }
 
-/* autofill fix */
 main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill,
 main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill:hover,
 main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill:focus {
@@ -983,7 +969,6 @@ main .form form .field-otp-verification .field-entered-otp input:-webkit-autofil
     padding: 0 14px;
   }
 }
-
 /* MOBILE FIELD WRAPPER */
 main .form form .field-mobile {
   position: relative;
