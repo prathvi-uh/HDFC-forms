@@ -804,8 +804,9 @@ main .form form .field-otp-verification {
 
 /* OTP full row */
 main .form form .field-otp-verification .field-entered-otp {
-  grid-column: span 12;
-  max-width: 100%;
+  grid-column: 1 / span 8 !important;
+  max-width: none;
+  width: 100%;
 }
 
 /* TIMER */
@@ -905,8 +906,8 @@ main .form form .field-otp-verification .field-entered-otp .field-label {
 
 /* OTP INPUT */
 main .form form .field-otp-verification .field-entered-otp input {
-  width: 100px;
-  max-width: 700px;
+  width: 100%;
+  max-width: none;
   height: 42px;
   border: 1px solid #e2e7f0;
   border-radius: 10px;
@@ -954,6 +955,7 @@ main .form form .field-otp-verification .field-entered-otp input:-webkit-autofil
     grid-column: span 1 !important;
     justify-self: start;
     margin-left: 0;
+    width: 100%;
   }
 
   main .form form .field-otp-verification .field-entered-otp {
@@ -962,12 +964,13 @@ main .form form .field-otp-verification .field-entered-otp input:-webkit-autofil
 
   main .form form .field-otp-verification .field-entered-otp input {
     width: 100%;
-    max-width: 360px;
+    max-width: 100%;
     font-size: 20px;
     letter-spacing: 24px;
     padding: 0 14px;
   }
 }
+
 /* MOBILE FIELD WRAPPER */
 main .form form .field-mobile {
   position: relative;
