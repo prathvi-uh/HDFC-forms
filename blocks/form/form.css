@@ -848,9 +848,8 @@ main .form form .field-otp-verification .field-attempt-info {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  white-space: nowrap;
   gap: 4px;
-  white-space: nowrap;          /* keep in one line */
-  grid-column: span 4 !important; /* increase width from col-3 */
 }
 
 /* hide default label */
@@ -858,7 +857,7 @@ main .form form .field-otp-verification .field-attempt-info .field-label {
   display: none;
 }
 
-/* style 3/3 */
+/* make input shrink to just 3/3 */
 main .form form .field-otp-verification .field-attempt-info input {
   border: 0 !important;
   outline: 0 !important;
@@ -866,21 +865,24 @@ main .form form .field-otp-verification .field-attempt-info input {
   box-shadow: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  height: auto !important;
   min-height: auto !important;
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: max-content !important;
+  height: auto !important;
+
+  width: 3ch !important;      /* key fix */
+  min-width: 3ch !important;
+  max-width: 3ch !important;
+
   display: inline-block !important;
-  flex: 0 0 auto !important;
+  flex: 0 0 3ch !important;
 
   font-size: 14px;
   font-weight: 600;
   color: #5f6b7a;
   pointer-events: none;
+  text-align: left;
 }
 
-/* attempts text */
+/* add text immediately after */
 main .form form .field-otp-verification .field-attempt-info::after {
   content: " attempts left";
   font-size: 14px;
