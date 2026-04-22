@@ -793,7 +793,7 @@ main .form form select[multiple] {
     height: calc(42px + 50px);
 }
 
-/*capstone*/
+/* ================= OTP VERIFICATION ================= */
 
 main .form form .field-otp-verification {
   display: grid;
@@ -805,7 +805,7 @@ main .form form .field-otp-verification {
 /* OTP full row */
 main .form form .field-otp-verification .field-entered-otp {
   grid-column: span 12;
-  max-width: 360px;
+  max-width: 100%;
 }
 
 /* TIMER */
@@ -865,7 +865,6 @@ main .form form .field-otp-verification .field-attempt-info {
   display: flex;
   align-items: center;
   white-space: nowrap;
-  margin-left: 12px;
 }
 
 main .form form .field-otp-verification .field-attempt-info .field-label {
@@ -906,8 +905,8 @@ main .form form .field-otp-verification .field-entered-otp .field-label {
 
 /* OTP INPUT */
 main .form form .field-otp-verification .field-entered-otp input {
-  width: 360px;
-  max-width: 360px;
+  width: 100px;
+  max-width: 700px;
   height: 42px;
   border: 1px solid #e2e7f0;
   border-radius: 10px;
