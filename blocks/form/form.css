@@ -841,13 +841,19 @@ main .form form .field-otp-verification .field-timer input:active {
   background: transparent;
 }
 
-/*attempts */
+/* ATTEMPTS */
 main .form form .field-otp-verification .field-attempt-info {
+  grid-column: span 3 !important;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 2px;              /* reduced gap */
   white-space: nowrap;
+  gap: 2px;
+}
+
+/* SUBMIT BUTTON */
+main .form form .field-otp-verification .field-otp-submit {
+  grid-column: span 4 !important;
 }
 
 main .form form .field-otp-verification .field-attempt-info .field-label {
