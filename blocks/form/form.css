@@ -841,11 +841,6 @@ main .form form .field-otp-verification .field-timer input:active {
   background: transparent;
 }
 
-/* TIMER FIELD - reduce width */
-main .form form .field-otp-verification .field-timer {
-  grid-column: span 4 !important;
-}
-
 /*attempts */
 main .form form .field-otp-verification .field-attempt-info {
   display: flex;
