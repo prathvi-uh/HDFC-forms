@@ -842,22 +842,28 @@ main .form form .field-otp-verification .field-timer input:active {
 }
 
 /* ATTEMPTS */
+/* TIMER */
+main .form form .field-otp-verification .field-timer {
+  grid-column: span 4 !important;
+  justify-self: start;
+  width: max-content;
+}
+
+/* ATTEMPTS */
 main .form form .field-otp-verification .field-attempt-info {
   grid-column: span 3 !important;
+  justify-self: start;          /* key fix */
+  width: max-content;           /* key fix */
   display: flex;
   align-items: center;
   justify-content: flex-start;
   white-space: nowrap;
   gap: 2px;
-}
-
-/* SUBMIT BUTTON */
-main .form form .field-otp-verification .field-otp-submit {
-  grid-column: span 4 !important;
+  margin-left: -40px;           /* bring it closer */
 }
 
 main .form form .field-otp-verification .field-attempt-info .field-label {
-  display: none;
+  display: none !important;
 }
 
 main .form form .field-otp-verification .field-attempt-info input {
@@ -869,14 +875,18 @@ main .form form .field-otp-verification .field-attempt-info input {
   margin: 0 !important;
   height: auto !important;
   width: auto !important;
-  max-width: max-content !important;
   min-width: 0 !important;
+  max-width: max-content !important;
   display: inline-block !important;
-
   font-size: 14px;
   font-weight: 600;
   color: #5f6b7a;
   pointer-events: none;
+}
+
+/* SUBMIT */
+main .form form .field-otp-verification .field-otp-submit {
+  grid-column: span 5 !important;
 }
 
 /* OTP INPUT WRAPPER */
