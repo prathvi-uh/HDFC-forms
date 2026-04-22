@@ -22,7 +22,7 @@ footer .footer p {
 
 /*cap tooter */
 .form-block {
-  padding-bottom: 100px; /* match footer height */
+  padding-bottom: 100px; 
   box-sizing: border-box;
 }
 
@@ -51,11 +51,9 @@ footer .footer {
   width: 100%;
   margin: 0;
   box-sizing: border-box;
-
-  min-height: 50px;   /* 🔥 controls thickness */
+  min-height: 50px;   
 }
 
-/* REMOVE height dependency from inner div */
 footer .footer > div {
   width: 100%;
   max-width: none;

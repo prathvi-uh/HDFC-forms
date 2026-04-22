@@ -841,10 +841,9 @@ main .form form .field-otp-verification .field-timer input:active {
   background: transparent;
 }
 
-/* make Attempts look like: 3/3 attempts left */
 main .form form .field-otp-verification .field-attempt-info {
   display: flex;
-  flex-direction: row;          /* 🔥 column → row */
+  flex-direction: row;          /* column → row */
   align-items: center;
   justify-content: flex-end;    /* keep it right aligned */
   gap: 4px;
@@ -852,7 +851,7 @@ main .form form .field-otp-verification .field-attempt-info {
 
 /* hide "Attempts" label */
 main .form form .field-otp-verification .field-attempt-info .field-label {
-  display: none;                /* 🔥 remove label */
+  display: none;                /*  remove label */
 }
 
 /* convert input to text */
