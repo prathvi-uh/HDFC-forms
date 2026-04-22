@@ -842,22 +842,19 @@ main .form form .field-otp-verification .field-timer input:active {
 }
 
 
-/* ================= OTP VERIFICATION ================= */
-/* ATTEMPTS FIELD */
+/*attempts */
 main .form form .field-otp-verification .field-attempt-info {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 2px;              /* reduced gap */
   white-space: nowrap;
-  gap: 4px;
 }
 
-/* hide default label */
 main .form form .field-otp-verification .field-attempt-info .field-label {
   display: none;
 }
 
-/* make input shrink to just 3/3 */
 main .form form .field-otp-verification .field-attempt-info input {
   border: 0 !important;
   outline: 0 !important;
@@ -865,39 +862,16 @@ main .form form .field-otp-verification .field-attempt-info input {
   box-shadow: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  min-height: auto !important;
   height: auto !important;
-
-  width: 3ch !important;      /* key fix */
-  min-width: 3ch !important;
-  max-width: 3ch !important;
-
+  width: auto !important;
+  max-width: max-content !important;
+  min-width: 0 !important;
   display: inline-block !important;
-  flex: 0 0 3ch !important;
 
   font-size: 14px;
   font-weight: 600;
   color: #5f6b7a;
   pointer-events: none;
-  text-align: left;
-}
-
-/* add text immediately after */
-main .form form .field-otp-verification .field-attempt-info::after {
-  content: " attempts left";
-  font-size: 14px;
-  font-weight: 400;
-  color: #7d8794;
-  white-space: nowrap;
-  flex: 0 0 auto;
-}
-
-/* "attempts left" always visible */
-main .form form .field-otp-verification .field-attempt-info::after {
-  content: " attempts left" !important;
-  font-size: 14px;
-  font-weight: 400;
-  color: #7d8794;
 }
 
 /* OTP INPUT WRAPPER */
