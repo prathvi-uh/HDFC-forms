@@ -857,7 +857,7 @@ main .form form .field-otp-verification .field-attempt-info .field-label {
   display: none;
 }
 
-/* style 3/3 */
+/* make 3/3 behave like plain inline text */
 main .form form .field-otp-verification .field-attempt-info input {
   border: 0 !important;
   outline: 0 !important;
@@ -866,8 +866,12 @@ main .form form .field-otp-verification .field-attempt-info input {
   padding: 0 !important;
   margin: 0 !important;
   height: auto !important;
+  min-height: auto !important;
   width: auto !important;
-  max-width: max-content;
+  min-width: 0 !important;
+  max-width: max-content !important;
+  display: inline-block !important;
+  flex: 0 0 auto !important;
 
   font-size: 14px;
   font-weight: 600;
@@ -875,7 +879,17 @@ main .form form .field-otp-verification .field-attempt-info input {
   pointer-events: none;
 }
 
-/* 🔥 ensure "attempts left" always visible */
+/* attach text right next to 3/3 */
+main .form form .field-otp-verification .field-attempt-info::after {
+  content: " attempts left";
+  font-size: 14px;
+  font-weight: 400;
+  color: #7d8794;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* "attempts left" always visible */
 main .form form .field-otp-verification .field-attempt-info::after {
   content: " attempts left" !important;
   font-size: 14px;
