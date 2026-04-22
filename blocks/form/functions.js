@@ -57,16 +57,21 @@ function maskMobileNumber(mobileNumber) {
 }
 
 window.otpTimerInterval = window.otpTimerInterval || null;
+
 window.otpResendAttemptsLeft =
- typeof window.otpResendAttemptsLeft === 'number'
- ? window.otpResendAttemptsLeft
- : 3;
- 
+  typeof window.otpResendAttemptsLeft === 'number'
+    ? window.otpResendAttemptsLeft
+    : 3;
+
+window.otpTimerExpired =
+  typeof window.otpTimerExpired === 'boolean'
+    ? window.otpTimerExpired
+    : false;
+
 /**
  * @param {scope} globals
  * @returns {string}
  */
-
 function updateAttemptsInfo(globals) {
   const attemptsField = globals.form.otp_verification.attempt_info;
 
@@ -83,111 +88,35 @@ function updateAttemptsInfo(globals) {
 
   return '';
 }
+
 /**
  * Start timer
- */
-/**
  * @param {scope} globals
  * @returns {string}
  */
 function startOtpTimer(globals) {
- const timerField = globals.form.otp_verification.timer;
- const resendBtn = globals.form.otp_verification.resend_otp;
- 
- let seconds = 30;
- 
- if (!timerField) {
- return '';
- }
- 
- if (typeof window.otpResendAttemptsLeft !== 'number') {
- window.otpResendAttemptsLeft = 3;
- }
- 
- updateAttemptsInfo(globals);
- 
- if (window.otpTimerInterval) {
- clearInterval(window.otpTimerInterval);
- window.otpTimerInterval = null;
- }
- 
- if (resendBtn) {
- globals.functions.setProperty(resendBtn, {
- visible: false,
- enabled: false,
- });
- }
- 
- globals.functions.setProperty(timerField, {
- value: '00:30',
- });
- 
- window.otpTimerInterval = setInterval(() => {
- seconds -= 1;
- 
- if (seconds >= 0) {
- globals.functions.setProperty(timerField, {
- value: `00:${seconds < 10 ? `0${seconds}` : seconds}`,
- });
- }
- 
- if (seconds <= 0) {
- clearInterval(window.otpTimerInterval);
- window.otpTimerInterval = null;
- 
- globals.functions.setProperty(timerField, {
- value: '00:00',
- });
- 
- if (resendBtn && window.otpResendAttemptsLeft > 0) {
- globals.functions.setProperty(resendBtn, {
- visible: true,
- enabled: true,
- });
- }
- }
- }, 1000);
- 
- return '';
-}
- 
-/**
- * Stop timer 
- */
-/**
- * @param {scope} globals
- * @returns {string}
- */
-function stopOtpTimer(globals) {
- if (window.otpTimerInterval) {
- clearInterval(window.otpTimerInterval);
- window.otpTimerInterval = null;
- }
- 
- return '';
-}
- 
-/**
- * Handle resend
-/**
- * @param {scope} globals
- * @returns {string}
-*/
+  const timerField = globals.form.otp_verification.timer;
+  const resendBtn = globals.form.otp_verification.resend_otp;
 
-function handleResendOtp(globals) {
- const resendBtn = globals.form.otp_verification.resend_otp;
- 
- if (typeof window.otpResendAttemptsLeft !== 'number') {
- window.otpResendAttemptsLeft = 3;
- }
- 
- if (window.otpResendAttemptsLeft > 0) {
- window.otpResendAttemptsLeft -= 1;
- }
- 
- updateAttemptsInfo(globals);
+  let seconds = 10; // ✅ changed to 10 sec
 
-if (window.otpResendAttemptsLeft <= 0) {
+  if (!timerField) {
+    return '';
+  }
+
+  if (typeof window.otpResendAttemptsLeft !== 'number') {
+    window.otpResendAttemptsLeft = 3;
+  }
+
+  window.otpTimerExpired = false;
+
+  updateAttemptsInfo(globals);
+
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+    window.otpTimerInterval = null;
+  }
+
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
@@ -195,68 +124,165 @@ if (window.otpResendAttemptsLeft <= 0) {
     });
   }
 
-  alert('Maximum attempts reached');
+  globals.functions.setProperty(timerField, {
+    value: '00:10', // ✅ updated display
+  });
 
-  if (globals.form.otp_verification) {
-    globals.functions.setProperty(globals.form.otp_verification, {
+  window.otpTimerInterval = setInterval(() => {
+    seconds -= 1;
+
+    if (seconds >= 0) {
+      globals.functions.setProperty(timerField, {
+        value: `00:${seconds < 10 ? `0${seconds}` : seconds}`,
+      });
+    }
+
+    if (seconds <= 0) {
+      clearInterval(window.otpTimerInterval);
+      window.otpTimerInterval = null;
+
+      window.otpTimerExpired = true; // ✅ mark expired
+
+      globals.functions.setProperty(timerField, {
+        value: '00:00',
+      });
+
+      if (resendBtn && window.otpResendAttemptsLeft > 0) {
+        globals.functions.setProperty(resendBtn, {
+          visible: true,
+          enabled: true,
+        });
+      }
+    }
+  }, 1000);
+
+  return '';
+}
+
+/**
+ * Stop timer
+ * @param {scope} globals
+ * @returns {string}
+ */
+function stopOtpTimer(globals) {
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+    window.otpTimerInterval = null;
+  }
+
+  return '';
+}
+
+/**
+ * Handle resend
+ * @param {scope} globals
+ * @returns {string}
+ */
+function handleResendOtp(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+
+  if (typeof window.otpResendAttemptsLeft !== 'number') {
+    window.otpResendAttemptsLeft = 3;
+  }
+
+  if (window.otpResendAttemptsLeft > 0) {
+    window.otpResendAttemptsLeft -= 1;
+  }
+
+  window.otpTimerExpired = false;
+
+  updateAttemptsInfo(globals);
+
+  if (window.otpResendAttemptsLeft <= 0) {
+    if (resendBtn) {
+      globals.functions.setProperty(resendBtn, {
+        visible: false,
+        enabled: false,
+      });
+    }
+
+    alert('Maximum attempts reached');
+
+    if (globals.form.otp_verification) {
+      globals.functions.setProperty(globals.form.otp_verification, {
+        visible: false,
+      });
+    }
+
+    if (globals.form.personal_loan_offer) {
+      globals.functions.setProperty(globals.form.personal_loan_offer, {
+        visible: true,
+      });
+    }
+
+    return '';
+  }
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
       visible: false,
+      enabled: false,
     });
   }
 
-  if (globals.form.personal_loan_offer) {
-    globals.functions.setProperty(globals.form.personal_loan_offer, {
-      visible: true,
+  startOtpTimer(globals);
+
+  return '';
+}
+
+/**
+ * Call when OTP is verified successfully
+ * @param {scope} globals
+ * @returns {string}
+ */
+function handleOtpSuccess(globals) {
+  const timerField = globals.form.otp_verification.timer;
+  const resendBtn = globals.form.otp_verification.resend_otp;
+
+  stopOtpTimer(globals);
+
+  window.otpResendAttemptsLeft = 3;
+  window.otpTimerExpired = false;
+
+  updateAttemptsInfo(globals);
+
+  if (timerField) {
+    globals.functions.setProperty(timerField, {
+      value: '',
+    });
+  }
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: false,
+      enabled: false,
     });
   }
 
   return '';
 }
 
- if (resendBtn) {
- globals.functions.setProperty(resendBtn, {
- visible: false,
- enabled: false,
- });
- }
- 
- startOtpTimer(globals);
- 
- return '';
-}
- 
 /**
- * Call when OTP is verified successfully stop timer
- */
-/**
+ * Call on Submit button click
  * @param {scope} globals
  * @returns {string}
  */
-function handleOtpSuccess(globals) {
- const timerField = globals.form.otp_verification.timer;
- const resendBtn = globals.form.otp_verification.resend_otp;
- 
- stopOtpTimer();
- 
- window.otpResendAttemptsLeft = 3;
- 
- updateAttemptsInfo(globals);
- 
- if (timerField) {
- globals.functions.setProperty(timerField, {
- value: '',
- });
- }
- 
- if (resendBtn) {
- globals.functions.setProperty(resendBtn, {
- visible: false,
- enabled: false,
- });
- }
- 
- return '';
+function handleOtpSubmit(globals) {
+  const attemptsField = globals.form.otp_verification.attempt_info;
+
+  // ✅ show expired message
+  if (window.otpTimerExpired) {
+    if (attemptsField) {
+      globals.functions.setProperty(attemptsField, {
+        value: 'Time expired Retry',
+      });
+    }
+    return '';
+  }
+
+  // continue normal OTP validation here
+  return '';
 }
- 
  
 /**
  * @param {scope} globals
