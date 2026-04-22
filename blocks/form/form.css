@@ -842,51 +842,60 @@ main .form form .field-otp-verification .field-timer input:active {
 }
 
 /* ATTEMPTS */
-/* TIMER */
-main .form form .field-otp-verification .field-timer {
-  grid-column: span 4 !important;
-  justify-self: start;
-  width: max-content;
+/* make parent behave properly */
+main .form form .field-otp-verification {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
 }
 
-/* ATTEMPTS */
-main .form form .field-otp-verification .field-attempt-info {
-  grid-column: span 3 !important;
-  justify-self: start;          /* key fix */
-  width: max-content;           /* key fix */
+/* OTP stays full width */
+main .form form .field-entered-otp {
+  grid-column: span 12;
+}
+
+/* TIMER (right side) */
+main .form form .field-timer {
+  grid-column: 7 / span 3 !important;
+  justify-self: end;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  gap: 6px;
+}
+
+/* ATTEMPTS (just next to timer) */
+main .form form .field-attempt-info {
+  grid-column: 10 / span 3 !important;
+  justify-self: start;  /* sits next to timer */
+  display: flex;
+  align-items: center;
+  gap: 4px;
   white-space: nowrap;
-  gap: 2px;
-  margin-left: -40px;           /* bring it closer */
 }
 
-main .form form .field-otp-verification .field-attempt-info .field-label {
-  display: none !important;
+/* hide label */
+main .form form .field-attempt-info .field-label {
+  display: none;
 }
 
-main .form form .field-otp-verification .field-attempt-info input {
+/* clean text */
+main .form form .field-attempt-info input {
   border: 0 !important;
-  outline: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  height: auto !important;
   width: auto !important;
-  min-width: 0 !important;
-  max-width: max-content !important;
-  display: inline-block !important;
   font-size: 14px;
   font-weight: 600;
   color: #5f6b7a;
   pointer-events: none;
 }
 
-/* SUBMIT */
-main .form form .field-otp-verification .field-otp-submit {
-  grid-column: span 5 !important;
+/* SUBMIT goes below */
+main .form form .field-otp-submit {
+  grid-column: span 12 !important;
+  justify-self: center;
 }
 
 /* OTP INPUT WRAPPER */
