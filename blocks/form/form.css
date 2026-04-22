@@ -898,6 +898,11 @@ main .form form .field-otp-submit {
   justify-self: center;
 }
 
+/* OTP INPUT WRAPPER */
+main .form form .field-otp-verification .field-entered-otp {
+  max-width: 360px;
+}
+
 /* LABEL */
 main .form form .field-otp-verification .field-entered-otp .field-label {
   margin-bottom: 8px;
