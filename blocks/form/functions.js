@@ -57,7 +57,7 @@ function maskMobileNumber(mobileNumber) {
 }
 
 window.otpTimerInterval = window.otpTimerInterval || null;
-window.otpInvalidObserver = window.otpInvalidObserver || null;
+window.otpErrorCheckInterval = window.otpErrorCheckInterval || null;
 window.otpInvalidHandled = window.otpInvalidHandled || false;
 
 window.otpResendAttemptsLeft =
@@ -112,19 +112,30 @@ function stopOtpTimer(globals) {
 }
 
 /**
- * Watch page for invalid OTP message
- * No extra rule-editor function needed
  * @param {scope} globals
  * @returns {string}
  */
-function initOtpInvalidWatcher(globals) {
-  if (window.otpInvalidObserver) {
-    return '';
+function stopOtpErrorCheck() {
+  if (window.otpErrorCheckInterval) {
+    clearInterval(window.otpErrorCheckInterval);
+    window.otpErrorCheckInterval = null;
   }
 
-  window.otpInvalidObserver = new MutationObserver(() => {
+  return '';
+}
+
+/**
+ * Detect invalid OTP automatically
+ * @param {scope} globals
+ * @returns {string}
+ */
+function startOtpErrorCheck(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+
+  stopOtpErrorCheck();
+
+  window.otpErrorCheckInterval = setInterval(() => {
     const pageText = document.body ? document.body.innerText : '';
-    const resendBtn = globals.form.otp_verification.resend_otp;
 
     const hasInvalidOtpMessage =
       pageText.includes('Invalid OTP') ||
@@ -136,6 +147,7 @@ function initOtpInvalidWatcher(globals) {
       window.otpTimerExpired = false;
 
       stopOtpTimer(globals);
+      stopOtpErrorCheck();
 
       if (window.otpResendAttemptsLeft > 0) {
         window.otpResendAttemptsLeft -= 1;
@@ -166,15 +178,7 @@ function initOtpInvalidWatcher(globals) {
         }
       }
     }
-  });
-
-  if (document.body) {
-    window.otpInvalidObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-      characterData: true,
-    });
-  }
+  }, 300);
 
   return '';
 }
@@ -201,10 +205,10 @@ function startOtpTimer(globals) {
   window.otpTimerExpired = false;
   window.otpInvalidHandled = false;
 
-  initOtpInvalidWatcher(globals);
   updateAttemptsInfo(globals);
 
   stopOtpTimer(globals);
+  stopOtpErrorCheck();
 
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
@@ -217,6 +221,8 @@ function startOtpTimer(globals) {
     value: '00:10',
   });
 
+  startOtpErrorCheck(globals);
+
   window.otpTimerInterval = setInterval(() => {
     seconds -= 1;
 
@@ -228,6 +234,7 @@ function startOtpTimer(globals) {
 
     if (seconds <= 0) {
       stopOtpTimer(globals);
+      stopOtpErrorCheck();
 
       window.otpTimerExpired = true;
 
@@ -271,6 +278,9 @@ function handleResendOtp(globals) {
   updateAttemptsInfo(globals);
 
   if (window.otpResendAttemptsLeft <= 0) {
+    stopOtpTimer(globals);
+    stopOtpErrorCheck();
+
     if (resendBtn) {
       globals.functions.setProperty(resendBtn, {
         visible: false,
@@ -317,6 +327,7 @@ function handleOtpSuccess(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
 
   stopOtpTimer(globals);
+  stopOtpErrorCheck();
 
   window.otpResendAttemptsLeft = 3;
   window.otpTimerExpired = false;
@@ -339,7 +350,6 @@ function handleOtpSuccess(globals) {
 
   return '';
 }
-
 /**
  * @param {scope} globals
  */
