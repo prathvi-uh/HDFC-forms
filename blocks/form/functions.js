@@ -55,6 +55,7 @@ function maskMobileNumber(mobileNumber) {
   // Mask first 5 digits and keep the rest
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
+
 window.otpTimerInterval = window.otpTimerInterval || null;
 
 window.otpResendAttemptsLeft =
@@ -114,7 +115,6 @@ function startOtpTimer(globals) {
   }
 
   window.otpTimerExpired = false;
-
   updateAttemptsInfo(globals);
 
   if (window.otpTimerInterval) {
@@ -143,11 +143,16 @@ function startOtpTimer(globals) {
     }
 
     if (seconds <= 0) {
-      stopOtpTimer(globals);
+      clearInterval(window.otpTimerInterval);
+      window.otpTimerInterval = null;
+
+      window.otpTimerExpired = true;
 
       globals.functions.setProperty(timerField, {
         value: '00:00',
       });
+
+      updateAttemptsInfo(globals);
 
       if (resendBtn && window.otpResendAttemptsLeft > 0) {
         globals.functions.setProperty(resendBtn, {
@@ -162,31 +167,14 @@ function startOtpTimer(globals) {
 }
 
 /**
+ * Only stop timer. Do not set expired state here.
  * @param {scope} globals
  * @returns {string}
  */
 function stopOtpTimer(globals) {
-  const otpField = globals.form.otp_verification.entered_otp;
-  const attemptsField = globals.form.otp_verification.attempt_info;
-
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
-  }
-
-  window.otpTimerExpired = true;
-
-  if (attemptsField) {
-    globals.functions.setProperty(attemptsField, {
-      value: 'Time expired Retry',
-    });
-  }
-
-  // clear entered OTP after expiry
-  if (otpField) {
-    globals.functions.setProperty(otpField, {
-      value: '',
-    });
   }
 
   return '';
@@ -208,7 +196,6 @@ function handleResendOtp(globals) {
   }
 
   window.otpTimerExpired = false;
-
   updateAttemptsInfo(globals);
 
   if (window.otpResendAttemptsLeft <= 0) {
@@ -249,6 +236,7 @@ function handleResendOtp(globals) {
 }
 
 /**
+ * Call when OTP is verified successfully
  * @param {scope} globals
  * @returns {string}
  */
@@ -256,10 +244,7 @@ function handleOtpSuccess(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
 
-  if (window.otpTimerInterval) {
-    clearInterval(window.otpTimerInterval);
-    window.otpTimerInterval = null;
-  }
+  stopOtpTimer(globals);
 
   window.otpResendAttemptsLeft = 3;
   window.otpTimerExpired = false;
@@ -281,7 +266,7 @@ function handleOtpSuccess(globals) {
 
   return '';
 }
- 
+
 /**
  * @param {scope} globals
  */
