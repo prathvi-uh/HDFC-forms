@@ -55,7 +55,6 @@ function maskMobileNumber(mobileNumber) {
   // Mask first 5 digits and keep the rest
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
-
 window.otpTimerInterval = window.otpTimerInterval || null;
 
 window.otpResendAttemptsLeft =
@@ -79,6 +78,13 @@ function updateAttemptsInfo(globals) {
     return '';
   }
 
+  if (window.otpTimerExpired) {
+    globals.functions.setProperty(attemptsField, {
+      value: 'Time expired Retry',
+    });
+    return '';
+  }
+
   globals.functions.setProperty(attemptsField, {
     value:
       window.otpResendAttemptsLeft > 0
@@ -90,7 +96,6 @@ function updateAttemptsInfo(globals) {
 }
 
 /**
- * Start timer
  * @param {scope} globals
  * @returns {string}
  */
@@ -98,7 +103,7 @@ function startOtpTimer(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
 
-  let seconds = 10; // ✅ changed to 10 sec
+  let seconds = 10;
 
   if (!timerField) {
     return '';
@@ -125,7 +130,7 @@ function startOtpTimer(globals) {
   }
 
   globals.functions.setProperty(timerField, {
-    value: '00:10', // ✅ updated display
+    value: '00:10',
   });
 
   window.otpTimerInterval = setInterval(() => {
@@ -138,10 +143,7 @@ function startOtpTimer(globals) {
     }
 
     if (seconds <= 0) {
-      clearInterval(window.otpTimerInterval);
-      window.otpTimerInterval = null;
-
-      window.otpTimerExpired = true; // ✅ mark expired
+      stopOtpTimer(globals);
 
       globals.functions.setProperty(timerField, {
         value: '00:00',
@@ -160,21 +162,37 @@ function startOtpTimer(globals) {
 }
 
 /**
- * Stop timer
  * @param {scope} globals
  * @returns {string}
  */
 function stopOtpTimer(globals) {
+  const otpField = globals.form.otp_verification.entered_otp;
+  const attemptsField = globals.form.otp_verification.attempt_info;
+
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
     window.otpTimerInterval = null;
+  }
+
+  window.otpTimerExpired = true;
+
+  if (attemptsField) {
+    globals.functions.setProperty(attemptsField, {
+      value: 'Time expired Retry',
+    });
+  }
+
+  // clear entered OTP after expiry
+  if (otpField) {
+    globals.functions.setProperty(otpField, {
+      value: '',
+    });
   }
 
   return '';
 }
 
 /**
- * Handle resend
  * @param {scope} globals
  * @returns {string}
  */
@@ -231,7 +249,6 @@ function handleResendOtp(globals) {
 }
 
 /**
- * Call when OTP is verified successfully
  * @param {scope} globals
  * @returns {string}
  */
@@ -239,7 +256,10 @@ function handleOtpSuccess(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
 
-  stopOtpTimer(globals);
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+    window.otpTimerInterval = null;
+  }
 
   window.otpResendAttemptsLeft = 3;
   window.otpTimerExpired = false;
@@ -259,28 +279,6 @@ function handleOtpSuccess(globals) {
     });
   }
 
-  return '';
-}
-
-/**
- * Call on Submit button click
- * @param {scope} globals
- * @returns {string}
- */
-function handleOtpSubmit(globals) {
-  const attemptsField = globals.form.otp_verification.attempt_info;
-
-  // ✅ show expired message
-  if (window.otpTimerExpired) {
-    if (attemptsField) {
-      globals.functions.setProperty(attemptsField, {
-        value: 'Time expired Retry',
-      });
-    }
-    return '';
-  }
-
-  // continue normal OTP validation here
   return '';
 }
  
