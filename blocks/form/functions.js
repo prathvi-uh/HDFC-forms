@@ -116,6 +116,7 @@ function stopOtpTimer(globals) {
 function startOtpTimer(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
+  const submitBtn = globals.form.otp_verification.otp_submit; // ✅ correct key
 
   let seconds = 10;
 
@@ -132,6 +133,13 @@ function startOtpTimer(globals) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
       enabled: false,
+    });
+  }
+
+  // ✅ enable submit when timer starts
+  if (submitBtn) {
+    globals.functions.setProperty(submitBtn, {
+      enabled: true,
     });
   }
 
@@ -158,6 +166,13 @@ function startOtpTimer(globals) {
 
       updateAttemptsInfo(globals);
 
+      // ✅ disable submit on expiry
+      if (submitBtn) {
+        globals.functions.setProperty(submitBtn, {
+          enabled: false,
+        });
+      }
+
       if (resendBtn && window.otpResendAttemptsLeft > 0) {
         globals.functions.setProperty(resendBtn, {
           visible: true,
@@ -176,6 +191,7 @@ function startOtpTimer(globals) {
  */
 function handleResendOtp(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
+  const submitBtn = globals.form.otp_verification.otp_submit;
 
   if (typeof window.otpResendAttemptsLeft !== 'number') {
     window.otpResendAttemptsLeft = 3;
@@ -195,6 +211,12 @@ function handleResendOtp(globals) {
     if (resendBtn) {
       globals.functions.setProperty(resendBtn, {
         visible: false,
+        enabled: false,
+      });
+    }
+
+    if (submitBtn) {
+      globals.functions.setProperty(submitBtn, {
         enabled: false,
       });
     }
@@ -223,6 +245,13 @@ function handleResendOtp(globals) {
     });
   }
 
+  // ✅ enable submit again on resend
+  if (submitBtn) {
+    globals.functions.setProperty(submitBtn, {
+      enabled: true,
+    });
+  }
+
   startOtpTimer(globals);
 
   return '';
@@ -235,6 +264,7 @@ function handleResendOtp(globals) {
 function handleOtpSuccess(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
+  const submitBtn = globals.form.otp_verification.otp_submit;
 
   stopOtpTimer(globals);
 
@@ -253,6 +283,12 @@ function handleOtpSuccess(globals) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
       enabled: false,
+    });
+  }
+
+  if (submitBtn) {
+    globals.functions.setProperty(submitBtn, {
+      enabled: true,
     });
   }
 
