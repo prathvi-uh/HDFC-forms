@@ -1100,14 +1100,12 @@ main .form form .field-terms-privacy-text p::after {
   color: #1d4ed8;
 }
 
-/* =========================
-   RIGHT DISPLAY CARD
-   ========================= */
+/* RIGHT DISPLAY CARD */
 main .form form .field-display {
   background: #efe4cf;
   border-radius: 18px;
+  width: 300px;
   padding: 18px 20px 0;
-  width: 300px;                 /* balanced size */
   box-sizing: border-box;
   overflow: hidden;
 
@@ -1115,12 +1113,10 @@ main .form form .field-display {
   grid-template-columns: 1fr 1fr;
   gap: 14px 20px;
 
-  align-content: start;
+  height: auto;
 }
 
-/* =========================
-   TOP BLOCK
-   ========================= */
+/* TOP BLOCK */
 main .form form .field-loandisplay {
   grid-column: 1 / -1;
   border-bottom: 1px dashed #d7c8ad;
@@ -1128,7 +1124,6 @@ main .form form .field-loandisplay {
   margin-bottom: 8px;
 }
 
-/* TITLE (slightly bigger like you asked) */
 main .form form .field-loandisplay .field-label {
   font-size: 14px;
   font-weight: 600;
@@ -1136,7 +1131,6 @@ main .form form .field-loandisplay .field-label {
   margin-bottom: 6px;
 }
 
-/* BIG LOAN AMOUNT */
 main .form form .field-loandisplay input {
   border: none !important;
   background: transparent !important;
@@ -1144,16 +1138,13 @@ main .form form .field-loandisplay input {
   padding: 0 !important;
   margin: 0 !important;
   width: 100%;
-
-  font-size: 26px;              /* slightly bigger */
+  font-size: 26px;
   font-weight: 800;
   color: #111827;
   line-height: 1.1;
 }
 
-/* =========================
-   REMOVE INPUT LOOK
-   ========================= */
+/* REMOVE INPUT LOOK */
 main .form form .field-display input {
   border: none !important;
   background: transparent !important;
@@ -1164,9 +1155,7 @@ main .form form .field-display input {
   box-shadow: none !important;
 }
 
-/* =========================
-   DETAIL BLOCKS
-   ========================= */
+/* DETAIL BLOCKS */
 main .form form .field-emi,
 main .form form .field-tenure,
 main .form form .field-rate,
@@ -1178,7 +1167,6 @@ main .form form .field-processing-fee {
   gap: 3px;
 }
 
-/* ORANGE ACCENT LINE */
 main .form form .field-emi::before,
 main .form form .field-tenure::before,
 main .form form .field-rate::before,
@@ -1187,14 +1175,12 @@ main .form form .field-processing-fee::before {
   position: absolute;
   left: 0;
   top: 4px;
-
   width: 2px;
   height: 22px;
   background: #f4a022;
   border-radius: 2px;
 }
 
-/* LABELS */
 main .form form .field-emi .field-label,
 main .form form .field-tenure .field-label,
 main .form form .field-rate .field-label,
@@ -1204,7 +1190,6 @@ main .form form .field-processing-fee .field-label {
   white-space: nowrap;
 }
 
-/* VALUES */
 main .form form .field-emi input,
 main .form form .field-tenure input,
 main .form form .field-rate input,
@@ -1215,43 +1200,22 @@ main .form form .field-processing-fee input {
   white-space: nowrap;
 }
 
-/* GRID POSITIONS */
-main .form form .field-emi { grid-column: 1; }
-main .form form .field-tenure { grid-column: 2; }
-main .form form .field-rate { grid-column: 1; }
-main .form form .field-processing-fee { grid-column: 2; }
-
-/* =========================
-   FOOTER NOTE BAR
-   ========================= */
+/* FOOTER NOTE */
 main .form form .field-note {
   grid-column: 1 / -1;
   margin-top: 10px;
-
   background: #f4a022;
-  color: #ffffff;
-
+  color: #fff;
   font-size: 10px;
   line-height: 1.4;
   padding: 12px 14px;
-
   border-radius: 0 0 18px 18px;
-
   margin-left: -20px;
   margin-right: -20px;
-  margin-bottom: 0;
 }
 
 main .form form .field-note p,
 main .form form .field-note .plain-text-wrapper {
   margin: 0;
-  color: #ffffff;
-}
-
-/* =========================
-   PREVENT STRETCHING
-   ========================= */
-main .form form .field-display {
-  height: auto !important;
-  min-height: unset !important;
+  color: #fff;
 }
