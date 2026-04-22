@@ -802,7 +802,7 @@ main .form form .field-otp-verification {
   row-gap: 20px;
 }
 
-/* OTP full row */
+/* OTP full rrow */
 main .form form .field-otp-verification .field-entered-otp {
   grid-column: 1 / span 8 !important;
   max-width: none;
