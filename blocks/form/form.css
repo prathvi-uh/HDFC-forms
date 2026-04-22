@@ -1106,14 +1106,14 @@ main .form form .field-terms-privacy-text p::after {
 main .form form .field-display {
   background: #efe4cf;
   border-radius: 16px;
-  padding: 18px 20px 0;
+  padding: 16px 18px 0;
   width: 320px;
   box-sizing: border-box;
   overflow: hidden;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px 20px;
+  gap: 14px 18px;
 
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   align-content: start;
@@ -1125,8 +1125,8 @@ main .form form .field-display {
 main .form form .field-loandisplay {
   grid-column: 1 / -1;
   border-bottom: 1px dashed #d7c8ad;
-  padding-bottom: 14px;
-  margin-bottom: 2px;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
 }
 
 main .form form .field-loandisplay .field-label {
@@ -1146,7 +1146,7 @@ main .form form .field-loandisplay input {
   margin: 0 !important;
   width: 100%;
 
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   color: #111111;
   letter-spacing: 0;
@@ -1174,8 +1174,8 @@ main .form form .field-tenure,
 main .form form .field-rate,
 main .form form .field-processing-fee {
   position: relative;
-  padding-left: 12px;
-  min-height: 42px;
+  padding-left: 10px;
+  min-height: 38px;
 }
 
 /* ORANGE ACCENT LINE */
@@ -1186,9 +1186,9 @@ main .form form .field-processing-fee::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 2px;
-  width: 3px;
-  height: 26px;
+  top: 4px;
+  width: 2px;
+  height: 18px;
   background: #f4a022;
   border-radius: 2px;
 }
@@ -1198,9 +1198,10 @@ main .form form .field-emi .field-label,
 main .form form .field-tenure .field-label,
 main .form form .field-rate .field-label,
 main .form form .field-processing-fee .field-label {
-  font-size: 11px;
-  color: #6b7280;
-  margin-bottom: 3px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #5f6470;
+  margin-bottom: 4px;
   line-height: 1.25;
 }
 
@@ -1209,10 +1210,10 @@ main .form form .field-emi input,
 main .form form .field-tenure input,
 main .form form .field-rate input,
 main .form form .field-processing-fee input {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   color: #111827;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 /* GRID POSITIONS */
@@ -1226,17 +1227,16 @@ main .form form .field-processing-fee { grid-column: 2; }
    ========================= */
 main .form form .field-note {
   grid-column: 1 / -1;
-  margin-top: 6px;
+  margin-top: 8px;
   background: #f4a022;
   color: #ffffff;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.45;
-  padding: 12px 14px;
+  padding: 10px 14px 11px;
   border-radius: 0 0 16px 16px;
 
-  /* stretch footer to card edges */
-  margin-left: -20px;
-  margin-right: -20px;
+  margin-left: -18px;
+  margin-right: -18px;
   margin-bottom: 0;
 }
 
