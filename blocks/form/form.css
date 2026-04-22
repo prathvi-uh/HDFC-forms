@@ -793,7 +793,7 @@ main .form form select[multiple] {
     height: calc(42px + 50px);
 }
 
-/* ================= OTP VERIFICATION ================= */
+/*capstone*/
 
 main .form form .field-otp-verification {
   display: grid;
