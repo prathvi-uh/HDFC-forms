@@ -68,22 +68,21 @@ window.otpResendAttemptsLeft =
  */
 
 function updateAttemptsInfo(globals) {
- const attemptsField = globals.form.otp_verification.attempt_info;
- 
- if (!attemptsField) {
- return '';
- }
- 
- globals.functions.setProperty(attemptsField, {
- value:
- window.otpResendAttemptsLeft > 0
- ? `${window.otpResendAttemptsLeft}/3`
- : 'No attempts left',
- });
- 
- return '';
+  const attemptsField = globals.form.otp_verification.attempt_info;
+
+  if (!attemptsField) {
+    return '';
+  }
+
+  globals.functions.setProperty(attemptsField, {
+    value:
+      window.otpResendAttemptsLeft > 0
+        ? `${window.otpResendAttemptsLeft}/3 attempts left`
+        : 'No attempts left',
+  });
+
+  return '';
 }
- 
 /**
  * Start timer
  */
