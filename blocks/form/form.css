@@ -843,13 +843,14 @@ main .form form .field-otp-verification .field-timer input:active {
 
 
 /* ================= OTP VERIFICATION ================= */
-
 /* ATTEMPTS FIELD */
 main .form form .field-otp-verification .field-attempt-info {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 4px;
+  white-space: nowrap;          /* keep in one line */
+  grid-column: span 4 !important; /* increase width from col-3 */
 }
 
 /* hide default label */
@@ -857,7 +858,7 @@ main .form form .field-otp-verification .field-attempt-info .field-label {
   display: none;
 }
 
-/* make 3/3 behave like plain inline text */
+/* style 3/3 */
 main .form form .field-otp-verification .field-attempt-info input {
   border: 0 !important;
   outline: 0 !important;
@@ -879,7 +880,7 @@ main .form form .field-otp-verification .field-attempt-info input {
   pointer-events: none;
 }
 
-/* attach text right next to 3/3 */
+/* attempts text */
 main .form form .field-otp-verification .field-attempt-info::after {
   content: " attempts left";
   font-size: 14px;
