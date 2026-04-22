@@ -55,6 +55,7 @@ function maskMobileNumber(mobileNumber) {
   // Mask first 5 digits and keep the rest
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
+
 window.otpTimerInterval = window.otpTimerInterval || null;
 
 window.otpResendAttemptsLeft =
@@ -65,11 +66,6 @@ window.otpResendAttemptsLeft =
 window.otpTimerExpired =
   typeof window.otpTimerExpired === 'boolean'
     ? window.otpTimerExpired
-    : false;
-
-window.otpSubmitAttempted =
-  typeof window.otpSubmitAttempted === 'boolean'
-    ? window.otpSubmitAttempted
     : false;
 
 /**
@@ -128,7 +124,6 @@ function startOtpTimer(globals) {
   }
 
   window.otpTimerExpired = false;
-  window.otpSubmitAttempted = false;
 
   updateAttemptsInfo(globals);
   stopOtpTimer(globals);
@@ -176,27 +171,6 @@ function startOtpTimer(globals) {
 }
 
 /**
- * Call this from Submit button if possible
- * If not possible, ignore this function.
- * @param {scope} globals
- * @returns {string}
- */
-function markOtpSubmitAttempt(globals) {
-  const resendBtn = globals.form.otp_verification.resend_otp;
-
-  window.otpSubmitAttempted = true;
-
-  if (resendBtn && window.otpResendAttemptsLeft > 0) {
-    globals.functions.setProperty(resendBtn, {
-      visible: true,
-      enabled: true,
-    });
-  }
-
-  return '';
-}
-
-/**
  * @param {scope} globals
  * @returns {string}
  */
@@ -212,7 +186,6 @@ function handleResendOtp(globals) {
   }
 
   window.otpTimerExpired = false;
-  window.otpSubmitAttempted = false;
 
   updateAttemptsInfo(globals);
 
@@ -267,7 +240,6 @@ function handleOtpSuccess(globals) {
 
   window.otpResendAttemptsLeft = 3;
   window.otpTimerExpired = false;
-  window.otpSubmitAttempted = false;
 
   updateAttemptsInfo(globals);
 
