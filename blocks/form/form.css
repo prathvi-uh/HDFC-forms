@@ -1105,17 +1105,16 @@ main .form form .field-terms-privacy-text p::after {
    ========================= */
 main .form form .field-display {
   background: #efe4cf;
-  border-radius: 16px;
-  padding: 14px 16px 0;
-  width: 235px;                  /* compact like reference */
+  border-radius: 18px;
+  padding: 18px 20px 0;
+  width: 300px;                 /* balanced size */
   box-sizing: border-box;
   overflow: hidden;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 14px;
+  gap: 14px 20px;
 
-  box-shadow: none;
   align-content: start;
 }
 
@@ -1125,18 +1124,19 @@ main .form form .field-display {
 main .form form .field-loandisplay {
   grid-column: 1 / -1;
   border-bottom: 1px dashed #d7c8ad;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+/* TITLE (slightly bigger like you asked) */
+main .form form .field-loandisplay .field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
   margin-bottom: 6px;
 }
 
-main .form form .field-loandisplay .field-label {
-  font-size: 10px;
-  font-weight: 500;
-  color: #222;
-  margin-bottom: 4px;
-  line-height: 1.2;
-}
-
+/* BIG LOAN AMOUNT */
 main .form form .field-loandisplay input {
   border: none !important;
   background: transparent !important;
@@ -1145,10 +1145,10 @@ main .form form .field-loandisplay input {
   margin: 0 !important;
   width: 100%;
 
-  font-size: 22px;
+  font-size: 26px;              /* slightly bigger */
   font-weight: 800;
-  color: #111;
-  line-height: 1.05;
+  color: #111827;
+  line-height: 1.1;
 }
 
 /* =========================
@@ -1172,11 +1172,10 @@ main .form form .field-tenure,
 main .form form .field-rate,
 main .form form .field-processing-fee {
   position: relative;
-  padding-left: 8px;
-  min-height: auto;
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  gap: 3px;
 }
 
 /* ORANGE ACCENT LINE */
@@ -1187,9 +1186,10 @@ main .form form .field-processing-fee::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 2px;
+  top: 4px;
+
   width: 2px;
-  height: 28px;
+  height: 22px;
   background: #f4a022;
   border-radius: 2px;
 }
@@ -1199,12 +1199,9 @@ main .form form .field-emi .field-label,
 main .form form .field-tenure .field-label,
 main .form form .field-rate .field-label,
 main .form form .field-processing-fee .field-label {
-  font-size: 9px;
-  font-weight: 400;
-  color: #6b6f7a;
-  margin-bottom: 2px;
-  line-height: 1.15;
-  white-space: nowrap;           /* keep EMI Amount in one line */
+  font-size: 12px;
+  color: #6b7280;
+  white-space: nowrap;
 }
 
 /* VALUES */
@@ -1212,10 +1209,9 @@ main .form form .field-emi input,
 main .form form .field-tenure input,
 main .form form .field-rate input,
 main .form form .field-processing-fee input {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
   color: #111827;
-  line-height: 1.15;
   white-space: nowrap;
 }
 
@@ -1230,21 +1226,32 @@ main .form form .field-processing-fee { grid-column: 2; }
    ========================= */
 main .form form .field-note {
   grid-column: 1 / -1;
-  margin-top: 8px;
-  background: #f4a022;
-  color: #fff;
-  font-size: 8px;
-  line-height: 1.35;
-  padding: 9px 12px 10px;
-  border-radius: 0 0 16px 16px;
+  margin-top: 10px;
 
-  margin-left: -16px;
-  margin-right: -16px;
+  background: #f4a022;
+  color: #ffffff;
+
+  font-size: 10px;
+  line-height: 1.4;
+  padding: 12px 14px;
+
+  border-radius: 0 0 18px 18px;
+
+  margin-left: -20px;
+  margin-right: -20px;
   margin-bottom: 0;
 }
 
 main .form form .field-note p,
 main .form form .field-note .plain-text-wrapper {
   margin: 0;
-  color: #fff;
+  color: #ffffff;
+}
+
+/* =========================
+   PREVENT STRETCHING
+   ========================= */
+main .form form .field-display {
+  height: auto !important;
+  min-height: unset !important;
 }
