@@ -841,20 +841,23 @@ main .form form .field-otp-verification .field-timer input:active {
   background: transparent;
 }
 
+
+/* ================= OTP VERIFICATION ================= */
+
+/* ATTEMPTS FIELD */
 main .form form .field-otp-verification .field-attempt-info {
   display: flex;
-  flex-direction: row;          /* column → row */
   align-items: center;
-  justify-content: flex-end;    /* keep it right aligned */
+  justify-content: flex-end;
   gap: 4px;
 }
 
-/* hide "Attempts" label */
+/* hide default label */
 main .form form .field-otp-verification .field-attempt-info .field-label {
-  display: none;                /*  remove label */
+  display: none;
 }
 
-/* convert input to text */
+/* style 3/3 */
 main .form form .field-otp-verification .field-attempt-info input {
   border: 0 !important;
   outline: 0 !important;
@@ -865,75 +868,77 @@ main .form form .field-otp-verification .field-attempt-info input {
   height: auto !important;
   width: auto !important;
   max-width: max-content;
+
   font-size: 14px;
-  font-weight: 500;             /* slightly bold like UI */
-  color: #6b6b6b;
+  font-weight: 600;
+  color: #5f6b7a;
   pointer-events: none;
 }
 
-/* OTP input wrapper */
-main .form form .field-otp-verification .field-entered-otp {
-  max-width: 620px;
+/* 🔥 ensure "attempts left" always visible */
+main .form form .field-otp-verification .field-attempt-info::after {
+  content: " attempts left" !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: #7d8794;
 }
 
-/* label */
+/* OTP INPUT WRAPPER */
+main .form form .field-otp-verification .field-entered-otp {
+  max-width: 360px;
+}
+
+/* LABEL */
 main .form form .field-otp-verification .field-entered-otp .field-label {
   margin-bottom: 8px;
   font-size: 18px;
   font-weight: 500;
-  color: #4a4a4a;
+  color: #3f4a5a;
 }
 
-/* OTP input look like first image */
-main .form form .field-otp-verification .field-entered-otp {
-  max-width: 320px;
-}
-
+/* OTP INPUT STYLE */
 main .form form .field-otp-verification .field-entered-otp input {
-  width: 320px;
-  max-width: 320px;
-  height: 44px;
-  border: 1px solid #d9dce3;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  width: 360px;
+  max-width: 360px;
+  height: 42px;
+
+  border: 1px solid #e2e7f0;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: none;
   box-sizing: border-box;
 
   font-size: 22px;
   font-weight: 500;
-  color: #6b7280;
-  letter-spacing: 28px;
-  line-height: 44px;
+  color: #5f6b7a;
+  letter-spacing: 34px;
+  line-height: 42px;
   padding: 0 18px;
   text-align: left;
-
-  /* 6-slot visual guide */
-  background-image: radial-gradient(circle, #e5e7eb 2px, transparent 2px);
-  background-size: 46px 44px;
-  background-repeat: no-repeat, no-repeat; 
-  background-position: 20px center;
-
-  overflow: hidden;
 }
 
+/* placeholder */
 main .form form .field-otp-verification .field-entered-otp input::placeholder {
-  color: #9ca3af;
-  letter-spacing: normal;
+  color: #c2c9d3;
+  letter-spacing: 34px;
 }
 
+/* focus */
 main .form form .field-otp-verification .field-entered-otp input:focus {
   outline: none;
-  border-color: #cfd5df;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border-color: #d8dee8;
+  box-shadow: none;
 }
 
+/* autofill fix */
 main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill,
 main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill:hover,
 main .form form .field-otp-verification .field-entered-otp input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1000px #fff inset;
-  -webkit-text-fill-color: #6b7280;
+  -webkit-text-fill-color: #5f6b7a;
 }
 
+/* MOBILE */
 @media (max-width: 768px) {
   main .form form .field-otp-verification .field-entered-otp {
     max-width: 100%;
@@ -941,12 +946,10 @@ main .form form .field-otp-verification .field-entered-otp input:-webkit-autofil
 
   main .form form .field-otp-verification .field-entered-otp input {
     width: 100%;
-    max-width: 320px;
+    max-width: 360px;
     font-size: 20px;
-    letter-spacing: 22px;
+    letter-spacing: 24px;
     padding: 0 14px;
-    background-size: 38px 44px;
-    background-position: 14px center;
   }
 }
 
@@ -1077,4 +1080,114 @@ main .form form .field-terms-privacy-text p::after {
   font-size: 18px;
   font-weight: 600;
   color: #1d4ed8;
+}
+
+/* CARD */
+main .form form .field-display {
+  background: #f3ead7;
+  border-radius: 24px;
+  padding: 28px 28px 0;
+  max-width: 380px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 24px;
+}
+
+/* TOP TITLE */
+main .form form .field-loandisplay .field-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 6px;
+}
+
+/* BIG AMOUNT */
+main .form form .field-loandisplay input {
+  border: none !important;
+  background: transparent !important;
+  font-size: 36px;
+  font-weight: 800;
+  color: #0f172a;
+  padding: 0;
+}
+
+/* FULL WIDTH TOP */
+main .form form .field-loandisplay {
+  grid-column: 1 / -1;
+  border-bottom: 2px dotted #d8cfba;
+  padding-bottom: 16px;
+  margin-bottom: 10px;
+}
+
+/* REMOVE INPUT BOX STYLE */
+main .form form .field-display input {
+  border: none !important;
+  background: transparent !important;
+  padding: 0;
+  outline: none;
+}
+
+/* EMI / TENURE / RATE BLOCK */
+main .form form .field-emi,
+main .form form .field-tenure,
+main .form form .field-rate,
+main .form form .field-processing-fee {
+  position: relative;
+  padding-left: 12px;
+}
+
+/* ORANGE LINE */
+main .form form .field-emi::before,
+main .form form .field-tenure::before,
+main .form form .field-rate::before,
+main .form form .field-processing-fee::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: #f59e0b;
+}
+
+/* LABELS */
+main .form form .field-emi .field-label,
+main .form form .field-tenure .field-label,
+main .form form .field-rate .field-label,
+main .form form .field-processing-fee .field-label {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* VALUES */
+main .form form .field-emi input,
+main .form form .field-tenure input,
+main .form form .field-rate input,
+main .form form .field-processing-fee input {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* TAX (BOTTOM LEFT) FULL WIDTH */
+main .form form .field-processing-fee {
+  grid-column: 1 / 2;
+}
+
+/* PUSH RATE DOWN */
+main .form form .field-rate {
+  grid-column: 1 / 2;
+}
+
+/* ORANGE FOOTER */
+main .form form .field-note {
+  grid-column: 1 / -1;
+  background: #f59e0b;
+  color: #fff;
+  margin: 16px -28px 0;
+  padding: 16px 20px;
+  border-radius: 0 0 24px 24px;
+  font-size: 12px;
+  line-height: 1.4;
 }
