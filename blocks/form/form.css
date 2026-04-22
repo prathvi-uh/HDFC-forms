@@ -921,6 +921,7 @@ main .form form .field-otp-verification .field-entered-otp input {
   line-height: 42px;
   padding: 0 18px;
   text-align: left;
+  caret-color: transparent;
 }
 
 main .form form .field-otp-verification .field-entered-otp input::placeholder {
