@@ -1100,23 +1100,6 @@ main .form form .field-terms-privacy-text p::after {
   color: #1d4ed8;
 }
 
-/* RIGHT DISPLAY CARD */
-main .form form .field-display {
-  background: #efe4cf;
-  border-radius: 18px;
-  width: 300px;
-  padding: 18px 20px 0;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 20px;
-
-  height: auto;
-}
-
-/* TOP BLOCK */
 main .form form .field-loandisplay {
   grid-column: 1 / -1;
   border-bottom: 1px dashed #d7c8ad;
@@ -1144,7 +1127,6 @@ main .form form .field-loandisplay input {
   line-height: 1.1;
 }
 
-/* REMOVE INPUT LOOK */
 main .form form .field-display input {
   border: none !important;
   background: transparent !important;
@@ -1155,7 +1137,6 @@ main .form form .field-display input {
   box-shadow: none !important;
 }
 
-/* DETAIL BLOCKS */
 main .form form .field-emi,
 main .form form .field-tenure,
 main .form form .field-rate,
@@ -1200,7 +1181,6 @@ main .form form .field-processing-fee input {
   white-space: nowrap;
 }
 
-/* FOOTER NOTE */
 main .form form .field-note {
   grid-column: 1 / -1;
   margin-top: 10px;
@@ -1212,6 +1192,7 @@ main .form form .field-note {
   border-radius: 0 0 18px 18px;
   margin-left: -20px;
   margin-right: -20px;
+  margin-bottom: 0;
 }
 
 main .form form .field-note p,
