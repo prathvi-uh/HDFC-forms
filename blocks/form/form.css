@@ -1503,41 +1503,26 @@ main .form form .field-terms-privacy-text p::after {
 }
 
 /* =========================================================
-   TOP OFFER BANNER
-   field-discount = whole banner section
-   field-off      = text: "Loan offer based on customer's declared income"
-   field-amt      = text + changing amount input
+   BLUE BANNER 
    ========================================================= */
 
-/* outer wrapper */
-.field-discount,
-.field-discount.field-wrapper,
-.field-discount.panel-wrapper {
-  width: 100% !important;
-  max-width: 100% !important;
+/* exact top banner fieldset only */
+fieldset#panelcontainer-0813f2edd9 {
+  grid-column: 1 / span 8 !important;
+  width: 760px !important;
+  max-width: 760px !important;
+  min-width: 760px !important;
+  justify-self: start !important;
+  align-self: start !important;
   margin: 0 0 18px 0 !important;
   padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
   box-sizing: border-box !important;
 }
 
-/* remove outer legend if builder adds it */
-.field-discount > legend,
-.field-discount > .field-label {
-  display: none !important;
-}
-
-/* ---------------------------------------------------------
-   TOP TITLE
-   "Loan offer based on customer's declared income"
-   --------------------------------------------------------- */
-.field-discount .field-off,
-.field-discount .plain-text-wrapper.field-off,
-.field-discount .text-wrapper.field-off {
-  display: block !important;
-  width: 100% !important;
+/* title above banner */
+fieldset#panelcontainer-0813f2edd9 .field-off,
+fieldset#panelcontainer-0813f2edd9 .plain-text-wrapper.field-off,
+fieldset#panelcontainer-0813f2edd9 .text-wrapper.field-off {
   margin: 0 0 12px 0 !important;
   padding: 0 !important;
   background: transparent !important;
@@ -1545,185 +1530,38 @@ main .form form .field-terms-privacy-text p::after {
   box-shadow: none !important;
 }
 
-.field-discount .field-off p,
-.field-discount .field-off .plain-text-wrapper,
-.field-discount .field-off .field-label {
+fieldset#panelcontainer-0813f2edd9 .field-off p {
   margin: 0 !important;
-  padding: 0 !important;
   font-size: 14px !important;
   line-height: 1.35 !important;
   font-weight: 600 !important;
   color: #1f2f46 !important;
 }
 
-/* ---------------------------------------------------------
-   BLUE MESSAGE BANNER
-   contains text + input
-   --------------------------------------------------------- */
-.field-discount .field-amt,
-.field-discount .text-wrapper.field-amt,
-.field-discount .plain-text-wrapper.field-amt {
+/* actual blue box */
+fieldset#panelcontainer-0813f2edd9 .field-amt,
+fieldset#panelcontainer-0813f2edd9 .text-wrapper.field-amt,
+fieldset#panelcontainer-0813f2edd9 .plain-text-wrapper.field-amt {
   position: relative !important;
   display: flex !important;
   align-items: center !important;
-  gap: 14px !important;
+  gap: 12px !important;
   width: 100% !important;
-  min-height: 74px !important;
+  max-width: 100% !important;
+  min-height: 78px !important;
   margin: 0 !important;
-  padding: 16px 18px 16px 72px !important;
-
-  background: #e8f4f7 !important;
+  padding: 16px 18px 16px 58px !important;
+  background: #e6f1f5 !important;
   border: none !important;
   border-radius: 14px !important;
-  box-shadow: none !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
 }
 
-/* icon area */
-.field-discount .field-amt::before,
-.field-discount .text-wrapper.field-amt::before,
-.field-discount .plain-text-wrapper.field-amt::before {
-  content: "💰" !important;
-  position: absolute !important;
-  left: 18px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  font-size: 32px !important;
-  line-height: 1 !important;
-}
-
-/* static text before input */
-.field-discount .field-amt p,
-.field-discount .field-amt .plain-text-wrapper,
-.field-discount .field-amt .field-label,
-.field-discount .text-wrapper.field-amt p,
-.field-discount .plain-text-wrapper.field-amt p {
-  margin: 0 !important;
-  padding: 0 !important;
-  display: inline !important;
-  font-size: 15px !important;
-  line-height: 1.4 !important;
-  font-weight: 500 !important;
-  color: #17263a !important;
-  white-space: nowrap !important;
-}
-
-/* ---------------------------------------------------------
-   CHANGING AMOUNT INPUT
-   keep visible, no hardcoded value
-   --------------------------------------------------------- */
-.field-discount .field-amt input,
-.field-discount .field-amt input[type="text"],
-.field-discount .field-amt input[type="number"],
-.field-discount .field-amt .form-control,
-.field-discount .text-wrapper.field-amt input,
-.field-discount .plain-text-wrapper.field-amt input {
-  display: inline-block !important;
-  width: auto !important;
-  min-width: 90px !important;
-  max-width: 220px !important;
-  height: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-
-  font-size: 16px !important;
-  line-height: 1.4 !important;
-  font-weight: 700 !important;
-  color: #17263a !important;
-  text-align: left !important;
-  white-space: nowrap !important;
-}
-
-/* remove default builder label inside amount field */
-.field-discount .field-amt > label,
-.field-discount .field-amt > .field-label,
-.field-discount .field-amt > legend {
-  display: none !important;
-}
-
-/* placeholders */
-.field-discount .field-amt input::placeholder,
-.field-discount .field-amt .form-control::placeholder {
-  color: #17263a !important;
-  opacity: 1 !important;
-  font-weight: 700 !important;
-}
-
-/* focus */
-.field-discount .field-amt input:focus,
-.field-discount .field-amt .form-control:focus {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* ---------------------------------------------------------
-   MOBILE
-   --------------------------------------------------------- */
-@media (max-width: 768px) {
-  .field-discount .field-amt,
-  .field-discount .text-wrapper.field-amt,
-  .field-discount .plain-text-wrapper.field-amt {
-    min-height: 68px !important;
-    padding: 14px 16px 14px 62px !important;
-    gap: 10px !important;
-  }
-
-  .field-discount .field-amt::before,
-  .field-discount .text-wrapper.field-amt::before,
-  .field-discount .plain-text-wrapper.field-amt::before {
-    left: 16px !important;
-    font-size: 28px !important;
-  }
-
-  .field-discount .field-off p,
-  .field-discount .field-off .plain-text-wrapper,
-  .field-discount .field-amt p,
-  .field-discount .field-amt .plain-text-wrapper,
-  .field-discount .field-amt input {
-    font-size: 14px !important;
-  }
-}
-
-/* =========================================================
-   FIX TOP BLUE BANNER
-   ========================================================= */
-
-/* make banner width end near the offer card */
-.field-discount,
-.field-discount.field-wrapper,
-.field-discount.panel-wrapper {
-  width: calc(100% - 360px) !important;
-  max-width: calc(100% - 360px) !important;
-  min-width: calc(100% - 360px) !important;
-  margin: 0 0 18px 0 !important;
-}
-
-/* blue box */
-.field-discount .field-amt,
-.field-discount .text-wrapper.field-amt,
-.field-discount .plain-text-wrapper.field-amt {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  min-height: 78px !important;
-  padding: 16px 18px 16px 58px !important;
-  background: #e6f1f5 !important;
-  border-radius: 14px !important;
-  position: relative !important;
-}
-
 /* icon */
-.field-discount .field-amt::before,
-.field-discount .text-wrapper.field-amt::before,
-.field-discount .plain-text-wrapper.field-amt::before {
+fieldset#panelcontainer-0813f2edd9 .field-amt::before,
+fieldset#panelcontainer-0813f2edd9 .text-wrapper.field-amt::before,
+fieldset#panelcontainer-0813f2edd9 .plain-text-wrapper.field-amt::before {
   content: "💰" !important;
   position: absolute !important;
   left: 18px !important;
@@ -1733,26 +1571,25 @@ main .form form .field-terms-privacy-text p::after {
   line-height: 1 !important;
 }
 
-/* SHOW the text */
-.field-discount .field-amt p,
-.field-discount .field-amt .plain-text-wrapper,
-.field-discount .field-amt .field-label {
+/* banner text */
+fieldset#panelcontainer-0813f2edd9 .field-amt p,
+fieldset#panelcontainer-0813f2edd9 .field-amt .plain-text-wrapper,
+fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   display: inline !important;
-  visibility: visible !important;
-  opacity: 1 !important;
   margin: 0 !important;
   padding: 0 !important;
   font-size: 15px !important;
   line-height: 1.4 !important;
   font-weight: 500 !important;
   color: #1b2738 !important;
+  white-space: nowrap !important;
 }
 
-/* amount input visible and inline */
-.field-discount .field-amt input,
-.field-discount .field-amt input[type="text"],
-.field-discount .field-amt input[type="number"],
-.field-discount .field-amt .form-control {
+/* changing input amount */
+fieldset#panelcontainer-0813f2edd9 .field-amt input,
+fieldset#panelcontainer-0813f2edd9 .field-amt input[type="text"],
+fieldset#panelcontainer-0813f2edd9 .field-amt input[type="number"],
+fieldset#panelcontainer-0813f2edd9 .field-amt .form-control {
   display: inline-block !important;
   width: auto !important;
   min-width: 90px !important;
@@ -1769,66 +1606,21 @@ main .form form .field-terms-privacy-text p::after {
   color: #1b2738 !important;
 }
 
-/* remove white input look if builder adds it */
-.field-discount .field-amt input:focus,
-.field-discount .field-amt .form-control:focus {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* mobile fallback */
-@media (max-width: 1024px) {
-  .field-discount,
-  .field-discount.field-wrapper,
-  .field-discount.panel-wrapper {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-  }
-}
-
-/* move the Avail EXPRESS card a little closer to the sliders */
-.field-display,
-.field-display.field-wrapper,
-.field-display.panel-wrapper {
+/* move right card closer */
+fieldset#panelcontainer-92e5f72b8d {
   margin-left: -100px !important;
 }
 
-/* optional: slightly tighter desktop alignment */
-@media (max-width: 1200px) {
-  .field-display,
-  .field-display.field-wrapper,
-  .field-display.panel-wrapper {
-    margin-left: -20px !important;
+/* responsive */
+@media (max-width: 1024px) {
+  fieldset#panelcontainer-0813f2edd9 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    grid-column: 1 / -1 !important;
+  }
+
+  fieldset#panelcontainer-92e5f72b8d {
+    margin-left: 0 !important;
   }
 }
-
-/* keep outer section full width */
-.field-discount,
-.field-discount.field-wrapper,
-.field-discount.panel-wrapper {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 100% !important;
-}
-
-/* exact banner fieldset */
-fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 {
-  grid-column: 1 / span 8 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  justify-self: start !important;
-  align-self: start !important;
-}
-
-/* actual blue banner inside */
-fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 .field-amt,
-fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 .text-wrapper.field-amt,
-fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 .plain-text-wrapper.field-amt {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-
