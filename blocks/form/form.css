@@ -1101,7 +1101,6 @@ main .form form .field-terms-privacy-text p::after {
 }
 
 /*offer panel */
-
 .field-display,
 .field-display.field-wrapper,
 .field-display.panel-wrapper {
@@ -1117,7 +1116,7 @@ main .form form .field-terms-privacy-text p::after {
   box-shadow: none !important;
   margin: 0 !important;
 }
-
+ 
 /* hide outer legend */
 .field-display > legend,
 .field-display > .field-label {
@@ -1611,4 +1610,3 @@ fieldset#panelcontainer-92e5f72b8d {
     margin-left: 0 !important;
   }
 }
-
