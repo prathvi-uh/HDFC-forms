@@ -1624,3 +1624,8 @@ fieldset#panelcontainer-92e5f72b8d {
     margin-left: 0 !important;
   }
 }
+
+.field-discount .field-amt {
+  width: 800px !important;
+  max-width: 800px !important;
+}
