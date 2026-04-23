@@ -1195,8 +1195,8 @@ main .form form .field-terms-privacy-text p::after {
   grid-area: rate !important;
 }
 
-.field-display .field-tax {
-  grid-area: tax !important;
+.field-display .field-tenure {
+  grid-area: tenure !important;
 }
 
 .field-display .field-note {
@@ -1209,7 +1209,7 @@ main .form form .field-terms-privacy-text p::after {
 
 .field-display .field-emi,
 .field-display .field-rate,
-.field-display .field-tax {
+.field-display .field-tenure {
   margin: 0 !important;
   padding: 0 !important;
   min-width: 0 !important;
@@ -1221,10 +1221,10 @@ main .form form .field-terms-privacy-text p::after {
 /* labels */
 .field-display .field-emi > legend,
 .field-display .field-rate > legend,
-.field-display .field-tax > legend,
+.field-display .field-tenure > legend,
 .field-display .field-emi > .field-label,
 .field-display .field-rate > .field-label,
-.field-display .field-tax > .field-label {
+.field-display .field-tenure > .field-label {
   position: relative !important;
   display: block !important;
   margin: 0 0 4px !important;
@@ -1238,10 +1238,10 @@ main .form form .field-terms-privacy-text p::after {
 /* orange line */
 .field-display .field-emi > legend::before,
 .field-display .field-rate > legend::before,
-.field-display .field-tax > legend::before,
+.field-display .field-tenure > legend::before,
 .field-display .field-emi > .field-label::before,
 .field-display .field-rate > .field-label::before,
-.field-display .field-tax > .field-label::before {
+.field-display .field-tenure > .field-label::before {
   content: "" !important;
   position: absolute !important;
   left: 0 !important;
@@ -1255,7 +1255,7 @@ main .form form .field-terms-privacy-text p::after {
 /* values */
 .field-display .field-emi input,
 .field-display .field-rate input,
-.field-display .field-tax input {
+.field-display .field-tenure input {
   padding: 0 0 0 12px !important;
   margin: 0 !important;
   display: block !important;
@@ -1388,7 +1388,7 @@ main .form form .field-terms-privacy-text p::after {
 /* reduce gap above EMI section */
 .field-display .field-emi,
 .field-display .field-rate,
-.field-display .field-tax {
+.field-display .field-tenure {
   margin-top: 0 !important;
 }
 
@@ -1455,14 +1455,14 @@ main .form form .field-terms-privacy-text p::after {
 /* spacing between rows */
 .field-display .field-emi,
 .field-display .field-rate,
-.field-display .field-tax {
+.field-display .field-tenure {
   padding-top: 4px !important;
 }
 
 /* label spacing */
 .field-display .field-emi > .field-label,
 .field-display .field-rate > .field-label,
-.field-display .field-tax > .field-label {
+.field-display .field-tenure > .field-label {
   margin-bottom: 4px !important;
 }
 
@@ -1611,3 +1611,4 @@ fieldset#panelcontainer-92e5f72b8d {
     margin-left: 0 !important;
   }
 }
+
