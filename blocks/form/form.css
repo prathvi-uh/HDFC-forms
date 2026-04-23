@@ -1813,14 +1813,22 @@ main .form form .field-terms-privacy-text p::after {
   min-width: 100% !important;
 }
 
-/* shrink the actual blue banner */
-.field-discount .field-amt,
-.field-discount .text-wrapper.field-amt,
-.field-discount .plain-text-wrapper.field-amt {
-  width: calc(100% - 520px) !important;
-  max-width: calc(100% - 520px) !important;
-  min-width: calc(100% - 520px) !important;
-  margin-right: auto !important;
+/* exact banner fieldset */
+fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 {
+  grid-column: 1 / span 8 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  justify-self: start !important;
+  align-self: start !important;
+}
+
+/* actual blue banner inside */
+fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 .field-amt,
+fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 .text-wrapper.field-amt,
+fieldset[name="discount"].panel-wrapper.field-discount.field-wrapper.col-12 .plain-text-wrapper.field-amt {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 
