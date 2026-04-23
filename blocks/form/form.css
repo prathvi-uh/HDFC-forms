@@ -1491,3 +1491,13 @@ main .form form .field-terms-privacy-text p::after {
   font-weight: 600 !important; /* slightly stronger */
   color: #1b2738 !important;
 }
+
+/* ===== MAKE CARD BIGGER ===== */
+.field-display,
+.field-display.field-wrapper,
+.field-display.panel-wrapper {
+  width: 300px !important;
+  max-width: 300px !important;
+  min-width: 300px !important;
+  padding: 20px 18px 0 !important;
+}
