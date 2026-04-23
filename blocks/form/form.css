@@ -1100,109 +1100,394 @@ main .form form .field-terms-privacy-text p::after {
   color: #1d4ed8;
 }
 
-/*Panel*/
-.offer-text,
-.loan-subtext {
-  grid-column: span 12;
-}
+/*offer panel */
+/* =========================================================
+   OFFER CARD - SAME NEW STYLE, YOUR FIELD NAMES
+   ========================================================= */
 
-main .form form .field-loandisplay {
-  grid-column: 1 / -1;
-  border-bottom: 1px dashed #d7c8ad;
-  padding-bottom: 12px;
-  margin-bottom: 8px;
-}
-
-main .form form .field-loandisplay .field-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 6px;
-}
-
-main .form form .field-loandisplay input {
+.field-display,
+.field-display.field-wrapper,
+.field-display.panel-wrapper {
+  width: 292px !important;
+  max-width: 292px !important;
+  min-width: 292px !important;
+  background: #f6f0e3 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  padding: 18px 18px 0 !important;
+  box-sizing: border-box !important;
   border: none !important;
-  background: transparent !important;
-  outline: none !important;
-  padding: 0 !important;
+  box-shadow: none !important;
   margin: 0 !important;
-  width: 100%;
-  font-size: 26px;
-  font-weight: 800;
-  color: #111827;
-  line-height: 1.1;
 }
 
-main .form form .field-display input {
+/* hide outer legend */
+.field-display > legend,
+.field-display > .field-label {
+  display: none !important;
+}
+
+/* ===== HEADING + MAIN AMOUNT ===== */
+.field-display .field-loandisplay {
+  margin: 0 0 14px !important;
+  padding: 0 0 18px !important;
   border: none !important;
+  border-bottom: 1px dashed #e2d7c3 !important;
   background: transparent !important;
-  outline: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100%;
   box-shadow: none !important;
 }
 
-main .form form .field-emi,
-main .form form .field-tenure,
-main .form form .field-rate,
-main .form form .field-processing-fee {
-  position: relative;
-  padding-left: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+.field-display .field-loandisplay p,
+.field-display .field-loandisplay .field-label,
+.field-display .field-loandisplay .plain-text-wrapper {
+  margin: 0 !important;
 }
 
-main .form form .field-emi::before,
-main .form form .field-tenure::before,
-main .form form .field-rate::before,
-main .form form .field-processing-fee::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 2px;
-  height: 22px;
-  background: #f4a022;
-  border-radius: 2px;
+/* heading text */
+.field-display .field-loandisplay p:first-child,
+.field-display .field-loandisplay .field-label,
+.field-display .field-loandisplay .plain-text-wrapper:first-child {
+  display: block !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  color: #22364a !important;
+  margin-bottom: 10px !important;
 }
 
-main .form form .field-emi .field-label,
-main .form form .field-tenure .field-label,
-main .form form .field-rate .field-label,
-main .form form .field-processing-fee .field-label {
-  font-size: 13px;
-  color: #6b7280;
-  white-space: nowrap;
+/* main amount */
+.field-display .field-loandisplay input {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  font-size: 27px !important;
+  line-height: 1.05 !important;
+  font-weight: 800 !important;
+  color: #16263c !important;
 }
 
-main .form form .field-emi input,
-main .form form .field-tenure input,
-main .form form .field-rate input,
-main .form form .field-processing-fee input {
-  font-size: 16px;
-  font-weight: 700;
-  color: #111827;
-  white-space: nowrap;
+/* ===== DETAILS LAYOUT ===== */
+.field-display {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-areas:
+    "header header"
+    "emi rate"
+    "tenure ."
+    "note note" !important;
+  column-gap: 26px !important;
+  row-gap: 16px !important;
+  align-items: start !important;
 }
 
-main .form form .field-note {
-  grid-column: 1 / -1;
-  margin-top: 10px;
-  background: #f4a022;
-  color: #fff;
-  font-size: 10px;
-  line-height: 1.4;
-  padding: 12px 14px;
-  border-radius: 0 0 18px 18px;
-  margin-left: -20px;
-  margin-right: -20px;
-  margin-bottom: 0;
+.field-display .field-loandisplay {
+  grid-area: header !important;
 }
 
-main .form form .field-note p,
-main .form form .field-note .plain-text-wrapper {
-  margin: 0;
-  color: #fff;
+.field-display .field-emi {
+  grid-area: emi !important;
+}
+
+.field-display .field-rate {
+  grid-area: rate !important;
+}
+
+.field-display .field-tenure {
+  grid-area: tenure !important;
+}
+
+.field-display .field-note {
+  grid-area: note !important;
+}
+
+/* hide processing fee if not needed */
+.field-display .field-processing-fee {
+  display: none !important;
+}
+
+/* remove defaults */
+.field-display .field-emi,
+.field-display .field-rate,
+.field-display .field-tenure {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* labels */
+.field-display .field-emi > legend,
+.field-display .field-rate > legend,
+.field-display .field-tenure > legend,
+.field-display .field-emi > .field-label,
+.field-display .field-rate > .field-label,
+.field-display .field-tenure > .field-label {
+  position: relative !important;
+  display: block !important;
+  margin: 0 0 4px !important;
+  padding: 0 0 0 12px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  font-weight: 600 !important;
+  color: #7f8791 !important;
+}
+
+/* orange left line */
+.field-display .field-emi > legend::before,
+.field-display .field-rate > legend::before,
+.field-display .field-tenure > legend::before,
+.field-display .field-emi > .field-label::before,
+.field-display .field-rate > .field-label::before,
+.field-display .field-tenure > .field-label::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 2px !important;
+  height: 30px !important;
+  background: #f2a126 !important;
+  border-radius: 2px !important;
+}
+
+/* values */
+.field-display .field-emi input,
+.field-display .field-rate input,
+.field-display .field-tenure input {
+  padding: 0 0 0 12px !important;
+  margin: 0 !important;
+  display: block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  font-size: 15px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  color: #1b2738 !important;
+}
+
+/* ===== DISCLAIMER ===== */
+.field-display .field-note,
+.field-display .field-note.field-wrapper,
+.field-display .field-note.panel-wrapper {
+  position: relative !important;
+  margin: 0 -18px !important;
+  padding: 12px 16px 12px 40px !important;
+  background: #f2a126 !important;
+  border-radius: 0 0 20px 20px !important;
+}
+
+.field-display .field-note::before {
+  content: "i" !important;
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 15px !important;
+  height: 18px !important;
+  border: 1.5px solid #ffd793 !important;
+  border-radius: 50% !important;
+  color: #ffd793 !important;
+  font-size: 10px !important;
+  line-height: 13px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.field-display .field-note p,
+.field-display .field-note .field-label,
+.field-display .field-note .plain-text-wrapper {
+  margin: 0 !important;
+  font-size: 10px !important;
+  line-height: 1.45 !important;
+  font-weight: 600 !important;
+  color: #fff4df !important;
+}
+
+/* cleanup */
+.field-display,
+.field-display p,
+.field-display b,
+.field-display strong,
+.field-display legend,
+.field-display .field-label {
+  text-decoration: none !important;
+}
+
+/* ===== FORCE SLIDER ORANGE ===== */
+
+/* entire track (full orange line) */
+.range-widget-wrapper input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px !important;
+  background: #f2a126 !important;
+  border-radius: 4px !important;
+}
+
+.range-widget-wrapper input[type="range"]::-moz-range-track {
+  height: 4px !important;
+  background: #f2a126 !important;
+  border-radius: 4px !important;
+}
+
+/* remove blue fill */
+.range-widget-wrapper input[type="range"]::-moz-range-progress {
+  background: #f2a126 !important;
+}
+
+/* thumb (blue dot → optional change to match UI) */
+.range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: #2f5bd3 !important; /* keep blue dot like screenshot */
+  border: none !important;
+  margin-top: -5px !important;
+}
+
+.range-widget-wrapper input[type="range"]::-moz-range-thumb {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: #2f5bd3 !important;
+  border: none !important;
+}
+
+/* IMPORTANT: override browser default blue */
+.range-widget-wrapper input[type="range"] {
+  accent-color: #f2a126 !important;
+}
+
+/* ===== BOLD LABEL + VALUE ABOVE SLIDER ===== */
+
+.number-wrapper label,
+.number-wrapper .field-label,
+.number-wrapper p,
+.number-wrapper .range-widget-wrapper div:first-child {
+  font-weight: 700 !important;
+  color: #111 !important;
+}
+
+/* slightly bigger value */
+.range-widget-wrapper div:first-child {
+  font-size: 22px !important;
+  text-align: center !important;
+}
+
+/* reduce gap below amount */
+.field-display .field-loandisplay {
+  padding-bottom: 8px !important;   /* was ~16–18 */
+  margin-bottom: 6px !important;    /* tighten */
+}
+
+/* reduce gap above EMI section */
+.field-display .field-emi,
+.field-display .field-rate,
+.field-display .field-tenure {
+  margin-top: 0 !important;
+}
+
+/* ===== SPACE BETWEEN LABEL, VALUE & SLIDER ===== */
+/* space below label */
+.number-wrapper label,
+.number-wrapper .field-label {
+  display: block;
+  margin-bottom: 6px !important;
+}
+
+/* space below value (50000 / 54) */
+.range-widget-wrapper .range-bubble {
+  display: block;
+  margin-bottom: 10px !important;
+}
+
+/* space above slider track */
+.range-widget-wrapper input[type="range"] {
+  margin-top: 4px !important;
+}
+
+/* ===== VALUE BOX ABOVE SLIDER ===== */
+
+.range-widget-wrapper .range-bubble {
+  display: inline-block !important;
+  padding: 6px 10px !important;
+
+  background: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
+
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+
+  position: relative !important;
+}
+
+/* ===== REMOVE EXTRA SPACE AFTER FOOTER ===== */
+.field-display,
+.field-display.field-wrapper,
+.field-display.panel-wrapper {
+  height: auto !important;
+  min-height: unset !important;
+  padding-bottom: 0 !important;
+}
+
+/* make footer stick to bottom */
+.field-display .field-note {
+  margin-bottom: 0 !important;
+}
+
+/* ===== IMPROVE SPACING ===== */
+.field-display {
+  row-gap: 14px !important;   /* increase from 8 */
+}
+
+/* header spacing */
+.field-display .field-loandisplay {
+  padding-bottom: 12px !important;
+  margin-bottom: 6px !important;
+}
+
+/* spacing between rows */
+.field-display .field-emi,
+.field-display .field-rate,
+.field-display .field-tenure {
+  padding-top: 4px !important;
+}
+
+/* label spacing */
+.field-display .field-emi > .field-label,
+.field-display .field-rate > .field-label,
+.field-display .field-tenure > .field-label {
+  margin-bottom: 4px !important;
+}
+
+.panel-wrapper.field-display {
+  align-self: start !important;
+}
+
+/* increase heading size */
+.field-display .field-loandisplay p:first-child,
+.field-display .field-loandisplay .field-label,
+.field-display .field-loandisplay .plain-text-wrapper:first-child {
+  font-size: 13px !important;  /* increase from ~10-11 */
+  font-weight: 600 !important; /* slightly stronger */
+  color: #1b2738 !important;
 }

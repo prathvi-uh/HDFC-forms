@@ -49,3 +49,23 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 .range-widget-wrapper.decorated .range-max {
     float: right;
 }
+
+/*cap range */
+.range-min,
+.range-max {
+  display: none !important;
+}
+
+.range-ticks {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #5f6b7a;
+}
+
+.range-tick {
+  white-space: nowrap;
+  line-height: 1;
+}
