@@ -1503,8 +1503,9 @@ main .form form .field-terms-privacy-text p::after {
 }
 
 /* =========================================================
-   BLUE BANNER 
+   BLUE BANNER
    ========================================================= */
+
 /* exact top banner fieldset only */
 fieldset#panelcontainer-0813f2edd9 {
   grid-column: 1 / span 8 !important;
@@ -1547,6 +1548,7 @@ fieldset#panelcontainer-0813f2edd9 .plain-text-wrapper.field-amt {
   gap: 12px !important;
   width: 100% !important;
   max-width: 100% !important;
+  min-width: 0 !important;
   min-height: 78px !important;
   margin: 0 !important;
   padding: 16px 18px 16px 58px !important;
@@ -1624,7 +1626,4 @@ fieldset#panelcontainer-92e5f72b8d {
   }
 }
 
-.field-discount .field-amt {
-  width: 1000px !important;
-  max-width: 1000px !important;
-}
+
