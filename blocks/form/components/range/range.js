@@ -1,70 +1,93 @@
+const rangeConfigs = {
+  loanAmount: {
+    ticks: [50000, 200000, 400000, 600000, 800000, 1000000, 1500000],
+    defaultValue: 1500000,
+    formatBubble: (value) => `₹${Number(value).toLocaleString('en-IN')}`,
+    formatTick: (value) => (value === 50000 ? '50K' : `${value / 100000}L`),
+  },
+  loanTenure: {
+    ticks: [12, 24, 36, 48, 60, 72, 84],
+    defaultValue: 48,
+    formatBubble: (value) => `${Math.round(value)} months`,
+    formatTick: (value) => `${value}m`,
+  },
+};
+
 function isLoanAmountSlider(input, fieldDiv) {
   const title = fieldDiv.querySelector(
     'label, .field-label, .cmp-adaptiveform-textinput__label, .cmp-adaptiveform-numberinput__label, .cmp-adaptiveform-range__label'
   );
-  const labelText = title ? title.textContent.toLowerCase() : '';
 
+  const labelText = title ? title.textContent.toLowerCase() : '';
   return labelText.includes('loan amount');
 }
 
-function getTickValues(input, fieldDiv) {
-  if (isLoanAmountSlider(input, fieldDiv)) {
-    return [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+function getFieldType(input, fieldDiv) {
+  return isLoanAmountSlider(input, fieldDiv) ? 'loanAmount' : 'loanTenure';
+}
+
+function getActualValueFromSlider(input, config) {
+  const sliderValue = Number(input.value);
+  const lowerIndex = Math.floor(sliderValue);
+  const upperIndex = Math.ceil(sliderValue);
+
+  if (lowerIndex === upperIndex) {
+    return config.ticks[lowerIndex];
   }
 
-  return [12, 24, 36, 48, 60, 72, 84];
+  const lowerValue = config.ticks[lowerIndex];
+  const upperValue = config.ticks[upperIndex];
+  const percentage = sliderValue - lowerIndex;
+
+  return lowerValue + ((upperValue - lowerValue) * percentage);
 }
 
-function formatTick(value, input, fieldDiv) {
-  const num = Number(value);
+function getSliderValueFromActual(actualValue, config) {
+  const ticks = config.ticks;
 
-  if (isLoanAmountSlider(input, fieldDiv)) {
-    if (num === 50000) return '50K';
-    return `${num / 100000}L`;
+  if (actualValue <= ticks[0]) return 0;
+  if (actualValue >= ticks[ticks.length - 1]) return ticks.length - 1;
+
+  for (let i = 0; i < ticks.length - 1; i += 1) {
+    if (actualValue >= ticks[i] && actualValue <= ticks[i + 1]) {
+      const percentage = (actualValue - ticks[i]) / (ticks[i + 1] - ticks[i]);
+      return i + percentage;
+    }
   }
 
-  return `${num}m`;
+  return 0;
 }
 
-function formatBubbleValue(value, input, fieldDiv) {
-  const num = Number(value);
-
-  if (isLoanAmountSlider(input, fieldDiv)) {
-    return `₹${num.toLocaleString('en-IN')}`;
+function formatActualValue(actualValue, fieldType) {
+  if (fieldType === 'loanAmount') {
+    return Math.round(actualValue / 1000) * 1000;
   }
 
-  return `${num} months`;
+  if (fieldType === 'loanTenure') {
+    return Math.round(actualValue);
+  }
+
+  return actualValue;
 }
 
-function getPercent(value, min, max) {
-  min = Number(min);
-  max = Number(max);
-  value = Number(value);
-
-  if (max <= min) return 0;
-  return ((value - min) / (max - min)) * 100;
-}
-
-function createTicks(input, wrapper, fieldDiv) {
-  const min = Number(input.min || 0);
-  const max = Number(input.max || 0);
-  const tickValues = getTickValues(input, fieldDiv);
-
+function createTicks(input, wrapper, config) {
   const oldTicks = wrapper.querySelector('.range-ticks');
   if (oldTicks) oldTicks.remove();
 
   const ticksWrap = document.createElement('div');
   ticksWrap.className = 'range-ticks';
 
-  tickValues.forEach((tick) => {
-    if (tick < min || tick > max) return;
-
+  config.ticks.forEach((tickValue, index) => {
     const tickEl = document.createElement('span');
     tickEl.className = 'range-tick';
-    tickEl.textContent = formatTick(tick, input, fieldDiv);
+    tickEl.textContent = config.formatTick(tickValue);
+    tickEl.style.left = `${(index / (config.ticks.length - 1)) * 100}%`;
 
-    const percent = getPercent(tick, min, max);
-    tickEl.style.left = `${percent}%`;
+    tickEl.addEventListener('click', () => {
+      input.value = index;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
 
     ticksWrap.appendChild(tickEl);
   });
@@ -72,15 +95,19 @@ function createTicks(input, wrapper, fieldDiv) {
   wrapper.appendChild(ticksWrap);
 }
 
-function updateBubble(input, wrapper, fieldDiv) {
-  const min = Number(input.min || 0);
-  const max = Number(input.max || 0);
-  const value = Number(input.value || min);
-
+function updateBubble(input, wrapper, fieldType) {
+  const config = rangeConfigs[fieldType];
   const bubble = wrapper.querySelector('.range-bubble');
-  const percent = getPercent(value, min, max);
 
-  bubble.innerText = formatBubbleValue(value, input, fieldDiv);
+  if (!bubble || !config) return;
+
+  const rawActualValue = getActualValueFromSlider(input, config);
+  const actualValue = formatActualValue(rawActualValue, fieldType);
+
+  const percent = (Number(input.value) / (config.ticks.length - 1)) * 100;
+
+  input.dataset.actualValue = actualValue;
+  bubble.innerText = config.formatBubble(actualValue);
   bubble.style.left = `${percent}%`;
 
   if (percent <= 5) {
@@ -98,10 +125,18 @@ export default async function decorate(fieldDiv, fieldJson) {
   const input = fieldDiv.querySelector('input');
   if (!input) return fieldDiv;
 
+  const fieldType = getFieldType(input, fieldDiv);
+  const config = rangeConfigs[fieldType];
+
   input.type = 'range';
-  input.min = input.min || 1;
-  input.max = input.max || 100;
-  input.step = fieldJson?.properties?.stepValue || 1;
+
+  const originalActualValue = Number(input.value || config.defaultValue);
+  const sliderValue = getSliderValueFromActual(originalActualValue, config);
+
+  input.min = 0;
+  input.max = config.ticks.length - 1;
+  input.step = 0.01;
+  input.value = sliderValue;
 
   const wrapper = document.createElement('div');
   wrapper.className = 'range-widget-wrapper decorated';
@@ -110,27 +145,19 @@ export default async function decorate(fieldDiv, fieldJson) {
   const bubble = document.createElement('span');
   bubble.className = 'range-bubble';
 
-  const rangeMinEl = document.createElement('span');
-  rangeMinEl.className = 'range-min';
-
-  const rangeMaxEl = document.createElement('span');
-  rangeMaxEl.className = 'range-max';
-
-  rangeMinEl.innerText = formatTick(input.min, input, fieldDiv);
-  rangeMaxEl.innerText = formatTick(input.max, input, fieldDiv);
-
   wrapper.appendChild(bubble);
   wrapper.appendChild(input);
-  wrapper.appendChild(rangeMinEl);
-  wrapper.appendChild(rangeMaxEl);
 
-  createTicks(input, wrapper, fieldDiv);
+  createTicks(input, wrapper, config);
+  updateBubble(input, wrapper, fieldType);
 
   input.addEventListener('input', (e) => {
-    updateBubble(e.target, wrapper, fieldDiv);
+    updateBubble(e.target, wrapper, fieldType);
   });
 
-  updateBubble(input, wrapper, fieldDiv);
+  input.addEventListener('change', (e) => {
+    updateBubble(e.target, wrapper, fieldType);
+  });
 
   return fieldDiv;
 }

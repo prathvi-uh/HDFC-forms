@@ -1592,9 +1592,12 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .form-control {
   color: #1b2738 !important;
 }
 
-/* move right card closer */
-fieldset#panelcontainer-92e5f72b8d {
-  margin-left: -100px !important;
+/* Loan Amount + Loan Tenure sliders */
+.field-loanamt .range-widget-wrapper,
+.field-loantenure .range-widget-wrapper {
+  width: 118% !important;
+  margin-left: 0 !important;
+  transform: none !important;
 }
 
 /* responsive */
@@ -1609,4 +1612,173 @@ fieldset#panelcontainer-92e5f72b8d {
   fieldset#panelcontainer-92e5f72b8d {
     margin-left: 0 !important;
   }
+}
+
+/* main white card */
+.field-thankyou {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 760px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+/* yellow alert */
+.field-thankyou .field-alert {
+  background: #fff7e6;
+  border: 1px solid #ffe0a3;
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: #6b5b3e;
+  font-size: 12px;
+  margin-bottom: 22px;
+}
+
+/* loan application number block */
+.field-appnumber {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0 0 20px 64px;
+  margin: 0 0 20px 0;
+  position: relative;
+  border-bottom: 1px dashed #e5e7eb;
+  max-width: none;
+}
+
+/* left purple icon */
+.field-appnumber::before {
+  content: "▣";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f0eaff;
+  color: #5b43d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* app number label */
+.field-appnumber label {
+  display: block;
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* app number value */
+.field-appnumber input {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827 !important;
+  width: 160px !important;
+}
+
+/* copy icon */
+.field-appnumber::after {
+  content: "⧉";
+  position: absolute;
+  left: 220px;
+  top: 26px;
+  color: #5b43d6;
+  font-size: 20px;
+}
+
+/* summary title */
+.field-plain-text-1661058811777010192665 {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 18px 0 !important;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* loan amount */
+.field-loandisplay {
+  position: relative;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 0 0 14px !important;
+  margin: 0 !important;
+  width: fit-content;
+}
+
+/*
+.field-loandisplay::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 2px;
+  height: 42px;
+  background: #9ec5ff;
+  border-radius: 2px;
+}
+  */
+
+.field-loandisplay label {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  color: #9ca3af !important;
+  line-height: 1.2 !important;
+  margin: 0 0 5px 0 !important;
+}
+
+.field-loandisplay input {
+  display: block !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  width: 160px !important;
+}
+
+/* push summary title */
+.field-plain-text-1661058811777010192665 {
+  padding-left: 64px !important;   /* align with icon/text above */
+  margin-top: 16px;
+}
+
+/* push loan amount block */
+.field-loandisplay {
+  margin-left: 64px !important;    /* same alignment */
+}
+
+/* ===== MATCH FONT STYLE LIKE "XPRESS PERSONAL LOAN SUMMARY" ===== */
+
+/* Loan Application Number */
+.field-appnumber label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;   /* dark grey */
+  letter-spacing: 0.2px;
+}
+
+/* Orange banner text */
+.field-thankyou .plain-text-wrapper {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;   /* same dark tone */
+  line-height: 1.4;
 }
