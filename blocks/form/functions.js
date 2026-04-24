@@ -320,15 +320,19 @@ function handleOtpInvalid(globals) {
 }
 
 /**
- * @param {number} loanAmt
- * @param {number} loanTenure
+ * @param {string} loanAmt
+ * @param {string} loanTenure
  * @param {scope} globals
  * @returns {string}
  */
 function calculateEMI(loanAmt, loanTenure, globals) {
+  const cleanNumber = (val) => {
+    if (val === null || val === undefined) return 0;
+    return Number(String(val).replace(/[^\d.]/g, '')) || 0;
+  };
 
-  const loan = Number(loanAmt || 0);
-  const tenure = Number(loanTenure || 0);
+  const loan = cleanNumber(loanAmt);
+  const tenure = cleanNumber(loanTenure);
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
@@ -342,7 +346,6 @@ function calculateEMI(loanAmt, loanTenure, globals) {
 
   const tax = 4000;
 
-  // 🔷 Update display
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: loan,
   });
