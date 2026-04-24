@@ -262,18 +262,16 @@ function handleResendOtp(globals) {
  * @returns {string}
  */
 
-function handleOtpSuccess(globals) {
-  console.log('OTP globals:', globals);
-  alert('handleOtpSuccess called');
+function handleOtpSuccess(globals, message) {
+  alert('handleOtpSuccess called: ' + message);
+
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit;
 
-  const message = globals.response?.message || '';
+  message = message || '';
 
-  // 🔴 INVALID OTP
   if (message.toLowerCase().includes('invalid')) {
-    // ✅ STOP TIMER
     stopOtpTimer(globals);
 
     if (window.otpResendAttemptsLeft > 0) {
@@ -284,42 +282,22 @@ function handleOtpSuccess(globals) {
 
     updateAttemptsInfo(globals);
 
-    // show resend button
     if (resendBtn) {
       globals.functions.setProperty(resendBtn, {
-        visible: window.otpResendAttemptsLeft > 0,
-        enabled: window.otpResendAttemptsLeft > 0,
+        visible: true,
+        enabled: true,
       });
     }
 
-    // disable submit
     if (submitBtn) {
       globals.functions.setProperty(submitBtn, {
         enabled: false,
       });
     }
 
-    // max attempts
-    if (window.otpResendAttemptsLeft <= 0) {
-      alert('Maximum attempts reached');
-
-      if (globals.form.otp_verification) {
-        globals.functions.setProperty(globals.form.otp_verification, {
-          visible: false,
-        });
-      }
-
-      if (globals.form.personal_loan_offer) {
-        globals.functions.setProperty(globals.form.personal_loan_offer, {
-          visible: true,
-        });
-      }
-    }
-
-    return message; // "Invalid OTP"
+    return message;
   }
 
-  // 🟢 VALID OTP
   stopOtpTimer(globals);
 
   window.otpResendAttemptsLeft = 3;
