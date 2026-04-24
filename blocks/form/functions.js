@@ -288,6 +288,41 @@ function handleOtpSuccess(globals) {
 
   return 'OTP validated successfully';
 }
+
+/**
+ * @param {scope} globals
+ */
+
+function handleOtpInvalid(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+  const submitBtn = globals.form.otp_verification.otp_submit;
+
+  stopOtpTimer(globals);
+
+  if (window.otpResendAttemptsLeft > 0) {
+    window.otpResendAttemptsLeft -= 1;
+  }
+
+  window.otpTimerExpired = false;
+
+  updateAttemptsInfo(globals);
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: window.otpResendAttemptsLeft > 0,
+      enabled: window.otpResendAttemptsLeft > 0,
+    });
+  }
+
+  if (submitBtn) {
+    globals.functions.setProperty(submitBtn, {
+      enabled: false,
+    });
+  }
+
+  return 'Invalid OTP';
+}
+
 /**
  * @param {scope} globals
  */
@@ -300,6 +335,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, debugForm,
 };
  
