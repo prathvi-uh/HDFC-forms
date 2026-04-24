@@ -318,6 +318,43 @@ function handleOtpInvalid(globals) {
 
   return 'Invalid OTP';
 }
+
+/**
+ * @param {scope} globals
+ */
+function calculateEMI(globals) {
+
+  // 🔷 Read inputs from offer
+  const loan = Number(globals.form.offer.loanamt?.value || 0);
+  const tenure = Number(globals.form.offer.loantenure?.value || 0);
+
+  // 🔷 Fixed interest rate
+  const annualRate = 10.09;
+
+  // 🔷 Convert to monthly rate
+  const r = annualRate / (12 * 100);
+
+  let emi = 0;
+
+  // 🔷 EMI calculation
+  if (loan > 0 && tenure > 0) {
+    const numerator = loan * r * Math.pow(1 + r, tenure);
+    const denominator = Math.pow(1 + r, tenure) - 1;
+    emi = Math.round(numerator / denominator);
+  }
+
+  // 🔷 Taxes (simple fixed or % logic)
+  const tax = 4000; // you can change this later
+
+  // 🔷 Update display fields
+  globals.form.display.offer.value = loan;
+  globals.form.display.emi.value = emi;
+  globals.form.display.rate.value = annualRate;
+  globals.form.display.tax.value = tax;
+
+  return '';
+}
+
 /**
  * @param {scope} globals
  */
@@ -330,6 +367,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, debugForm,
 };
  
