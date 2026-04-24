@@ -287,6 +287,7 @@ function handleOtpSuccess(globals) {
  * @param {scope} globals
  */
 function handleOtpInvalid(globals) {
+  alert('INVALID HANDLER CALLED');
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit;
   const timerField = globals.form.otp_verification.timer;
