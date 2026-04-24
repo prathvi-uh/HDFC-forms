@@ -318,21 +318,16 @@ function handleOtpInvalid(globals) {
 
   return 'Invalid OTP';
 }
+
 /**
+ * @param {number} loanAmt
+ * @param {number} loanTenure
  * @param {scope} globals
  * @returns {string}
  */
-function calculateEMI(globals) {
-  const loanField = globals.form.offer.loanamt;
-  const tenureField = globals.form.offer.loantenure;
-
-  const loanDisplayField = globals.form.display.loandisplay;
-  const emiField = globals.form.display.emi;
-  const rateField = globals.form.display.rate;
-  const taxField = globals.form.display.tenure;
-
-  const loan = Number(loanField?.$value || loanField?._value || loanField?.valueOf?.() || 0);
-  const tenure = Number(tenureField?.$value || tenureField?._value || tenureField?.valueOf?.() || 0);
+function calculateEMI(loanAmt, loanTenure, globals) {
+  const loan = Number(loanAmt || 0);
+  const tenure = Number(loanTenure || 0);
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
@@ -346,15 +341,26 @@ function calculateEMI(globals) {
 
   const tax = 4000;
 
-  globals.functions.setProperty(loanDisplayField, { value: loan });
-  globals.functions.setProperty(emiField, { value: emi });
-  globals.functions.setProperty(rateField, { value: 10.09 });
-  globals.functions.setProperty(taxField, { value: tax });
+  globals.functions.setProperty(globals.form.display.loandisplay, {
+    value: loan,
+  });
+
+  globals.functions.setProperty(globals.form.display.emi, {
+    value: emi,
+  });
+
+  globals.functions.setProperty(globals.form.display.rate, {
+    value: annualRate,
+  });
+
+  globals.functions.setProperty(globals.form.display.tenure, {
+    value: tax,
+  });
 
   return '';
 }
 
-/**
+/** 
  * @param {scope} globals
  */
 function debugForm(globals) {
