@@ -324,14 +324,14 @@ function handleOtpInvalid(globals) {
  */
 function calculateEMI(globals) {
 
-  // 🔷 Read inputs (from offer)
+  // 🔷 Read inputs
   const loan = Number(globals.form.offer.loanamt?.value || 0);
   const tenure = Number(globals.form.offer.loantenure?.value || 0);
 
-  // 🔷 Fixed interest
+  // 🔷 Fixed interest rate
   const annualRate = 10.09;
 
-  // 🔷 Monthly rate
+  // 🔷 Convert to monthly rate
   const r = annualRate / (12 * 100);
 
   let emi = 0;
@@ -343,14 +343,14 @@ function calculateEMI(globals) {
     emi = Math.round(numerator / denominator);
   }
 
-  // 🔷 Tax logic (you can change later)
+  // 🔷 Tax logic (simple for now)
   const tax = 4000;
 
-  // 🔷 Update display fields
-  globals.form.display.offer.value = loan;
+  // 🔷 Update display fields (IMPORTANT FIX HERE)
+  globals.form.display.loandisplay.value = loan;
   globals.form.display.emi.value = emi;
   globals.form.display.rate.value = annualRate;
-  globals.form.display.tenure.value = tax; // 👈 your tax field
+  globals.form.display.tenure.value = tax;
 
   return '';
 }
