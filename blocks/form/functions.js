@@ -299,13 +299,6 @@ function handleOtpInvalid(globals) {
     }
 
     window.otpTimerExpired = false;
-
-    if (timerField) {
-      globals.functions.setProperty(timerField, {
-        value: '00:00',
-      });
-    }
-
     updateAttemptsInfo(globals);
 
     if (resendBtn) {
