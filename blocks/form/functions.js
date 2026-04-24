@@ -320,46 +320,36 @@ function handleOtpInvalid(globals) {
 }
 
 /**
- * @param {string} loanAmt
- * @param {string} loanTenure
+ * @param {scope} globals
  * @returns {string}
  */
-function calculateEMI(loanAmt, loanTenure) {
+function calculateEMI(globals) {
+  const loanField = globals.form.offer.loanamt;
+  const tenureField = globals.form.offer.loantenure;
 
-  const globals = this;
+  const getVal = (field) => {
+    if (!field) return 0;
+    const raw = field.valueOf ? field.valueOf() : field;
+    return Number(String(raw).replace(/[^\d.]/g, '')) || 0;
+  };
 
-  const clean = (v) => Number(String(v).replace(/[^\d]/g, '')) || 0;
-
-  const P = clean(loanAmt);
-  const n = clean(loanTenure);
+  const loan = getVal(loanField);
+  const tenure = getVal(tenureField);
 
   const annualRate = 10.09;
-  const r = annualRate / 12 / 100;
+  const monthlyRate = annualRate / 12 / 100;
 
   let emi = 0;
 
-  if (P > 0 && n > 0) {
-    const pow = Math.pow(1 + r, n);
-    emi = Math.round((P * r * pow) / (pow - 1));
+  if (loan > 0 && tenure > 0) {
+    const factor = Math.pow(1 + monthlyRate, tenure);
+    emi = Math.round((loan * monthlyRate * factor) / (factor - 1));
   }
 
-  const tax = 4000;
-
-  globals.functions.setProperty(globals.form.display.loandisplay, {
-    value: P
-  });
-
-  globals.functions.setProperty(globals.form.display.emi, {
-    value: emi
-  });
-
-  globals.functions.setProperty(globals.form.display.rate, {
-    value: annualRate
-  });
-
-  globals.functions.setProperty(globals.form.display.tenure, {
-    value: tax
-  });
+  globals.functions.setProperty(globals.form.display.loandisplay, { value: loan });
+  globals.functions.setProperty(globals.form.display.emi, { value: emi });
+  globals.functions.setProperty(globals.form.display.rate, { value: annualRate });
+  globals.functions.setProperty(globals.form.display.tenure, { value: 4000 });
 
   return '';
 }
