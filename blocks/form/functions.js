@@ -318,7 +318,6 @@ function handleOtpInvalid(globals) {
 
   return 'Invalid OTP';
 }
-
 /**
  * @param {scope} globals
  * @returns {string}
@@ -330,46 +329,27 @@ function calculateEMI(globals) {
   const loanDisplayField = globals.form.display.loandisplay;
   const emiField = globals.form.display.emi;
   const rateField = globals.form.display.rate;
-  const taxField = globals.form.display.tenure; // your Taxes field name
+  const taxField = globals.form.display.tenure;
 
-  const loan = Number(loanField?.value || 0);
-  const tenure = Number(tenureField?.value || 0);
+  const loan = Number(loanField?.$value || loanField?._value || loanField?.valueOf?.() || 0);
+  const tenure = Number(tenureField?.$value || tenureField?._value || tenureField?.valueOf?.() || 0);
 
   const annualRate = 10.09;
-  const monthlyRate = annualRate / (12 * 100);
+  const monthlyRate = annualRate / 12 / 100;
 
   let emi = 0;
 
   if (loan > 0 && tenure > 0) {
-    const power = Math.pow(1 + monthlyRate, tenure);
-    emi = Math.round((loan * monthlyRate * power) / (power - 1));
+    const factor = Math.pow(1 + monthlyRate, tenure);
+    emi = Math.round((loan * monthlyRate * factor) / (factor - 1));
   }
 
   const tax = 4000;
 
-  if (loanDisplayField) {
-    globals.functions.setProperty(loanDisplayField, {
-      value: loan,
-    });
-  }
-
-  if (emiField) {
-    globals.functions.setProperty(emiField, {
-      value: emi,
-    });
-  }
-
-  if (rateField) {
-    globals.functions.setProperty(rateField, {
-      value: annualRate,
-    });
-  }
-
-  if (taxField) {
-    globals.functions.setProperty(taxField, {
-      value: tax,
-    });
-  }
+  globals.functions.setProperty(loanDisplayField, { value: loan });
+  globals.functions.setProperty(emiField, { value: emi });
+  globals.functions.setProperty(rateField, { value: 10.09 });
+  globals.functions.setProperty(taxField, { value: tax });
 
   return '';
 }
