@@ -326,6 +326,7 @@ function handleOtpInvalid(globals) {
  * @returns {string}
  */
 function calculateEMI(loanAmt, loanTenure, globals) {
+
   const loan = Number(loanAmt || 0);
   const tenure = Number(loanTenure || 0);
 
@@ -341,6 +342,7 @@ function calculateEMI(loanAmt, loanTenure, globals) {
 
   const tax = 4000;
 
+  // 🔷 Update display
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: loan,
   });
