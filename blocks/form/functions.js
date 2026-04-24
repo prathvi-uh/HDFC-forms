@@ -320,58 +320,45 @@ function handleOtpInvalid(globals) {
 }
 
 /**
- * @param {scope} globals
  * @param {string} loanAmt
  * @param {string} loanTenure
  * @returns {string}
  */
-function calculateEMI(globals, loanAmt, loanTenure) {
-  const args = Array.from(arguments);
+function calculateEMI(loanAmt, loanTenure) {
 
-  const scope = args.find(
-    (arg) => arg && arg.form && arg.functions && arg.functions.setProperty
-  );
+  const globals = this;
 
-  if (!scope) {
-    return '';
-  }
+  const clean = (v) => Number(String(v).replace(/[^\d]/g, '')) || 0;
 
-  const values = args.filter((arg) => arg !== scope);
-
-  const cleanNumber = (val) => {
-    if (val === null || val === undefined) return 0;
-    return Number(String(val).replace(/[^\d.]/g, '')) || 0;
-  };
-
-  const loan = cleanNumber(values[0]);
-  const tenure = cleanNumber(values[1]);
+  const P = clean(loanAmt);
+  const n = clean(loanTenure);
 
   const annualRate = 10.09;
-  const monthlyRate = annualRate / 12 / 100;
+  const r = annualRate / 12 / 100;
 
   let emi = 0;
 
-  if (loan > 0 && tenure > 0) {
-    const factor = Math.pow(1 + monthlyRate, tenure);
-    emi = Math.round((loan * monthlyRate * factor) / (factor - 1));
+  if (P > 0 && n > 0) {
+    const pow = Math.pow(1 + r, n);
+    emi = Math.round((P * r * pow) / (pow - 1));
   }
 
   const tax = 4000;
 
-  scope.functions.setProperty(scope.form.display.loandisplay, {
-    value: loan,
+  globals.functions.setProperty(globals.form.display.loandisplay, {
+    value: P
   });
 
-  scope.functions.setProperty(scope.form.display.emi, {
-    value: emi,
+  globals.functions.setProperty(globals.form.display.emi, {
+    value: emi
   });
 
-  scope.functions.setProperty(scope.form.display.rate, {
-    value: annualRate,
+  globals.functions.setProperty(globals.form.display.rate, {
+    value: annualRate
   });
 
-  scope.functions.setProperty(scope.form.display.tenure, {
-    value: tax,
+  globals.functions.setProperty(globals.form.display.tenure, {
+    value: tax
   });
 
   return '';
