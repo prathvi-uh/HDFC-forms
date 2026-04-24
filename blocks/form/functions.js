@@ -321,36 +321,55 @@ function handleOtpInvalid(globals) {
 
 /**
  * @param {scope} globals
+ * @returns {string}
  */
 function calculateEMI(globals) {
+  const loanField = globals.form.offer.loanamt;
+  const tenureField = globals.form.offer.loantenure;
 
-  // 🔷 Read inputs
-  const loan = Number(globals.form.offer.loanamt?.value || 0);
-  const tenure = Number(globals.form.offer.loantenure?.value || 0);
+  const loanDisplayField = globals.form.display.loandisplay;
+  const emiField = globals.form.display.emi;
+  const rateField = globals.form.display.rate;
+  const taxField = globals.form.display.tenure; // your Taxes field name
 
-  // 🔷 Fixed interest rate
+  const loan = Number(loanField?.value || 0);
+  const tenure = Number(tenureField?.value || 0);
+
   const annualRate = 10.09;
-
-  // 🔷 Convert to monthly rate
-  const r = annualRate / (12 * 100);
+  const monthlyRate = annualRate / (12 * 100);
 
   let emi = 0;
 
-  // 🔷 EMI calculation
   if (loan > 0 && tenure > 0) {
-    const numerator = loan * r * Math.pow(1 + r, tenure);
-    const denominator = Math.pow(1 + r, tenure) - 1;
-    emi = Math.round(numerator / denominator);
+    const power = Math.pow(1 + monthlyRate, tenure);
+    emi = Math.round((loan * monthlyRate * power) / (power - 1));
   }
 
-  // 🔷 Tax logic (simple for now)
   const tax = 4000;
 
-  // 🔷 Update display fields (IMPORTANT FIX HERE)
-  globals.form.display.loandisplay.value = loan;
-  globals.form.display.emi.value = emi;
-  globals.form.display.rate.value = annualRate;
-  globals.form.display.tenure.value = tax;
+  if (loanDisplayField) {
+    globals.functions.setProperty(loanDisplayField, {
+      value: loan,
+    });
+  }
+
+  if (emiField) {
+    globals.functions.setProperty(emiField, {
+      value: emi,
+    });
+  }
+
+  if (rateField) {
+    globals.functions.setProperty(rateField, {
+      value: annualRate,
+    });
+  }
+
+  if (taxField) {
+    globals.functions.setProperty(taxField, {
+      value: tax,
+    });
+  }
 
   return '';
 }
