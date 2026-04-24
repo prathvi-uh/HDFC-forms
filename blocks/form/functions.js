@@ -114,6 +114,7 @@ function stopOtpTimer(globals) {
  * @returns {string}
  */
 function startOtpTimer(globals) {
+  debugger;
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit; // ✅ correct key
