@@ -273,16 +273,6 @@ function handleOtpSuccess(globals) {
   window.otpTimerExpired = false;
 
   updateAttemptsInfo(globals);
-
-  // keep current timer value as-is, don't force 00:00
-  // If you want to clear timer after success, keep this block.
-  // If you want to show stopped time, remove this block.
-  if (timerField) {
-    globals.functions.setProperty(timerField, {
-      value: '',
-    });
-  }
-
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
