@@ -261,43 +261,12 @@ function handleResendOtp(globals) {
  * @param {scope} globals
  * @returns {string}
  */
-
-function handleOtpSuccess(globals, message) {
-  alert('handleOtpSuccess called: ' + message);
-
+function handleOtpSuccess(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit;
 
-  message = message || '';
-
-  if (message.toLowerCase().includes('invalid')) {
-    stopOtpTimer(globals);
-
-    if (window.otpResendAttemptsLeft > 0) {
-      window.otpResendAttemptsLeft -= 1;
-    }
-
-    window.otpTimerExpired = false;
-
-    updateAttemptsInfo(globals);
-
-    if (resendBtn) {
-      globals.functions.setProperty(resendBtn, {
-        visible: true,
-        enabled: true,
-      });
-    }
-
-    if (submitBtn) {
-      globals.functions.setProperty(submitBtn, {
-        enabled: false,
-      });
-    }
-
-    return message;
-  }
-
+  // stop timer immediately
   stopOtpTimer(globals);
 
   window.otpResendAttemptsLeft = 3;
@@ -305,6 +274,9 @@ function handleOtpSuccess(globals, message) {
 
   updateAttemptsInfo(globals);
 
+  // keep current timer value as-is, don't force 00:00
+  // If you want to clear timer after success, keep this block.
+  // If you want to show stopped time, remove this block.
   if (timerField) {
     globals.functions.setProperty(timerField, {
       value: '',
@@ -324,7 +296,7 @@ function handleOtpSuccess(globals, message) {
     });
   }
 
-  return message;
+  return 'OTP validated successfully';
 }
 /**
  * @param {scope} globals
