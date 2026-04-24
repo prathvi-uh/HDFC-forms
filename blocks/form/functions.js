@@ -287,64 +287,40 @@ function handleOtpSuccess(globals) {
  * @param {scope} globals
  */
 function handleOtpInvalid(globals) {
-  alert('INVALID HANDLER CALLED');
-  const resendBtn = globals.form.otp_verification.resend_otp;
-  const submitBtn = globals.form.otp_verification.otp_submit;
-  const timerField = globals.form.otp_verification.timer;
+  setTimeout(() => {
+    const resendBtn = globals.form.otp_verification.resend_otp;
+    const submitBtn = globals.form.otp_verification.otp_submit;
+    const timerField = globals.form.otp_verification.timer;
 
-  if (typeof window.otpResendAttemptsLeft !== 'number') {
-    window.otpResendAttemptsLeft = 3;
-  }
+    stopOtpTimer(globals);
 
-  if (window.otpResendAttemptsLeft > 0) {
-    window.otpResendAttemptsLeft -= 1;
-  }
+    if (window.otpResendAttemptsLeft > 0) {
+      window.otpResendAttemptsLeft -= 1;
+    }
 
-  stopOtpTimer(globals);
+    window.otpTimerExpired = false;
 
-  if (timerField) {
-    globals.functions.setProperty(timerField, {
-      value: '00:00',
-    });
-  }
+    if (timerField) {
+      globals.functions.setProperty(timerField, {
+        value: '00:00',
+      });
+    }
 
-  if (submitBtn) {
-    globals.functions.setProperty(submitBtn, {
-      enabled: false,
-    });
-  }
-
-  if (resendBtn) {
-    globals.functions.setProperty(resendBtn, {
-      visible: window.otpResendAttemptsLeft > 0,
-      enabled: window.otpResendAttemptsLeft > 0,
-    });
-  }
-
-  updateAttemptsInfo(globals);
-
-  if (window.otpResendAttemptsLeft <= 0) {
-    alert('Maximum attempts reached');
+    updateAttemptsInfo(globals);
 
     if (resendBtn) {
       globals.functions.setProperty(resendBtn, {
-        visible: false,
+        visible: true,
+        enabled: true,
+      });
+    }
+
+    if (submitBtn) {
+      globals.functions.setProperty(submitBtn, {
         enabled: false,
       });
     }
-
-    if (globals.form.otp_verification) {
-      globals.functions.setProperty(globals.form.otp_verification, {
-        visible: false,
-      });
-    }
-
-    if (globals.form.personal_loan_offer) {
-      globals.functions.setProperty(globals.form.personal_loan_offer, {
-        visible: true,
-      });
-    }
-  }
+  }, 100);
 
   return 'Invalid OTP';
 }
