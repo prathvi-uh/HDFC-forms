@@ -262,16 +262,18 @@ function handleResendOtp(globals) {
  * @returns {string}
  */
 function handleOtpSuccess(globals) {
+  alert('MSG: ' + message);
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit;
 
   // ✅ get message directly from event payload
   const message =
-    globals?.eventPayload?.message ||
-    globals?.eventPayload?.response?.message ||
-    '';
-
+  globals?.message ||
+  globals?.eventPayload?.message ||
+  globals?.eventPayload?.response?.message ||
+  globals?.response?.message ||
+  '';
   // 🔴 INVALID OTP
   if (message.toLowerCase().includes('invalid')) {
     stopOtpTimer(globals);
