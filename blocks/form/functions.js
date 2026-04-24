@@ -289,20 +289,21 @@ function handleOtpSuccess(globals) {
 function handleOtpInvalid(globals) {
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit;
+  const timerField = globals.form.otp_verification.timer;
 
-  stopOtpTimer(globals);
+  if (typeof window.otpResendAttemptsLeft !== 'number') {
+    window.otpResendAttemptsLeft = 3;
+  }
 
   if (window.otpResendAttemptsLeft > 0) {
     window.otpResendAttemptsLeft -= 1;
   }
 
-  window.otpTimerExpired = false;
-  updateAttemptsInfo(globals);
+  stopOtpTimer(globals);
 
-  if (resendBtn) {
-    globals.functions.setProperty(resendBtn, {
-      visible: window.otpResendAttemptsLeft > 0,
-      enabled: window.otpResendAttemptsLeft > 0,
+  if (timerField) {
+    globals.functions.setProperty(timerField, {
+      value: '00:00',
     });
   }
 
@@ -312,9 +313,40 @@ function handleOtpInvalid(globals) {
     });
   }
 
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: window.otpResendAttemptsLeft > 0,
+      enabled: window.otpResendAttemptsLeft > 0,
+    });
+  }
+
+  updateAttemptsInfo(globals);
+
+  if (window.otpResendAttemptsLeft <= 0) {
+    alert('Maximum attempts reached');
+
+    if (resendBtn) {
+      globals.functions.setProperty(resendBtn, {
+        visible: false,
+        enabled: false,
+      });
+    }
+
+    if (globals.form.otp_verification) {
+      globals.functions.setProperty(globals.form.otp_verification, {
+        visible: false,
+      });
+    }
+
+    if (globals.form.personal_loan_offer) {
+      globals.functions.setProperty(globals.form.personal_loan_offer, {
+        visible: true,
+      });
+    }
+  }
+
   return 'Invalid OTP';
 }
-
 /**
  * @param {scope} globals
  */
