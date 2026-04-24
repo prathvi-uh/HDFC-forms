@@ -262,52 +262,12 @@ function handleResendOtp(globals) {
  * @returns {string}
  */
 function handleOtpSuccess(globals) {
-  alert('MSG: ' + message);
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit;
-
-  // ✅ get message directly from event payload
-  const message =
-  globals?.message ||
-  globals?.eventPayload?.message ||
-  globals?.eventPayload?.response?.message ||
-  globals?.response?.message ||
-  '';
-  // 🔴 INVALID OTP
-  if (message.toLowerCase().includes('invalid')) {
-    stopOtpTimer(globals);
-
-    if (window.otpResendAttemptsLeft > 0) {
-      window.otpResendAttemptsLeft -= 1;
-    }
-
-    window.otpTimerExpired = false;
-
-    updateAttemptsInfo(globals);
-
-    if (resendBtn) {
-      globals.functions.setProperty(resendBtn, {
-        visible: true,
-        enabled: true,
-      });
-    }
-
-    if (submitBtn) {
-      globals.functions.setProperty(submitBtn, {
-        enabled: false,
-      });
-    }
-
-    return message; // shows "Invalid OTP"
-  }
-
-  // 🟢 VALID OTP
   stopOtpTimer(globals);
-
   window.otpResendAttemptsLeft = 3;
   window.otpTimerExpired = false;
-
   updateAttemptsInfo(globals);
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
@@ -315,14 +275,12 @@ function handleOtpSuccess(globals) {
       enabled: false,
     });
   }
-
   if (submitBtn) {
     globals.functions.setProperty(submitBtn, {
       enabled: true,
     });
   }
-
-  return message;
+  return 'OTP validated successfully';
 }
 
 /**
