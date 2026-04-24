@@ -320,12 +320,11 @@ function handleOtpInvalid(globals) {
 }
 
 /**
- * @param {scope} globals
  * @param {string} loanAmt
  * @param {string} loanTenure
  * @returns {string}
  */
-function calculateEMI(globals, loanAmt, loanTenure) {
+function calculateEMI(loanAmt, loanTenure) {
   const cleanNumber = (val) => {
     if (val === null || val === undefined) return 0;
     return Number(String(val).replace(/[^\d.]/g, '')) || 0;
