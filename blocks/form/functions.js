@@ -286,6 +286,38 @@ function handleOtpSuccess(globals) {
 /**
  * @param {scope} globals
  */
+function handleOtpInvalid(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+  const submitBtn = globals.form.otp_verification.otp_submit;
+
+  stopOtpTimer(globals);
+
+  if (window.otpResendAttemptsLeft > 0) {
+    window.otpResendAttemptsLeft -= 1;
+  }
+
+  window.otpTimerExpired = false;
+  updateAttemptsInfo(globals);
+
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: window.otpResendAttemptsLeft > 0,
+      enabled: window.otpResendAttemptsLeft > 0,
+    });
+  }
+
+  if (submitBtn) {
+    globals.functions.setProperty(submitBtn, {
+      enabled: false,
+    });
+  }
+
+  return 'Invalid OTP';
+}
+
+/**
+ * @param {scope} globals
+ */
 function debugForm(globals) {
   window.myForm = globals.form;
   // eslint-disable-next-line no-console
