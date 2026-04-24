@@ -261,6 +261,8 @@ function handleResendOtp(globals) {
  * @param {scope} globals
  * @returns {string}
  */
+console.log('OTP globals:', globals);
+alert('handleOtpSuccess called');
 function handleOtpSuccess(globals) {
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
