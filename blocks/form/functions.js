@@ -326,46 +326,49 @@ function handleOtpInvalid(globals) {
 function calculateEMI(globals) {
   const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
   const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
-
+ 
   const existing = globals.form.$properties || {};
-
-  const loanAmt = loanRaw > 0 ? loanRaw : Number(existing.loanAmt || 0);
-  const tenure = tenureRaw > 0 ? tenureRaw : Number(existing.loanTenure || 0);
-
+ 
+  const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
+  const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
+ 
   globals.functions.setProperty(globals.form, {
     properties: {
       ...existing,
-      loanAmt,
-      loanTenure: tenure,
+      loanRaw: savedLoanRaw,
+      tenureRaw: savedTenureRaw,
     },
   });
-
-  if (!loanAmt || !tenure) {
+ 
+  if (!savedLoanRaw || !savedTenureRaw) {
     return '';
   }
-
+ 
+  const loanAmt = Math.round(savedLoanRaw * 200000);
+  const tenure = Math.round(savedTenureRaw * 15);
+ 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
-
+ 
   const factor = Math.pow(1 + monthlyRate, tenure);
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
-
+ 
   globals.functions.setProperty(globals.form.display.loandisplay, {
-    value: `₹${Number(loanAmt).toLocaleString('en-IN')}`,
+    value: loanAmt,
   });
-
+ 
   globals.functions.setProperty(globals.form.display.emi, {
     value: emi,
   });
-
+ 
   globals.functions.setProperty(globals.form.display.rate, {
     value: annualRate,
   });
-
+ 
   globals.functions.setProperty(globals.form.display.tenure, {
     value: 4000,
   });
-
+ 
   return '';
 }
 
