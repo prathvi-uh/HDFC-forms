@@ -321,51 +321,66 @@ function handleOtpInvalid(globals) {
 
 /**
  * @param {scope} globals
+ * @returns {string}
  */
 function calculateEMI(globals) {
+  const loanField = globals.form.offer.loanamt;
+  const tenureField = globals.form.offer.loantenure;
 
-  // 1. Read RAW slider values
-  const loanRaw = globals.form.offer.loanamt.valueOf();
-  const tenureRaw = globals.form.offer.loantenure.valueOf();
+  const readNumber = (field) => {
+    let raw = field?.valueOf?.();
 
-  // 2. Convert to ACTUAL values (based on your slider scale)
-  const loanAmt = loanRaw * 200000;   // ₹ scaling
-  const tenure = tenureRaw * 15;      // months scaling
+    if (raw === null || raw === undefined || raw === '' || Number.isNaN(raw)) {
+      return 0;
+    }
 
-  // 3. Interest
+    return Number(String(raw).replace(/[^\d.]/g, '')) || 0;
+  };
+
+  const loanRaw = readNumber(loanField);
+  const tenureRaw = readNumber(tenureField);
+
+  console.log('loanRaw:', loanRaw);
+  console.log('tenureRaw:', tenureRaw);
+
+  // stop if unreadable, do not write NaN
+  if (!loanRaw || !tenureRaw) {
+    return '';
+  }
+
+  const loanAmt = Math.round(loanRaw * 200000);
+  const tenure = Math.round(tenureRaw * 15);
+
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
 
-  // 4. EMI calculation
-  const emi = (loanAmt * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
-              (Math.pow(1 + monthlyRate, tenure) - 1);
+  let emi = 0;
 
-  const emiFinal = Math.round(emi);
+  if (loanAmt > 0 && tenure > 0) {
+    const factor = Math.pow(1 + monthlyRate, tenure);
+    emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
+  }
 
-  // 5. Set values (FULL PATH + setProperty)
-  globals.functions.setProperty(
-    globals.form.display.emi,
-    { value: emiFinal }
-  );
+  globals.functions.setProperty(globals.form.display.loandisplay, {
+    value: loanAmt,
+  });
 
-  globals.functions.setProperty(
-    globals.form.display.rate,
-    { value: annualRate }
-  );
+  globals.functions.setProperty(globals.form.display.emi, {
+    value: emi,
+  });
 
-  globals.functions.setProperty(
-    globals.form.display.tenure,
-    { value: 4000 }   // your tax logic
-  );
+  globals.functions.setProperty(globals.form.display.rate, {
+    value: annualRate,
+  });
 
-  globals.functions.setProperty(
-    globals.form.display.loandisplay,
-    { value: loanAmt }
-  );
+  globals.functions.setProperty(globals.form.display.tenure, {
+    value: 4000,
+  });
 
   return '';
 }
 
+export { calculateEMI };
 /** 
  * @param {scope} globals
  */
