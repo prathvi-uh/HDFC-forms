@@ -324,6 +324,26 @@ function handleOtpInvalid(globals) {
  * @returns {string}
  */
 function calculateEMI(globals) {
+  const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+  const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
+
+  function getActualValueFromSlider(sliderValue, ticks) {
+    const value = Number(sliderValue);
+
+    const lowerIndex = Math.floor(value);
+    const upperIndex = Math.ceil(value);
+
+    if (lowerIndex === upperIndex) {
+      return ticks[lowerIndex];
+    }
+
+    const lowerValue = ticks[lowerIndex];
+    const upperValue = ticks[upperIndex];
+    const percentage = value - lowerIndex;
+
+    return lowerValue + ((upperValue - lowerValue) * percentage);
+  }
+
   const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
   const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
 
@@ -344,10 +364,8 @@ function calculateEMI(globals) {
     return '';
   }
 
-  // Use actual slider values directly.
-  // Do not multiply, because range.js already maps slider to real amount/months.
-  const loanAmt = Math.round(savedLoanRaw);
-  const tenure = Math.round(savedTenureRaw);
+  const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
+  const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
@@ -369,7 +387,6 @@ function calculateEMI(globals) {
     value: annualRate,
   });
 
-  // Keeping this unchanged because your tax field is labelled as tenure
   globals.functions.setProperty(globals.form.display.tenure, {
     value: 4000,
   });
