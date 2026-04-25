@@ -380,7 +380,6 @@ function calculateEMI(globals) {
   return '';
 }
 
-export { calculateEMI };
 /** 
  * @param {scope} globals
  */
