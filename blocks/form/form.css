@@ -1339,24 +1339,6 @@ main .form form .field-terms-privacy-text p::after {
   background: #f2a126 !important;
 }
 
-/* ===== THUMB ===== */
-.range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none !important;
-  width: 14px !important;
-  height: 14px !important;
-  border-radius: 50% !important;
-  background: #2f5bd3 !important;
-  border: none !important;
-  margin-top: -5px !important;
-}
-
-.range-widget-wrapper input[type="range"]::-moz-range-thumb {
-  width: 14px !important;
-  height: 14px !important;
-  border-radius: 50% !important;
-  background: #2f5bd3 !important;
-  border: none !important;
-}
 
 /* override browser default */
 .range-widget-wrapper input[type="range"] {
@@ -1396,14 +1378,6 @@ main .form form .field-terms-privacy-text p::after {
   color: #111 !important;
 }
 
-/* ===== REMOVE OLD BROKEN RULE ===== */
-/* DO NOT USE THIS (causes mismatch)
-.range-widget-wrapper div:first-child {
-  font-size: 22px !important;
-  text-align: center !important;
-}
-*/
-
 /* ===== TICKS ===== */
 .range-min,
 .range-max {
@@ -1422,6 +1396,30 @@ main .form form .field-terms-privacy-text p::after {
 .range-tick {
   white-space: nowrap;
   line-height: 1;
+}
+
+/* Hide AEM's original top value display */
+.number-wrapper > div:first-child:not(.range-widget-wrapper),
+.number-wrapper .cmp-adaptiveform-numberinput__widget,
+.number-wrapper .cmp-adaptiveform-range__widget > div:first-child {
+  display: none !important;
+}
+
+/* Show custom range bubble */
+.range-bubble {
+  display: inline-block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 999;
+
+  background: red !important; /* keep temporarily for testing */
+  color: white !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
 }
 
 /* reduce gap below amount */
