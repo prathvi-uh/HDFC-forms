@@ -324,6 +324,8 @@ function handleOtpInvalid(globals) {
  * @returns {string}
  */
 function calculateEMI(globals) {
+  console.log(globals.form.offer.loanamt.valueOf())
+  console.log(globals.form.offer.loantenure.valueOf())
   const loan = Number(globals.form.offer.loanamt.$value || 0);
   const tenure = Number(globals.form.offer.loantenure.$value || 0);
 
