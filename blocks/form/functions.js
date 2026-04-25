@@ -324,42 +324,34 @@ function handleOtpInvalid(globals) {
  * @returns {string}
  */
 function calculateEMI(globals) {
-  const loanField = globals.form.offer.loanamt;
-  const tenureField = globals.form.offer.loantenure;
+  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
+  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
 
-  const readNumber = (field) => {
-    let raw = field?.valueOf?.();
+  const existing = globals.form.$properties || {};
 
-    if (raw === null || raw === undefined || raw === '' || Number.isNaN(raw)) {
-      return 0;
-    }
+  const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
+  const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
 
-    return Number(String(raw).replace(/[^\d.]/g, '')) || 0;
-  };
+  globals.functions.setProperty(globals.form, {
+    properties: {
+      ...existing,
+      loanRaw: savedLoanRaw,
+      tenureRaw: savedTenureRaw,
+    },
+  });
 
-  const loanRaw = readNumber(loanField);
-  const tenureRaw = readNumber(tenureField);
-
-  console.log('loanRaw:', loanRaw);
-  console.log('tenureRaw:', tenureRaw);
-
-  // stop if unreadable, do not write NaN
-  if (!loanRaw || !tenureRaw) {
+  if (!savedLoanRaw || !savedTenureRaw) {
     return '';
   }
 
-  const loanAmt = Math.round(loanRaw * 200000);
-  const tenure = Math.round(tenureRaw * 15);
+  const loanAmt = Math.round(savedLoanRaw * 200000);
+  const tenure = Math.round(savedTenureRaw * 15);
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
 
-  let emi = 0;
-
-  if (loanAmt > 0 && tenure > 0) {
-    const factor = Math.pow(1 + monthlyRate, tenure);
-    emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
-  }
+  const factor = Math.pow(1 + monthlyRate, tenure);
+  const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
 
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: loanAmt,
