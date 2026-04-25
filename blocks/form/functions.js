@@ -324,45 +324,47 @@ function handleOtpInvalid(globals) {
  * @returns {string}
  */
 function calculateEMI(globals) {
+  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
+  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
 
-  // 1. Read actual values directly
-  const loanAmt = Number(globals.form.offer.loanamt.valueOf()) || 0;
-  const tenure = Number(globals.form.offer.loantenure.valueOf()) || 0;
+  const existing = globals.form.$properties || {};
 
-  // 2. EMI logic
+  const loanAmt = loanRaw > 0 ? loanRaw : Number(existing.loanAmt || 0);
+  const tenure = tenureRaw > 0 ? tenureRaw : Number(existing.loanTenure || 0);
+
+  globals.functions.setProperty(globals.form, {
+    properties: {
+      ...existing,
+      loanAmt,
+      loanTenure: tenure,
+    },
+  });
+
+  if (!loanAmt || !tenure) {
+    return '';
+  }
+
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
 
-  let emi = 0;
+  const factor = Math.pow(1 + monthlyRate, tenure);
+  const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
 
-  if (loanAmt > 0 && tenure > 0) {
-    const factor = Math.pow(1 + monthlyRate, tenure);
-    emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
-  }
+  globals.functions.setProperty(globals.form.display.loandisplay, {
+    value: `₹${Number(loanAmt).toLocaleString('en-IN')}`,
+  });
 
-  // 3. Format loan amount with ₹
-  const formattedLoan = "₹" + loanAmt.toLocaleString('en-IN');
+  globals.functions.setProperty(globals.form.display.emi, {
+    value: emi,
+  });
 
-  // 4. Update UI (FULL PATH)
-  globals.functions.setProperty(
-    globals.form.display.loandisplay,
-    { value: formattedLoan }
-  );
+  globals.functions.setProperty(globals.form.display.rate, {
+    value: annualRate,
+  });
 
-  globals.functions.setProperty(
-    globals.form.display.emi,
-    { value: emi }
-  );
-
-  globals.functions.setProperty(
-    globals.form.display.rate,
-    { value: annualRate }
-  );
-
-  globals.functions.setProperty(
-    globals.form.display.tenure,
-    { value: 4000 }
-  );
+  globals.functions.setProperty(globals.form.display.tenure, {
+    value: 4000,
+  });
 
   return '';
 }
