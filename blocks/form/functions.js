@@ -324,6 +324,25 @@ function handleOtpInvalid(globals) {
  * @returns {string}
  */
 function calculateEMI(globals) {
+  const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+  const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
+
+  const getActualValue = (sliderValue, ticks) => {
+    const value = Number(sliderValue) || 0;
+    const lowerIndex = Math.floor(value);
+    const upperIndex = Math.ceil(value);
+
+    if (lowerIndex === upperIndex) {
+      return ticks[lowerIndex];
+    }
+
+    const lowerValue = ticks[lowerIndex];
+    const upperValue = ticks[upperIndex];
+    const percentage = value - lowerIndex;
+
+    return lowerValue + ((upperValue - lowerValue) * percentage);
+  };
+
   const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
   const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
 
@@ -344,8 +363,8 @@ function calculateEMI(globals) {
     return '';
   }
 
-  const loanAmt = Math.round(savedLoanRaw * 200000);
-  const tenure = Math.round(savedTenureRaw * 15);
+  const loanAmt = Math.round(getActualValue(savedLoanRaw, loanTicks) / 1000) * 1000;
+  const tenure = Math.round(getActualValue(savedTenureRaw, tenureTicks));
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
