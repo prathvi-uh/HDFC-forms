@@ -26,10 +26,10 @@ function getFieldType(input, fieldDiv) {
   return isLoanAmountSlider(input, fieldDiv) ? 'loanAmount' : 'loanTenure';
 }
 
-function getActualValueFromSlider(input, config) {
-  const sliderValue = Number(input.value);
-  const lowerIndex = Math.floor(sliderValue);
-  const upperIndex = Math.ceil(sliderValue);
+function getActualValueFromSliderValue(sliderValue, config) {
+  const value = Number(sliderValue);
+  const lowerIndex = Math.floor(value);
+  const upperIndex = Math.ceil(value);
 
   if (lowerIndex === upperIndex) {
     return config.ticks[lowerIndex];
@@ -37,7 +37,7 @@ function getActualValueFromSlider(input, config) {
 
   const lowerValue = config.ticks[lowerIndex];
   const upperValue = config.ticks[upperIndex];
-  const percentage = sliderValue - lowerIndex;
+  const percentage = value - lowerIndex;
 
   return lowerValue + ((upperValue - lowerValue) * percentage);
 }
@@ -85,7 +85,7 @@ function createTicks(input, wrapper, config) {
 
     tickEl.addEventListener('click', () => {
       input.value = index;
-      input.dispatchEvent(new Event('input', { bubbles: true }));
+      updateBubble(input, wrapper);
       input.dispatchEvent(new Event('change', { bubbles: true }));
     });
 
@@ -95,28 +95,25 @@ function createTicks(input, wrapper, config) {
   wrapper.appendChild(ticksWrap);
 }
 
-function updateBubble(input, wrapper, fieldType) {
+function updateBubble(input, wrapper) {
+  const fieldType = input.dataset.fieldType;
   const config = rangeConfigs[fieldType];
   const bubble = wrapper.querySelector('.range-bubble');
 
   if (!bubble || !config) return;
 
-  const rawActualValue = getActualValueFromSlider(input, config);
+  const sliderValue = Number(input.value);
+  const max = config.ticks.length - 1;
+  const percent = (sliderValue / max) * 100;
+
+  const rawActualValue = getActualValueFromSliderValue(sliderValue, config);
   const actualValue = formatActualValue(rawActualValue, fieldType);
 
-  const percent = (Number(input.value) / (config.ticks.length - 1)) * 100;
-
   input.dataset.actualValue = actualValue;
+
   bubble.innerText = config.formatBubble(actualValue);
   bubble.style.left = `${percent}%`;
-
-  if (percent <= 5) {
-    bubble.style.transform = 'translateX(0)';
-  } else if (percent >= 95) {
-    bubble.style.transform = 'translateX(-100%)';
-  } else {
-    bubble.style.transform = 'translateX(-50%)';
-  }
+  bubble.style.transform = 'translateX(-50%)';
 
   wrapper.style.setProperty('--range-progress', `${percent}%`);
 }
@@ -128,6 +125,7 @@ export default async function decorate(fieldDiv, fieldJson) {
   const fieldType = getFieldType(input, fieldDiv);
   const config = rangeConfigs[fieldType];
 
+  input.dataset.fieldType = fieldType;
   input.type = 'range';
 
   const originalActualValue = Number(input.value || config.defaultValue);
@@ -149,16 +147,15 @@ export default async function decorate(fieldDiv, fieldJson) {
   wrapper.appendChild(input);
 
   createTicks(input, wrapper, config);
-  updateBubble(input, wrapper, fieldType);
+  updateBubble(input, wrapper);
 
   input.addEventListener('input', (e) => {
-    updateBubble(e.target, wrapper, fieldType);
+    updateBubble(e.target, wrapper);
   });
 
   input.addEventListener('change', (e) => {
-    updateBubble(e.target, wrapper, fieldType);
+    updateBubble(e.target, wrapper);
   });
 
   return fieldDiv;
 }
- 

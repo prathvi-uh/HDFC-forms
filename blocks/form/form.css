@@ -1320,7 +1320,8 @@ main .form form .field-terms-privacy-text p::after {
   text-decoration: none !important;
 }
 
-/* entire track (full orange line) */
+/* added new */
+/* ===== RANGE TRACK ===== */
 .range-widget-wrapper input[type="range"]::-webkit-slider-runnable-track {
   height: 4px !important;
   background: #f2a126 !important;
@@ -1338,13 +1339,13 @@ main .form form .field-terms-privacy-text p::after {
   background: #f2a126 !important;
 }
 
-/* thumb (blue dot → optional change to match UI) */
+/* ===== THUMB ===== */
 .range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none !important;
   width: 14px !important;
   height: 14px !important;
   border-radius: 50% !important;
-  background: #2f5bd3 !important; /* keep blue dot like screenshot */
+  background: #2f5bd3 !important;
   border: none !important;
   margin-top: -5px !important;
 }
@@ -1357,25 +1358,70 @@ main .form form .field-terms-privacy-text p::after {
   border: none !important;
 }
 
-/* IMPORTANT: override browser default blue */
+/* override browser default */
 .range-widget-wrapper input[type="range"] {
+  width: 100%;
+  display: block;
   accent-color: #f2a126 !important;
 }
 
-/* ===== BOLD LABEL + VALUE ABOVE SLIDER ===== */
+/* ===== WRAPPER ===== */
+.range-widget-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 48px;
+}
 
+/* ===== BUBBLE (FIXED) ===== */
+.range-bubble {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 2;
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+  text-align: center !important;
+}
+
+/* ===== LABEL STYLING ===== */
 .number-wrapper label,
 .number-wrapper .field-label,
-.number-wrapper p,
-.number-wrapper .range-widget-wrapper div:first-child {
+.number-wrapper p {
   font-weight: 700 !important;
   color: #111 !important;
 }
 
-/* slightly bigger value */
+/* ===== REMOVE OLD BROKEN RULE ===== */
+/* DO NOT USE THIS (causes mismatch)
 .range-widget-wrapper div:first-child {
   font-size: 22px !important;
   text-align: center !important;
+}
+*/
+
+/* ===== TICKS ===== */
+.range-min,
+.range-max {
+  display: none !important;
+}
+
+.range-ticks {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #5f6b7a;
+}
+
+.range-tick {
+  white-space: nowrap;
+  line-height: 1;
 }
 
 /* reduce gap below amount */
