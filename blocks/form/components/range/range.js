@@ -1,10 +1,13 @@
 const rangeConfigs = {
   loanAmount: {
-    ticks: [50000, 200000, 400000, 600000, 800000, 1000000, 1500000],
-    defaultValue: 1500000,
-    formatBubble: (value) => `₹${Number(value).toLocaleString('en-IN')}`,
-    formatTick: (value) => (value === 50000 ? '50K' : `${value / 100000}L`),
-  },
+  min: 50000,
+  max: 1500000,
+  step: 1,   
+  defaultValue: 1500000,
+  ticks: [50000, 200000, 400000, 600000, 800000, 1000000, 1500000],
+  formatBubble: (value) => `₹${Number(value).toLocaleString('en-IN')}`,
+  formatTick: (value) => (value === 50000 ? '50K' : `${value / 100000}L`),
+},
   loanTenure: {
     ticks: [12, 24, 36, 48, 60, 72, 84],
     defaultValue: 48,
