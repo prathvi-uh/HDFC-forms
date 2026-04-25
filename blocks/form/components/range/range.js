@@ -66,6 +66,14 @@ function formatActualValue(actualValue, fieldType) {
   return actualValue;
 }
 
+function showSliderValue(wrapper) {
+  const bubble = wrapper.querySelector('.range-bubble');
+  const customThumb = wrapper.querySelector('.range-custom-thumb');
+
+  if (bubble) bubble.style.display = 'inline-block';
+  if (customThumb) customThumb.style.display = 'block';
+}
+
 function createTicks(input, wrapper, config) {
   const ticksWrap = document.createElement('div');
   ticksWrap.className = 'range-ticks';
@@ -77,6 +85,7 @@ function createTicks(input, wrapper, config) {
 
     tickEl.addEventListener('click', () => {
       input.value = index;
+      showSliderValue(wrapper);
       updateBubble(input, wrapper);
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -164,9 +173,11 @@ export default async function decorate(fieldDiv, fieldJson) {
   bubble.style.pointerEvents = 'none';
   bubble.style.whiteSpace = 'nowrap';
   bubble.style.zIndex = '9999';
+  bubble.style.display = 'none';
 
   const customThumb = document.createElement('span');
   customThumb.className = 'range-custom-thumb';
+  customThumb.style.display = 'none';
 
   wrapper.appendChild(bubble);
   wrapper.appendChild(input);
@@ -177,20 +188,20 @@ export default async function decorate(fieldDiv, fieldJson) {
 
   createTicks(input, wrapper, config);
 
-  requestAnimationFrame(() => {
-    updateBubble(input, wrapper);
-  });
-
   input.addEventListener('input', () => {
+    showSliderValue(wrapper);
     updateBubble(input, wrapper);
   });
 
   input.addEventListener('change', () => {
+    showSliderValue(wrapper);
     updateBubble(input, wrapper);
   });
 
   window.addEventListener('resize', () => {
-    updateBubble(input, wrapper);
+    if (bubble.style.display !== 'none') {
+      updateBubble(input, wrapper);
+    }
   });
 
   return fieldDiv;
