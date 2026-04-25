@@ -326,12 +326,12 @@ function handleOtpInvalid(globals) {
 function calculateEMI(globals) {
   const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
   const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
- 
+
   const existing = globals.form.$properties || {};
- 
+
   const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
   const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
- 
+
   globals.functions.setProperty(globals.form, {
     properties: {
       ...existing,
@@ -339,38 +339,41 @@ function calculateEMI(globals) {
       tenureRaw: savedTenureRaw,
     },
   });
- 
+
   if (!savedLoanRaw || !savedTenureRaw) {
     return '';
   }
- 
-  const loanAmt = Math.round(savedLoanRaw * 200000);
-  const tenure = Math.round(savedTenureRaw * 15);
- 
+
+  // Use actual slider values directly.
+  // Do not multiply, because range.js already maps slider to real amount/months.
+  const loanAmt = Math.round(savedLoanRaw);
+  const tenure = Math.round(savedTenureRaw);
+
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
- 
+
   const factor = Math.pow(1 + monthlyRate, tenure);
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
- 
+
   const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
 
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: formattedLoan,
   });
- 
+
   globals.functions.setProperty(globals.form.display.emi, {
     value: emi,
   });
- 
+
   globals.functions.setProperty(globals.form.display.rate, {
     value: annualRate,
   });
- 
+
+  // Keeping this unchanged because your tax field is labelled as tenure
   globals.functions.setProperty(globals.form.display.tenure, {
     value: 4000,
   });
- 
+
   return '';
 }
 
