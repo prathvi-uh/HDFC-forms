@@ -353,8 +353,10 @@ function calculateEMI(globals) {
   const factor = Math.pow(1 + monthlyRate, tenure);
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
  
+  const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
+
   globals.functions.setProperty(globals.form.display.loandisplay, {
-    value: loanAmt,
+    value: formattedLoan,
   });
  
   globals.functions.setProperty(globals.form.display.emi, {
