@@ -394,9 +394,6 @@ function calculateEMI(globals) {
   return '';
 }
 
-/** 
- * @param {scope} globals
- */
 function maskMobile(globals) {
   const mobile = globals.form.personal_loan_offer.mobile.valueOf();
 
@@ -404,9 +401,8 @@ function maskMobile(globals) {
 
   const str = mobile.toString();
 
-  return '******' + str.slice(-4);
+  return "We have sent an OTP to this mobile number ******" + str.slice(-4);
 }
-
 /** 
  * @param {scope} globals
  */
