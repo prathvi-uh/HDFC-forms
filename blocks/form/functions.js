@@ -398,13 +398,13 @@ function calculateEMI(globals) {
  * @param {scope} globals
  */
 function maskMobile(globals) {
-  const mobile = globals.form.personal_loan_offer.mobile?.valueOf();
+  const mobile = globals.form.personal_loan_offer.mobile.valueOf();
 
   if (!mobile) return '';
 
   const str = mobile.toString();
 
-  return str.substring(0, 2) + '******' + str.slice(-2);
+  return '******' + str.slice(-4);
 }
 
 /** 
