@@ -397,6 +397,19 @@ function calculateEMI(globals) {
 /** 
  * @param {scope} globals
  */
+function maskMobile(globals) {
+  const mobile = globals.form.personal_loan_offer.mobile?.valueOf();
+
+  if (!mobile) return '';
+
+  const str = mobile.toString();
+
+  return str.substring(0, 2) + '******' + str.slice(-2);
+}
+
+/** 
+ * @param {scope} globals
+ */
 function debugForm(globals) {
   window.myForm = globals.form;
   // eslint-disable-next-line no-console
@@ -406,6 +419,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, maskMobile, debugForm,
 };
  
