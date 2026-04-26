@@ -394,15 +394,6 @@ function calculateEMI(globals) {
   return '';
 }
 
-function maskMobile(globals) {
-  const mobile = globals.form.personal_loan_offer.mobile.valueOf();
-
-  if (!mobile) return '';
-
-  const str = mobile.toString();
-
-  return "We have sent an OTP to this mobile number ******" + str.slice(-4);
-}
 /** 
  * @param {scope} globals
  */
@@ -415,6 +406,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, maskMobile, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, debugForm,
 };
  
