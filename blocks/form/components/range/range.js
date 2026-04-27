@@ -150,8 +150,11 @@ export default async function decorate(fieldDiv, fieldJson) {
  
   input.min = 0;
   input.max = config.ticks.length - 1;
-  input.step = 1;
- 
+  if (fieldType === 'loanTenure') {
+  input.step = 1;      // ✅ snap to ticks only
+  } else {
+  input.step = 0.01;   // ✅ smooth for loan amount
+  }
   input.value = currentValue > config.ticks.length - 1
     ? getSliderValueFromActual(currentValue, config)
     : currentValue;
