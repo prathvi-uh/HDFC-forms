@@ -332,23 +332,20 @@ function calculateEMI(globals) {
 
     if (Number.isNaN(value)) return 0;
 
-    // If already actual value like 60, 84, 974000, return as-is
-    if (value > ticks.length - 1) {
-      return value;
-    }
+    const maxIndex = ticks.length - 1;
+
+    if (value <= 0) return ticks[0];
+    if (value >= maxIndex) return ticks[maxIndex];
 
     const lowerIndex = Math.floor(value);
     const upperIndex = Math.ceil(value);
 
     if (lowerIndex === upperIndex) {
-      return ticks[lowerIndex] || 0;
+      return ticks[lowerIndex];
     }
 
     const lowerValue = ticks[lowerIndex];
     const upperValue = ticks[upperIndex];
-
-    if (!lowerValue || !upperValue) return 0;
-
     const percentage = value - lowerIndex;
 
     return lowerValue + ((upperValue - lowerValue) * percentage);
@@ -362,6 +359,14 @@ function calculateEMI(globals) {
   const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
   const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
 
+  globals.functions.setProperty(globals.form, {
+    properties: {
+      ...existing,
+      loanRaw: savedLoanRaw,
+      tenureRaw: savedTenureRaw,
+    },
+  });
+
   if (!savedLoanRaw || !savedTenureRaw) {
     return '';
   }
@@ -369,15 +374,14 @@ function calculateEMI(globals) {
   const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
   const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
 
-  globals.functions.setProperty(globals.form, {
-    properties: {
-      ...existing,
-      loanRaw: savedLoanRaw,
-      tenureRaw: savedTenureRaw,
-      tenureActual: tenure,
-      loanActual: loanAmt,
-    },
-  });
+  if (globals.form.review?.view_details?.loan_accordion?.loan_details?.loantenure) {
+    globals.functions.setProperty(
+      globals.form.review.view_details.loan_accordion.loan_details.loantenure,
+      {
+        value: `${tenure} months`,
+      }
+    );
+  }
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
@@ -385,11 +389,7 @@ function calculateEMI(globals) {
   const factor = Math.pow(1 + monthlyRate, tenure);
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
 
-  if (!emi || Number.isNaN(emi)) {
-    return '';
-  }
-
-  const formattedLoan = `₹${Number(loanAmt).toLocaleString('en-IN')}`;
+  const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
 
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: formattedLoan,
@@ -406,15 +406,6 @@ function calculateEMI(globals) {
   globals.functions.setProperty(globals.form.display.tenure, {
     value: 4000,
   });
-
-  if (globals.form.review?.view_details?.loan_accordion?.loan_details?.loantenure) {
-    globals.functions.setProperty(
-      globals.form.review.view_details.loan_accordion.loan_details.loantenure,
-      {
-        value: `${tenure} months`,
-      }
-    );
-  }
 
   return '';
 }
