@@ -106,6 +106,15 @@ function updateBubble(input, wrapper) {
   const actualValue = formatActualValue(rawActualValue, fieldType);
 
   input.dataset.actualValue = actualValue;
+  if (fieldType === 'loanTenure') {
+  const tenureActualInput = document.querySelector('[name="loantenureactual"]');
+
+  if (tenureActualInput) {
+    tenureActualInput.value = actualValue;
+    tenureActualInput.dispatchEvent(new Event('input', { bubbles: true }));
+    tenureActualInput.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+ }
   bubble.innerText = config.formatBubble(actualValue);
 
   bubble.style.left = `${percent}%`;
