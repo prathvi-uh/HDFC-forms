@@ -367,6 +367,14 @@ function calculateEMI(globals) {
   const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
   const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
   
+  globals.functions.setProperty(globals.form, {
+  properties: {
+    ...existing,
+    loanRaw: savedLoanRaw,
+    tenureRaw: savedTenureRaw,
+    tenureActual: tenure,
+  },
+  });
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
 
