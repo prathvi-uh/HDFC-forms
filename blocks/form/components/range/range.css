@@ -136,14 +136,13 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 
 .range-custom-thumb {
   position: absolute;
-  top: 50px;
-  width: 14px;          /* was 12 */
+  top: 43px;
+  width: 14px;
   height: 14px;
-  background: #2f5bd3;  /* blue */
+  background: #2f5bd3;
   border-radius: 50%;
   transform: translateX(-50%);
   pointer-events: none;
-  z-index: 5;
-
-  box-shadow: 0 0 0 3px rgba(47,91,211,0.15); /* soft outer ring */
+  z-index: 20;
+  display: block !important;
 }
