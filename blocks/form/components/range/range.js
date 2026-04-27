@@ -13,6 +13,82 @@ const rangeConfigs = {
   },
 };
 
+function addRangeStyles() {
+  if (document.getElementById('custom-range-style')) return;
+
+  const style = document.createElement('style');
+  style.id = 'custom-range-style';
+  style.textContent = `
+    .range-widget-wrapper {
+      position: relative !important;
+      width: 100% !important;
+      padding-top: 48px !important;
+    }
+
+    .range-widget-wrapper input[type="range"] {
+      width: 100% !important;
+      display: block !important;
+      accent-color: #2f5bd3 !important;
+    }
+
+    .range-widget-wrapper input[type="range"]::-webkit-slider-runnable-track {
+      height: 4px !important;
+      background: #f2a126 !important;
+      border-radius: 4px !important;
+    }
+
+    .range-widget-wrapper input[type="range"]::-moz-range-track {
+      height: 4px !important;
+      background: #f2a126 !important;
+      border-radius: 4px !important;
+    }
+
+    .range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
+      opacity: 1 !important;
+      cursor: pointer !important;
+    }
+
+    .range-widget-wrapper input[type="range"]::-moz-range-thumb {
+      opacity: 1 !important;
+      cursor: pointer !important;
+    }
+
+    .range-bubble {
+      position: absolute !important;
+      top: 0 !important;
+      transform: translateX(-50%) !important;
+      display: inline-block !important;
+      padding: 10px 14px !important;
+      background: #fff !important;
+      border: 1px solid #d1d5db !important;
+      border-radius: 8px !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      color: #111 !important;
+      white-space: nowrap !important;
+      pointer-events: none !important;
+      z-index: 9999 !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    }
+
+    .range-ticks {
+      display: flex !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      margin-top: 8px !important;
+      font-size: 10px !important;
+      color: #5f6b7a !important;
+    }
+
+    .range-tick {
+      white-space: nowrap !important;
+      line-height: 1 !important;
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
 function isLoanAmountSlider(input, fieldDiv) {
   const title = fieldDiv.querySelector(
     'label, .field-label, .cmp-adaptiveform-textinput__label, .cmp-adaptiveform-numberinput__label, .cmp-adaptiveform-range__label'
@@ -46,9 +122,7 @@ function getActualValueFromSlider(sliderValue, config) {
   const lowerIndex = Math.floor(value);
   const upperIndex = Math.ceil(value);
 
-  if (lowerIndex === upperIndex) {
-    return config.ticks[lowerIndex];
-  }
+  if (lowerIndex === upperIndex) return config.ticks[lowerIndex];
 
   return config.ticks[lowerIndex]
     + ((config.ticks[upperIndex] - config.ticks[lowerIndex]) * (value - lowerIndex));
@@ -66,14 +140,6 @@ function formatActualValue(actualValue, fieldType) {
   return actualValue;
 }
 
-function showSliderValue(wrapper) {
-  const bubble = wrapper.querySelector('.range-bubble');
-  const customThumb = wrapper.querySelector('.range-custom-thumb');
-
-  if (bubble) bubble.style.setProperty('display', 'inline-block', 'important');
-  if (customThumb) customThumb.style.setProperty('display', 'block', 'important');
-}
-
 function createTicks(input, wrapper, config) {
   const ticksWrap = document.createElement('div');
   ticksWrap.className = 'range-ticks';
@@ -85,7 +151,6 @@ function createTicks(input, wrapper, config) {
 
     tickEl.addEventListener('click', () => {
       input.value = index;
-      showSliderValue(wrapper);
       updateBubble(input, wrapper);
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -101,12 +166,15 @@ function updateBubble(input, wrapper) {
   const fieldType = input.dataset.fieldType;
   const config = rangeConfigs[fieldType];
   const bubble = wrapper.querySelector('.range-bubble');
-  const customThumb = wrapper.querySelector('.range-custom-thumb');
 
   if (!bubble || !config) return;
 
+  if (fieldType === 'loanTenure') {
+    input.value = Math.round(Number(input.value));
+  }
+
   const sliderValue = Number(input.value);
-  const max = config.ticks.length - 1;
+  const max = Number(input.max);
   const percent = (sliderValue / max) * 100;
 
   const rawActualValue = getActualValueFromSlider(sliderValue, config);
@@ -115,25 +183,12 @@ function updateBubble(input, wrapper) {
   input.dataset.actualValue = actualValue;
   bubble.innerText = config.formatBubble(actualValue);
 
-  const thumbWidth = 14;
-  const sliderWidth = input.getBoundingClientRect().width || wrapper.getBoundingClientRect().width;
-  const left = ((sliderWidth - thumbWidth) * percent) / 100 + (thumbWidth / 2);
-
-  bubble.style.setProperty('position', 'absolute', 'important');
-  bubble.style.setProperty('top', '0', 'important');
-  bubble.style.setProperty('left', `${left}px`, 'important');
-  bubble.style.setProperty('transform', 'translateX(-50%)', 'important');
-
-  if (customThumb) {
-    customThumb.style.setProperty('position', 'absolute', 'important');
-    customThumb.style.setProperty('left', `${left}px`, 'important');
-    customThumb.style.setProperty('transform', 'translateX(-50%)', 'important');
-  }
-
-  wrapper.style.setProperty('--range-progress', `${percent}%`);
+  bubble.style.setProperty('left', `${percent}%`, 'important');
 }
 
 export default async function decorate(fieldDiv, fieldJson) {
+  addRangeStyles();
+
   const input = fieldDiv.querySelector('input');
   if (!input) return fieldDiv;
 
@@ -153,61 +208,36 @@ export default async function decorate(fieldDiv, fieldJson) {
   input.max = config.ticks.length - 1;
   input.step = fieldType === 'loanTenure' ? 1 : 0.01;
 
-  const defaultSliderValue = getSliderValueFromActual(config.defaultValue, config);
-  input.value = fieldType === 'loanTenure'
-    ? Math.round(defaultSliderValue)
-    : defaultSliderValue;
+  input.value = getSliderValueFromActual(config.defaultValue, config);
+
+  if (fieldType === 'loanTenure') {
+    input.value = Math.round(Number(input.value));
+  }
 
   const wrapper = document.createElement('div');
   wrapper.className = 'range-widget-wrapper decorated';
-  wrapper.style.setProperty('position', 'relative', 'important');
-  wrapper.style.setProperty('width', '100%', 'important');
-  wrapper.style.setProperty('padding-top', '48px', 'important');
 
   input.after(wrapper);
 
   const bubble = document.createElement('span');
   bubble.className = 'range-bubble';
 
-  const customThumb = document.createElement('span');
-  customThumb.className = 'range-custom-thumb';
-
   wrapper.appendChild(bubble);
   wrapper.appendChild(input);
-  wrapper.appendChild(customThumb);
-
-  input.style.setProperty('width', '100%', 'important');
-  input.style.setProperty('display', 'block', 'important');
 
   createTicks(input, wrapper, config);
 
-  showSliderValue(wrapper);
-
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      updateBubble(input, wrapper);
-    });
+    updateBubble(input, wrapper);
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
   });
 
-  setTimeout(() => {
-    updateBubble(input, wrapper);
-  }, 500);
-
   input.addEventListener('input', () => {
-    if (fieldType === 'loanTenure') {
-      input.value = Math.round(Number(input.value));
-    }
-
-    showSliderValue(wrapper);
     updateBubble(input, wrapper);
   });
 
   input.addEventListener('change', () => {
-    if (fieldType === 'loanTenure') {
-      input.value = Math.round(Number(input.value));
-    }
-
-    showSliderValue(wrapper);
     updateBubble(input, wrapper);
   });
 
