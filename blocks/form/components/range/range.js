@@ -145,19 +145,14 @@ export default async function decorate(fieldDiv, fieldJson) {
   input.dataset.fieldType = fieldType;
   input.type = 'range';
 
-  const currentValue = Number(input.value || config.defaultValue);
-
   input.min = 0;
   input.max = config.ticks.length - 1;
   input.step = fieldType === 'loanTenure' ? 1 : 0.01;
 
-  input.value = currentValue > config.ticks.length - 1
-    ? getSliderValueFromActual(currentValue, config)
-    : currentValue;
-
-  if (fieldType === 'loanTenure') {
-    input.value = Math.round(Number(input.value));
-  }
+  const defaultSliderValue = getSliderValueFromActual(config.defaultValue, config);
+  input.value = fieldType === 'loanTenure'
+    ? Math.round(defaultSliderValue)
+    : defaultSliderValue;
 
   const wrapper = document.createElement('div');
   wrapper.className = 'range-widget-wrapper decorated';
@@ -192,7 +187,12 @@ export default async function decorate(fieldDiv, fieldJson) {
   createTicks(input, wrapper, config);
 
   showSliderValue(wrapper);
-  requestAnimationFrame(() => updateBubble(input, wrapper));
+
+  requestAnimationFrame(() => {
+    updateBubble(input, wrapper);
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+  });
 
   input.addEventListener('input', () => {
     if (fieldType === 'loanTenure') {
@@ -213,9 +213,7 @@ export default async function decorate(fieldDiv, fieldJson) {
   });
 
   window.addEventListener('resize', () => {
-    if (bubble.style.display !== 'none') {
-      updateBubble(input, wrapper);
-    }
+    updateBubble(input, wrapper);
   });
 
   return fieldDiv;
