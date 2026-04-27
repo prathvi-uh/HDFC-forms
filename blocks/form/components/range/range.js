@@ -70,8 +70,8 @@ function showSliderValue(wrapper) {
   const bubble = wrapper.querySelector('.range-bubble');
   const customThumb = wrapper.querySelector('.range-custom-thumb');
 
-  if (bubble) bubble.style.display = 'inline-block';
-  if (customThumb) customThumb.style.display = 'block';
+  if (bubble) bubble.style.setProperty('display', 'inline-block', 'important');
+  if (customThumb) customThumb.style.setProperty('display', 'block', 'important');
 }
 
 function createTicks(input, wrapper, config) {
@@ -119,11 +119,15 @@ function updateBubble(input, wrapper) {
   const sliderWidth = input.offsetWidth;
   const left = ((sliderWidth - thumbWidth) * percent) / 100 + (thumbWidth / 2);
 
-  bubble.style.left = `${left}px`;
-  bubble.style.transform = 'translateX(-50%)';
+  bubble.style.setProperty('position', 'absolute', 'important');
+  bubble.style.setProperty('top', '0', 'important');
+  bubble.style.setProperty('left', `${left}px`, 'important');
+  bubble.style.setProperty('transform', 'translateX(-50%)', 'important');
 
   if (customThumb) {
-    customThumb.style.left = `${left}px`;
+    customThumb.style.setProperty('position', 'absolute', 'important');
+    customThumb.style.setProperty('left', `${left}px`, 'important');
+    customThumb.style.setProperty('transform', 'translateX(-50%)', 'important');
   }
 
   wrapper.style.setProperty('--range-progress', `${percent}%`);
@@ -156,33 +160,24 @@ export default async function decorate(fieldDiv, fieldJson) {
 
   const wrapper = document.createElement('div');
   wrapper.className = 'range-widget-wrapper decorated';
-  wrapper.style.position = 'relative';
-  wrapper.style.width = '100%';
-  wrapper.style.paddingTop = '48px';
+  wrapper.style.setProperty('position', 'relative', 'important');
+  wrapper.style.setProperty('width', '100%', 'important');
+  wrapper.style.setProperty('padding-top', '48px', 'important');
 
   input.after(wrapper);
 
   const bubble = document.createElement('span');
   bubble.className = 'range-bubble';
-  bubble.style.position = 'absolute';
-  bubble.style.top = '0';
-  bubble.style.left = '0';
-  bubble.style.transform = 'translateX(-50%)';
-  bubble.style.pointerEvents = 'none';
-  bubble.style.whiteSpace = 'nowrap';
-  bubble.style.zIndex = '9999';
-  bubble.style.display = 'inline-block';
 
   const customThumb = document.createElement('span');
   customThumb.className = 'range-custom-thumb';
-  customThumb.style.display = 'block';
 
   wrapper.appendChild(bubble);
   wrapper.appendChild(input);
   wrapper.appendChild(customThumb);
 
-  input.style.width = '100%';
-  input.style.display = 'block';
+  input.style.setProperty('width', '100%', 'important');
+  input.style.setProperty('display', 'block', 'important');
 
   createTicks(input, wrapper, config);
 
@@ -190,9 +185,11 @@ export default async function decorate(fieldDiv, fieldJson) {
 
   requestAnimationFrame(() => {
     updateBubble(input, wrapper);
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
   });
+
+  setTimeout(() => {
+    updateBubble(input, wrapper);
+  }, 300);
 
   input.addEventListener('input', () => {
     if (fieldType === 'loanTenure') {
