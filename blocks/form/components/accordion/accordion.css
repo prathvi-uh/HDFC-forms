@@ -66,33 +66,24 @@ main .form form .field-personal-details {
   border: 1px solid #edf0f5;
   border-radius: 16px;
   overflow: hidden;
-  padding-bottom: 18px;
+  padding-bottom: 16px;
 }
-
+ 
 /* HEADER */
 main .form form .field-loan-details > legend.field-label.accordion-legend,
 main .form form .field-personal-details > legend.field-label.accordion-legend {
   background: #e7eefc;
   padding: 18px 20px 18px 46px;
+  border-radius: 0;
   position: relative;
   grid-column: 1 / -1;
   box-sizing: border-box;
   font-size: 18px;
   font-weight: 600;
   color: #3f4a5a;
-  margin: 0 0 18px;
+  margin: 0 0 8px;
 }
-
-/* HEADER ICONS */
-main .form form .field-loan-details > legend.field-label.accordion-legend::before {
-  content: "💰";
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-}
-
+ 
 main .form form .field-personal-details > legend.field-label.accordion-legend::before {
   content: "";
   position: absolute;
@@ -104,46 +95,43 @@ main .form form .field-personal-details > legend.field-label.accordion-legend::b
   background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%233b82f6' stroke-width='2' viewBox='0 0 24 24'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 4-6 8-6s8 2 8 6'/></svg>");
 }
 
-/* FIELD WRAPPERS */
+/* FIELD BLOCKS */
 main .form form .field-loan-details > .text-wrapper,
 main .form form .field-personal-details > .text-wrapper,
 main .form form .field-loan-details > .date-wrapper,
 main .form form .field-personal-details > .date-wrapper {
   position: relative;
   display: block;
-  padding: 0 18px 0 22px;
-  margin-top: 18px;
-  box-sizing: border-box;
+  padding: 0 16px 0 14px;
+  margin-top: 14px;
 }
-
-/* BLUE LEFT LINE */
+ 
+/* BLUE LINE */
 main .form form .field-loan-details > .text-wrapper::before,
 main .form form .field-personal-details > .text-wrapper::before,
-main .form form .field-loan-details > .date-wrapper::before,
+main .form form .field-loan-details > .date-wrapper::before,  
 main .form form .field-personal-details > .date-wrapper::before {
   content: "";
   position: absolute;
-  left: 7px;
+  left: 0;
   top: 4px;
   bottom: 4px;
   width: 2px;
   background: #8fb2ff;
   border-radius: 2px;
 }
-
+ 
 /* LABELS */
 main .form form .field-loan-details .field-label,
 main .form form .field-personal-details .field-label {
-  display: block;
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.25;
   color: #7a8394;
-  margin: 0 0 8px;
-  white-space: nowrap;
+  margin-bottom: 6px;
+  display: block;
 }
-
-/* INPUTS AS TEXT */
+ 
+/* MAKE INPUTS LOOK LIKE TEXT, NOT BOXES */
 main .form form .field-loan-details input,
 main .form form .field-personal-details input,
 main .form form .field-loan-details textarea,
@@ -156,16 +144,21 @@ main .form form .field-personal-details textarea {
   margin: 0 !important;
   height: auto !important;
   min-height: auto !important;
-  width: 100% !important;
+  width: auto !important;
   max-width: 100%;
   font-size: 16px;
   font-weight: 600;
-  line-height: 1.4;
-  color: #26364d;
+  color: #3f4a5a;
   border-radius: 0 !important;
 }
-
-/* FOCUS */
+ 
+/* DATE FIELDS ALSO LOOK LIKE TEXT */
+main .form form .field-loan-details .date-wrapper input,
+main .form form .field-personal-details .date-wrapper input {
+  letter-spacing: 0;
+}
+ 
+/* REMOVE GENERIC FORM FOCUS STYLES */
 main .form form .field-loan-details input:focus,
 main .form form .field-personal-details input:focus,
 main .form form .field-loan-details textarea:focus,
@@ -175,50 +168,28 @@ main .form form .field-personal-details textarea:focus {
   box-shadow: none !important;
   background: transparent !important;
 }
-
-/* FIX LOAN AMOUNT ONLY */
-main .form form .field-loan-details > .field-loandisplay {
-  padding: 0 18px 0 22px !important;
-  margin-top: 18px !important;
-}
-
-main .form form .field-loan-details > .field-loandisplay .field-label {
-  white-space: nowrap !important;
-}
-
-main .form form .field-loan-details > .field-loandisplay input {
-  width: 100% !important;
-}
-
-/* PERSONAL DETAILS FULL WIDTH ADDRESS */
+ 
+/* OPTIONAL: LONG ADDRESS FULL WIDTH LOOK */
 main .form form .field-personal-details .field-current-address {
   grid-column: 1 / -1;
 }
-
-/* OPTIONAL SEPARATORS */
+ 
+/* OPTIONAL: DOTTED SEPARATOR LIKE REFERENCE */
 main .form form .field-personal-details .field-current-address,
 main .form form .field-personal-details .field-residence-type {
   border-top: 1px dashed #e4e8f0;
   padding-top: 14px;
   margin-top: 18px;
 }
-
-/* FORCE loan details into 4 equal columns */
-main .form form .field-loan-details > .text-wrapper,
-main .form form .field-loan-details > .date-wrapper {
-  flex: 0 0 25% !important;
-  max-width: 25% !important;
-  width: 25% !important;
-  box-sizing: border-box;
-}
-
-/* same for personal details */
-main .form form .field-personal-details > .text-wrapper,
-main .form form .field-personal-details > .date-wrapper {
-  flex: 0 0 25% !important;
-  max-width: 25% !important;
-  width: 25% !important;
-  box-sizing: border-box;
+ 
+/* HEADER ICONS */
+main .form form .field-loan-details > legend.field-label.accordion-legend::before {
+  content: "💰";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
 }
 
 /* make Loan Amount align like Rate of Interest */
@@ -230,4 +201,49 @@ main .form form .field-loan-details > .field-loandisplay {
 /* fix blue line position */
 main .form form .field-loan-details > .field-loandisplay::before {
   left: 10px !important;
+}
+
+/* ============================= */
+/* FIX BLUE LINE (ALL FIELDS)    */
+/* ============================= */
+
+main .form form .field-loan-details > .text-wrapper::before,
+main .form form .field-loan-details > .date-wrapper::before,
+main .form form .field-loan-details > .field-loandisplay::before {
+  top: 4px;
+  bottom: auto;
+  height: 40px;   /* same as personal details */
+}
+
+/* ============================= */
+/* FIX LOAN AMOUNT (FINAL TUNE)  */
+/* ============================= */
+
+main .form form .field-loan-details > .field-loandisplay {
+  padding: 0 18px 0 16px !important;   /* align left like others */
+  margin-top: 14px !important;         /* reduce gap */
+  height: 68px;                        /* slightly smaller */
+  min-height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* label spacing */
+main .form form .field-loan-details > .field-loandisplay .field-label {
+  margin-bottom: 4px;                  /* tighter like EMI */
+  line-height: 16px;
+}
+
+/* value alignment */
+main .form form .field-loan-details > .field-loandisplay input {
+  min-height: 22px;
+  line-height: 22px;
+  margin-top: 0;
+}
+
+/* fix blue line alignment */
+main .form form .field-loan-details > .field-loandisplay::before {
+  top: 2px;
+  height: 48px;                       /* match others */
 }
