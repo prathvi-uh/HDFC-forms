@@ -144,3 +144,27 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
   z-index: 20;
   display: block !important;
 }
+
+/* force thumb to sit on orange track */
+.range-widget-wrapper .range-custom-thumb {
+  top: 48px !important;
+  transform: translate(-50%, -50%) !important;
+  width: 12px !important;
+  height: 12px !important;
+  background: #2f5bd3 !important;
+  border-radius: 50% !important;
+  z-index: 9999 !important;
+  display: block !important;
+}
+
+/* keep bubble above track */
+.range-widget-wrapper .range-bubble {
+  top: 0 !important;
+  transform: translateX(-50%) !important;
+}
+
+/* ensure wrapper spacing remains fixed */
+.range-widget-wrapper {
+  position: relative !important;
+  padding-top: 48px !important;
+}
