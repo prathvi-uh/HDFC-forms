@@ -26,44 +26,8 @@ function getFieldType(input, fieldDiv) {
   return isLoanAmountSlider(input, fieldDiv) ? 'loanAmount' : 'loanTenure';
 }
 
-function getSliderValueFromActual(actualValue, config) {
-  const ticks = config.ticks;
-
-  if (actualValue <= ticks[0]) return 0;
-  if (actualValue >= ticks[ticks.length - 1]) return ticks.length - 1;
-
-  for (let i = 0; i < ticks.length - 1; i += 1) {
-    if (actualValue >= ticks[i] && actualValue <= ticks[i + 1]) {
-      return i + ((actualValue - ticks[i]) / (ticks[i + 1] - ticks[i]));
-    }
-  }
-
-  return 0;
-}
-
 function getActualValueFromSlider(sliderValue, config) {
-  const value = Number(sliderValue);
-  const lowerIndex = Math.floor(value);
-  const upperIndex = Math.ceil(value);
-
-  if (lowerIndex === upperIndex) {
-    return config.ticks[lowerIndex];
-  }
-
-  return config.ticks[lowerIndex]
-    + ((config.ticks[upperIndex] - config.ticks[lowerIndex]) * (value - lowerIndex));
-}
-
-function formatActualValue(actualValue, fieldType) {
-  if (fieldType === 'loanAmount') {
-    return Math.round(actualValue / 1000) * 1000;
-  }
-
-  if (fieldType === 'loanTenure') {
-    return Math.round(actualValue);
-  }
-
-  return actualValue;
+  return config.ticks[Number(sliderValue)];
 }
 
 function showBubble(wrapper) {
@@ -106,13 +70,12 @@ function updateBubble(input, wrapper) {
   const max = config.ticks.length - 1;
   const percent = (sliderValue / max) * 100;
 
-  const rawActualValue = getActualValueFromSlider(sliderValue, config);
-  const actualValue = formatActualValue(rawActualValue, fieldType);
+  const actualValue = getActualValueFromSlider(sliderValue, config);
 
   input.dataset.actualValue = actualValue;
   bubble.innerText = config.formatBubble(actualValue);
 
-  const thumbWidth = 14;
+  const thumbWidth = 10;
   const sliderWidth = input.offsetWidth;
   const left = ((sliderWidth - thumbWidth) * percent) / 100 + (thumbWidth / 2);
 
@@ -145,8 +108,7 @@ export default async function decorate(fieldDiv, fieldJson) {
 
   input.min = 0;
   input.max = config.ticks.length - 1;
-  input.step = 0.01;
-
+  input.step = 1;
   input.value = config.ticks.length - 1;
 
   const wrapper = document.createElement('div');
@@ -198,9 +160,6 @@ export default async function decorate(fieldDiv, fieldJson) {
 
   window.addEventListener('resize', () => {
     updateBubble(input, wrapper);
-    if (!input.matches(':active')) {
-      bubble.style.display = 'none';
-    }
   });
 
   return fieldDiv;
