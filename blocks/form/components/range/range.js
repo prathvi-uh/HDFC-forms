@@ -113,7 +113,6 @@ function updateBubble(input, wrapper) {
   const actualValue = formatActualValue(rawActualValue, fieldType);
 
   input.dataset.actualValue = actualValue;
-
   bubble.innerText = config.formatBubble(actualValue);
 
   const thumbWidth = 14;
@@ -177,11 +176,11 @@ export default async function decorate(fieldDiv, fieldJson) {
   bubble.style.pointerEvents = 'none';
   bubble.style.whiteSpace = 'nowrap';
   bubble.style.zIndex = '9999';
-  bubble.style.display = 'none';
+  bubble.style.display = 'inline-block';
 
   const customThumb = document.createElement('span');
   customThumb.className = 'range-custom-thumb';
-  customThumb.style.display = 'none';
+  customThumb.style.display = 'block';
 
   wrapper.appendChild(bubble);
   wrapper.appendChild(input);
@@ -191,6 +190,9 @@ export default async function decorate(fieldDiv, fieldJson) {
   input.style.display = 'block';
 
   createTicks(input, wrapper, config);
+
+  showSliderValue(wrapper);
+  requestAnimationFrame(() => updateBubble(input, wrapper));
 
   input.addEventListener('input', () => {
     if (fieldType === 'loanTenure') {
