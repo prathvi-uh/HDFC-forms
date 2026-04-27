@@ -136,7 +136,7 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 
 .range-custom-thumb {
   position: absolute;
-  top: 43px;
+  top: calc(48px - 7px);
   width: 14px;
   height: 14px;
   background: #2f5bd3;
