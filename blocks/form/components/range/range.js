@@ -106,6 +106,7 @@ function updateBubble(input, wrapper) {
   const actualValue = formatActualValue(rawActualValue, fieldType);
 
   input.dataset.actualValue = actualValue;
+  input.value = actualValue;
   bubble.innerText = config.formatBubble(actualValue);
 
   bubble.style.left = `${percent}%`;
