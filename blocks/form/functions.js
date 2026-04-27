@@ -410,13 +410,22 @@ function calculateEMI(globals) {
   return '';
 }
 
-/** 
+/**
  * @param {scope} globals
+ * @returns {string}
  */
-
 function getTenureActual(globals) {
-  return globals.form.$properties?.tenureActual || '';
+  const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
+
+  const raw = Number(globals.form.offer.loantenure.valueOf()) || 0;
+
+  if (raw >= 0 && raw <= tenureTicks.length - 1) {
+    return `${tenureTicks[Math.round(raw)]} months`;
+  }
+
+  return `${raw} months`;
 }
+
 /** 
  * @param {scope} globals
  */
