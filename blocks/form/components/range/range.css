@@ -100,37 +100,22 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
   border: 0;
 }
 
-/* custom thumb */
-.range-custom-thumb {
-  position: absolute;
-  top: 50px;
-  width: 12px;
-  height: 12px;
-  background: #2f5bd3;
-  border-radius: 50%;
-  transform: translateX(-50%);
-  pointer-events: none;
-  z-index: 5;
-  box-shadow: none;
-}
-
-/* bubble */
 .range-bubble {
   position: absolute;
   top: 0;
   transform: translateX(-50%);
   display: inline-block;
-  padding: 10px 14px;
+  padding: 6px 10px;        /* smaller */
+  font-size: 14px;          /* smaller text */
+  font-weight: 600;         /* slightly lighter */
   background: #fff;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 700;
+  border-radius: 6px;       /* less rounded */
   color: #111;
   white-space: nowrap;
   pointer-events: none;
   z-index: 10;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 /* ticks */
@@ -147,4 +132,18 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
   white-space: nowrap;
   line-height: 1;
   cursor: pointer;
+}
+
+.range-custom-thumb {
+  position: absolute;
+  top: 50px;
+  width: 14px;          /* was 12 */
+  height: 14px;
+  background: #2f5bd3;  /* blue */
+  border-radius: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 5;
+
+  box-shadow: 0 0 0 3px rgba(47,91,211,0.15); /* soft outer ring */
 }
