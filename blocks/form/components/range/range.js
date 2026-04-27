@@ -111,9 +111,8 @@ function updateBubble(input, wrapper) {
   const actualTenureInput = actualTenureWrapper?.querySelector('input, textarea');
 
   if (actualTenureInput) {
-    actualTenureInput.value = `${actualValue} months`;
-    actualTenureInput.setAttribute('value', `${actualValue} months`);
-
+    actualTenureInput.value = actualValue;
+    actualTenureInput.setAttribute('value', actualValue);
     actualTenureInput.dispatchEvent(new Event('input', { bubbles: true }));
     actualTenureInput.dispatchEvent(new Event('change', { bubbles: true }));
     actualTenureInput.dispatchEvent(new Event('blur', { bubbles: true }));
