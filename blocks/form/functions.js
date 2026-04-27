@@ -374,14 +374,14 @@ function calculateEMI(globals) {
   const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
   const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
 
-  if (globals.form.review?.view_details?.loan_accordion?.loan_details?.loantenure) {
-    globals.functions.setProperty(
-      globals.form.review.view_details.loan_accordion.loan_details.loantenure,
-      {
-        value: `${tenure} months`,
-      }
-    );
-  }
+  globals.functions.setProperty(globals.form, {
+  properties: {
+    ...(globals.form.$properties || {}),
+    loanRaw: savedLoanRaw,
+    tenureRaw: savedTenureRaw,
+    tenureActual: `${tenure} months`,
+  },
+ });
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
@@ -413,6 +413,13 @@ function calculateEMI(globals) {
 /** 
  * @param {scope} globals
  */
+
+function getTenureActual(globals) {
+  return globals.form.$properties?.tenureActual || '';
+}
+/** 
+ * @param {scope} globals
+ */
 function debugForm(globals) {
   window.myForm = globals.form;
   // eslint-disable-next-line no-console
@@ -422,6 +429,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, getTenureActual, debugForm,
 };
  
