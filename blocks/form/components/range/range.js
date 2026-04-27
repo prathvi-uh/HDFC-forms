@@ -111,8 +111,11 @@ function updateBubble(input, wrapper) {
   bubble.style.left = `${percent}%`;
 
   if (customThumb) {
-    customThumb.style.left = `${percent}%`;
-  }
+  const trackTop = input.offsetTop + (input.offsetHeight / 2);
+
+  customThumb.style.left = `${percent}%`;
+  customThumb.style.top = `${trackTop}px`;
+}
 }
 
 export default async function decorate(fieldDiv, fieldJson) {

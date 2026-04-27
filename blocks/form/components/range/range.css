@@ -135,7 +135,6 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 
 .range-custom-thumb {
   position: absolute;
-  top: 48px;
   width: 12px;
   height: 12px;
   background: #2f5bd3;
@@ -144,5 +143,4 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
   pointer-events: none;
   z-index: 20;
   display: block !important;
-  box-shadow: none;
 }
