@@ -116,7 +116,7 @@ function updateBubble(input, wrapper) {
   bubble.innerText = config.formatBubble(actualValue);
 
   const thumbWidth = 14;
-  const sliderWidth = input.offsetWidth;
+  const sliderWidth = input.getBoundingClientRect().width || wrapper.getBoundingClientRect().width;
   const left = ((sliderWidth - thumbWidth) * percent) / 100 + (thumbWidth / 2);
 
   bubble.style.setProperty('position', 'absolute', 'important');
@@ -184,12 +184,14 @@ export default async function decorate(fieldDiv, fieldJson) {
   showSliderValue(wrapper);
 
   requestAnimationFrame(() => {
-    updateBubble(input, wrapper);
+    requestAnimationFrame(() => {
+      updateBubble(input, wrapper);
+    });
   });
 
   setTimeout(() => {
     updateBubble(input, wrapper);
-  }, 300);
+  }, 500);
 
   input.addEventListener('input', () => {
     if (fieldType === 'loanTenure') {
