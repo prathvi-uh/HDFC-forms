@@ -101,20 +101,21 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 }
 
 .range-bubble {
-  position: absolute;
-  top: 4px;
+  position: absolute !important;
+  top: -6px !important;              /* slightly above track */
   transform: translateX(-50%);
-  display: inline-block;
-  padding: 4px 8px;
-  font-size: 12px;
-  font-weight: 600;
-  background: #fff;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  color: #111;
+  
+  padding: 4px 8px !important;      /* smaller */
+  font-size: 12px !important;       /* smaller text */
+  font-weight: 600 !important;
+  background: #fff !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  color: #111 !important;
   white-space: nowrap;
   pointer-events: none;
   z-index: 10;
+  box-shadow: none !important;      /* remove heavy shadow */
 }
 
 /* ticks */
@@ -134,13 +135,18 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 }
 
 .range-custom-thumb {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #2f5bd3;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute !important;
+  top: 48px !important;            /* EXACT track level */
+  
+  width: 12px !important;
+  height: 12px !important;
+  
+  background: #2f5bd3 !important;
+  border-radius: 50% !important;
+
+  transform: translate(-50%, -50%) !important;
   pointer-events: none;
-  z-index: 20;
-  display: block !important;
+  z-index: 9999 !important;
+
+  box-shadow: none !important;     /* remove glow */
 }
