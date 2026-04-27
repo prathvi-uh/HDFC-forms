@@ -1615,6 +1615,10 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   white-space: nowrap !important;
 }
 
+.field-amt input {
+  display: none !important;
+}
+
 /* Loan Amount + Loan Tenure sliders */
 .field-loanamt .range-widget-wrapper,
 .field-loantenure .range-widget-wrapper {
