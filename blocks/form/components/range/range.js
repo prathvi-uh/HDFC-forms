@@ -111,7 +111,7 @@ function updateBubble(input, wrapper) {
   bubble.style.left = `${percent}%`;
 
   if (customThumb) {
-    const trackTop = input.offsetTop + (input.offsetHeight / 2);
+    const trackTop = input.offsetTop + 2;  // FIXED VALUE (track height based)
     customThumb.style.left = `${percent}%`;
     customThumb.style.top = `${trackTop}px`;
   }
