@@ -1615,27 +1615,6 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   white-space: nowrap !important;
 }
 
-/* changing input amount */
-fieldset#panelcontainer-0813f2edd9 .field-amt input,
-fieldset#panelcontainer-0813f2edd9 .field-amt input[type="text"],
-fieldset#panelcontainer-0813f2edd9 .field-amt input[type="number"],
-fieldset#panelcontainer-0813f2edd9 .field-amt .form-control {
-  display: inline-block !important;
-  width: auto !important;
-  min-width: 90px !important;
-  max-width: 220px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-  font-size: 16px !important;
-  line-height: 1.4 !important;
-  font-weight: 700 !important;
-  color: #1b2738 !important;
-}
-
 /* Loan Amount + Loan Tenure sliders */
 .field-loanamt .range-widget-wrapper,
 .field-loantenure .range-widget-wrapper {

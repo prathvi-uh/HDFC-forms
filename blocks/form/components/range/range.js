@@ -1,13 +1,13 @@
 const rangeConfigs = {
   loanAmount: {
     ticks: [50000, 200000, 400000, 600000, 800000, 1000000, 1500000],
-    defaultValue: 600000,
+    defaultValue: 1500000,
     formatBubble: (value) => `₹${Number(value).toLocaleString('en-IN')}`,
     formatTick: (value) => (value === 50000 ? '50K' : `${value / 100000}L`),
   },
   loanTenure: {
     ticks: [12, 24, 36, 48, 60, 72, 84],
-    defaultValue: 60,
+    defaultValue: 84,
     formatBubble: (value) => `${Math.round(value)} months`,
     formatTick: (value) => `${value}m`,
   },
@@ -66,12 +66,9 @@ function formatActualValue(actualValue, fieldType) {
   return actualValue;
 }
 
-function showSliderValue(wrapper) {
+function showBubble(wrapper) {
   const bubble = wrapper.querySelector('.range-bubble');
-  const customThumb = wrapper.querySelector('.range-custom-thumb');
-
   if (bubble) bubble.style.display = 'inline-block';
-  if (customThumb) customThumb.style.display = 'block';
 }
 
 function createTicks(input, wrapper, config) {
@@ -85,7 +82,7 @@ function createTicks(input, wrapper, config) {
 
     tickEl.addEventListener('click', () => {
       input.value = index;
-      showSliderValue(wrapper);
+      showBubble(wrapper);
       updateBubble(input, wrapper);
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -113,7 +110,6 @@ function updateBubble(input, wrapper) {
   const actualValue = formatActualValue(rawActualValue, fieldType);
 
   input.dataset.actualValue = actualValue;
-
   bubble.innerText = config.formatBubble(actualValue);
 
   const thumbWidth = 14;
@@ -125,6 +121,7 @@ function updateBubble(input, wrapper) {
 
   if (customThumb) {
     customThumb.style.left = `${left}px`;
+    customThumb.style.display = 'block';
   }
 
   wrapper.style.setProperty('--range-progress', `${percent}%`);
@@ -146,15 +143,11 @@ export default async function decorate(fieldDiv, fieldJson) {
   input.dataset.fieldType = fieldType;
   input.type = 'range';
 
-  const currentValue = Number(input.value || config.defaultValue);
-
   input.min = 0;
   input.max = config.ticks.length - 1;
   input.step = 0.01;
 
-  input.value = currentValue > config.ticks.length - 1
-    ? getSliderValueFromActual(currentValue, config)
-    : currentValue;
+  input.value = getSliderValueFromActual(config.defaultValue, config);
 
   const wrapper = document.createElement('div');
   wrapper.className = 'range-widget-wrapper decorated';
@@ -177,7 +170,7 @@ export default async function decorate(fieldDiv, fieldJson) {
 
   const customThumb = document.createElement('span');
   customThumb.className = 'range-custom-thumb';
-  customThumb.style.display = 'none';
+  customThumb.style.display = 'block';
 
   wrapper.appendChild(bubble);
   wrapper.appendChild(input);
@@ -188,19 +181,25 @@ export default async function decorate(fieldDiv, fieldJson) {
 
   createTicks(input, wrapper, config);
 
+  requestAnimationFrame(() => {
+    updateBubble(input, wrapper);
+    bubble.style.display = 'none';
+  });
+
   input.addEventListener('input', () => {
-    showSliderValue(wrapper);
+    showBubble(wrapper);
     updateBubble(input, wrapper);
   });
 
   input.addEventListener('change', () => {
-    showSliderValue(wrapper);
+    showBubble(wrapper);
     updateBubble(input, wrapper);
   });
 
   window.addEventListener('resize', () => {
-    if (bubble.style.display !== 'none') {
-      updateBubble(input, wrapper);
+    updateBubble(input, wrapper);
+    if (!input.matches(':active')) {
+      bubble.style.display = 'none';
     }
   });
 
