@@ -150,7 +150,7 @@ export default async function decorate(fieldDiv, fieldJson) {
  
   input.min = 0;
   input.max = config.ticks.length - 1;
-  input.step = 0.01;
+  input.step = 1;
  
   input.value = currentValue > config.ticks.length - 1
     ? getSliderValueFromActual(currentValue, config)
