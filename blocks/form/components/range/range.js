@@ -111,11 +111,10 @@ function updateBubble(input, wrapper) {
   bubble.style.left = `${percent}%`;
 
   if (customThumb) {
-  const trackTop = input.offsetTop + (input.offsetHeight / 2);
-
-  customThumb.style.left = `${percent}%`;
-  customThumb.style.top = `${trackTop}px`;
-}
+    const trackTop = input.offsetTop + (input.offsetHeight / 2);
+    customThumb.style.left = `${percent}%`;
+    customThumb.style.top = `${trackTop}px`;
+  }
 }
 
 export default async function decorate(fieldDiv, fieldJson) {
@@ -138,11 +137,9 @@ export default async function decorate(fieldDiv, fieldJson) {
   input.max = config.ticks.length - 1;
   input.step = fieldType === 'loanTenure' ? 1 : 0.01;
 
-  input.value = getSliderValueFromActual(config.defaultValue, config);
-
-  if (fieldType === 'loanTenure') {
-    input.value = Math.round(Number(input.value));
-  }
+  input.value = fieldType === 'loanTenure'
+    ? Math.round(getSliderValueFromActual(config.defaultValue, config))
+    : getSliderValueFromActual(config.defaultValue, config);
 
   const wrapper = document.createElement('div');
   wrapper.className = 'range-widget-wrapper decorated';
@@ -162,10 +159,16 @@ export default async function decorate(fieldDiv, fieldJson) {
   createTicks(input, wrapper, config);
 
   requestAnimationFrame(() => {
-    updateBubble(input, wrapper);
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
+    requestAnimationFrame(() => {
+      updateBubble(input, wrapper);
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
   });
+
+  setTimeout(() => {
+    updateBubble(input, wrapper);
+  }, 300);
 
   input.addEventListener('input', () => {
     updateBubble(input, wrapper);
