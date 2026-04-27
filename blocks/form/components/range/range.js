@@ -28,12 +28,9 @@ function addRangeStyles() {
     .range-widget-wrapper input[type="range"] {
       width: 100% !important;
       display: block !important;
-      -webkit-appearance: none !important;
-      appearance: none !important;
-      background: transparent !important;
+      accent-color: #2f5bd3 !important;
     }
 
-    /* TRACK */
     .range-widget-wrapper input[type="range"]::-webkit-slider-runnable-track {
       height: 4px !important;
       background: #f2a126 !important;
@@ -46,25 +43,14 @@ function addRangeStyles() {
       border-radius: 4px !important;
     }
 
-    /* THUMB (BLUE DOT) */
     .range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none !important;
-      height: 18px !important;
-      width: 18px !important;
-      background: #2f5bd3 !important;
-      border-radius: 50% !important;
-      margin-top: -7px !important;
+      opacity: 1 !important;
       cursor: pointer !important;
-      border: none !important;
     }
 
     .range-widget-wrapper input[type="range"]::-moz-range-thumb {
-      height: 18px !important;
-      width: 18px !important;
-      background: #2f5bd3 !important;
-      border-radius: 50% !important;
+      opacity: 1 !important;
       cursor: pointer !important;
-      border: none !important;
     }
 
     .range-bubble {
@@ -97,7 +83,6 @@ function addRangeStyles() {
     .range-tick {
       white-space: nowrap !important;
       line-height: 1 !important;
-      cursor: pointer;
     }
   `;
 
@@ -106,8 +91,9 @@ function addRangeStyles() {
 
 function isLoanAmountSlider(input, fieldDiv) {
   const title = fieldDiv.querySelector(
-    'label, .field-label, .cmp-adaptiveform-range__label'
+    'label, .field-label, .cmp-adaptiveform-textinput__label, .cmp-adaptiveform-numberinput__label, .cmp-adaptiveform-range__label'
   );
+
   const labelText = title ? title.textContent.toLowerCase() : '';
   return labelText.includes('loan amount');
 }
@@ -122,7 +108,7 @@ function getSliderValueFromActual(actualValue, config) {
   if (actualValue <= ticks[0]) return 0;
   if (actualValue >= ticks[ticks.length - 1]) return ticks.length - 1;
 
-  for (let i = 0; i < ticks.length - 1; i++) {
+  for (let i = 0; i < ticks.length - 1; i += 1) {
     if (actualValue >= ticks[i] && actualValue <= ticks[i + 1]) {
       return i + ((actualValue - ticks[i]) / (ticks[i + 1] - ticks[i]));
     }
@@ -138,17 +124,19 @@ function getActualValueFromSlider(sliderValue, config) {
 
   if (lowerIndex === upperIndex) return config.ticks[lowerIndex];
 
-  return config.ticks[lowerIndex] +
-    ((config.ticks[upperIndex] - config.ticks[lowerIndex]) * (value - lowerIndex));
+  return config.ticks[lowerIndex]
+    + ((config.ticks[upperIndex] - config.ticks[lowerIndex]) * (value - lowerIndex));
 }
 
 function formatActualValue(actualValue, fieldType) {
   if (fieldType === 'loanAmount') {
     return Math.round(actualValue / 1000) * 1000;
   }
+
   if (fieldType === 'loanTenure') {
     return Math.round(actualValue);
   }
+
   return actualValue;
 }
 
@@ -195,14 +183,18 @@ function updateBubble(input, wrapper) {
   input.dataset.actualValue = actualValue;
   bubble.innerText = config.formatBubble(actualValue);
 
-  bubble.style.left = `${percent}%`;
+  bubble.style.setProperty('left', `${percent}%`, 'important');
 }
 
-export default async function decorate(fieldDiv) {
+export default async function decorate(fieldDiv, fieldJson) {
   addRangeStyles();
 
   const input = fieldDiv.querySelector('input');
-  if (!input || input.dataset.rangeDecorated === 'true') return fieldDiv;
+  if (!input) return fieldDiv;
+
+  if (input.dataset.rangeDecorated === 'true') {
+    return fieldDiv;
+  }
 
   input.dataset.rangeDecorated = 'true';
 
@@ -211,14 +203,19 @@ export default async function decorate(fieldDiv) {
 
   input.dataset.fieldType = fieldType;
   input.type = 'range';
+
   input.min = 0;
   input.max = config.ticks.length - 1;
   input.step = fieldType === 'loanTenure' ? 1 : 0.01;
 
   input.value = getSliderValueFromActual(config.defaultValue, config);
 
+  if (fieldType === 'loanTenure') {
+    input.value = Math.round(Number(input.value));
+  }
+
   const wrapper = document.createElement('div');
-  wrapper.className = 'range-widget-wrapper';
+  wrapper.className = 'range-widget-wrapper decorated';
 
   input.after(wrapper);
 
@@ -232,11 +229,21 @@ export default async function decorate(fieldDiv) {
 
   requestAnimationFrame(() => {
     updateBubble(input, wrapper);
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
   });
 
-  input.addEventListener('input', () => updateBubble(input, wrapper));
-  input.addEventListener('change', () => updateBubble(input, wrapper));
-  window.addEventListener('resize', () => updateBubble(input, wrapper));
+  input.addEventListener('input', () => {
+    updateBubble(input, wrapper);
+  });
+
+  input.addEventListener('change', () => {
+    updateBubble(input, wrapper);
+  });
+
+  window.addEventListener('resize', () => {
+    updateBubble(input, wrapper);
+  });
 
   return fieldDiv;
 }
