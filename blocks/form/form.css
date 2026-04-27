@@ -1320,108 +1320,6 @@ main .form form .field-terms-privacy-text p::after {
   text-decoration: none !important;
 }
 
-/* added new */
-/* ===== RANGE TRACK ===== */
-.range-widget-wrapper input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px !important;
-  background: #f2a126 !important;
-  border-radius: 4px !important;
-}
-
-.range-widget-wrapper input[type="range"]::-moz-range-track {
-  height: 4px !important;
-  background: #f2a126 !important;
-  border-radius: 4px !important;
-}
-
-/* remove blue fill */
-.range-widget-wrapper input[type="range"]::-moz-range-progress {
-  background: #f2a126 !important;
-}
-
-
-/* override browser default */
-.range-widget-wrapper input[type="range"] {
-  width: 100%;
-  display: block;
-  accent-color: #f2a126 !important;
-}
-
-/* ===== WRAPPER ===== */
-.range-widget-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 48px;
-}
-
-/* ===== BUBBLE (FIXED) ===== */
-.range-bubble {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0;
-  transform: translateX(-50%);
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 2;
-
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  color: #111 !important;
-  text-align: center !important;
-}
-
-/* ===== LABEL STYLING ===== */
-.number-wrapper label,
-.number-wrapper .field-label,
-.number-wrapper p {
-  font-weight: 700 !important;
-  color: #111 !important;
-}
-
-/* ===== TICKS ===== */
-.range-min,
-.range-max {
-  display: none !important;
-}
-
-.range-ticks {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 8px;
-  font-size: 10px;
-  color: #5f6b7a;
-}
-
-.range-tick {
-  white-space: nowrap;
-  line-height: 1;
-}
-
-/* Hide AEM's original top value display */
-.number-wrapper > div:first-child:not(.range-widget-wrapper),
-.number-wrapper .cmp-adaptiveform-numberinput__widget,
-.number-wrapper .cmp-adaptiveform-range__widget > div:first-child {
-  display: none !important;
-}
-
-/* Show custom range bubble */
-.range-bubble {
-  display: inline-block !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0;
-  transform: translateX(-50%);
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 999;
-
-  background: red !important; /* keep temporarily for testing */
-  color: white !important;
-  padding: 4px 8px !important;
-  border-radius: 4px !important;
-}
-
 /* reduce gap below amount */
 .field-display .field-loandisplay {
   padding-bottom: 8px !important;   /* was ~16–18 */
@@ -1442,33 +1340,16 @@ main .form form .field-terms-privacy-text p::after {
   margin-bottom: 6px !important;
 }
 
-/* space below value (50000 / 54) */
+/* space below value (50000 / 54) 
 .range-widget-wrapper .range-bubble {
   display: block;
   margin-bottom: 10px !important;
 }
 
-/* space above slider track */
+/* space above slider track
 .range-widget-wrapper input[type="range"] {
   margin-top: 4px !important;
-}
-
-.range-widget-wrapper .range-bubble {
-  display: inline-block !important;
-  padding: 6px 10px !important;
-
-  background: #ffffff !important;
-  border: 1px solid #d1d5db !important;
-  border-radius: 8px !important;
-
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: #111 !important;
-
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
-
-  position: relative !important;
-}
+}*/
 
 /* reduce gap below amount */
 .field-display .field-loandisplay {

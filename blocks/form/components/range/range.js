@@ -13,82 +13,6 @@ const rangeConfigs = {
   },
 };
 
-function addRangeStyles() {
-  if (document.getElementById('custom-range-style')) return;
-
-  const style = document.createElement('style');
-  style.id = 'custom-range-style';
-  style.textContent = `
-    .range-widget-wrapper {
-      position: relative !important;
-      width: 100% !important;
-      padding-top: 48px !important;
-    }
-
-    .range-widget-wrapper input[type="range"] {
-      width: 100% !important;
-      display: block !important;
-      accent-color: #2f5bd3 !important;
-    }
-
-    .range-widget-wrapper input[type="range"]::-webkit-slider-runnable-track {
-      height: 4px !important;
-      background: #f2a126 !important;
-      border-radius: 4px !important;
-    }
-
-    .range-widget-wrapper input[type="range"]::-moz-range-track {
-      height: 4px !important;
-      background: #f2a126 !important;
-      border-radius: 4px !important;
-    }
-
-    .range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
-      opacity: 1 !important;
-      cursor: pointer !important;
-    }
-
-    .range-widget-wrapper input[type="range"]::-moz-range-thumb {
-      opacity: 1 !important;
-      cursor: pointer !important;
-    }
-
-    .range-bubble {
-      position: absolute !important;
-      top: 0 !important;
-      transform: translateX(-50%) !important;
-      display: inline-block !important;
-      padding: 10px 14px !important;
-      background: #fff !important;
-      border: 1px solid #d1d5db !important;
-      border-radius: 8px !important;
-      font-size: 16px !important;
-      font-weight: 700 !important;
-      color: #111 !important;
-      white-space: nowrap !important;
-      pointer-events: none !important;
-      z-index: 9999 !important;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
-    }
-
-    .range-ticks {
-      display: flex !important;
-      justify-content: space-between !important;
-      width: 100% !important;
-      margin-top: 8px !important;
-      font-size: 10px !important;
-      color: #5f6b7a !important;
-    }
-
-    .range-tick {
-      white-space: nowrap !important;
-      line-height: 1 !important;
-    }
-  `;
-
-  document.head.appendChild(style);
-}
-
 function isLoanAmountSlider(input, fieldDiv) {
   const title = fieldDiv.querySelector(
     'label, .field-label, .cmp-adaptiveform-textinput__label, .cmp-adaptiveform-numberinput__label, .cmp-adaptiveform-range__label'
@@ -166,6 +90,7 @@ function updateBubble(input, wrapper) {
   const fieldType = input.dataset.fieldType;
   const config = rangeConfigs[fieldType];
   const bubble = wrapper.querySelector('.range-bubble');
+  const customThumb = wrapper.querySelector('.range-custom-thumb');
 
   if (!bubble || !config) return;
 
@@ -183,12 +108,14 @@ function updateBubble(input, wrapper) {
   input.dataset.actualValue = actualValue;
   bubble.innerText = config.formatBubble(actualValue);
 
-  bubble.style.setProperty('left', `${percent}%`, 'important');
+  bubble.style.left = `${percent}%`;
+
+  if (customThumb) {
+    customThumb.style.left = `${percent}%`;
+  }
 }
 
 export default async function decorate(fieldDiv, fieldJson) {
-  addRangeStyles();
-
   const input = fieldDiv.querySelector('input');
   if (!input) return fieldDiv;
 
@@ -222,8 +149,12 @@ export default async function decorate(fieldDiv, fieldJson) {
   const bubble = document.createElement('span');
   bubble.className = 'range-bubble';
 
+  const customThumb = document.createElement('span');
+  customThumb.className = 'range-custom-thumb';
+
   wrapper.appendChild(bubble);
   wrapper.appendChild(input);
+  wrapper.appendChild(customThumb);
 
   createTicks(input, wrapper, config);
 
