@@ -147,7 +147,7 @@ export default async function decorate(fieldDiv, fieldJson) {
   input.max = config.ticks.length - 1;
   input.step = 0.01;
 
-  input.value = getSliderValueFromActual(config.defaultValue, config);
+  input.value = config.ticks.length - 1;
 
   const wrapper = document.createElement('div');
   wrapper.className = 'range-widget-wrapper decorated';
