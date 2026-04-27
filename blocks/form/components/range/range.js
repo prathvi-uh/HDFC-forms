@@ -150,11 +150,13 @@ export default async function decorate(fieldDiv, fieldJson) {
   input.dataset.fieldType = fieldType;
   input.type = 'range';
 
-  const currentValue = Number(input.value || config.defaultValue);
-
   input.min = 0;
   input.max = config.ticks.length - 1;
   input.step = fieldType === 'loanTenure' ? 1 : 0.01;
+  const currentValue = config.defaultValue;
+  input.value = getSliderValueFromActual(currentValue, config);
+
+  
 
   input.value = currentValue > config.ticks.length - 1
     ? getSliderValueFromActual(currentValue, config)
