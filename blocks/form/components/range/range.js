@@ -107,12 +107,16 @@ function updateBubble(input, wrapper) {
 
   input.dataset.actualValue = actualValue;
   if (fieldType === 'loanTenure') {
-  const actualTenureInput = document.querySelector('[name="actualtenure"]');
+  const actualTenureWrapper = document.querySelector('.field-actualtenure');
+  const actualTenureInput = actualTenureWrapper?.querySelector('input, textarea');
 
   if (actualTenureInput) {
-    actualTenureInput.value = actualValue;
+    actualTenureInput.value = `${actualValue} months`;
+    actualTenureInput.setAttribute('value', `${actualValue} months`);
+
     actualTenureInput.dispatchEvent(new Event('input', { bubbles: true }));
     actualTenureInput.dispatchEvent(new Event('change', { bubbles: true }));
+    actualTenureInput.dispatchEvent(new Event('blur', { bubbles: true }));
   }
  }
   bubble.innerText = config.formatBubble(actualValue);
