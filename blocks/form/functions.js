@@ -356,9 +356,9 @@ function calculateEMI(globals) {
 
   const existing = globals.form.$properties || {};
 
-  const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
-  const savedTenureRaw = tenureRaw || Number(existing.tenureRaw || 4);
-
+  const savedLoanRaw = Number(existing.loanRaw || loanRaw || 0);
+  const savedTenureRaw = Number(existing.tenureRaw || tenureRaw || 0);
+  
   globals.functions.setProperty(globals.form, {
     properties: {
       ...existing,
