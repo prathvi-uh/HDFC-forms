@@ -107,12 +107,12 @@ function updateBubble(input, wrapper) {
 
   input.dataset.actualValue = actualValue;
   if (fieldType === 'loanTenure') {
-  const tenureActualInput = document.querySelector('[name="loantenureactual"]');
+  const actualTenureInput = document.querySelector('[name="actualtenure"]');
 
-  if (tenureActualInput) {
-    tenureActualInput.value = actualValue;
-    tenureActualInput.dispatchEvent(new Event('input', { bubbles: true }));
-    tenureActualInput.dispatchEvent(new Event('change', { bubbles: true }));
+  if (actualTenureInput) {
+    actualTenureInput.value = actualValue;
+    actualTenureInput.dispatchEvent(new Event('input', { bubbles: true }));
+    actualTenureInput.dispatchEvent(new Event('change', { bubbles: true }));
   }
  }
   bubble.innerText = config.formatBubble(actualValue);
