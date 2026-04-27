@@ -122,3 +122,15 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 .range-custom-thumb {
   display: none !important;
 }
+
+.range-widget-wrapper input[type="range"] {
+  outline: none !important;
+}
+
+.range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
+  box-shadow: none !important;
+}
+
+.range-widget-wrapper input[type="range"]::-moz-range-thumb {
+  box-shadow: none !important;
+}
