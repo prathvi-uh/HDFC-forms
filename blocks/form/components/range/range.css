@@ -105,9 +105,9 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
   top: 0;
   transform: translateX(-50%);
   display: inline-block;
-  padding: 6px 10px;        /* smaller */
-  font-size: 14px;          /* smaller text */
-  font-weight: 600;         /* slightly lighter */
+  padding: 5px 8px;        /* smaller */
+  font-size: 11px;          /* smaller text */
+  font-weight: 400;         /* slightly lighter */
   background: #fff;
   border: 1px solid #d1d5db;
   border-radius: 6px;       /* less rounded */
