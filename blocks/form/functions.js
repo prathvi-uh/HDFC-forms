@@ -399,7 +399,7 @@ function calculateEMI(globals) {
  * @param {scope} globals
  */
 function setReviewTenure(globals) {
-   debugger;
+  debugger;
   globals.functions.setProperty(
     globals.form.review.view_details.loan_accordion.loan_details.loantenure,
     {
