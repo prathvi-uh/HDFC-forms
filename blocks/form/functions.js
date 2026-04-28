@@ -319,95 +319,185 @@ function handleOtpInvalid(globals) {
   return 'Invalid OTP';
 }
 
-/**
- * @param {scope} globals
- * @returns {string}
- */
-function calculateEMI(globals) {
-  const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
-  const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
+const rangeConfigs = {
+  loanAmount: {
+    ticks: [50000, 200000, 400000, 600000, 800000, 1000000, 1500000],
+    defaultValue: 1500000,
+    formatBubble: (value) => `₹${Number(value).toLocaleString('en-IN')}`,
+    formatTick: (value) => (value === 50000 ? '50K' : `${value / 100000}L`),
+  },
+  loanTenure: {
+    ticks: [12, 24, 36, 48, 60, 72, 84],
+    defaultValue: 84,
+    formatBubble: (value) => `${Math.round(value)} months`,
+    formatTick: (value) => `${value}m`,
+  },
+};
  
-  function getActualValueFromSlider(sliderValue, ticks) {
-    const value = Number(sliderValue);
+function isLoanAmountSlider(input, fieldDiv) {
+  const title = fieldDiv.querySelector(
+    'label, .field-label, .cmp-adaptiveform-textinput__label, .cmp-adaptiveform-numberinput__label, .cmp-adaptiveform-range__label'
+  );
  
-    const lowerIndex = Math.floor(value);
-    const upperIndex = Math.ceil(value);
- 
-    if (lowerIndex === upperIndex) {
-      return ticks[lowerIndex];
-    }
- 
-    const lowerValue = ticks[lowerIndex];
-    const upperValue = ticks[upperIndex];
-    const percentage = value - lowerIndex;
- 
-    return lowerValue + ((upperValue - lowerValue) * percentage);
-  }
- 
-  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
-  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
- 
-  const existing = globals.form.$properties || {};
- 
-  const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
-  const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
- 
-  globals.functions.setProperty(globals.form, {
-    properties: {
-      ...existing,
-      loanRaw: savedLoanRaw,
-      tenureRaw: savedTenureRaw,
-    },
-  });
- 
-  if (!savedLoanRaw || !savedTenureRaw) {
-    return '';
-  }
- 
-  const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
-  const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
- 
-  const annualRate = 10.09;
-  const monthlyRate = annualRate / 12 / 100;
- 
-  const factor = Math.pow(1 + monthlyRate, tenure);
-  const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
- 
-  const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
- 
-  globals.functions.setProperty(globals.form.display.loandisplay, {
-    value: formattedLoan,
-  });
- 
-  globals.functions.setProperty(globals.form.display.emi, {
-    value: emi,
-  });
- 
-  globals.functions.setProperty(globals.form.display.rate, {
-    value: annualRate,
-  });
- 
-  globals.functions.setProperty(globals.form.display.tenure, {
-    value: 4000,
-  });
- 
-  return '';
+  const labelText = title ? title.textContent.toLowerCase() : '';
+  return labelText.includes('loan amount');
 }
-
-/**
- * @param {scope} globals
- * @returns {string}
- */
-function getTenureActual(globals) {
-  const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
-
-  const raw = Number(globals.form.offer.loantenure.valueOf()) || 0;
-
-  if (raw >= 0 && raw <= tenureTicks.length - 1) {
-    return `${tenureTicks[Math.round(raw)]} months`;
+ 
+function getFieldType(input, fieldDiv) {
+  return isLoanAmountSlider(input, fieldDiv) ? 'loanAmount' : 'loanTenure';
+}
+ 
+function getSliderValueFromActual(actualValue, config) {
+  const ticks = config.ticks;
+ 
+  if (actualValue <= ticks[0]) return 0;
+  if (actualValue >= ticks[ticks.length - 1]) return ticks.length - 1;
+ 
+  for (let i = 0; i < ticks.length - 1; i += 1) {
+    if (actualValue >= ticks[i] && actualValue <= ticks[i + 1]) {
+      return i + ((actualValue - ticks[i]) / (ticks[i + 1] - ticks[i]));
+    }
   }
-
-  return `${raw} months`;
+ 
+  return 0;
+}
+ 
+function getActualValueFromSlider(sliderValue, config) {
+  const value = Number(sliderValue);
+  const lowerIndex = Math.floor(value);
+  const upperIndex = Math.ceil(value);
+ 
+  if (lowerIndex === upperIndex) return config.ticks[lowerIndex];
+ 
+  return config.ticks[lowerIndex]
+    + ((config.ticks[upperIndex] - config.ticks[lowerIndex]) * (value - lowerIndex));
+}
+ 
+function formatActualValue(actualValue, fieldType) {
+  if (fieldType === 'loanAmount') {
+    return Math.round(actualValue / 1000) * 1000;
+  }
+ 
+  if (fieldType === 'loanTenure') {
+    return Math.round(actualValue);
+  }
+ 
+  return actualValue;
+}
+ 
+function createTicks(input, wrapper, config) {
+  const ticksWrap = document.createElement('div');
+  ticksWrap.className = 'range-ticks';
+ 
+  config.ticks.forEach((tickValue, index) => {
+    const tickEl = document.createElement('span');
+    tickEl.className = 'range-tick';
+    tickEl.textContent = config.formatTick(tickValue);
+ 
+    tickEl.addEventListener('click', () => {
+      input.value = index;
+      updateBubble(input, wrapper);
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+ 
+    ticksWrap.appendChild(tickEl);
+  });
+ 
+  wrapper.appendChild(ticksWrap);
+}
+ 
+function updateBubble(input, wrapper) {
+  const fieldType = input.dataset.fieldType;
+  const config = rangeConfigs[fieldType];
+  const bubble = wrapper.querySelector('.range-bubble');
+  const customThumb = wrapper.querySelector('.range-custom-thumb');
+ 
+  if (!bubble || !config) return;
+ 
+  if (fieldType === 'loanTenure') {
+    input.value = Math.round(Number(input.value));
+  }
+ 
+  const sliderValue = Number(input.value);
+  const max = Number(input.max);
+  const percent = (sliderValue / max) * 100;
+ 
+  const rawActualValue = getActualValueFromSlider(sliderValue, config);
+  const actualValue = formatActualValue(rawActualValue, fieldType);
+ 
+  input.dataset.actualValue = actualValue;
+  bubble.innerText = config.formatBubble(actualValue);
+ 
+  bubble.style.left = `${percent}%`;
+ 
+  if (customThumb) {
+    customThumb.style.left = `${percent}%`;
+  }
+}
+ 
+export default async function decorate(fieldDiv, fieldJson) {
+  const input = fieldDiv.querySelector('input');
+  if (!input) return fieldDiv;
+ 
+  if (input.dataset.rangeDecorated === 'true') {
+    return fieldDiv;
+  }
+ 
+  input.dataset.rangeDecorated = 'true';
+ 
+  const fieldType = getFieldType(input, fieldDiv);
+  const config = rangeConfigs[fieldType];
+ 
+  input.dataset.fieldType = fieldType;
+  input.type = 'range';
+ 
+  input.min = 0;
+  input.max = config.ticks.length - 1;
+  input.step = fieldType === 'loanTenure' ? 1 : 0.01;
+ 
+  input.value = getSliderValueFromActual(config.defaultValue, config);
+ 
+  if (fieldType === 'loanTenure') {
+    input.value = Math.round(Number(input.value));
+  }
+ 
+  const wrapper = document.createElement('div');
+  wrapper.className = 'range-widget-wrapper decorated';
+ 
+  input.after(wrapper);
+ 
+  const bubble = document.createElement('span');
+  bubble.className = 'range-bubble';
+ 
+  const customThumb = document.createElement('span');
+  customThumb.className = 'range-custom-thumb';
+ 
+  wrapper.appendChild(bubble);
+  wrapper.appendChild(input);
+  wrapper.appendChild(customThumb);
+ 
+  createTicks(input, wrapper, config);
+ 
+  requestAnimationFrame(() => {
+    updateBubble(input, wrapper);
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+ 
+  input.addEventListener('input', () => {
+    updateBubble(input, wrapper);
+  });
+ 
+  input.addEventListener('change', () => {
+    updateBubble(input, wrapper);
+  });
+ 
+  window.addEventListener('resize', () => {
+    updateBubble(input, wrapper);
+  });
+ 
+  return fieldDiv;
 }
 
 /** 
