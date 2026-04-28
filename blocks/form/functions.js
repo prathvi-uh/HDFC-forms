@@ -328,6 +328,7 @@ function calculateEMI(globals) {
 
   function getActualValueFromSlider(sliderValue, ticks) {
     const value = Number(sliderValue);
+
     const lowerIndex = Math.floor(value);
     const upperIndex = Math.ceil(value);
 
@@ -350,6 +351,14 @@ function calculateEMI(globals) {
   const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
   const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
 
+  globals.functions.setProperty(globals.form, {
+    properties: {
+      ...existing,
+      loanRaw: savedLoanRaw,
+      tenureRaw: savedTenureRaw,
+    },
+  });
+
   if (!savedLoanRaw || !savedTenureRaw) {
     return '';
   }
@@ -364,17 +373,6 @@ function calculateEMI(globals) {
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
 
   const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
-  const tenureText = tenure + " months";
-
-  globals.functions.setProperty(globals.form, {
-    properties: {
-      ...existing,
-      loanRaw: savedLoanRaw,
-      tenureRaw: savedTenureRaw,
-      reviewEmi: emi,
-      reviewTenure: tenureText
-    }
-  });
 
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: formattedLoan,
@@ -389,8 +387,16 @@ function calculateEMI(globals) {
   });
 
   globals.functions.setProperty(globals.form.display.tenure, {
-    value: "₹ 4000",
+    value: 4000,
   });
+  
+  globals.functions.setProperty(globals.form.display.reviewtenure, {
+    value: tenure + " months"
+  });
+
+  globals.functions.setProperty(globals.form.display.emi, {
+  value: emi
+});
 
   return '';
 }
@@ -399,15 +405,45 @@ function calculateEMI(globals) {
  * @param {scope} globals
  * @returns {string}
  */
-function setReviewEmi(globals) {
-  return globals.form.$properties.reviewEmi || '';
+function setReviewTenure(globals) {
+  var ticks = [12, 24, 36, 48, 60, 72, 84];
+
+  var raw = globals.form.offer.loantenure.valueOf();
+
+  if (raw === null || raw === undefined || raw === '') {
+    return '';
+  }
+
+  return ticks[Math.round(Number(raw))] + " months";
+}
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
+function setReviewLoanDetails(globals) {
+  const ticks = [12, 24, 36, 48, 60, 72, 84];
+
+  const emi = globals.form.display.emi.valueOf();
+
+  const raw = Number(globals.form.review.view_details.loan_accordion.loan_details.loantenure.valueOf());
+  const tenure = isNaN(raw) ? '' : ticks[Math.round(raw)] + " months";
+
+  globals.functions.setProperty(globals.form.review.view_details.loan_accordion.loan_details.emi, {
+    value: emi || ''
+  });
+
+  globals.functions.setProperty(globals.form.review.view_details.loan_accordion.loan_details.loantenure, {
+    value: tenure
+  });
+
+  return '';
 }
 
 /** 
  * @param {scope} globals
  */
-function setReviewTenure(globals) {
-  return globals.form.$properties.reviewTenure || '';
+function setReviewEmi(globals) {
+  return globals.form.offer.emi.valueOf() || globals.form.display.emi.valueOf() || '';
 }
 
 /** 
@@ -422,6 +458,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewTenure,setReviewEmi, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewLoanDetails,setReviewTenure,setReviewEmi, debugForm,
 };
  
