@@ -404,9 +404,25 @@ function calculateEMI(globals) {
  * @returns {string}
  */
 function getReviewTenure(globals) {
-  return globals.form.display.reviewtenure.valueOf() || '';
-}
 
+  const ticks = [12, 24, 36, 48, 60, 72, 84];
+
+  const raw = Number(globals.form.offer.loantenure.valueOf()) || 0;
+
+  const lower = Math.floor(raw);
+  const upper = Math.ceil(raw);
+
+  let tenure = 12;
+
+  if (lower === upper) {
+    tenure = ticks[lower];
+  } else {
+    const percent = raw - lower;
+    tenure = ticks[lower] + ((ticks[upper] - ticks[lower]) * percent);
+  }
+
+  return Math.round(tenure) + " months";
+}
 /** 
  * @param {scope} globals
  */
