@@ -423,6 +423,15 @@ function getReviewTenure(globals) {
 
   return Math.round(tenure) + " months";
 }
+
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
+function setReviewEmi(globals) {
+  return globals.form.display.emi.valueOf() || '';
+}
+
 /** 
  * @param {scope} globals
  */
@@ -435,6 +444,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, getReviewTenure, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, getReviewTenure, setReviewEmi, debugForm,
 };
  
