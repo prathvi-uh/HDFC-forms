@@ -432,9 +432,10 @@ function getReviewTenure(globals) {
  * @param {scope} globals
  * @returns {string}
  */
-function setReviewEmi(globals){
+function setReviewEmi(globals) {
   debugger;
-  return globals.form.offer.emi.valueOf() || '';
+  var emi = globals.form.offer.emi.valueOf();
+  return emi ? emi.toString() : '';
 }
 
 /** 
