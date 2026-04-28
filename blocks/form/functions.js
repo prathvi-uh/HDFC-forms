@@ -411,17 +411,10 @@ function setReviewEmi(globals) {
 /** 
  * @param {scope} globals
  */
-
 function setReviewTenure(globals) {
   const ticks = [12, 24, 36, 48, 60, 72, 84];
 
-  const rawValue = globals.form.display.reviewtenure.valueOf();
-
-  if (rawValue && rawValue.includes("months")) {
-    return rawValue;
-  }
-
-  const raw = Number(rawValue);
+  const raw = Number(globals.form.review.view_details.loan_accordion.loan_details.loantenure.valueOf());
 
   if (isNaN(raw)) {
     return '';
