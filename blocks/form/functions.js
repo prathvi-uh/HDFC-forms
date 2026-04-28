@@ -386,8 +386,13 @@ function calculateEMI(globals) {
     value: annualRate,
   });
 
-  /* SAVE TENURE IN BLANK TEXTBOX */
+  /* TAXES FIELD KEEP ₹4000 */
   globals.functions.setProperty(globals.form.display.tenure, {
+    value: "₹ 4000",
+  });
+
+  /* BLANK TEXTBOX STORE TENURE MONTHS */
+  globals.functions.setProperty(globals.form.display.reviewtenure, {
     value: tenure + " months",
   });
 
@@ -398,10 +403,9 @@ function calculateEMI(globals) {
  * @param {scope} globals
  * @returns {string}
  */
-function setReviewTenure(globals) {
-  return globals.form.display.tenure.valueOf() || '';
+function getReviewTenure(globals) {
+  return globals.form.display.reviewtenure.valueOf() || '';
 }
-
 /** 
  * @param {scope} globals
  */
