@@ -393,14 +393,20 @@ function calculateEMI(globals) {
   return '';
 }
 
-/**
+/** 
  * @param {scope} globals
- * @returns {string}
  */
 function setReviewTenure(globals) {
-  return globals.form.offer.loantenure_display.valueOf() || '';
-}
+  debugger;
+  const ticks = [12, 24, 36, 48, 60, 72, 84];
+  const raw = Number(globals.form.offer.loantenure.valueOf());
 
+  if (isNaN(raw)) {
+    return '';
+  }
+
+  return ticks[Math.round(raw)] + " months";
+}
 /** 
  * @param {scope} globals
  */
