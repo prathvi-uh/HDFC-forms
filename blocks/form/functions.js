@@ -348,15 +348,20 @@ function calculateEMI(globals) {
 
   const existing = globals.form.$properties || {};
 
+  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
+  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
+
+  const existing = globals.form.$properties || {};
+
   const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
   const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
 
   globals.functions.setProperty(globals.form, {
-    properties: {
-      ...existing,
-      loanRaw: savedLoanRaw,
-      tenureRaw: savedTenureRaw,
-    },
+  properties: {
+    ...existing,
+    loanRaw: savedLoanRaw,
+    tenureRaw: savedTenureRaw,
+  },
   });
 
   if (!savedLoanRaw || !savedTenureRaw) {
@@ -398,13 +403,8 @@ function calculateEMI(globals) {
  * @returns {string}
  */
 function setReviewTenure(globals) {
-  var raw = Number(globals.form.$properties.tenureRaw);
-
-  if (isNaN(raw)) {
-    return '';
-  }
-
-  return raw * 12;
+  var raw = Number(globals.form.$properties.tenureRaw || 0);
+  return (raw * 12) + " months";
 }
 /**
  * @param {scope} globals
