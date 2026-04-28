@@ -401,6 +401,10 @@ function calculateEMI(globals) {
   return '';
 }
 
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
 function setReviewLoanDetails(globals) {
   const ticks = [12, 24, 36, 48, 60, 72, 84];
 
