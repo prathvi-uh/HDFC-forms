@@ -395,9 +395,8 @@ function calculateEMI(globals) {
     value: "₹ 4000",
   });
 
-  /* BLANK TEXTBOX STORE TENURE MONTHS */
-  globals.functions.setProperty(globals.form.display.reviewtenure, {
-    value: tenure + " months",
+ globals.functions.setProperty(globals.form.offer.emi, {
+    value: String(emi),
   });
 
   return '';
