@@ -401,27 +401,25 @@ function calculateEMI(globals) {
   return '';
 }
 
-/** 
- * @param {scope} globals
- */
-
-function setReviewEmi(globals) {
-  return globals.form.display.emi.valueOf() || '';
-}
-/** 
- * @param {scope} globals
- */
-function setReviewTenure(globals) {
+function setReviewLoanDetails(globals) {
   const ticks = [12, 24, 36, 48, 60, 72, 84];
 
+  const emi = globals.form.display.emi.valueOf();
+
   const raw = Number(globals.form.review.view_details.loan_accordion.loan_details.loantenure.valueOf());
+  const tenure = isNaN(raw) ? '' : ticks[Math.round(raw)] + " months";
 
-  if (isNaN(raw)) {
-    return '';
-  }
+  globals.functions.setProperty(globals.form.review.view_details.loan_accordion.loan_details.emi, {
+    value: emi || ''
+  });
 
-  return ticks[Math.round(raw)] + " months";
+  globals.functions.setProperty(globals.form.review.view_details.loan_accordion.loan_details.loantenure, {
+    value: tenure
+  });
+
+  return '';
 }
+
 /** 
  * @param {scope} globals
  */
@@ -434,6 +432,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewTenure, setReviewEmi, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewLoanDetails, debugForm,
 };
  
