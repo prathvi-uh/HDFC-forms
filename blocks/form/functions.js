@@ -405,6 +405,21 @@ function calculateEMI(globals) {
  * @param {scope} globals
  * @returns {string}
  */
+function setReviewTenure(globals) {
+  var ticks = [12, 24, 36, 48, 60, 72, 84];
+
+  var raw = globals.form.offer.loantenure.valueOf();
+
+  if (raw === null || raw === undefined || raw === '') {
+    return '';
+  }
+
+  return ticks[Math.round(Number(raw))] + " months";
+}
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
 function setReviewLoanDetails(globals) {
   const ticks = [12, 24, 36, 48, 60, 72, 84];
 
