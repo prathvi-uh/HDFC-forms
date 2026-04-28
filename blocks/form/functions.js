@@ -388,7 +388,7 @@ function calculateEMI(globals) {
 
   /* TAXES FIELD KEEP ₹4000 */
   globals.functions.setProperty(globals.form.display.tenure, {
-    value: "₹ 4000",
+    value: 4000,
   });
 
   /* BLANK TEXTBOX STORE TENURE MONTHS */
@@ -403,6 +403,7 @@ function calculateEMI(globals) {
  * @param {scope} globals
  * @returns {string}
  */
+
 function getReviewTenure(globals) {
   return globals.form.display.reviewtenure.valueOf() || '';
 }
