@@ -398,8 +398,13 @@ function calculateEMI(globals) {
  * @returns {string}
  */
 function setReviewTenure(globals) {
-  var val = Number(globals.form.offer.loantenure.valueOf() || 0);
-  return val * 12;
+  var raw = Number(globals.form.$properties.tenureRaw);
+
+  if (isNaN(raw)) {
+    return '';
+  }
+
+  return raw * 12;
 }
 /**
  * @param {scope} globals
