@@ -442,6 +442,19 @@ function setReviewLoanDetails(globals) {
 /** 
  * @param {scope} globals
  */
+function setReviewEmi(globals) {
+  var emi = globals.form.display.emi.valueOf();
+
+  if (emi === null || emi === undefined || emi === '' || emi === 'NaN') {
+    return '';
+  }
+
+  return emi;
+}
+
+/** 
+ * @param {scope} globals
+ */
 function debugForm(globals) {
   window.myForm = globals.form;
   // eslint-disable-next-line no-console
@@ -451,6 +464,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewLoanDetails,setReviewTenure, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewLoanDetails,setReviewTenure,setReviewEmi, debugForm,
 };
  
