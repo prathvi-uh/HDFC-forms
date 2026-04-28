@@ -389,7 +389,10 @@ function calculateEMI(globals) {
   globals.functions.setProperty(globals.form.display.tenure, {
     value: 4000,
   });
-
+  
+  globals.functions.setProperty(globals.form.display.reviewtenure, {
+    value: tenure + " months"
+  });
   return '';
 }
 
@@ -405,14 +408,7 @@ function setReviewEmi(globals) {
  */
 
 function setReviewTenure(globals) {
-  const ticks = [12, 24, 36, 48, 60, 72, 84];
-  const raw = Number(globals.form.offer.loantenure.valueOf());
-
-  if (isNaN(raw)) {
-    return '';
-  }
-
-  return ticks[Math.round(raw)] + " months";
+  return globals.form.display.reviewtenure.valueOf() || '';
 }
 
 /** 
