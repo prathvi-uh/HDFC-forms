@@ -395,7 +395,14 @@ function calculateEMI(globals) {
     value: "₹ 4000",
   });
 
- globals.functions.setProperty(globals.form.offer.emi, {
+  globals.functions.setProperty(globals.form.review.view_details.loan_accordion.loan_details.emi, {
+    value: String(emi),
+  });
+
+  globals.functions.setProperty(globals.form.review.view_details.loan_accordion.loan_details.loantenure, {
+    value: tenure + " months",
+  });
+  globals.functions.setProperty(globals.form.offer.emi, {
     value: String(emi),
   });
 
