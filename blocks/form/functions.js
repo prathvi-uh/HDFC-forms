@@ -330,13 +330,6 @@ function calculateEMI(globals) {
   function getActualValueFromSlider(sliderValue, ticks) {
     const value = Number(sliderValue);
  
-    if (Number.isNaN(value)) return 0;
- 
-    const maxIndex = ticks.length - 1;
- 
-    if (value <= 0) return ticks[0];
-    if (value >= maxIndex) return ticks[maxIndex];
- 
     const lowerIndex = Math.floor(value);
     const upperIndex = Math.ceil(value);
  
@@ -356,8 +349,8 @@ function calculateEMI(globals) {
  
   const existing = globals.form.$properties || {};
  
-  const savedLoanRaw = Number(existing.loanRaw || loanRaw || 0);
-  const savedTenureRaw = Number(existing.tenureRaw || tenureRaw || 0);
+  const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
+  const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
  
   globals.functions.setProperty(globals.form, {
     properties: {
@@ -373,15 +366,6 @@ function calculateEMI(globals) {
  
   const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
   const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
-  debugger;
-  globals.functions.setProperty(globals.form, {
-  properties: {
-    ...(globals.form.$properties || {}),
-    loanRaw: savedLoanRaw,
-    tenureRaw: savedTenureRaw,
-    tenureActual: `${tenure} months`,
-  },
- });
  
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
