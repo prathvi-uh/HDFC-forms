@@ -353,12 +353,11 @@ function calculateEMI(globals) {
 
   globals.functions.setProperty(globals.form, {
     properties: {
-      ...existing,
-      loanRaw: savedLoanRaw,
-      tenureRaw: savedTenureRaw,
+    ...existing,
+    loanRaw: savedLoanRaw,
+    tenureRaw: savedTenureRaw,
     },
   });
-
   if (!savedLoanRaw || !savedTenureRaw) {
     return '';
   }
@@ -413,7 +412,7 @@ function setReviewEmi(globals) {
  * @param {scope} globals
  */
 function setReviewTenure(globals) {
-  return globals.form.review.view_details.loan_accordion.loan_details.loantenure.valueOf() || '';
+  return String(globals.form.$properties.tenureRaw || '');
 }
 /** 
  * @param {scope} globals
