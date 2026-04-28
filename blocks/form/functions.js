@@ -401,8 +401,13 @@ function calculateEMI(globals) {
   return '';
 }
 
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
 function setReviewTenure(globals) {
-  return globals.form.offer.loantenure.valueOf() || '';
+  var val = Number(globals.form.offer.loantenure.valueOf() || 0);
+  return val * 12;
 }
 /**
  * @param {scope} globals
