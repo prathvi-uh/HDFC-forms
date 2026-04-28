@@ -406,6 +406,7 @@ function setReviewTenure(globals) {
  * @returns {string}
  */
 function setReviewLoanDetails(globals) {
+  debugger;
   const ticks = [12, 24, 36, 48, 60, 72, 84];
 
   const emi = globals.form.display.emi.valueOf();
