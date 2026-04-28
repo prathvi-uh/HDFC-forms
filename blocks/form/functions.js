@@ -433,6 +433,7 @@ function getReviewTenure(globals) {
  * @returns {string}
  */
 function setReviewEmi(globals){
+  debugger;
   return globals.form.offer.emi.valueOf() || '';
 }
 
