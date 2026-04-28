@@ -367,7 +367,7 @@ function calculateEMI(globals) {
   const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
   const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
   globals.functions.setProperty(globals.form.offer.loantenure_display, {
-  value: `${tenure} months`,
+    value: `${tenure} months`,
   });
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
@@ -393,6 +393,20 @@ function calculateEMI(globals) {
     value: 4000,
   });
  
+  return '';
+}
+
+/** 
+ * @param {scope} globals
+ */
+function setReviewTenure(globals) {
+  globals.functions.setProperty(
+    globals.form.review.view_details.loan_accordion.loan_details.loantenure,
+    {
+      value: globals.form.offer.loantenure_display.valueOf(),
+    }
+  );
+
   return '';
 }
 
