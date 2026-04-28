@@ -400,19 +400,12 @@ function calculateEMI(globals) {
 function setReviewEmi(globals) {
   return globals.form.display.emi.valueOf() || '';
 }
-
 /** 
  * @param {scope} globals
  */
 
 function setReviewTenure(globals) {
-  const raw = Number(globals.form.$properties.tenureRaw || 0);
-  const ticks = [12, 24, 36, 48, 60, 72, 84];
-
-  if (!raw && raw !== 0) {
-    return '';
-  }
-  return ticks[Math.round(raw)] + " months";
+  return globals.form.offer.loantenure_display.valueOf() || '';
 }
 /** 
  * @param {scope} globals
