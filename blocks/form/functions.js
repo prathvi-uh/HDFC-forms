@@ -407,9 +407,17 @@ function setReviewEmi(globals) {
  */
 
 function setReviewTenure(globals) {
-  debugger;
-  return globals.form.offer.loantenure_display.valueOf() || '';
+  const ticks = [12, 24, 36, 48, 60, 72, 84];
+
+  const raw = Number(globals.form.$properties.tenureRaw);
+
+  if (raw === null || raw === undefined || isNaN(raw)) {
+    return '';
+  }
+
+  return ticks[Math.round(raw)] + " months";
 }
+
 /** 
  * @param {scope} globals
  */
