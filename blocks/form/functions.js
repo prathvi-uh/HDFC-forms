@@ -390,14 +390,6 @@ function calculateEMI(globals) {
     value: 4000,
   });
   
-  globals.functions.setProperty(globals.form.display.reviewtenure, {
-    value: tenure + " months"
-  });
-
-  globals.functions.setProperty(globals.form.display.emi, {
-  value: emi
-});
-
   return '';
 }
 
