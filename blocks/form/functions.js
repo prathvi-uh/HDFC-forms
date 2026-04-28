@@ -409,14 +409,12 @@ function setReviewEmi(globals) {
   return globals.form.display.emi.valueOf() || '';
 }
 
-/**
+/** 
  * @param {scope} globals
- * @returns {string}
  */
 function setReviewTenure(globals) {
-  return String(globals.form.$properties.tenureRaw || '');
+  return globals.form.review.view_details.loan_accordion.loan_details.loantenure.valueOf() || '';
 }
-
 /** 
  * @param {scope} globals
  */
