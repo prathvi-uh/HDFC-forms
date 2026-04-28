@@ -427,14 +427,45 @@ function getReviewTenure(globals) {
   return Math.round(tenure) + " months";
 }
 
-/**
- * @param {scope} globals
- * @returns {string}
- */
 function setReviewEmi(globals) {
-  debugger;
-  return globals.form.offer.emi.valueOf();
+  const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+  const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
+
+  function getActualValueFromSlider(sliderValue, ticks) {
+    const value = Number(sliderValue);
+    const lowerIndex = Math.floor(value);
+    const upperIndex = Math.ceil(value);
+
+    if (lowerIndex === upperIndex) {
+      return ticks[lowerIndex];
+    }
+
+    const lowerValue = ticks[lowerIndex];
+    const upperValue = ticks[upperIndex];
+    const percentage = value - lowerIndex;
+
+    return lowerValue + ((upperValue - lowerValue) * percentage);
+  }
+
+  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
+  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
+
+  if (!loanRaw || !tenureRaw) {
+    return '';
+  }
+
+  const loanAmt = Math.round(getActualValueFromSlider(loanRaw, loanTicks) / 1000) * 1000;
+  const tenure = Math.round(getActualValueFromSlider(tenureRaw, tenureTicks));
+
+  const annualRate = 10.09;
+  const monthlyRate = annualRate / 12 / 100;
+
+  const factor = Math.pow(1 + monthlyRate, tenure);
+  const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
+
+  return String(emi);
 }
+
 /** 
  * @param {scope} globals
  */
