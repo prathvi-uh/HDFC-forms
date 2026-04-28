@@ -443,13 +443,7 @@ function setReviewLoanDetails(globals) {
  * @param {scope} globals
  */
 function setReviewEmi(globals) {
-  var emi = globals.form.display.emi.valueOf();
-
-  if (emi === null || emi === undefined || emi === '' || emi === 'NaN') {
-    return '';
-  }
-
-  return emi;
+  return globals.form.offer.emi.valueOf() || globals.form.display.emi.valueOf() || '';
 }
 
 /** 
