@@ -114,7 +114,6 @@ function stopOtpTimer(globals) {
  * @returns {string}
  */
 function startOtpTimer(globals) {
-  debugger;
   const timerField = globals.form.otp_verification.timer;
   const resendBtn = globals.form.otp_verification.resend_otp;
   const submitBtn = globals.form.otp_verification.otp_submit; // ✅ correct key
@@ -400,6 +399,7 @@ function calculateEMI(globals) {
  * @param {scope} globals
  */
 function setReviewTenure(globals) {
+   debugger;
   globals.functions.setProperty(
     globals.form.review.view_details.loan_accordion.loan_details.loantenure,
     {
