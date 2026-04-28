@@ -325,32 +325,32 @@ function handleOtpInvalid(globals) {
 function calculateEMI(globals) {
   const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
   const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
- 
+
   function getActualValueFromSlider(sliderValue, ticks) {
     const value = Number(sliderValue);
- 
+
     const lowerIndex = Math.floor(value);
     const upperIndex = Math.ceil(value);
- 
+
     if (lowerIndex === upperIndex) {
       return ticks[lowerIndex];
     }
- 
+
     const lowerValue = ticks[lowerIndex];
     const upperValue = ticks[upperIndex];
     const percentage = value - lowerIndex;
- 
+
     return lowerValue + ((upperValue - lowerValue) * percentage);
   }
- 
+
   const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
   const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
- 
+
   const existing = globals.form.$properties || {};
- 
+
   const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
   const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
- 
+
   globals.functions.setProperty(globals.form, {
     properties: {
       ...existing,
@@ -358,38 +358,39 @@ function calculateEMI(globals) {
       tenureRaw: savedTenureRaw,
     },
   });
- 
+
   if (!savedLoanRaw || !savedTenureRaw) {
     return '';
   }
- 
+
   const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
   const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
- 
+
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
- 
+
   const factor = Math.pow(1 + monthlyRate, tenure);
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
- 
+
   const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
- 
+
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: formattedLoan,
   });
- 
+
   globals.functions.setProperty(globals.form.display.emi, {
     value: emi,
   });
- 
+
   globals.functions.setProperty(globals.form.display.rate, {
     value: annualRate,
   });
- 
+
+  /* SAVE TENURE IN BLANK TEXTBOX */
   globals.functions.setProperty(globals.form.display.tenure, {
-    value: 4000,
+    value: tenure + " months",
   });
- 
+
   return '';
 }
 
@@ -398,7 +399,7 @@ function calculateEMI(globals) {
  * @returns {string}
  */
 function setReviewTenure(globals) {
-  return globals.form.offer.loantenure_display.valueOf() || '';
+  return globals.form.display.tenure.valueOf() || '';
 }
 
 /** 
