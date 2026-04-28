@@ -392,7 +392,7 @@ function calculateEMI(globals) {
  
   return '';
 }
-
+ 
 /**
  * @param {scope} globals
  * @returns {string}
@@ -401,6 +401,7 @@ function calculateEMI(globals) {
 function getReviewTenure(globals) {
   return globals.form.display.reviewtenure.valueOf() || '';
 }
+
 /** 
  * @param {scope} globals
  */
