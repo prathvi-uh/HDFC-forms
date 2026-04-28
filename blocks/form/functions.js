@@ -396,16 +396,19 @@ function calculateEMI(globals) {
 /** 
  * @param {scope} globals
  */
+
+function setReviewEmi(globals) {
+  debugger;
+  return globals.form.display.emi.valueOf() || '';
+}
+
+/** 
+ * @param {scope} globals
+ */
+
 function setReviewTenure(globals) {
   debugger;
-  const ticks = [12, 24, 36, 48, 60, 72, 84];
-  const raw = Number(globals.form.offer.loantenure.valueOf());
-
-  if (isNaN(raw)) {
-    return '';
-  }
-
-  return ticks[Math.round(raw)] + " months";
+  return globals.form.offer.loantenure_display.valueOf() || '';
 }
 /** 
  * @param {scope} globals
