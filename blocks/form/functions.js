@@ -398,7 +398,6 @@ function calculateEMI(globals) {
  */
 
 function setReviewEmi(globals) {
-  debugger;
   return globals.form.display.emi.valueOf() || '';
 }
 
@@ -407,17 +406,14 @@ function setReviewEmi(globals) {
  */
 
 function setReviewTenure(globals) {
+  const raw = Number(globals.form.$properties.tenureRaw || 0);
   const ticks = [12, 24, 36, 48, 60, 72, 84];
 
-  const raw = Number(globals.form.$properties.tenureRaw);
-
-  if (raw === null || raw === undefined || isNaN(raw)) {
+  if (!raw && raw !== 0) {
     return '';
   }
-
   return ticks[Math.round(raw)] + " months";
 }
-
 /** 
  * @param {scope} globals
  */
