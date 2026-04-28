@@ -429,7 +429,13 @@ function getReviewTenure(globals) {
  * @returns {string}
  */
 function setReviewEmi(globals) {
-  return globals.form.display.emi.valueOf() || '';
+  const emiValue = globals.form.display.emi.valueOf();
+
+  if (emiValue && emiValue !== 'NaN') {
+    return emiValue;
+  }
+
+  return globals.form.offer.emi.valueOf() || '';
 }
 
 /** 
