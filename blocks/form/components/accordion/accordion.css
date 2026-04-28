@@ -247,3 +247,32 @@ main .form form .field-loan-details > .field-loandisplay::before {
   top: 2px;
   height: 48px;                       /* match others */
 }
+
+/* Current Address + Residence Type full input width */
+
+.field-current-address,
+.field-residence-type {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+/* actual textbox */
+.field-current-address input[type="text"],
+.field-residence-type input[type="text"] {
+  display: block !important;
+  width: calc(100vw - 260px) !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  height: 55px !important;
+  box-sizing: border-box !important;
+}
+
+/* remove browser default input shrink */
+input[name="current_address"],
+input[name="residence_type"] {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 100% !important;
+}
+
