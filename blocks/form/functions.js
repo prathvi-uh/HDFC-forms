@@ -436,7 +436,7 @@ function setReviewLoanDetails(globals) {
  * @param {scope} globals
  */
 function setReviewEmi(globals) {
-  return globals.form.offer.emi.valueOf() || globals.form.display.emi.valueOf() || '';
+  return globals.form.offer.emi.valueOf() || '';
 }
 
 /** 
