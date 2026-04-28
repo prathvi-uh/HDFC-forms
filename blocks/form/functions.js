@@ -341,8 +341,8 @@ function calculateEMI(globals) {
   const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
   const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
 
-  if (!loanRaw || !tenureRaw) {
-    return '';
+  if (isNaN(loanRaw) || isNaN(tenureRaw)) {
+  return '';
   }
 
   const loanAmt = Math.round(getActualValueFromSlider(loanRaw, loanTicks) / 1000) * 1000;
