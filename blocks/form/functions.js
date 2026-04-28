@@ -407,6 +407,7 @@ function calculateEMI(globals) {
  * @returns {string}
  */
 function getReviewTenure(globals) {
+  debugger;
 
   const ticks = [12, 24, 36, 48, 60, 72, 84];
 
