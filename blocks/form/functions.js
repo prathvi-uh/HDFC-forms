@@ -412,7 +412,7 @@ function setReviewEmi(globals) {
  * @param {scope} globals
  */
 function setReviewTenure(globals) {
-  return String(globals.form.$properties.tenureRaw || '');
+  return globals.form.offer.loantenure.valueOf() || '';
 }
 /** 
  * @param {scope} globals
