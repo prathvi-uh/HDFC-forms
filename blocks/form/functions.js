@@ -382,6 +382,10 @@ function calculateEMI(globals) {
     value: emi,
   });
 
+  globals.functions.setProperty(globals.form.offer.emi, {
+    value: emi,
+  });
+
   globals.functions.setProperty(globals.form.display.rate, {
     value: annualRate,
   });
