@@ -413,7 +413,21 @@ function setReviewEmi(globals) {
  */
 
 function setReviewTenure(globals) {
-  return globals.form.display.reviewtenure.valueOf() || '';
+  const ticks = [12, 24, 36, 48, 60, 72, 84];
+
+  const rawValue = globals.form.display.reviewtenure.valueOf();
+
+  if (rawValue && rawValue.includes("months")) {
+    return rawValue;
+  }
+
+  const raw = Number(rawValue);
+
+  if (isNaN(raw)) {
+    return '';
+  }
+
+  return ticks[Math.round(raw)] + " months";
 }
 /** 
  * @param {scope} globals
