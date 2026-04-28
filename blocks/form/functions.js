@@ -405,53 +405,16 @@ function calculateEMI(globals) {
  * @param {scope} globals
  * @returns {string}
  */
-function setReviewTenure(globals) {
-  var raw = Number(globals.form.$properties.tenureRaw || 0);
-  return (raw * 12) + " months";
+function setReviewEmi(globals) {
+  return globals.form.display.emi.valueOf() || '';
 }
 
 /**
  * @param {scope} globals
  * @returns {string}
  */
-function setReviewLoanDetails(globals) {
-  debugger;
-
-  const ticks = [12, 24, 36, 48, 60, 72, 84];
-
-  const emi = globals.form.display.emi.valueOf();
-
-  const raw = Number(
-    globals.form.review.view_details.loan_accordion.loan_details.loantenure.valueOf()
-  );
-
-  const tenure = isNaN(raw)
-    ? ''
-    : ticks[Math.round(raw)] + " months";
-
-  globals.functions.setProperty(
-    globals.form.review.view_details.loan_accordion.loan_details.emi,
-    {
-      value: emi || '',
-    }
-  );
-
-  globals.functions.setProperty(
-    globals.form.review.view_details.loan_accordion.loan_details.loantenure,
-    {
-      value: tenure,
-    }
-  );
-
-  return '';
-}
-
-/** 
- * @param {scope} globals
- */
-function setReviewEmi(globals) {
-  debugger;
-  return globals.form.offer.emi.valueOf() || '';
+function setReviewTenure(globals) {
+  return String(globals.form.$properties.tenureRaw || '');
 }
 
 /** 
@@ -466,6 +429,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewLoanDetails,setReviewTenure,setReviewEmi, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, setReviewTenure,setReviewEmi, debugForm,
 };
  
