@@ -318,6 +318,9 @@ function handleOtpInvalid(globals) {
   return 'Invalid OTP';
 }
 
+/**
+ * @param {scope} globals
+ */
 function calculateEMI(globals) {
   const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
   const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
