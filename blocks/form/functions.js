@@ -223,16 +223,24 @@ function handleResendOtp(globals) {
   // Hide OTP panel
   if (globals.form.otp_verification) {
     globals.functions.setProperty(globals.form.otp_verification, {
-      visible: false,
+     visible: false,
     });
   }
 
-  // Show zero try error panel
-  if (globals.form.zerotry.retry ) {
-    globals.functions.setProperty(globals.form.zerotry.retry, {
+// 👇 IMPORTANT: show parent first
+  if (globals.form.zerotry) {
+    globals.functions.setProperty(globals.form.zerotry, {
       visible: true,
     });
   }
+
+// Then show child
+  if (globals.form.zerotry && globals.form.zerotry.retry) {
+   globals.functions.setProperty(globals.form.zerotry.retry, {
+      visible: true,
+    });
+  }
+  
     return '';
   }
 
