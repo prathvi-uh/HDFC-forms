@@ -320,6 +320,7 @@ function handleOtpInvalid(globals) {
 
 /**
  * @param {scope} globals
+ * @returns {string}
  */
 function calculateEMI(globals) {
   const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
@@ -347,8 +348,8 @@ function calculateEMI(globals) {
     properties: {
       ...existing,
       loanRaw: savedLoanRaw,
-      tenureRaw: savedTenureRaw
-    }
+      tenureRaw: savedTenureRaw,
+    },
   });
 
   if (!savedLoanRaw || !savedTenureRaw) {
@@ -365,6 +366,7 @@ function calculateEMI(globals) {
 
   const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
 
+  // first page display
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: formattedLoan,
   });
@@ -380,31 +382,26 @@ function calculateEMI(globals) {
   globals.functions.setProperty(globals.form.display.tenure, {
     value: 4000,
   });
- 
-  globals.functions.setProperty(globals.form.offer.loantenure_display, {
-    value: `${tenure} months`,
-  });
-  
+
+  // review page direct values
+  if (globals.form.review?.view_details?.loan_accordion?.loan_details) {
+    globals.functions.setProperty(
+      globals.form.review.view_details.loan_accordion.loan_details.emi,
+      {
+        value: emi,
+      }
+    );
+
+    globals.functions.setProperty(
+      globals.form.review.view_details.loan_accordion.loan_details.loantenure,
+      {
+        value: `${tenure} months`,
+      }
+    );
+  }
+
   return '';
 }
-
-/**
- * @param {scope} globals
- * @returns {string}
- */
-function setReviewEmi(globals) {
-  return globals.form.offer.emi.valueOf() || '';
-}
-
-/** 
- * @param {scope} globals
- */
-
-function setReviewTenure(globals) {
-  debugger;
-  return globals.form.offer.loantenure_display.valueOf() || '';
-}
-
 /** 
  * @param {scope} globals
  */
