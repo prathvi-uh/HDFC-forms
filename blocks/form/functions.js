@@ -328,45 +328,52 @@ function calculateEMI(globals) {
 
   function getActualValueFromSlider(sliderValue, ticks) {
     const value = Number(sliderValue);
+
+    if (Number.isNaN(value)) return 0;
+
     const lowerIndex = Math.floor(value);
     const upperIndex = Math.ceil(value);
 
-    if (lowerIndex === upperIndex) return ticks[lowerIndex];
+    if (lowerIndex === upperIndex) {
+      return ticks[lowerIndex];
+    }
 
     return ticks[lowerIndex] + ((ticks[upperIndex] - ticks[lowerIndex]) * (value - lowerIndex));
   }
 
-  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || 0;
-  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || 0;
-
   const existing = globals.form.$properties || {};
 
-  const savedLoanRaw = loanRaw > 0 ? loanRaw : Number(existing.loanRaw || 0);
-  const savedTenureRaw = tenureRaw > 0 ? tenureRaw : Number(existing.tenureRaw || 0);
+  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || Number(existing.loanRaw || 0);
+  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || Number(existing.tenureRaw || 0);
 
-  globals.functions.setProperty(globals.form, {
-    properties: {
-      ...existing,
-      loanRaw: savedLoanRaw,
-      tenureRaw: savedTenureRaw,
-    },
-  });
-
-  if (!savedLoanRaw || !savedTenureRaw) {
+  if (!loanRaw || !tenureRaw) {
     return '';
   }
 
-  const loanAmt = Math.round(getActualValueFromSlider(savedLoanRaw, loanTicks) / 1000) * 1000;
-  const tenure = Math.round(getActualValueFromSlider(savedTenureRaw, tenureTicks));
+  const loanAmt = Math.round(getActualValueFromSlider(loanRaw, loanTicks) / 1000) * 1000;
+  const tenure = Math.round(getActualValueFromSlider(tenureRaw, tenureTicks));
 
   const annualRate = 10.09;
   const monthlyRate = annualRate / 12 / 100;
   const factor = Math.pow(1 + monthlyRate, tenure);
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
 
-  const formattedLoan = "₹" + Number(loanAmt).toLocaleString('en-IN');
+  const formattedLoan = `₹${Number(loanAmt).toLocaleString('en-IN')}`;
+  const formattedTenure = `${tenure} months`;
 
-  // first page display
+  // Save values so review page does not lose/overwrite them
+  globals.functions.setProperty(globals.form, {
+    properties: {
+      ...(globals.form.$properties || {}),
+      loanRaw,
+      tenureRaw,
+      reviewLoanAmount: formattedLoan,
+      reviewEmi: emi,
+      reviewTenure: formattedTenure,
+    },
+  });
+
+  // First page card/display values
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: formattedLoan,
   });
@@ -383,23 +390,48 @@ function calculateEMI(globals) {
     value: 4000,
   });
 
-  // review page direct values
+  // Review page values, only if review fields are available
   if (globals.form.review?.view_details?.loan_accordion?.loan_details) {
-    debugger;
+    globals.functions.setProperty(
+      globals.form.review.view_details.loan_accordion.loan_details.loandisplay,
+      { value: formattedLoan }
+    );
+
     globals.functions.setProperty(
       globals.form.review.view_details.loan_accordion.loan_details.emiamt,
-      {
-        value: emi,
-      }
+      { value: emi }
     );
 
     globals.functions.setProperty(
       globals.form.review.view_details.loan_accordion.loan_details.loantenure,
-      {
-        value: `${tenure} months`,
-      }
+      { value: formattedTenure }
     );
   }
+
+  return '';
+}
+
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
+function restoreReviewLoanDetails(globals) {
+  const props = globals.form.$properties || {};
+  const loanDetails = globals.form.review?.view_details?.loan_accordion?.loan_details;
+
+  if (!loanDetails) return '';
+
+  globals.functions.setProperty(loanDetails.loandisplay, {
+    value: props.reviewLoanAmount || '',
+  });
+
+  globals.functions.setProperty(loanDetails.emiamt, {
+    value: props.reviewEmi || '',
+  });
+
+  globals.functions.setProperty(loanDetails.loantenure, {
+    value: props.reviewTenure || '',
+  });
 
   return '';
 }
@@ -415,6 +447,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, debugForm,
 };
  
