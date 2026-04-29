@@ -408,7 +408,7 @@ function restoreReviewLoanDetails(globals) {
   if (!loanDetails) return '';
 
   globals.functions.setProperty(loanDetails.emiamt, {
-    value: props.reviewEmi || '',
+    value: props.reviewEmi ? `₹${Number(props.reviewEmi).toLocaleString('en-IN')}` : ''
   });
 
   globals.functions.setProperty(loanDetails.loantenure, {
