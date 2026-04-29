@@ -394,6 +394,7 @@ function setReviewEmi(globals) {
  */
 
 function setReviewTenure(globals) {
+  debugger;
   return globals.form.offer.loantenure_display.valueOf() || '';
 }
 
