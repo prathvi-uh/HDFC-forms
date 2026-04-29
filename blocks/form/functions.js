@@ -385,8 +385,9 @@ function calculateEMI(globals) {
 
   // review page direct values
   if (globals.form.review?.view_details?.loan_accordion?.loan_details) {
+    debugger;
     globals.functions.setProperty(
-      globals.form.review.view_details.loan_accordion.loan_details.emi,
+      globals.form.review.view_details.loan_accordion.loan_details.emiamt,
       {
         value: emi,
       }
