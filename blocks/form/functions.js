@@ -401,6 +401,7 @@ function calculateEMI(globals) {
  * @param {scope} globals
  */
 function restoreReviewLoanDetails(globals) {
+  debugger;
   const props = globals.form.$properties || {};
   const loanDetails = globals.form.review?.view_details?.loan_accordion?.loan_details;
 
