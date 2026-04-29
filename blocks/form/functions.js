@@ -326,29 +326,33 @@ function calculateEMI(globals) {
   const loanTicks = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
   const tenureTicks = [12, 24, 36, 48, 60, 72, 84];
 
-  function getActualValueFromSlider(sliderValue, ticks) {
-    const value = Number(sliderValue);
+  function cleanNumber(value) {
+    return Number(String(value || '').replace(/[^\d.]/g, '')) || 0;
+  }
 
-    if (Number.isNaN(value)) return 0;
+  function getActualValueFromSlider(sliderValue, ticks) {
+    const value = cleanNumber(sliderValue);
+    const maxIndex = ticks.length - 1;
+
+    if (value <= 0) return ticks[0];
+    if (value >= maxIndex && value <= 100) return ticks[maxIndex];
+
+    if (value > 100) return value;
 
     const lowerIndex = Math.floor(value);
     const upperIndex = Math.ceil(value);
 
-    if (lowerIndex === upperIndex) {
-      return ticks[lowerIndex];
-    }
+    if (lowerIndex === upperIndex) return ticks[lowerIndex];
 
     return ticks[lowerIndex] + ((ticks[upperIndex] - ticks[lowerIndex]) * (value - lowerIndex));
   }
 
   const existing = globals.form.$properties || {};
 
-  const loanRaw = Number(globals.form.offer.loanamt.valueOf()) || Number(existing.loanRaw || 0);
-  const tenureRaw = Number(globals.form.offer.loantenure.valueOf()) || Number(existing.tenureRaw || 0);
+  const loanRaw = cleanNumber(globals.form.offer.loanamt.valueOf()) || cleanNumber(existing.loanRaw);
+  const tenureRaw = cleanNumber(globals.form.offer.loantenure.valueOf()) || cleanNumber(existing.tenureRaw);
 
-  if (!loanRaw || !tenureRaw) {
-    return '';
-  }
+  if (!loanRaw || !tenureRaw) return '';
 
   const loanAmt = Math.round(getActualValueFromSlider(loanRaw, loanTicks) / 1000) * 1000;
   const tenure = Math.round(getActualValueFromSlider(tenureRaw, tenureTicks));
@@ -358,10 +362,11 @@ function calculateEMI(globals) {
   const factor = Math.pow(1 + monthlyRate, tenure);
   const emi = Math.round((loanAmt * monthlyRate * factor) / (factor - 1));
 
+  if (!emi || Number.isNaN(emi)) return '';
+
   const formattedLoan = `₹${Number(loanAmt).toLocaleString('en-IN')}`;
   const formattedTenure = `${tenure} months`;
 
-  // Save values so review page does not lose/overwrite them
   globals.functions.setProperty(globals.form, {
     properties: {
       ...(globals.form.$properties || {}),
@@ -373,7 +378,6 @@ function calculateEMI(globals) {
     },
   });
 
-  // First page card/display values
   globals.functions.setProperty(globals.form.display.loandisplay, {
     value: formattedLoan,
   });
@@ -390,40 +394,17 @@ function calculateEMI(globals) {
     value: 4000,
   });
 
-  // Review page values, only if review fields are available
-  if (globals.form.review?.view_details?.loan_accordion?.loan_details) {
-    globals.functions.setProperty(
-      globals.form.review.view_details.loan_accordion.loan_details.loandisplay,
-      { value: formattedLoan }
-    );
-
-    globals.functions.setProperty(
-      globals.form.review.view_details.loan_accordion.loan_details.emiamt,
-      { value: emi }
-    );
-
-    globals.functions.setProperty(
-      globals.form.review.view_details.loan_accordion.loan_details.loantenure,
-      { value: formattedTenure }
-    );
-  }
-
   return '';
 }
 
-/**
+/** 
  * @param {scope} globals
- * @returns {string}
  */
 function restoreReviewLoanDetails(globals) {
   const props = globals.form.$properties || {};
   const loanDetails = globals.form.review?.view_details?.loan_accordion?.loan_details;
 
   if (!loanDetails) return '';
-
-  globals.functions.setProperty(loanDetails.loandisplay, {
-    value: props.reviewLoanAmount || '',
-  });
 
   globals.functions.setProperty(loanDetails.emiamt, {
     value: props.reviewEmi || '',
