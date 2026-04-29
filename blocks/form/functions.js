@@ -378,10 +378,6 @@ function calculateEMI(globals) {
     value: 4000,
   });
  
-  globals.functions.setProperty(globals.form.offer.loantenure_display, {
-    value: `${tenure} months`,
-  });
-  
   return '';
 }
 
