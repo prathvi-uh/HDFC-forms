@@ -1704,3 +1704,33 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   line-height: 1.4;
 }
 
+/* Make error text red */
+.plain-text-wrapper.field-error p {
+    color: #d32f2f;
+    font-weight: 500;
+}
+
+/* Style the strong heading */
+.plain-text-wrapper.field-error p strong {
+    color: #d32f2f;
+}
+
+/* Add error image before the first message */
+.plain-text-wrapper.field-error p:first-child::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/463/463612.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Align image and text */
+.plain-text-wrapper.field-error p {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
