@@ -228,19 +228,11 @@ function handleResendOtp(globals) {
   }
 
   // Show zero try error panel
-  if (globals.zerotry && globals.zerotry.try) {
-    globals.functions.setProperty(globals.zerotry.try, {
+  if (globals.form.zerotry.retry ) {
+    globals.functions.setProperty(globals.form.zerotry.retry, {
       visible: true,
     });
   }
-
-
-    if (globals.form.personal_loan_offer) {
-      globals.functions.setProperty(globals.form.personal_loan_offer, {
-        visible: true,
-      });
-    }
-
     return '';
   }
 
