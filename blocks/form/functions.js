@@ -394,7 +394,7 @@ function setReviewEmi(globals) {
  */
 
 function setReviewTenure(globals) {
-  return globals.form.offer.loantenure.valueOf() || '';
+  return globals.form.offer.loantenure_display.valueOf() || '';
 }
 
 /** 
