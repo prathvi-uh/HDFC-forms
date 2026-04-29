@@ -204,30 +204,36 @@ function handleResendOtp(globals) {
   window.otpTimerExpired = false;
 
   updateAttemptsInfo(globals);
-
   if (window.otpResendAttemptsLeft <= 0) {
-    stopOtpTimer(globals);
+  stopOtpTimer(globals);
 
-    if (resendBtn) {
-      globals.functions.setProperty(resendBtn, {
-        visible: false,
-        enabled: false,
-      });
-    }
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: false,
+      enabled: false,
+    });
+  }
 
-    if (submitBtn) {
-      globals.functions.setProperty(submitBtn, {
-        enabled: false,
-      });
-    }
+  if (submitBtn) {
+    globals.functions.setProperty(submitBtn, {
+      enabled: false,
+    });
+  }
 
-    alert('Maximum attempts reached');
+  // Hide OTP panel
+  if (globals.form.otp_verification) {
+    globals.functions.setProperty(globals.form.otp_verification, {
+      visible: false,
+    });
+  }
 
-    if (globals.form.otp_verification) {
-      globals.functions.setProperty(globals.form.otp_verification, {
-        visible: false,
-      });
-    }
+  // Show zero try error panel
+  if (globals.zerotry && globals.zerotry.try) {
+    globals.functions.setProperty(globals.zerotry.try, {
+      visible: true,
+    });
+  }
+
 
     if (globals.form.personal_loan_offer) {
       globals.functions.setProperty(globals.form.personal_loan_offer, {
