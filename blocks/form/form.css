@@ -1824,46 +1824,115 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   color: #666666;
 }
 
-/* WHITE CONTAINER BOX */
-.panel-wrapper.field-full-name-as-per-pan-panel {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 24px 20px 10px;
-  margin: 20px auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  max-width: 1200px; /* keeps it centered like card */
-}
-
-/* HEADER BAR inside box */
-.panel-wrapper.field-full-name-as-per-pan-panel > legend {
-  background: #dbe6f8;
-  padding: 10px 16px;
-  border-radius: 4px;
-  margin-bottom: 30px;
-  font-weight: 600;
-}
-
-
 body {
-  background: #f5f7fb;
+  background: #fff;
 }
 
-/* REMOVE GAP BETWEEN WHITE BOX & BLUE BAR */
+/* 🔽 COMPRESS VERTICAL SPACING */
+.panel-wrapper.field-full-name-as-per-pan-panel .row {
+  row-gap: 10px; /* was 14px */
+}
+
+/* reduce space between label and input */
+.panel-wrapper.field-full-name-as-per-pan-panel label.field-label {
+  margin: 0 0 -6px 14px;
+}
+
+/* tighten field spacing */
+.panel-wrapper.field-full-name-as-per-pan-panel .field-wrapper.col-6 {
+  margin-bottom: 6px;
+}
+
+/* 🔼 INCREASE LABEL FONT */
+.panel-wrapper.field-full-name-as-per-pan-panel label.field-label {
+  font-size: 12.5px;   /* was 11px */
+  font-weight: 600;
+  color: #6f7c8f;      /* slightly darker for better visibility */
+}
+
+/* 🔼 NOTE TEXT IMPROVEMENT */
+.plain-text-wrapper.field-middle-name-note p {
+  font-size: 13px;     /* was 12px */
+  color: #6f7c8f;
+}
+
+/* OPTIONAL: slightly bigger input text */
+.panel-wrapper.field-full-name-as-per-pan-panel input {
+  font-size: 14px;
+}
+
+/* FULL CARD */
 .panel-wrapper.field-full-name-as-per-pan-panel {
-  padding-top: 0;   /* key fix */
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 24px 18px;
+  background: #fff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
 }
 
-/* HEADER BAR */
+/* HEADER */
 .panel-wrapper.field-full-name-as-per-pan-panel > legend.field-label {
   display: block;
-  width: 100%;
-  margin: 0;                 /* remove outer gap */
-  padding: 16px 20px;       /* thickness */
-  
+  width: calc(100% + 48px);
+  margin: 0 0 18px -24px;
+  padding: 12px 24px;
   background: #dbe6f8;
-  border-radius: 8px 8px 0 0;  /* match card top */
-  
-  font-size: 18px;
+  border-radius: 16px 16px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2f46;
+}
+
+/* 2-COLUMN LAYOUT (MAIN FIX) */
+.panel-wrapper.field-full-name-as-per-pan-panel .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 14px;
+}
+
+/* FIELD WRAPPER RESET */
+.panel-wrapper.field-full-name-as-per-pan-panel .field-wrapper.col-6 {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* LABEL */
+.panel-wrapper.field-full-name-as-per-pan-panel label.field-label {
+  font-size: 11px;
   font-weight: 600;
-  color: #4a5568;
+  color: #8b94a3;
+  margin: 0 0 -8px 14px;
+  padding: 0 5px;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+/* INPUT */
+.panel-wrapper.field-full-name-as-per-pan-panel input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #e2e6ee;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #26364d;
+}
+
+/* ✅ NOTE UNDER MIDDLE NAME (CLEAN FIX) */
+.plain-text-wrapper.field-middle-name-note {
+  grid-column: 2;        /* right column */
+  margin-top: -6px;
+}
+
+/* NOTE TEXT */
+.plain-text-wrapper.field-middle-name-note p {
+  margin: 0;
+  font-size: 12px;
+  color: #8b94a3;
+  white-space: nowrap;
 }
