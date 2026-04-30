@@ -1823,3 +1823,56 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   font-weight: 400;
   color: #666666;
 }
+
+/* PANEL CONTAINER */
+.field-full-name-as-per-pan-panel {
+  border-radius: 16px;
+  border: 1px solid #e3e7ef;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* HEADER BAR */
+.field-full-name-as-per-pan-panel > .field-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #dbe4f3;          /* light blue */
+  padding: 14px 20px;
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* ICON */
+.field-full-name-as-per-pan-panel > .field-label::before {
+  content: "🪪"; /* you can replace with SVG */
+  font-size: 20px;
+}
+
+/* BODY SPACING */
+.field-full-name-as-per-pan-panel .field-wrapper {
+  padding: 20px;
+}
+
+/* INPUTS INSIDE PANEL */
+.field-full-name-as-per-pan-panel input {
+  height: 52px;
+  border-radius: 12px;
+  border: 1px solid #d6dbe6;
+  background: #f7f8fb;
+  padding: 0 14px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+/* LABELS INSIDE */
+.field-full-name-as-per-pan-panel label {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 6px;
+  display: block;
+}
