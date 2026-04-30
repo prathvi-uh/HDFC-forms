@@ -1752,12 +1752,6 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   font-weight: 500;
 }
 
-/* Required star */
-.text-wrapper.field-pan .field-label::after {
-  content: " *";
-  color: #e53935;
-}
-
 /* Input same as mobile/DOB */
 .text-wrapper.field-pan input {
   width: 100%;
@@ -1781,5 +1775,5 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
 /* Focus */
 .text-wrapper.field-pan input:focus {
   border-color: #5f86ff;
-  background: #fff;
+  background: white;
 }
