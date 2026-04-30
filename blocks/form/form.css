@@ -1940,12 +1940,6 @@ body {
   margin-top: -10px !important;
 }
 
-/* Note: correct class */
-.panel-wrapper.field-full-name-as-per-pan-panel
-.plain-text-wrapper.field-middle-name-note.field-wrapper.col-6 {
-  margin-top: -10px !important;
-}
-
 /* reduce vertical gap between rows */
 .panel-wrapper.field-full-name-as-per-pan-panel .row,
 .panel-wrapper.field-full-name-as-per-pan-panel {
