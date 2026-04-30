@@ -1946,3 +1946,33 @@ body {
   row-gap: 2px !important;
 }
 
+/* ===== LABELS → HEADING STYLE ===== */
+.panel-wrapper.field-full-name-as-per-pan-panel label.field-label {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1f3b63;   /* same family as header */
+  margin: 0 0 6px 2px;
+}
+
+/* ===== INPUTS → STRONG LIKE HEADING ===== */
+.panel-wrapper.field-full-name-as-per-pan-panel input {
+  height: 42px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #c5cfdd;   /* slightly stronger border */
+  font-size: 14px;
+  font-weight: 600;              /* 🔥 makes it “heading-like” */
+  color: #1f2937;
+  background: #fff;
+}
+
+/* focus state (clean, not flashy) */
+.panel-wrapper.field-full-name-as-per-pan-panel input:focus {
+  border-color: #4a6fa5;
+  outline: none;
+}
+
+/* optional: subtle hover */
+.panel-wrapper.field-full-name-as-per-pan-panel input:hover {
+  border-color: #9fb3d1;
+}
