@@ -1738,28 +1738,31 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   background-position: center;
 }
 
-/* Match DOB style ONLY for PAN */
+/* Align PAN block vertically with DOB */
 .text-wrapper.field-pan {
-  position: relative;
+  margin-top: 4px; /* tweak: adjust 2–6px if needed */
 }
 
-/* Label (same as DOB) */
+/* Match label spacing exactly */
 .text-wrapper.field-pan .field-label {
   display: block;
   font-size: 20px;
   color: #4a4a4a;
-  margin-bottom: 8px;
+  margin-bottom: 10px; /* match DOB */
   font-weight: 500;
 }
 
-/* Input same as mobile/DOB */
+/* Match input look (MOST IMPORTANT FIX) */
 .text-wrapper.field-pan input {
   width: 100%;
   height: 56px;
   padding: 0 16px;
   border: 1px solid #d6dbe6;
   border-radius: 12px;
+
+  /* 🔥 this was the main difference */
   background: #f7f8fb;
+
   font-size: 16px;
   color: #333;
   outline: none;
@@ -1775,5 +1778,5 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
 /* Focus */
 .text-wrapper.field-pan input:focus {
   border-color: #5f86ff;
-  background: white;
+  background: #fff;
 }
