@@ -1789,7 +1789,6 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
 /* Icon */
 .plain-text-wrapper.field-off::before,
 .text-wrapper.field-amt::before {
-  content: "💰";
   font-size: 28px;
 }
 
