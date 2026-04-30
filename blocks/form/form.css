@@ -1738,9 +1738,9 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   background-position: center;
 }
 
-/* Remove extra spacing from PAN container */
+/* Remove extra spacing from PAN container - tier2*/
 .text-wrapper.field-pan {
-  margin-top: -6px;   /* 🔥 pulls PAN block up */
+  margin-top: -6px;   
   padding-top: 0;     /* important */
 }
 
@@ -1875,4 +1875,91 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   color: #6b7280;
   margin-bottom: 6px;
   display: block;
+}
+
+/* Full Name (As per PAN) section */
+.field-full-name-as-per-pan-panel {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header bar */
+.field-full-name-as-per-pan-panel > legend {
+  width: 100%;
+  background: #dbe6f8;
+  padding: 8px 12px;
+  margin-bottom: 28px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #555;
+  box-sizing: border-box;
+}
+
+/* Layout */
+.field-full-name-as-per-pan-panel .text-wrapper,
+.field-full-name-as-per-pan-panel .plain-text-wrapper {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding: 0 34px;
+  margin-bottom: 45px;
+}
+
+/* Labels */
+.field-full-name-as-per-pan-panel label,
+.field-full-name-as-per-pan-panel .field-label {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #555;
+}
+
+/* Inputs */
+.field-full-name-as-per-pan-panel input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #8b95a1;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 18px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* Required star */
+.field-full-name-as-per-pan-panel .guideFieldMandatoryIndicator,
+.field-full-name-as-per-pan-panel .required {
+  color: #ff3b30;
+}
+
+/* Middle note */
+.field-full-name-as-per-pan-panel .field-middle-name-note {
+  padding-top: 44px;
+  font-size: 22px;
+  color: #555;
+  line-height: 1.45;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .field-full-name-as-per-pan-panel .text-wrapper,
+  .field-full-name-as-per-pan-panel .plain-text-wrapper {
+    width: 100%;
+    display: block;
+    padding: 0 16px;
+    margin-bottom: 28px;
+  }
+
+  .field-full-name-as-per-pan-panel > legend {
+    font-size: 18px;
+  }
+
+  .field-full-name-as-per-pan-panel label,
+  .field-full-name-as-per-pan-panel .field-label,
+  .field-full-name-as-per-pan-panel .field-middle-name-note {
+    font-size: 18px;
+  }
 }
