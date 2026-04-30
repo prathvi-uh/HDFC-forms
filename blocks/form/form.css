@@ -1828,11 +1828,11 @@ body {
   background: #fff;
 }
 
-/* FULL CARD */
+/* CARD */
 .panel-wrapper.field-full-name-as-per-pan-panel {
   max-width: 890px;
-  margin: 18px auto;
-  padding: 0 24px 18px;
+  margin: 12px auto;
+  padding: 0 24px 12px;
   background: #fff;
   border: 1px solid #edf0f5;
   border-radius: 16px;
@@ -1843,12 +1843,112 @@ body {
 .panel-wrapper.field-full-name-as-per-pan-panel > legend.field-label {
   display: block;
   width: calc(100% + 48px);
-  margin: 0 0 18px -24px;
-  padding: 12px 24px;
+  margin: 0 0 4px -24px;
+  padding: 8px 24px;
   background: #dbe6f8;
   border-radius: 16px 16px 0 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: #102b4c;
   box-sizing: border-box;
 }
+
+/* GRID */
+.panel-wrapper.field-full-name-as-per-pan-panel .row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  column-gap: 18px !important;
+  row-gap: 4px !important;
+  margin: 0 !important;
+  align-items: start !important;
+}
+
+/* FIELD WRAPPERS */
+.panel-wrapper.field-full-name-as-per-pan-panel .field-wrapper.col-6,
+.panel-wrapper.field-full-name-as-per-pan-panel .text-wrapper,
+.panel-wrapper.field-full-name-as-per-pan-panel .plain-text-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  box-sizing: border-box;
+}
+
+/* LABEL */
+.panel-wrapper.field-full-name-as-per-pan-panel label.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 3px 4px !important;
+  padding: 0;
+}
+
+/* INPUT */
+.panel-wrapper.field-full-name-as-per-pan-panel input {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 34px !important;
+  border: 1px solid #cfd6e2;
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 13px;
+  color: #2d3748;
+  box-sizing: border-box;
+}
+
+/* NOTE UNDER MIDDLE NAME */
+.panel-wrapper.field-full-name-as-per-pan-panel .plain-text-wrapper.field-middle-name-note {
+  grid-column: 2 !important;
+  margin-top: -6px !important;
+}
+
+.panel-wrapper.field-full-name-as-per-pan-panel .plain-text-wrapper.field-middle-name-note p {
+  margin: 0 !important;
+  font-size: 12px;
+  line-height: 14px;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .panel-wrapper.field-full-name-as-per-pan-panel {
+    max-width: calc(100% - 24px);
+    padding: 0 14px 12px;
+  }
+
+  .panel-wrapper.field-full-name-as-per-pan-panel > legend.field-label {
+    width: calc(100% + 28px);
+    margin-left: -14px;
+  }
+
+  .panel-wrapper.field-full-name-as-per-pan-panel .row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .panel-wrapper.field-full-name-as-per-pan-panel .plain-text-wrapper.field-middle-name-note {
+    grid-column: 1 !important;
+  }
+}
+
+/* Last Name: correct class */
+.panel-wrapper.field-full-name-as-per-pan-panel
+.text-wrapper.field-last-name-pan.field-wrapper.col-6 {
+  margin-top: -10px !important;
+}
+
+/* Note: correct class */
+.panel-wrapper.field-full-name-as-per-pan-panel
+.plain-text-wrapper.field-middle-name-note.field-wrapper.col-6 {
+  margin-top: -10px !important;
+}
+
+/* reduce vertical gap between rows */
+.panel-wrapper.field-full-name-as-per-pan-panel .row,
+.panel-wrapper.field-full-name-as-per-pan-panel {
+  row-gap: 2px !important;
+}
+
