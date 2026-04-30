@@ -1800,3 +1800,26 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   font-weight: 600;
   color: #1f2d3d;
 }
+
+/* REMOVE banner styling */
+.plain-text-wrapper.field-off {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+}
+
+/* Remove icon if added via CSS */
+.plain-text-wrapper.field-off::before {
+  content: none !important;
+}
+
+/* Reset text */
+.plain-text-wrapper.field-off p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+}
