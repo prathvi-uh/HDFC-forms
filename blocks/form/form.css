@@ -1773,3 +1773,31 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   border: 1px solid #d9dee8;
 }
 
+/* Common banner style */
+.plain-text-wrapper.field-off,
+.text-wrapper.field-amt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: #d9e6eb;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 16px 0 24px;
+}
+
+/* Icon */
+.plain-text-wrapper.field-off::before,
+.text-wrapper.field-amt::before {
+  content: "💰";
+  font-size: 28px;
+}
+
+/* Text inside */
+.plain-text-wrapper.field-off p,
+.text-wrapper.field-amt .field-label {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2d3d;
+}
