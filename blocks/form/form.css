@@ -1761,3 +1761,14 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   box-sizing: border-box;
 }
+
+/* Make PAN input transparent */
+.text-wrapper.field-pan input[name="pan"] {
+  background: transparent !important;
+  box-shadow: none; /* optional: remove shadow if you want clean look */
+}
+
+/* Optional: keep border visible */
+.text-wrapper.field-pan input[name="pan"] {
+  border: 1px solid #d9dee8;
+}
