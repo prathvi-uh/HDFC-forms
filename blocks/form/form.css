@@ -1772,3 +1772,30 @@ fieldset#panelcontainer-0813f2edd9 .field-amt .field-label {
 .text-wrapper.field-pan input[name="pan"] {
   border: 1px solid #d9dee8;
 }
+
+/* Target only this info banner */
+.plain-text-wrapper.field-off {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: #d9e6eb;        /* light blue bg */
+  border-radius: 16px;
+  padding: 20px 24px;
+
+  margin: 16px 0 24px;
+}
+
+/* Add icon before text */
+.plain-text-wrapper.field-off::before {
+  content: "💰";
+  font-size: 28px;
+}
+
+/* Text styling */
+.plain-text-wrapper.field-off p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;           /* strong like image */
+  color: #1f2d3d;
+}
