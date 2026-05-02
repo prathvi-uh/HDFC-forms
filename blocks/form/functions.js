@@ -197,53 +197,53 @@ function handleResendOtp(globals) {
     window.otpResendAttemptsLeft = 3;
   }
 
+  // reduce attempt only on resend click
   if (window.otpResendAttemptsLeft > 0) {
     window.otpResendAttemptsLeft -= 1;
   }
 
-  window.otpTimerExpired = false;
-
   updateAttemptsInfo(globals);
+
+  // no attempts left screen
   if (window.otpResendAttemptsLeft <= 0) {
-  stopOtpTimer(globals);
+    stopOtpTimer(globals);
 
-  if (resendBtn) {
-    globals.functions.setProperty(resendBtn, {
-      visible: false,
-      enabled: false,
-    });
-  }
+    if (resendBtn) {
+      globals.functions.setProperty(resendBtn, {
+        visible: false,
+        enabled: false,
+      });
+    }
 
-  if (submitBtn) {
-    globals.functions.setProperty(submitBtn, {
-      enabled: false,
-    });
-  }
+    if (submitBtn) {
+      globals.functions.setProperty(submitBtn, {
+        enabled: false,
+      });
+    }
 
-  // Hide OTP panel
-  if (globals.form.otp_verification) {
-    globals.functions.setProperty(globals.form.otp_verification, {
-     visible: false,
-    });
-  }
+    if (globals.form.otp_verification) {
+      globals.functions.setProperty(globals.form.otp_verification, {
+        visible: false,
+      });
+    }
 
-// 👇 IMPORTANT: show parent first
-  if (globals.form.zerotry) {
-    globals.functions.setProperty(globals.form.zerotry, {
-      visible: true,
-    });
-  }
+    if (globals.form.zerotry) {
+      globals.functions.setProperty(globals.form.zerotry, {
+        visible: true,
+      });
+    }
 
-// Then show child
-  if (globals.form.zerotry && globals.form.zerotry.retry) {
-   globals.functions.setProperty(globals.form.zerotry.retry, {
-      visible: true,
-    });
-  }
-  
+    if (globals.form.zerotry && globals.form.zerotry.retry) {
+      globals.functions.setProperty(globals.form.zerotry.retry, {
+        visible: true,
+      });
+    }
+
     return '';
   }
 
+  window.otpTimerExpired = false;
+
   if (resendBtn) {
     globals.functions.setProperty(resendBtn, {
       visible: false,
@@ -251,7 +251,6 @@ function handleResendOtp(globals) {
     });
   }
 
-  // ✅ enable submit again on resend
   if (submitBtn) {
     globals.functions.setProperty(submitBtn, {
       enabled: true,
@@ -300,23 +299,25 @@ function handleOtpInvalid(globals) {
 
     stopOtpTimer(globals);
 
-    if (window.otpResendAttemptsLeft > 0) {
-      window.otpResendAttemptsLeft -= 1;
+    if (timerField) {
+      globals.functions.setProperty(timerField, {
+        value: '00:00',
+      });
     }
 
     window.otpTimerExpired = false;
     updateAttemptsInfo(globals);
 
-    if (resendBtn) {
-      globals.functions.setProperty(resendBtn, {
-        visible: true,
-        enabled: true,
-      });
-    }
-
     if (submitBtn) {
       globals.functions.setProperty(submitBtn, {
         enabled: false,
+      });
+    }
+
+    if (resendBtn && window.otpResendAttemptsLeft > 0) {
+      globals.functions.setProperty(resendBtn, {
+        visible: true,
+        enabled: true,
       });
     }
   }, 100);
