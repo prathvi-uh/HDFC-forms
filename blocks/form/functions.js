@@ -193,33 +193,151 @@ function handleOtpInvalid(globals) {
     const resendBtn = globals.form.otp_verification.resend_otp;
     const submitBtn = globals.form.otp_verification.otp_submit;
     const timerField = globals.form.otp_verification.timer;
- 
+
     stopOtpTimer(globals);
+
+    if (window.otpResendAttemptsLeft > 0) {
+      window.otpResendAttemptsLeft -= 1;
+    }
 
     if (timerField) {
       globals.functions.setProperty(timerField, {
         value: '00:00',
       });
     }
- 
+
     window.otpTimerExpired = false;
     updateAttemptsInfo(globals);
- 
+
+    if (window.otpResendAttemptsLeft <= 0) {
+      if (resendBtn) {
+        globals.functions.setProperty(resendBtn, {
+          visible: false,
+          enabled: false,
+        });
+      }
+
+      if (submitBtn) {
+        globals.functions.setProperty(submitBtn, {
+          enabled: false,
+        });
+      }
+
+      if (globals.form.otp_verification) {
+        globals.functions.setProperty(globals.form.otp_verification, {
+          visible: false,
+        });
+      }
+
+      if (globals.form.zerotry) {
+        globals.functions.setProperty(globals.form.zerotry, {
+          visible: true,
+        });
+      }
+
+      if (globals.form.zerotry && globals.form.zerotry.retry) {
+        globals.functions.setProperty(globals.form.zerotry.retry, {
+          visible: true,
+        });
+      }
+
+      return '';
+    }
+
     if (resendBtn) {
       globals.functions.setProperty(resendBtn, {
         visible: true,
         enabled: true,
       });
     }
- 
+
     if (submitBtn) {
       globals.functions.setProperty(submitBtn, {
         enabled: false,
       });
     }
   }, 100);
- 
+
   return 'Invalid OTP';
+}
+
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
+function handleResendOtp(globals) {
+  const resendBtn = globals.form.otp_verification.resend_otp;
+  const submitBtn = globals.form.otp_verification.otp_submit;
+
+  if (typeof window.otpResendAttemptsLeft !== 'number') {
+    window.otpResendAttemptsLeft = 3;
+  }
+
+  // ✅ decrease attempt on resend click
+  if (window.otpResendAttemptsLeft > 0) {
+    window.otpResendAttemptsLeft -= 1;
+  }
+
+  window.otpTimerExpired = false;
+
+  updateAttemptsInfo(globals);
+
+  // ❌ No attempts left → show error screen
+  if (window.otpResendAttemptsLeft <= 0) {
+    stopOtpTimer(globals);
+
+    if (resendBtn) {
+      globals.functions.setProperty(resendBtn, {
+        visible: false,
+        enabled: false,
+      });
+    }
+
+    if (submitBtn) {
+      globals.functions.setProperty(submitBtn, {
+        enabled: false,
+      });
+    }
+
+    if (globals.form.otp_verification) {
+      globals.functions.setProperty(globals.form.otp_verification, {
+        visible: false,
+      });
+    }
+
+    if (globals.form.zerotry) {
+      globals.functions.setProperty(globals.form.zerotry, {
+        visible: true,
+      });
+    }
+
+    if (globals.form.zerotry && globals.form.zerotry.retry) {
+      globals.functions.setProperty(globals.form.zerotry.retry, {
+        visible: true,
+      });
+    }
+
+    return '';
+  }
+
+  // hide resend again
+  if (resendBtn) {
+    globals.functions.setProperty(resendBtn, {
+      visible: false,
+      enabled: false,
+    });
+  }
+
+  // enable submit for new OTP
+  if (submitBtn) {
+    globals.functions.setProperty(submitBtn, {
+      enabled: true,
+    });
+  }
+
+  startOtpTimer(globals);
+
+  return '';
 }
 
 /**
