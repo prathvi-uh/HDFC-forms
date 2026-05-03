@@ -1962,7 +1962,7 @@ body {
   border: 1.5px solid #c5cfdd;   /* slightly stronger border */
   font-size: 14px;
   font-weight: 600;              /* 🔥 makes it “heading-like” */
-  color: #1f2937;
+  color: #8b94a3;
   background: #fff;
 }
 
@@ -1976,3 +1976,23 @@ body {
 .panel-wrapper.field-full-name-as-per-pan-panel input:hover {
   border-color: #9fb3d1;
 }
+
+/* ===== MATCH PERSONAL DETAILS INPUT STYLE ===== */
+.panel-wrapper.field-full-name-as-per-pan-panel input {
+  height: 40px !important;              /* same as Personal Details */
+  border: 1px solid #e2e6ee !important; /* lighter clean border */
+  border-radius: 10px !important;       /* softer radius */
+  padding: 10px 14px !important;
+  font-size: 13px !important;
+  font-weight: 600;
+  color: #8b94a3;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* optional: match focus */
+.panel-wrapper.field-full-name-as-per-pan-panel input:focus {
+  border-color: #c5cfdd !important;
+  outline: none;
+}
+
