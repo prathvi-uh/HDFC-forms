@@ -1950,7 +1950,7 @@ body {
 .panel-wrapper.field-full-name-as-per-pan-panel label.field-label {
   font-size: 13.5px;
   font-weight: 700;
-  color: #1f3b63;   /* same family as header */
+  color: #8b94a3;   /* same family as header */
   margin: 0 0 6px 2px;
 }
 
@@ -1985,7 +1985,7 @@ body {
   padding: 10px 14px !important;
   font-size: 13px !important;
   font-weight: 600;
-  color: #8b94a3;
+  color: #26364d;
   background: #fff;
   box-sizing: border-box;
 }
@@ -1996,3 +1996,234 @@ body {
   outline: none;
 }
 
+/* PERSONAL DETAILS CARD */
+.panel-wrapper.field-personal-details {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 24px 18px;
+  background: #fff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+ 
+/* HEADER */
+.panel-wrapper.field-personal-details > legend.field-label {
+  display: block;
+  width: calc(100% + 48px);
+  margin: 0 0 18px -24px;
+  padding: 12px 24px;
+  background: #dbe6f8;
+  border-radius: 16px 16px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #102b4c;
+  box-sizing: border-box;
+}
+ 
+/* GRID */
+.panel-wrapper.field-personal-details .row {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 18px !important;
+  row-gap: 14px !important;
+  margin: 0 !important;
+}
+ 
+/* REMOVE DEFAULT MARGINS */
+.panel-wrapper.field-personal-details .field-wrapper,
+.panel-wrapper.field-personal-details .drop-down-wrapper,
+.panel-wrapper.field-personal-details .text-wrapper,
+.panel-wrapper.field-personal-details .email-wrapper,
+.panel-wrapper.field-personal-details .button-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+ 
+/* FIELD WIDTHS */
+.panel-wrapper.field-personal-details .field-gender,
+.panel-wrapper.field-personal-details .field-pan-number {
+  grid-column: span 6;
+}
+ 
+.panel-wrapper.field-personal-details .field-email-id {
+  grid-column: span 8;
+}
+ 
+.panel-wrapper.field-personal-details .field-verify-email {
+  grid-column: span 4;
+  align-self: end;
+}
+ 
+/* LABELS LIKE IMG2 */
+.panel-wrapper.field-personal-details label.field-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b94a3;
+  margin: 0 0 -8px 14px;
+  padding: 0 5px;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+}
+ 
+/* INPUTS / SELECT */
+.panel-wrapper.field-personal-details input,
+.panel-wrapper.field-personal-details select {
+  width: 100% !important;
+  height: 46px;
+  border: 1px solid #e2e6ee;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #26364d;
+  background: #fff;
+  box-sizing: border-box;
+}
+ 
+/* VERIFY BUTTON */
+.panel-wrapper.field-personal-details button {
+  width: 100%;
+  height: 46px;
+  border: 0;
+  border-radius: 8px;
+  background: #5f8dda;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+ 
+/* MOBILE */
+@media (max-width: 768px) {
+  .panel-wrapper.field-personal-details {
+    max-width: calc(100% - 24px);
+    padding: 0 14px 18px;
+  }
+ 
+  .panel-wrapper.field-personal-details > legend.field-label {
+    width: calc(100% + 28px);
+    margin-left: -14px;
+  }
+ 
+  .panel-wrapper.field-personal-details .field-gender,
+  .panel-wrapper.field-personal-details .field-pan-number,
+  .panel-wrapper.field-personal-details .field-email-id,
+  .panel-wrapper.field-personal-details .field-verify-email {
+    grid-column: span 12;
+  }
+}
+ 
+/* compact rows */
+.panel-wrapper.field-personal-details .row {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
+  row-gap: 10px !important;
+}
+ 
+/* field positions */
+.panel-wrapper.field-personal-details .field-gender {
+  grid-column: 1 / span 6 !important;
+}
+ 
+.panel-wrapper.field-personal-details .field-pan-number {
+  grid-column: 7 / span 6 !important;
+}
+ 
+.panel-wrapper.field-personal-details .field-email-id {
+  grid-column: 1 / span 8 !important;
+}
+ 
+.panel-wrapper.field-personal-details .field-verify-email {
+  grid-column: 9 / span 4 !important;
+  align-self: end !important;
+}
+ 
+/* verify button same height as email input */
+.panel-wrapper.field-personal-details .field-verify-email button {
+  width: 100% !important;
+  height: 46px !important;
+  border-radius: 10px !important;
+  background: #5f8dda !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+ 
+/* remove space under blue header */
+.panel-wrapper.field-personal-details {
+  padding-top: 0 !important;
+}
+ 
+/* kill legend bottom gap */
+.panel-wrapper.field-personal-details > legend.field-label {
+  margin-bottom: 0 !important;
+  padding-bottom: 6px !important;
+}
+ 
+/* remove extra space before first row */
+.panel-wrapper.field-personal-details .row {
+  margin-top: 0 !important;
+}
+ 
+/* tighten first field row specifically */
+.panel-wrapper.field-personal-details .row:first-of-type {
+  margin-top: -6px !important;
+}
+ 
+/* labels should sit close to inputs */
+.panel-wrapper.field-personal-details label.field-label {
+  margin-top: 0 !important;
+  margin-bottom: 2px !important;
+}
+ 
+/* reduce gap before Enter Email row */
+.panel-wrapper.field-personal-details .field-email-id,
+.panel-wrapper.field-personal-details .field-verify-email {
+  margin-top: -14px !important;
+}
+ 
+/* reduce label-to-input gap for email */
+.panel-wrapper.field-personal-details .field-email-id label.field-label {
+  margin-bottom: 4px !important;
+}
+ 
+/* make Verify button same height/alignment as email textbox */
+.panel-wrapper.field-personal-details .field-verify-email {
+  display: flex !important;
+  align-items: flex-end !important;
+}
+ 
+.panel-wrapper.field-personal-details .field-verify-email button {
+  height: 46px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 10px !important;
+}
+ 
+/* ensure email input height same */
+.panel-wrapper.field-personal-details .field-email-id input {
+  height: 46px !important;
+}
+ 
+/* align button row properly */
+.panel-wrapper.field-personal-details .row {
+  align-items: center !important;
+}
+ 
+/* specifically move Verify button up */
+.panel-wrapper.field-personal-details .field-verify-email {
+  display: flex !important;
+  align-items: center !important;
+  margin-top: -6px !important; /* tweak if needed */
+}
+ 
+/* ensure button height matches input */
+.panel-wrapper.field-personal-details .field-verify-email button {
+  height: 46px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
