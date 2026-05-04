@@ -2970,3 +2970,20 @@ fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select {
   font-size: 15px !important;
   color: #7b8494 !important;
 }
+
+/* logo card */
+fieldset.panel-wrapper.field-e-income 
+> .panel-wrapper.field-banklogo .image-wrapper,
+fieldset.panel-wrapper.field-e-income 
+> .panel-wrapper.field-banklogo .field-wrapper {
+  width: 78px !important;
+  height: 78px !important;
+  min-width: 78px !important;
+}
+
+/* logo image */
+fieldset.panel-wrapper.field-e-income 
+> .panel-wrapper.field-banklogo img {
+  width: 52px !important;
+  height: 52px !important;
+}
