@@ -1996,5 +1996,858 @@ body {
   outline: none;
 }
 
+fieldset.panel-wrapper.field-personal-detail {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 24px 18px;
+  background: #fff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  box-sizing: border-box;
 
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
+  row-gap: 12px !important;
+}
 
+fieldset.panel-wrapper.field-personal-detail > legend.field-label {
+  grid-column: 1 / -1 !important;
+  display: block;
+  width: calc(100% + 48px);
+  margin: 0 0 12px -24px;
+  padding: 12px 24px;
+  background: #dbe6f8;
+  border-radius: 16px 16px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #102b4c;
+  box-sizing: border-box;
+}
+
+fieldset.panel-wrapper.field-personal-detail > .field-gender {
+  grid-column: 1 / span 6 !important;
+}
+
+fieldset.panel-wrapper.field-personal-detail > .field-pan-number {
+  grid-column: 7 / span 6 !important;
+}
+
+fieldset.panel-wrapper.field-personal-detail > .field-email-id {
+  grid-column: 1 / span 8 !important;
+}
+
+fieldset.panel-wrapper.field-personal-detail > .field-verify-email {
+  grid-column: 9 / span 4 !important;
+  align-self: end !important;
+}
+
+fieldset.panel-wrapper.field-personal-detail > .field-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-sizing: border-box;
+}
+
+fieldset.panel-wrapper.field-personal-detail label.field-label {
+  display: block !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #8b94a3 !important;
+  margin: 0 0 6px 2px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  position: static !important;
+}
+
+fieldset.panel-wrapper.field-personal-detail input,
+fieldset.panel-wrapper.field-personal-detail select {
+  display: block !important;
+  width: 100% !important;
+  height: 42px !important;
+  border: 1px solid #e2e6ee !important;
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #26364d !important;
+  background: #fff !important;
+  box-sizing: border-box !important;
+}
+
+fieldset.panel-wrapper.field-personal-detail .field-verify-email button {
+  width: 100% !important;
+  height: 42px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: #5f8dda !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* ADDRESS DETAILS CARD */
+fieldset.panel-wrapper.field-address-details {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 16px 20px 18px;
+  background: #f3f0fb;
+  border: 1px solid #e3def7;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+fieldset.panel-wrapper.field-address-details > legend.field-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #17194a !important;
+  margin: 0 0 14px 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* ALL FIELD WRAPPERS */
+fieldset.panel-wrapper.field-address-details > .field-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 14px 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* LABELS */
+fieldset.panel-wrapper.field-address-details label.field-label {
+  display: block !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #626b7a !important;
+  margin: 0 0 5px 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  position: static !important;
+}
+
+/* ADDRESS INPUT - EDITABLE BUT LIKE IMAGE 2 */
+fieldset.panel-wrapper.field-address-details input[type="text"],
+fieldset.panel-wrapper.field-address-details textarea {
+  width: 100% !important;
+  min-height: 28px !important;
+  height: 32px !important;
+  border: 0 !important;
+  border-left: 3px solid #c7b8ff !important;
+  border-radius: 0 !important;
+  padding: 4px 10px !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  color: #283044 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  resize: none !important;
+  box-sizing: border-box !important;
+}
+
+fieldset.panel-wrapper.field-address-details input[type="text"]:focus,
+fieldset.panel-wrapper.field-address-details textarea:focus {
+  outline: none !important;
+  border-left-color: #5b6ff0 !important;
+}
+
+/* QUESTION FIELDSET */
+fieldset.panel-wrapper.field-address-details 
+fieldset.radio-group-wrapper {
+  margin: 4px 0 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+}
+
+/* QUESTION TEXT */
+fieldset.panel-wrapper.field-address-details 
+fieldset.radio-group-wrapper > legend.field-label {
+  width: 100% !important;
+  flex-basis: 100% !important;
+  display: block !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #2f3542 !important;
+  line-height: 1.3 !important;
+
+  margin: 0 0 6px 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* RADIO OPTION WRAPPER */
+fieldset.panel-wrapper.field-address-details 
+fieldset.radio-group-wrapper .field-wrapper,
+fieldset.panel-wrapper.field-address-details 
+fieldset.radio-group-wrapper .radio-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+/* RADIO BUTTON */
+fieldset.panel-wrapper.field-address-details input[type="radio"] {
+  width: 13px !important;
+  height: 13px !important;
+  min-width: 13px !important;
+  min-height: 13px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  accent-color: #4c6edb !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+}
+
+/* RADIO LABEL */
+fieldset.panel-wrapper.field-address-details 
+fieldset.radio-group-wrapper label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  color: #202636 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  background: transparent !important;
+}
+
+/* REMOVE UNWANTED RADIO CUSTOM EFFECTS */
+fieldset.panel-wrapper.field-address-details input[type="radio"]::before,
+fieldset.panel-wrapper.field-address-details input[type="radio"]::after {
+  display: none !important;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  fieldset.panel-wrapper.field-address-details {
+    padding: 14px 16px;
+  }
+
+  fieldset.panel-wrapper.field-address-details 
+  fieldset.radio-group-wrapper {
+    gap: 14px !important;
+  }
+}
+
+/* FIX LEGEND POSITION */
+fieldset.panel-wrapper.field-address-details > legend.field-label {
+  position: relative !important;
+  display: inline-block !important;
+
+  padding: 0 8px !important;
+  margin-left: 12px !important;
+
+  background: #fff !important; /* match page bg */
+  z-index: 1;
+
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #17194a !important;
+}
+
+/* ADD SPACE FOR LEGEND */
+fieldset.panel-wrapper.field-address-details {
+  margin-top: 28px !important;
+  padding-top: 20px !important;
+}
+
+/* EMPLOYER DETAILS ACCORDION CARD */
+fieldset.panel-wrapper.field-employer-details {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 16px 18px;
+  background: #fff;
+  border: 1px solid #e7ebf3;
+  border-radius: 14px;
+  box-sizing: border-box;
+
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
+  row-gap: 14px !important;
+}
+
+/* ACCORDION HEADER */
+fieldset.panel-wrapper.field-employer-details > legend.field-label {
+  grid-column: 1 / -1 !important;
+  width: calc(100% + 32px) !important;
+  margin: 0 0 14px -16px !important;
+  padding: 14px 18px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #17213b !important;
+  box-sizing: border-box !important;
+}
+
+/* ACCORDION SYMBOL */
+fieldset.panel-wrapper.field-employer-details > legend.field-label::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+/* WHEN ACCORDION IS OPEN */
+fieldset.panel-wrapper.field-employer-details[data-component-status="loaded"] 
+> legend.field-label::after {
+  transform: rotate(225deg);
+}
+
+/* RESET FIELD WRAPPERS */
+fieldset.panel-wrapper.field-employer-details > .field-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* TWO TOP FIELDS */
+fieldset.panel-wrapper.field-employer-details > .field-employer-company-name-choice {
+  grid-column: 1 / span 6 !important;
+}
+
+fieldset.panel-wrapper.field-employer-details > .field-employer-company-name {
+  grid-column: 7 / span 6 !important;
+}
+
+/* HELP TEXT FULL WIDTH */
+fieldset.panel-wrapper.field-employer-details > .field-employer-company-name-help {
+  grid-column: 1 / -1 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  margin-top: -4px !important;
+}
+
+/* INDUSTRY TYPE */
+fieldset.panel-wrapper.field-employer-details > .field-industry-type {
+  grid-column: 1 / span 6 !important;
+}
+
+/* INDUSTRY HELP */
+fieldset.panel-wrapper.field-employer-details > .field-industry-type-help {
+  grid-column: 1 / -1 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  margin-top: -4px !important;
+}
+
+/* LABELS */
+fieldset.panel-wrapper.field-employer-details label.field-label {
+  display: block !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  margin: 0 0 5px 2px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  position: static !important;
+}
+
+/* INPUTS + SELECTS */
+fieldset.panel-wrapper.field-employer-details input,
+fieldset.panel-wrapper.field-employer-details select {
+  width: 100% !important;
+  height: 42px !important;
+  border: 1px solid #dfe5ef !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  background: #fff !important;
+  color: #202636 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  box-sizing: border-box !important;
+}
+
+/* DISCLAIMER BAR */
+fieldset.panel-wrapper.field-employer-details > .field-disclaimer-text-for-selected-industry,
+fieldset.panel-wrapper.field-employer-details > [class*="disclaimer"] {
+  grid-column: 1 / -1 !important;
+  background: #f3f6ff !important;
+  color: #315fdb !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  padding: 9px 12px !important;
+  border-radius: 6px !important;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  fieldset.panel-wrapper.field-employer-details {
+    grid-template-columns: 1fr !important;
+  }
+
+  fieldset.panel-wrapper.field-employer-details > .field-wrapper {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* TARGET ONLY THIS HELP TEXT */
+fieldset.panel-wrapper.field-employer-details 
+.field-employer-company-name-help p,
+fieldset.panel-wrapper.field-employer-details 
+.field-industry-type-help p {
+
+  font-size: 12px !important;      /* smaller */
+  font-weight: 400 !important;     /* lighter clean look */
+  color: #6f7a8a !important;       /* subtle grey */
+  line-height: 1.4 !important;
+
+  margin: 4px 0 !important;        /* reduce spacing */
+}
+
+/* INCOME DETAILS CARD */
+fieldset.panel-wrapper.field-income-details {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 16px 16px;
+  background: #fff;
+  border: 1px solid #e6eaf2;
+  border-radius: 14px;
+  box-sizing: border-box;
+
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 16px !important;
+  row-gap: 10px !important;
+}
+
+/* HEADER (like Image 2) */
+fieldset.panel-wrapper.field-income-details > legend.field-label {
+  grid-column: 1 / -1 !important;
+  width: calc(100% + 32px);
+  margin: 0 0 12px -16px;
+  padding: 12px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #dce8fb;
+  border-radius: 14px 14px 0 0;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #1b2559 !important;
+}
+
+/* ARROW ICON */
+fieldset.panel-wrapper.field-income-details > legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+/* OPEN STATE */
+fieldset.panel-wrapper.field-income-details[data-index="1"] 
+> legend.field-label::after {
+  transform: rotate(225deg);
+}
+
+/* FIELD WRAPPERS RESET */
+fieldset.panel-wrapper.field-income-details > .field-wrapper {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+/* TWO FIELDS SIDE BY SIDE */
+fieldset.panel-wrapper.field-income-details > .field-monthly-net-income {
+  grid-column: 1 / span 6 !important;
+}
+
+fieldset.panel-wrapper.field-income-details > .field-ongoing-emis {
+  grid-column: 7 / span 6 !important;
+}
+
+/* LABELS (small + clean) */
+fieldset.panel-wrapper.field-income-details label.field-label {
+  display: block !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  margin-bottom: 4px !important;
+}
+
+/* INPUTS (compact like Image 2) */
+fieldset.panel-wrapper.field-income-details input {
+  width: 100% !important;
+  height: 36px !important;
+  border: 1px solid #e1e6ef !important;
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1f2a44 !important;
+
+  background: #fff !important;
+  box-sizing: border-box !important;
+}
+
+/* PLACEHOLDER STYLE */
+fieldset.panel-wrapper.field-income-details input::placeholder {
+  color: #9aa3b2;
+  font-weight: 500;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  fieldset.panel-wrapper.field-income-details {
+    grid-template-columns: 1fr !important;
+  }
+
+  fieldset.panel-wrapper.field-income-details > .field-wrapper {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* MAKE INCOME HEADER SAME AS EMPLOYER */
+fieldset.panel-wrapper.field-income-details > legend.field-label {
+  grid-column: 1 / -1 !important;
+
+  width: calc(100% + 32px) !important;
+  margin: 0 0 14px -16px !important;
+  padding: 14px 18px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  background: #dce8fb !important;   /* same blue */
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #17213b !important;
+}
+
+/* MATCH ARROW STYLE */
+fieldset.panel-wrapper.field-income-details > legend.field-label::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg);   /* closed */
+  transition: transform 0.2s ease;
+}
+
+/* OPEN STATE (same as employer) */
+fieldset.panel-wrapper.field-income-details[data-index="1"] 
+> legend.field-label::after {
+  transform: rotate(225deg);
+}
+
+/* WORK EMAIL CARD */
+fieldset.panel-wrapper.field-work-email-id-panel {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 16px 16px;
+  background: #fff;
+  border: 1px solid #e6eaf2;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+fieldset.panel-wrapper.field-work-email-id-panel > legend.field-label {
+  width: calc(100% + 32px) !important;
+  margin: 0 0 14px -16px !important;
+  padding: 10px 16px !important;
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #14204a !important;
+}
+
+/* LABEL - ONE LINE */
+fieldset.panel-wrapper.field-work-email-id-panel label.field-label {
+  display: block !important;
+  white-space: nowrap !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  margin: 0 0 5px 0 !important;
+}
+
+/* INPUT WRAPPER */
+fieldset.panel-wrapper.field-work-email-id-panel .text-wrapper {
+  position: relative !important;
+  width: 430px !important;
+  max-width: 100% !important;
+}
+
+/* INPUT */
+fieldset.panel-wrapper.field-work-email-id-panel input {
+  width: 100% !important;
+  height: 36px !important;
+  padding: 6px 78px 6px 12px !important; /* space for Verify */
+  border: 1px solid #dfe5ef !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1f2a44 !important;
+  box-sizing: border-box !important;
+}
+
+/* VERIFY BUTTON INSIDE TEXTBOX */
+fieldset.panel-wrapper.field-work-email-id-panel .field-verify-email {
+  position: absolute !important;
+  left: 350px !important;
+  margin-top: -36px !important;
+  width: 78px !important;
+  height: 36px !important;
+  padding: 0 !important;
+}
+
+fieldset.panel-wrapper.field-work-email-id-panel button {
+  width: 100% !important;
+  height: 36px !important;
+  border: 0 !important;
+  border-left: 1px solid #dfe5ef !important;
+  border-radius: 0 8px 8px 0 !important;
+  background: transparent !important;
+
+  color: #2f63e5 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+/* HELP TEXT */
+fieldset.panel-wrapper.field-work-email-id-panel .plain-text-wrapper p,
+fieldset.panel-wrapper.field-work-email-id-panel [class*="help"] p {
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  margin: 8px 0 0 0 !important;
+}
+
+/* REMOVE EXISTING ICON (if any font/icon is used) */
+fieldset.panel-wrapper.field-employer-details 
+> legend.field-label i,
+fieldset.panel-wrapper.field-employer-details 
+> legend.field-label svg {
+  display: none !important;
+}
+
+/* ADD SAME CHEVRON ARROW */
+fieldset.panel-wrapper.field-employer-details 
+> legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+
+  transform: rotate(45deg); /* closed */
+  transition: transform 0.2s ease;
+
+  margin-left: auto;
+}
+
+/* OPEN STATE (match others) */
+fieldset.panel-wrapper.field-employer-details[data-index="0"] 
+> legend.field-label::after {
+  transform: rotate(225deg);
+}
+
+/* TYPE OF LOAN CARD */
+fieldset.panel-wrapper.field-type-of-loan-panel {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 16px 16px !important;
+  background: #fff !important;
+  border: 1px solid #e6eaf2 !important;
+  border-radius: 14px !important;
+  box-sizing: border-box !important;
+}
+
+/* HEADER */
+fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label {
+  width: calc(100% + 32px) !important;
+  margin: 0 0 14px -16px !important;
+  padding: 10px 16px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #14204a !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
+}
+
+/* HEADER ARROW */
+fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg);
+  margin-left: auto;
+}
+
+/* FIELD WRAPPER */
+fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper {
+  width: 260px !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* LABEL */
+fieldset.panel-wrapper.field-type-of-loan-panel label.field-label {
+  display: block !important;
+  white-space: nowrap !important;
+
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+
+  margin: 0 0 5px 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  position: static !important;
+}
+
+/* SELECT */
+fieldset.panel-wrapper.field-type-of-loan-panel select {
+  width: 100% !important;
+  height: 36px !important;
+
+  border: 1px solid #dfe5ef !important;
+  border-radius: 8px !important;
+
+  padding: 6px 12px !important;
+  background: #fff !important;
+
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1f2a44 !important;
+
+  box-sizing: border-box !important;
+  box-shadow: none !important;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper {
+    width: 100% !important;
+  }
+}
+
+/* REMOVE EXISTING ICON */
+fieldset.panel-wrapper.field-type-of-loan-panel 
+> legend.field-label i,
+fieldset.panel-wrapper.field-type-of-loan-panel 
+> legend.field-label svg {
+  display: none !important;
+}
+
+/* ADD SAME CHEVRON */
+fieldset.panel-wrapper.field-type-of-loan-panel 
+> legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+
+  transform: rotate(45deg); /* default */
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+/* OPEN STATE (UP ARROW like others) */
+fieldset.panel-wrapper.field-type-of-loan-panel[data-index="3"] 
+> legend.field-label::after {
+  transform: rotate(225deg);
+}
+
+fieldset.panel-wrapper.field-type-of-loan-panel {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* FIX TYPE OF LOAN HEADER WIDTH */
+fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label {
+  width: calc(100% + 32px) !important;   /* stretch full */
+  margin-left: -16px !important;         /* align left */
+  margin-right: -16px !important;        /* align right */
+}
+
+fieldset.panel-wrapper.field-type-of-loan-panel {
+  padding: 0 16px 20px !important;  /* same as others */
+  box-sizing: border-box !important;
+}
