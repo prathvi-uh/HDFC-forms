@@ -2997,3 +2997,22 @@ fieldset.panel-wrapper.field-e-income
 
   object-fit: contain !important;
 }
+
+/* REMOVE CENTER ALIGNMENT */
+fieldset.panel-wrapper.field-e-income {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  width: 100% !important;
+}
+
+/* MAKE SECTION FULL WIDTH */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  max-width: 100% !important;
+}
+
+/* ALIGN WITH CONFIRM BUTTON */
+.guideContainerNode {
+  padding-left: 24px !important; /* same as confirm button */
+}
