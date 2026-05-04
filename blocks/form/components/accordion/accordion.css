@@ -276,3 +276,651 @@ input[name="residence_type"] {
   min-width: 100% !important;
 }
 
+/* tier-1 modified*/
+/* MAKE LOAN + PERSONAL HEADERS LIKE OTHER COMPACT ACCORDIONS */
+main .form form .field-loan-details,
+main .form form .field-personal-details {
+  max-width: 890px !important;
+  margin: 18px auto !important;
+  padding: 0 !important;
+  background: #fff !important;
+  border: 1px solid #e6eaf2 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* HEADER ONLY */
+main .form form .field-loan-details > legend.field-label.accordion-legend,
+main .form form .field-personal-details > legend.field-label.accordion-legend {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 10px 16px 10px 46px !important;
+
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #14204a !important;
+  line-height: 1.2 !important;
+
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+
+/* KEEP EXISTING ICON POSITION */
+main .form form .field-loan-details > legend.field-label.accordion-legend::before,
+main .form form .field-personal-details > legend.field-label.accordion-legend::before {
+  left: 18px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* ARROW SAME AS OTHER SECTIONS */
+main .form form .field-loan-details > legend.field-label.accordion-legend::after,
+main .form form .field-personal-details > legend.field-label.accordion-legend::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+
+  position: absolute;
+  right: 18px;
+  top: 50%;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+
+  transform: translateY(-50%) rotate(45deg) !important;
+}
+
+/* REMOVE COLOUR UNDER HEADING WHEN COLLAPSED/EMPTY */
+main .form form .field-loan-details > legend.field-label.accordion-legend + *,
+main .form form .field-personal-details > legend.field-label.accordion-legend + * {
+  margin-top: 14px;
+}
+
+/*tier-2 */
+/* SALARY + OFFICE CARD */
+fieldset.panel-wrapper.field-salary-account-details,
+fieldset.panel-wrapper.field-office-address-panel {
+  max-width: 890px !important;
+  margin: 18px auto !important;
+  padding: 0 !important;
+  background: #fff !important;
+  border: 1px solid #e6eaf2 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* HEADER */
+fieldset.panel-wrapper.field-salary-account-details > legend.field-label,
+fieldset.panel-wrapper.field-office-address-panel > legend.field-label {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 10px 16px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #14204a !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
+}
+
+/* SALARY ICON */
+fieldset.panel-wrapper.field-salary-account-details > legend.field-label::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 2 7v2h20V7L12 2zm-8 9v8h4v-8H4zm6 0v8h4v-8h-4zm6 0v8h4v-8h-4zM2 21h20v-2H2v2z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* OFFICE ICON */
+fieldset.panel-wrapper.field-office-address-panel > legend.field-label::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232f63e5' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ARROW ALWAYS DOWN */
+fieldset.panel-wrapper.field-salary-account-details > legend.field-label::after,
+fieldset.panel-wrapper.field-office-address-panel > legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  margin-left: auto !important;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg) !important;
+}
+
+/* SALARY LAYOUT */
+fieldset.panel-wrapper.field-salary-account-details {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
+}
+
+fieldset.panel-wrapper.field-salary-account-details > legend.field-label {
+  grid-column: 1 / -1 !important;
+}
+
+fieldset.panel-wrapper.field-salary-account-details > .field-salary-ac-number {
+  grid-column: 1 / span 4 !important;
+}
+
+fieldset.panel-wrapper.field-salary-account-details > .field-ifsc {
+  grid-column: 5 / span 4 !important;
+}
+
+fieldset.panel-wrapper.field-salary-account-details > .field-bank-name {
+  grid-column: 9 / span 4 !important;
+}
+
+/* BODY FIELD STYLE */
+fieldset.panel-wrapper.field-salary-account-details > .field-wrapper,
+fieldset.panel-wrapper.field-office-address-panel > .field-wrapper {
+  min-height: auto !important;
+  height: auto !important;
+
+  margin: 10px 16px !important;
+  padding: 3px 0 3px 10px !important;
+
+  background: #fff !important;
+  border: 0 !important;
+  border-left: 3px solid #c8d6f8 !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* SALARY FIELD MARGIN FIX */
+fieldset.panel-wrapper.field-salary-account-details > .field-wrapper {
+  margin: 10px 0 14px !important;
+}
+
+/* LABELS */
+fieldset.panel-wrapper.field-salary-account-details label.field-label,
+fieldset.panel-wrapper.field-office-address-panel label.field-label {
+  display: block !important;
+
+  font-size: 10.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  line-height: 1.2 !important;
+
+  margin: 0 0 3px 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  position: static !important;
+}
+
+/* TEXT INPUT LOOK */
+fieldset.panel-wrapper.field-salary-account-details input,
+fieldset.panel-wrapper.field-office-address-panel input,
+fieldset.panel-wrapper.field-office-address-panel textarea {
+  width: 100% !important;
+  height: 20px !important;
+  min-height: 20px !important;
+
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  resize: none !important;
+
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #1f2a44 !important;
+  line-height: 1.2 !important;
+
+  box-sizing: border-box !important;
+}
+
+/* FOCUS */
+fieldset.panel-wrapper.field-salary-account-details input:focus,
+fieldset.panel-wrapper.field-office-address-panel input:focus,
+fieldset.panel-wrapper.field-office-address-panel textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  fieldset.panel-wrapper.field-salary-account-details {
+    grid-template-columns: 1fr !important;
+  }
+
+  fieldset.panel-wrapper.field-salary-account-details > .field-wrapper {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* REFERENCE DETAILS CARD */
+fieldset.panel-wrapper.field-reference-details-panel {
+  max-width: 890px !important;
+  margin: 18px auto !important;
+  padding: 0 !important;
+  background: #fff !important;
+  border: 1px solid #e6eaf2 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
+}
+
+/* HEADER */
+fieldset.panel-wrapper.field-reference-details-panel > legend.field-label {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 10px 16px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #14204a !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
+}
+
+/* REFERENCE ICON */
+fieldset.panel-wrapper.field-reference-details-panel > legend.field-label::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232f63e5' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='8' cy='8' r='3'/%3E%3Ccircle cx='16' cy='8' r='3'/%3E%3Ccircle cx='12' cy='16' r='3'/%3E%3Cpath d='M10.3 9.8 11 14M13.7 9.8 13 14'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ARROW ALWAYS DOWN */
+fieldset.panel-wrapper.field-reference-details-panel > legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  margin-left: auto !important;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg) !important;
+}
+
+/* FIELD POSITIONS */
+fieldset.panel-wrapper.field-reference-details-panel > .field-full-name {
+  grid-column: 1 / span 6 !important;
+}
+
+fieldset.panel-wrapper.field-reference-details-panel > .field-mobile-number {
+  grid-column: 7 / span 6 !important;
+}
+
+/* FIELD WRAPPERS */
+fieldset.panel-wrapper.field-reference-details-panel > .field-wrapper {
+  margin: 10px 0 14px !important;
+  padding: 3px 0 3px 10px !important;
+
+  background: #fff !important;
+  border: 0 !important;
+  border-left: 3px solid #c8d6f8 !important;
+  border-radius: 0 !important;
+
+  min-height: auto !important;
+  height: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* LABELS */
+fieldset.panel-wrapper.field-reference-details-panel label.field-label {
+  display: block !important;
+  font-size: 10.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  line-height: 1.2 !important;
+
+  margin: 0 0 3px 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  position: static !important;
+}
+
+/* INPUT TEXT STYLE */
+fieldset.panel-wrapper.field-reference-details-panel input {
+  width: 100% !important;
+  height: 20px !important;
+  min-height: 20px !important;
+
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #1f2a44 !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
+}
+
+fieldset.panel-wrapper.field-reference-details-panel input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  fieldset.panel-wrapper.field-reference-details-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  fieldset.panel-wrapper.field-reference-details-panel > .field-wrapper {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* ===============================
+   VERIFY EMAIL PANEL - CLEAN FINAL
+================================= */
+
+fieldset.panel-wrapper.field-verify-email-id-panel {
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 16px 16px;
+  background: #fff;
+  border: 1px solid #e6eaf2;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+/* ===== HEADER ===== */
+fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label {
+  width: calc(100% + 32px);
+  margin: 0 0 14px -16px;
+  padding: 10px 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: #dce8fb;
+  border-radius: 14px 14px 0 0;
+
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #14204a;
+}
+
+/* ICON */
+fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232f63e5' stroke-width='2' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+
+/* ARROW (UP like IMAGE 2) */
+fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label::after {
+  content: "";
+  margin-left: auto;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(225deg);
+}
+
+/* ===== TWO COLUMN LAYOUT ===== */
+.field-verify-email-id-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+}
+
+/* EACH COLUMN */
+.field-verify-email-id-panel .field-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* LABEL */
+.field-verify-email-id-panel label.field-label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* INPUT + BUTTON ROW */
+.field-verify-email-id-panel .email-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* INPUT */
+.field-verify-email-id-panel input {
+  flex: 1;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #1f2a44;
+}
+
+/* VERIFY BUTTON (MATCH IMAGE 2) */
+.field-verify-email-id-panel button {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 10px;
+
+  border: 1px solid #cfd8f6;
+  background: #fff;
+  color: #2f63e5;
+
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* HOVER */
+.field-verify-email-id-panel button:hover {
+  background: #f4f7ff;
+}
+
+/* HELP TEXT */
+.field-verify-email-id-panel p {
+  font-size: 12px;
+  color: #7a8494;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .field-verify-email-id-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FIX VERIFY PANEL LAYOUT */
+fieldset.panel-wrapper.field-verify-email-id-panel {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 14px !important;
+  row-gap: 10px !important;
+}
+
+/* Personal input */
+fieldset.panel-wrapper.field-verify-email-id-panel .field-personal-email-id {
+  grid-column: 1 / span 4 !important;
+}
+
+/* Personal verify button */
+fieldset.panel-wrapper.field-verify-email-id-panel .field-verify-personal-email-button {
+  grid-column: 5 / span 1 !important;
+  align-self: end !important;
+}
+
+/* Work input */
+fieldset.panel-wrapper.field-verify-email-id-panel .field-work-email-id {
+  grid-column: 7 / span 4 !important;
+}
+
+/* Work verify button */
+fieldset.panel-wrapper.field-verify-email-id-panel .field-verify-work-email-button {
+  grid-column: 11 / span 1 !important;
+  align-self: end !important;
+}
+
+/* Reset wrappers */
+fieldset.panel-wrapper.field-verify-email-id-panel .field-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* Inputs */
+fieldset.panel-wrapper.field-verify-email-id-panel input {
+  width: 100% !important;
+  height: 34px !important;
+  font-size: 12px !important;
+}
+
+/* Buttons */
+fieldset.panel-wrapper.field-verify-email-id-panel button {
+  width: 72px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+
+  background: #fff !important;
+  color: #2f63e5 !important;
+  border: 1px solid #cfd8f6 !important;
+
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+/* Help text */
+fieldset.panel-wrapper.field-verify-email-id-panel .field-personal-email-help {
+  grid-column: 1 / span 5 !important;
+}
+
+fieldset.panel-wrapper.field-verify-email-id-panel .field-work-email-help {
+  grid-column: 7 / span 5 !important;
+}
+
+fieldset.panel-wrapper.field-verify-email-id-panel p {
+  font-size: 11.5px !important;
+  line-height: 1.35 !important;
+}
+
+/* FIX VERIFY EMAIL WIDTH + POSITION */
+fieldset.panel-wrapper.field-verify-email-id-panel {
+  max-width: 890px !important;
+  margin: 18px auto !important;
+  padding: 0 16px 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* HEADER SAME WIDTH AS CARD */
+fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label {
+  width: calc(100% + 32px) !important;
+  margin: 0 0 14px -16px !important;
+  padding: 10px 16px !important;
+}
+
+/* FIX ARROW LIKE OTHERS */
+fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label::after {
+  transform: rotate(45deg) !important;
+}
+
+/* MOVE CONTENT INSIDE CARD */
+fieldset.panel-wrapper.field-verify-email-id-panel .field-wrapper {
+  margin: 0 !important;
+}
+
+/* ALIGN EMAIL INPUTS + BUTTONS */
+fieldset.panel-wrapper.field-verify-email-id-panel {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
+  row-gap: 10px !important;
+}
+
+fieldset.panel-wrapper.field-verify-email-id-panel .field-personal-email-id {
+  grid-column: 1 / span 4 !important;
+}
+
+fieldset.panel-wrapper.field-verify-email-id-panel .field-verify-personal-email-button {
+  grid-column: 5 / span 1 !important;
+  align-self: end !important;
+}
+
+fieldset.panel-wrapper.field-verify-email-id-panel .field-work-email-id {
+  grid-column: 7 / span 4 !important;
+}
+
+fieldset.panel-wrapper.field-verify-email-id-panel .field-verify-work-email-button {
+  grid-column: 11 / span 1 !important;
+  align-self: end !important;
+}
+
+fieldset.panel-wrapper.field-verify-email-id-panel input,
+fieldset.panel-wrapper.field-verify-email-id-panel button {
+  height: 34px !important;
+}
+
+/* ===== VERIFY EMAIL PANEL CLOSED BY DEFAULT ===== */
+fieldset.panel-wrapper.field-verify-email-id-panel.accordion-collapse > .field-wrapper {
+  display: none !important;
+}
+
+/* ===== OPEN STATE ===== */
+fieldset.panel-wrapper.field-verify-email-id-panel:not(.accordion-collapse) > .field-wrapper {
+  display: block !important;
+}
+
+/* ===== ARROW DEFAULT (DOWN) ===== */
+fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  margin-left: auto;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+
+  transform: rotate(45deg); /* DOWN */
+}
+
+/* ===== ARROW WHEN OPEN (UP) ===== */
+fieldset.panel-wrapper.field-verify-email-id-panel:not(.accordion-collapse) > legend.field-label::after {
+  transform: rotate(225deg); /* UP */
+}
+
