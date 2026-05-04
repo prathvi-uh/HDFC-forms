@@ -2852,116 +2852,72 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
   box-sizing: border-box !important;
 }
 
-/* BANK SELECT PANEL */
+/* MAIN BANK PANEL */
 fieldset.panel-wrapper.field-e-income {
   max-width: 890px !important;
-  margin: 18px auto !important;
-  padding: 0 18px 18px !important;
+  width: 100% !important;
+  margin: 18px 0 !important;
+  padding: 0 26px 26px !important;
   background: #fff !important;
   border: 1px solid #e6eaf2 !important;
   border-radius: 14px !important;
-  overflow: hidden !important;
   box-sizing: border-box !important;
+  overflow: hidden !important;
 
   display: grid !important;
   grid-template-columns: repeat(12, 1fr) !important;
   column-gap: 18px !important;
+  row-gap: 28px !important;
+  align-items: center !important;
 }
 
 /* HEADER */
 fieldset.panel-wrapper.field-e-income > legend.field-label {
   grid-column: 1 / -1 !important;
-  width: calc(100% + 36px) !important;
-  margin: 0 0 14px -18px !important;
-  padding: 12px 18px 12px 46px !important;
-
+  width: calc(100% + 52px) !important;
+  margin: 0 0 6px -26px !important;
+  padding: 14px 24px 14px 58px !important;
   background: #dce8fb !important;
   border-radius: 14px 14px 0 0 !important;
-
-  font-size: 14px !important;
+  font-size: 15px !important;
   font-weight: 700 !important;
-  color: #14204a !important;
-
+  color: #001b4d !important;
   position: relative !important;
   box-sizing: border-box !important;
 }
 
-/* ICON */
+/* HEADER ICON */
 fieldset.panel-wrapper.field-e-income > legend.field-label::before {
   content: "";
   position: absolute;
-  left: 18px;
+  left: 26px;
   top: 50%;
   transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-
+  width: 17px;
+  height: 17px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
-/* ARROW */
+/* HEADER ARROW */
 fieldset.panel-wrapper.field-e-income > legend.field-label::after {
   content: "";
   position: absolute;
-  right: 18px;
+  right: 26px;
   top: 50%;
-  width: 10px;
-  height: 10px;
-
-  border-right: 2px solid #2f63e5;
-  border-bottom: 2px solid #2f63e5;
-  transform: translateY(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  border-right: 3px solid #2f63e5;
+  border-bottom: 3px solid #2f63e5;
+  transform: translateY(-60%) rotate(45deg);
 }
 
-fieldset.panel-wrapper.field-e-income {
-  display: grid !important;
-  grid-template-columns: repeat(12, 1fr) !important;
-  align-items: center !important;
-  column-gap: 18px !important;
-}
-
-/* LOGO ROW LEFT */
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo {
-  grid-column: 1 / span 7 !important;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 14px !important;
-  flex-wrap: nowrap !important;
-  margin: 0 !important;
-}
-
-/* EACH LOGO CARD */
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .image-wrapper,
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .field-wrapper {
-  width: 58px !important;
-  height: 58px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border: 1px solid #dfe6f2 !important;
-  border-radius: 10px !important;
-  background: #fff !important;
-  margin: 0 !important;
-  padding: 6px !important;
-}
-
-/* LOGO IMAGE SIZE */
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo img {
-  width: 36px !important;
-  height: 36px !important;
-  object-fit: contain !important;
-}
-
-/* DROPDOWN RIGHT */
+/* DROPDOWN */
 fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank {
   grid-column: 8 / span 5 !important;
+  grid-row: 2 !important;
   margin: 0 !important;
-  padding: 0 !important;
-  align-self: center !important;
 }
 
-/* DROPDOWN STYLE */
 fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select {
   width: 100% !important;
   height: 52px !important;
@@ -2970,49 +2926,41 @@ fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select {
   background: #fff !important;
   padding: 0 16px !important;
   font-size: 15px !important;
-  font-weight: 500 !important;
   color: #7b8494 !important;
+}
+
+/* LOGO ROW */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo {
+  grid-column: 1 / span 7 !important;
+  grid-row: 3 !important;
+  display: flex !important;
+  gap: 18px !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* LOGO CARD */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .image-wrapper,
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .field-wrapper {
+  width: 82px !important;
+  height: 82px !important;
+  min-width: 82px !important;
+  border: 1px solid #dfe6f2 !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px !important;
+  margin: 0 !important;
   box-sizing: border-box !important;
 }
 
-/* LOGO CARD (outer box) */
-fieldset.panel-wrapper.field-e-income 
-> .panel-wrapper.field-banklogo .image-wrapper,
-fieldset.panel-wrapper.field-e-income 
-> .panel-wrapper.field-banklogo .field-wrapper {
-
-  width: 80px !important;
-  height: 80px !important;
-
-  border-radius: 12px !important;
-  padding: 10px !important;
-}
-
-/* LOGO IMAGE inside */
-fieldset.panel-wrapper.field-e-income 
-> .panel-wrapper.field-banklogo img {
-
-  width: 52px !important;
-  height: 52px !important;
-
+/* LOGO IMAGE */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo img {
+  width: 54px !important;
+  height: 54px !important;
   object-fit: contain !important;
-}
-
-/* REMOVE CENTER ALIGNMENT */
-fieldset.panel-wrapper.field-e-income {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  width: 100% !important;
-}
-
-/* MAKE SECTION FULL WIDTH */
-fieldset.panel-wrapper.field-e-income > .panel-wrapper {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  max-width: 100% !important;
-}
-
-/* ALIGN WITH CONFIRM BUTTON */
-.guideContainerNode {
-  padding-left: 24px !important; /* same as confirm button */
 }
