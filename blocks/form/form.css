@@ -2974,3 +2974,26 @@ fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select {
   color: #7b8494 !important;
   box-sizing: border-box !important;
 }
+
+/* LOGO CARD (outer box) */
+fieldset.panel-wrapper.field-e-income 
+> .panel-wrapper.field-banklogo .image-wrapper,
+fieldset.panel-wrapper.field-e-income 
+> .panel-wrapper.field-banklogo .field-wrapper {
+
+  width: 80px !important;
+  height: 80px !important;
+
+  border-radius: 12px !important;
+  padding: 10px !important;
+}
+
+/* LOGO IMAGE inside */
+fieldset.panel-wrapper.field-e-income 
+> .panel-wrapper.field-banklogo img {
+
+  width: 52px !important;
+  height: 52px !important;
+
+  object-fit: contain !important;
+}
