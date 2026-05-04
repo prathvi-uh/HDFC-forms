@@ -2913,28 +2913,64 @@ fieldset.panel-wrapper.field-e-income > legend.field-label::after {
   transform: translateY(-50%) rotate(45deg);
 }
 
-/* DROPDOWN WRAPPER - MOVE TO RIGHT */
+fieldset.panel-wrapper.field-e-income {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  align-items: center !important;
+  column-gap: 18px !important;
+}
+
+/* LOGO ROW LEFT */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo {
+  grid-column: 1 / span 7 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 14px !important;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+}
+
+/* EACH LOGO CARD */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .image-wrapper,
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .field-wrapper {
+  width: 58px !important;
+  height: 58px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid #dfe6f2 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 6px !important;
+}
+
+/* LOGO IMAGE SIZE */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo img {
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: contain !important;
+}
+
+/* DROPDOWN RIGHT */
 fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank {
   grid-column: 8 / span 5 !important;
   margin: 0 !important;
   padding: 0 !important;
-  background: transparent !important;
+  align-self: center !important;
 }
 
-/* DROPDOWN */
-fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select,
-fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank input,
-fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank .dropdown {
+/* DROPDOWN STYLE */
+fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select {
   width: 100% !important;
-  height: 40px !important;
-
+  height: 52px !important;
   border: 1px solid #d6deea !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   background: #fff !important;
-
-  padding: 0 12px !important;
-  font-size: 13px !important;
+  padding: 0 16px !important;
+  font-size: 15px !important;
   font-weight: 500 !important;
-  color: #1f2a44 !important;
+  color: #7b8494 !important;
   box-sizing: border-box !important;
 }
