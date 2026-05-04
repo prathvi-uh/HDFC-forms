@@ -2852,31 +2852,28 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
   box-sizing: border-box !important;
 }
 
-/* ========================= */
-/* BANK SELECT PANEL (FINAL) */
-/* ========================= */
-
+/* BANK SELECT PANEL */
 fieldset.panel-wrapper.field-e-income {
   max-width: 890px !important;
-
-  /* LEFT ALIGN PANEL */
-  margin: 18px 0 18px 24px !important;
-
-  padding: 0 !important;
-  background: #ffffff !important;
+  margin: 18px auto !important;
+  padding: 0 18px 18px !important;
+  background: #fff !important;
   border: 1px solid #e6eaf2 !important;
   border-radius: 14px !important;
   overflow: hidden !important;
+  box-sizing: border-box !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
 }
 
 /* HEADER */
 fieldset.panel-wrapper.field-e-income > legend.field-label {
-  width: 100% !important;
-  margin: 0 !important;
+  grid-column: 1 / -1 !important;
+  width: calc(100% + 36px) !important;
+  margin: 0 0 14px -18px !important;
   padding: 12px 18px 12px 46px !important;
-
-  display: flex;
-  align-items: center;
 
   background: #dce8fb !important;
   border-radius: 14px 14px 0 0 !important;
@@ -2885,7 +2882,8 @@ fieldset.panel-wrapper.field-e-income > legend.field-label {
   font-weight: 700 !important;
   color: #14204a !important;
 
-  position: relative;
+  position: relative !important;
+  box-sizing: border-box !important;
 }
 
 /* ICON */
@@ -2895,40 +2893,48 @@ fieldset.panel-wrapper.field-e-income > legend.field-label::before {
   left: 18px;
   top: 50%;
   transform: translateY(-50%);
-
   width: 16px;
   height: 16px;
 
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center/contain;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
-/* REMOVE INNER BG */
-fieldset.panel-wrapper.field-e-income > *:not(legend) {
+/* ARROW */
+fieldset.panel-wrapper.field-e-income > legend.field-label::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* DROPDOWN WRAPPER - MOVE TO RIGHT */
+fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank {
+  grid-column: 8 / span 5 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   background: transparent !important;
 }
 
-/* INNER WRAPPER */
-fieldset.panel-wrapper.field-e-income .drop-down-wrapper {
-  padding: 14px 18px !important;
-  margin: 0 !important;
-
-  /* 👉 MOVE CONTENT TO RIGHT */
-  display: flex !important;
-  justify-content: flex-end !important;
-}
-
-/* DROPDOWN STYLE */
-fieldset.panel-wrapper.field-e-income select,
-fieldset.panel-wrapper.field-e-income .dropdown,
-fieldset.panel-wrapper.field-e-income input {
-  width: 260px !important; /* 👈 fixed width like UI */
+/* DROPDOWN */
+fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select,
+fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank input,
+fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank .dropdown {
+  width: 100% !important;
   height: 40px !important;
 
-  border-radius: 8px !important;
   border: 1px solid #d6deea !important;
+  border-radius: 8px !important;
   background: #fff !important;
 
   padding: 0 12px !important;
   font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1f2a44 !important;
+  box-sizing: border-box !important;
 }
-
