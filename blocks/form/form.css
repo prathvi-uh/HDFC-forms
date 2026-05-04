@@ -2948,22 +2948,3 @@ fieldset.panel-wrapper.field-e-income input {
   font-size: 13px !important;
 }
 
-/* MOVE BANK DROPDOWN TO RIGHT SIDE */
-fieldset.panel-wrapper.field-e-income .drop-down-wrapper {
-  display: flex !important;
-  justify-content: flex-end !important;
-  padding: 14px 28px !important;
-}
-
-/* DROPDOWN WIDTH LIKE IMAGE 2 */
-fieldset.panel-wrapper.field-e-income .drop-down-wrapper select,
-fieldset.panel-wrapper.field-e-income .drop-down-wrapper input,
-fieldset.panel-wrapper.field-e-income .drop-down-wrapper .dropdown {
-  width: 320px !important;
-  max-width: 320px !important;
-}
-
-fieldset.panel-wrapper.field-e-income > .drop-down-wrapper {
-  margin-left: auto !important;
-  width: fit-content !important;
-}
