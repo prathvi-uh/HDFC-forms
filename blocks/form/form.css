@@ -2853,21 +2853,23 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
 }
 
 /* ========================= */
-/* BANK SELECT PANEL (FIXED) */
+/* BANK SELECT PANEL (FINAL) */
 /* ========================= */
 
 fieldset.panel-wrapper.field-e-income {
   max-width: 890px !important;
-  margin: 18px auto !important;
-  padding: 0 !important;
 
+  /* LEFT ALIGN PANEL */
+  margin: 18px 0 18px 24px !important;
+
+  padding: 0 !important;
   background: #ffffff !important;
   border: 1px solid #e6eaf2 !important;
   border-radius: 14px !important;
   overflow: hidden !important;
 }
 
-/* HEADER STYLE LIKE OTHER SECTIONS */
+/* HEADER */
 fieldset.panel-wrapper.field-e-income > legend.field-label {
   width: 100% !important;
   margin: 0 !important;
@@ -2884,10 +2886,9 @@ fieldset.panel-wrapper.field-e-income > legend.field-label {
   color: #14204a !important;
 
   position: relative;
-  box-sizing: border-box;
 }
 
-/* ICON (LEFT) */
+/* ICON */
 fieldset.panel-wrapper.field-e-income > legend.field-label::before {
   content: "";
   position: absolute;
@@ -2901,7 +2902,7 @@ fieldset.panel-wrapper.field-e-income > legend.field-label::before {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center/contain;
 }
 
-/* RIGHT ARROW */
+/* ARROW */
 fieldset.panel-wrapper.field-e-income > legend.field-label::after {
   content: "";
   width: 10px;
@@ -2914,33 +2915,35 @@ fieldset.panel-wrapper.field-e-income > legend.field-label::after {
   border-right: 2px solid #2f63e5;
   border-bottom: 2px solid #2f63e5;
 
-  transform: translateY(-50%) rotate(45deg); /* down arrow */
+  transform: translateY(-50%) rotate(45deg);
 }
 
-/* REMOVE BIG BLUE BACKGROUND INSIDE */
+/* REMOVE INNER BG */
 fieldset.panel-wrapper.field-e-income > *:not(legend) {
   background: transparent !important;
 }
 
-/* INNER CONTENT SPACING */
+/* INNER WRAPPER */
 fieldset.panel-wrapper.field-e-income .drop-down-wrapper {
   padding: 14px 18px !important;
   margin: 0 !important;
+
+  /* 👉 MOVE CONTENT TO RIGHT */
+  display: flex !important;
+  justify-content: flex-end !important;
 }
 
-/* DROPDOWN LOOK LIKE IMAGE 2 */
+/* DROPDOWN STYLE */
 fieldset.panel-wrapper.field-e-income select,
 fieldset.panel-wrapper.field-e-income .dropdown,
 fieldset.panel-wrapper.field-e-income input {
+  width: 260px !important; /* 👈 fixed width like UI */
   height: 40px !important;
+
   border-radius: 8px !important;
   border: 1px solid #d6deea !important;
   background: #fff !important;
+
   padding: 0 12px !important;
   font-size: 13px !important;
-}
-
-/* REMOVE EXTRA GAP BELOW HEADER */
-fieldset.panel-wrapper.field-e-income legend + * {
-  margin-top: 0 !important;
 }
