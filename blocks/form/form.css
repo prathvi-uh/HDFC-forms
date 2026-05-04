@@ -2851,3 +2851,96 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
   padding: 0 16px 20px !important;  /* same as others */
   box-sizing: border-box !important;
 }
+
+/* ========================= */
+/* BANK SELECT PANEL (FIXED) */
+/* ========================= */
+
+fieldset.panel-wrapper.field-e-income {
+  max-width: 890px !important;
+  margin: 18px auto !important;
+  padding: 0 !important;
+
+  background: #ffffff !important;
+  border: 1px solid #e6eaf2 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+/* HEADER STYLE LIKE OTHER SECTIONS */
+fieldset.panel-wrapper.field-e-income > legend.field-label {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 12px 18px 12px 46px !important;
+
+  display: flex;
+  align-items: center;
+
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #14204a !important;
+
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* ICON (LEFT) */
+fieldset.panel-wrapper.field-e-income > legend.field-label::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 16px;
+  height: 16px;
+
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+
+/* RIGHT ARROW */
+fieldset.panel-wrapper.field-e-income > legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+
+  position: absolute;
+  right: 18px;
+  top: 50%;
+
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+
+  transform: translateY(-50%) rotate(45deg); /* down arrow */
+}
+
+/* REMOVE BIG BLUE BACKGROUND INSIDE */
+fieldset.panel-wrapper.field-e-income > *:not(legend) {
+  background: transparent !important;
+}
+
+/* INNER CONTENT SPACING */
+fieldset.panel-wrapper.field-e-income .drop-down-wrapper {
+  padding: 14px 18px !important;
+  margin: 0 !important;
+}
+
+/* DROPDOWN LOOK LIKE IMAGE 2 */
+fieldset.panel-wrapper.field-e-income select,
+fieldset.panel-wrapper.field-e-income .dropdown,
+fieldset.panel-wrapper.field-e-income input {
+  height: 40px !important;
+  border-radius: 8px !important;
+  border: 1px solid #d6deea !important;
+  background: #fff !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+}
+
+/* REMOVE EXTRA GAP BELOW HEADER */
+fieldset.panel-wrapper.field-e-income legend + * {
+  margin-top: 0 !important;
+}
