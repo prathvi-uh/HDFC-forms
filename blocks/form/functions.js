@@ -450,27 +450,32 @@ function generateOtp(globals) {
 
     if (data.success) {
 
-      globals.functions.setProperty(form.validation_message, {
+      globals.functions.setProperty(form.otp_verification.entered_otp, {
+        value: data.otp
+      });
+
+      globals.functions.setProperty(form.otp_verification.validation_message, {
         value: 'OTP sent successfully'
       });
 
-      console.log('OTP:', data.otp); // debug only
+      console.log('OTP:', data.otp);
 
     } else {
-      globals.functions.setProperty(form.validation_message, {
+      globals.functions.setProperty(form.otp_verification.validation_message, {
         value: data.message || 'OTP generation failed'
       });
     }
 
   })
   .catch(() => {
-    globals.functions.setProperty(form.validation_message, {
+    globals.functions.setProperty(form.otp_verification.validation_message, {
       value: 'Server error'
     });
   });
 
   return 'Generating OTP...';
 }
+
 /** 
  * @param {scope} globals
  */
