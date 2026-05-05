@@ -463,7 +463,9 @@ function generateOtp(globals) {
           value: data.otp
         });
  
-        window.otpAttemptsLeft = 3;
+        if(window.otpAttemptsLeft == undefined){
+          window.otpAttemptsLeft=3;
+        }
         starttimer(globals);
       }
     });
@@ -497,7 +499,7 @@ function updateAttemptInfo(globals) {
   });
  
   return '';
-}
+ }
  
 /**
 * @param {scope} globals
