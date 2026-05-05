@@ -649,7 +649,7 @@ function verifyOtp(globals) {
 
         stoptimer(globals);
       } else {
-        handleInvalidOtpFlow(globals);
+        handleInvalidFlow(globals);
       }
     })
     .catch((error) => {
