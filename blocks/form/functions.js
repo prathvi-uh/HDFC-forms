@@ -584,13 +584,6 @@ function reduceOtpAttempt(globals, reason) {
   return "";
 }
 
-/**
- * @param {scope} globals
- */
-function initOtpState(globals) {
-  window.otpAttemptsLeft = 3;
-  return updateAttemptInfo(globals);
-}
 
 /**
  * @param {scope} globals
