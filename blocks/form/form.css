@@ -2955,3 +2955,12 @@ fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo img {
   height: 46px !important;
   object-fit: contain !important;
 }
+
+/* Respect AEM hidden components */
+[data-visible="false"] {
+  display: none !important;
+}
+
+fieldset.field-e-income[data-visible="true"] {
+  display: grid !important;
+}
