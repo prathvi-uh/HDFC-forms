@@ -422,16 +422,15 @@ function restoreReviewLoanDetails(globals) {
   return '';
 }
 
-/** 
- * @param {scope} globals
- */
 function generateOtp(globals) {
   const form = globals.form;
 
-  const mobile = form.personal_loan_offer.mobile?.value || '';
-  const pan = form.personal_loan_offer.pan?.value || '';
+  const mobile = form.personal_loan_offer.mobile?.$value || '';
+  const dob = form.personal_loan_offer.date_of_birth?.$value || '';
+  const pan = form.personal_loan_offer.pan?.$value || '';
 
   console.log('mobile:', mobile);
+  console.log('dob:', dob);
   console.log('pan:', pan);
 
   fetch('https://await-matchbox-certify.ngrok-free.dev/generate-otp', {
@@ -440,7 +439,11 @@ function generateOtp(globals) {
       'Content-Type': 'application/json',
       'ngrok-skip-browser-warning': 'true'
     },
-    body: JSON.stringify({ mobile, pan })
+    body: JSON.stringify({
+      mobile,
+      dob,
+      pan
+    })
   })
   .then(res => res.json())
   .then(data => {
