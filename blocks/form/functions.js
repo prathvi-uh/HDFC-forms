@@ -655,7 +655,7 @@ function verifyOtp(globals) {
         globals.functions.setProperty(form.fullname, {
           visible: true
         });
-        
+
         globals.functions.setProperty(form.fullname, {
           value: data.name
         });
@@ -729,6 +729,58 @@ function handleInvalidFlow(globals) {
   return "Invalid OTP";
 }
 
+/**
+ * @param {scope} globals
+ */
+function proceedApi(globals) {
+  const form = globals.form;
+
+  const mobile =
+    form.personal_loan_offer.mobile?.$value || "";
+
+  console.log("PROCEED PAYLOAD:", { mobile });
+
+  fetch("https://await-matchbox-certify.ngrok-free.dev/proceed", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      mobile: mobile
+    })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("PROCEED RESPONSE:", data);
+
+      if (data.success) {
+
+        // ✅ map values
+        globals.functions.setProperty(globals.form.fullname, {
+          value: data.data.name
+        });
+
+        globals.functions.setProperty(
+          globals.form.info.addpanel.address_details.aadharadd,
+          {
+            value: data.data.currentAddress
+          }
+        );
+
+        // you can map more if needed
+
+      } else {
+        console.log("PROCEED ERROR:", data.message);
+      }
+    })
+    .catch((err) => {
+      console.log("API ERROR:", err);
+    });
+
+  return "Fetching proceed data...";
+}
+
 /** 
  * @param {scope} globals
  */
@@ -741,6 +793,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, 
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, proceedApi, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, 
 };
  
