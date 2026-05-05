@@ -2898,3 +2898,46 @@ fieldset.panel-wrapper.field-e-income > legend.field-label::before {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
+/* ===== LOGO ROW ===== */
+fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+ 
+  display: flex !important;
+  align-items: center !important;
+  gap: 22px !important;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+}
+ 
+/* ===== LOGO CARD ===== */
+fieldset.panel-wrapper.field-e-income
+> .panel-wrapper.field-banklogo .image-wrapper,
+fieldset.panel-wrapper.field-e-income
+> .panel-wrapper.field-banklogo .field-wrapper {
+ 
+  width: 100px !important;
+  height: 100px !important;
+  min-width: 100px !important;
+ 
+  border: 1px solid #dfe6f2 !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+ 
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+ 
+  padding: 14px !important;
+  box-sizing: border-box !important;
+}
+ 
+/* ===== LOGO IMAGE ===== */
+fieldset.panel-wrapper.field-e-income
+> .panel-wrapper.field-banklogo img {
+ 
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain !important;
+}
+
