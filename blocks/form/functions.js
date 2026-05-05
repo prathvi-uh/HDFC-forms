@@ -605,7 +605,6 @@ function reduceOtpAttempt(globals, reason) {
   return "";
 }
 
-
 /**
  * @param {scope} globals
  */
@@ -613,7 +612,6 @@ function stopInvalidOtp(globals) {
   if (window.otpTimer) clearInterval(window.otpTimer);
   return reduceOtpAttempt(globals, 'invalid');
 }
-
 
 /** 
  * @param {scope} globals
@@ -627,6 +625,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer,stoptimer, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, verifyOtp,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, 
 };
  
