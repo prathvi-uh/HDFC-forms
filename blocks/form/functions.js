@@ -500,90 +500,90 @@ function updateAttemptInfo(globals) {
 }
  
 /**
- * @param {scope} globals
- */
- 
+* @param {scope} globals
+*/
 function starttimer(globals) {
   const form = globals.form;
   let timeLeft = 10;
- 
+
   if (window.otpTimer) clearInterval(window.otpTimer);
- 
+
   globals.functions.setProperty(form.otp_verification.resend_otp, {
     visible: false,
     enabled: false
   });
- 
+
   globals.functions.setProperty(form.otp_verification.otp_submit, {
     enabled: true
   });
- 
+
   updateAttemptInfo(globals);
- 
+
   globals.functions.setProperty(form.otp_verification.timer, {
     value: `Resend OTP in : ${timeLeft}`
   });
- 
+
   window.otpTimer = setInterval(() => {
     timeLeft--;
- 
+
     globals.functions.setProperty(form.otp_verification.timer, {
       value: `Resend OTP in : ${timeLeft}`
     });
- 
+
     if (timeLeft <= 0) {
       clearInterval(window.otpTimer);
-      reduceOtpAttempt(globals, 'timeout');
+
+      reduceOtpAttempt(globals, "timeout");
     }
   }, 1000);
- 
-  return '';
+
+  return "";
 }
  
 /**
- * @param {scope} globals
- */
+* @param {scope} globals
+*/
 function reduceOtpAttempt(globals, reason) {
   const form = globals.form;
- 
+
   if (window.otpAttemptsLeft === undefined) {
     window.otpAttemptsLeft = 3;
   }
- 
+
   window.otpAttemptsLeft--;
- 
+
   updateAttemptInfo(globals);
- 
+
   globals.functions.setProperty(form.otp_verification.otp_submit, {
     enabled: false
   });
- 
+
   globals.functions.setProperty(form.otp_verification.resend_otp, {
     visible: true,
     enabled: true
   });
- 
+
   globals.functions.setProperty(form.otp_verification.timer, {
-    value: reason === 'invalid'
-      ? 'Invalid OTP. Please resend OTP'
-      : 'Time expired. Please resend OTP'
+    value: reason === "invalid"
+      ? "Invalid OTP. Please resend OTP"
+      : "Time expired. Please resend OTP"
   });
- 
+
   if (window.otpAttemptsLeft <= 0) {
     clearInterval(window.otpTimer);
- 
+
     globals.functions.setProperty(form.otp_verification, {
       visible: false
     });
- 
-    globals.functions.setProperty(form.personal_loan_offer, {
+
+    globals.functions.setProperty(form.zerotry.retry, {
       visible: true
     });
- 
-    window.otpAttemptsLeft = 3;
+
+    window.otpAttemptsLeft = undefined;
   }
- 
-  return '';
+
+  return "";
 }
  
 /**
@@ -595,17 +595,18 @@ function stopInvalidOtp(globals) {
 }
 
 /**
- * @param {scope} globals
- */
-function handleOtpInvalid(globals) {
+* @param {scope} globals
+*/
+function verifyOtp(globals) {
   const form = globals.form;
 
   const mobile = String(form.personal_loan_offer.mobile?.$value || "").trim();
+
   const otp = String(form.otp_verification.entered_otp?.$value || "")
     .replace(/\s/g, "")
     .trim();
 
-  console.log("VERIFY OTP PAYLOAD:", { mobile, otp });
+  console.log("VERIFY OTP:", { mobile, otp });
 
   fetch("https://await-matchbox-certify.ngrok-free.dev/verify-otp", {
     method: "POST",
@@ -613,90 +614,32 @@ function handleOtpInvalid(globals) {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "true"
     },
-    body: JSON.stringify({
-      mobile,
-      otp
-    })
+    body: JSON.stringify({ mobile, otp })
   })
     .then((res) => res.json())
     .then((data) => {
       console.log("VERIFY OTP RESPONSE:", data);
 
-      const resendBtn = form.otp_verification.resend_otp;
-      const submitBtn = form.otp_verification.otp_submit;
-
       if (data.success === true) {
-        // ✅ VALID OTP
         if (window.otpTimer) clearInterval(window.otpTimer);
 
-        globals.functions.setProperty(form.otp_verification.otp_validation_message, {
-          value: "Valid OTP",
-          visible: true
-        });
-
-        setTimeout(() => {
-          stoptimer(globals);
-        }, 500);
-
+        stoptimer(globals);
       } else {
-        // ❌ INVALID OTP
         if (window.otpTimer) clearInterval(window.otpTimer);
 
-        globals.functions.setProperty(form.otp_verification.otp_validation_message, {
-          value: "Invalid OTP",
-          visible: true
-        });
-
-        if (window.otpResendAttemptsLeft === undefined) {
-          window.otpResendAttemptsLeft = 3;
-        }
-
-        if (window.otpResendAttemptsLeft > 0) {
-          window.otpResendAttemptsLeft -= 1;
-        }
-
-        window.otpTimerExpired = false;
-
-        updateAttemptsInfo(globals);
-
-        if (resendBtn) {
-          globals.functions.setProperty(resendBtn, {
-            visible: true,
-            enabled: true
-          });
-        }
-
-        if (submitBtn) {
-          globals.functions.setProperty(submitBtn, {
-            enabled: false
-          });
-        }
-
-        if (window.otpResendAttemptsLeft <= 0) {
-          globals.functions.setProperty(form.otp_verification, {
-            visible: false
-          });
-
-          globals.functions.setProperty(form.zerotry.retry, {
-            visible: true
-          });
-
-          window.otpResendAttemptsLeft = 3;
-        }
+        reduceOtpAttempt(globals, "invalid");
       }
     })
     .catch((error) => {
       console.error("VERIFY OTP ERROR:", error);
 
-      globals.functions.setProperty(form.otp_verification.otp_validation_message, {
-        value: "Invalid OTP",
-        visible: true
-      });
+      if (window.otpTimer) clearInterval(window.otpTimer);
+
+      reduceOtpAttempt(globals, "invalid");
     });
 
   return "Verifying OTP...";
 }
-
  
 /**
  * @param {scope} globals
