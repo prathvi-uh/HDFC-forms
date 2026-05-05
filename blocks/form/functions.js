@@ -616,6 +616,95 @@ function stopInvalidOtp(globals) {
 /** 
  * @param {scope} globals
  */
+function verifyOtp(globals) {
+  const form = globals.form;
+
+  const mobile = String(form.personal_loan_offer.mobile?.$value || "").trim();
+
+  const otp = String(form.otp_verification.entered_otp?.$value || "")
+    .replace(/\s/g, "")
+    .trim();
+
+  console.log("VERIFY PAYLOAD:", { mobile, otp });
+
+  fetch("https://await-matchbox-certify.ngrok-free.dev/verify-otp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      mobile: mobile,
+      otp: otp
+    })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("VERIFY RESPONSE:", data);
+
+      if (data.success === true) {
+        if (window.otpTimer) {
+          clearInterval(window.otpTimer);
+        }
+
+        stoptimer(globals);
+      } else {
+        handleInvalidOtpFlow(globals);
+      }
+    })
+    .catch((error) => {
+      console.error("VERIFY ERROR:", error);
+      handleInvalidFlow(globals);
+    });
+
+  return "Verifying OTP...";
+}
+
+function handleInvalidFlow(globals) {
+  const form = globals.form;
+
+  // stop timer
+  if (window.otpTimer) {
+    clearInterval(window.otpTimer);
+  }
+
+  // reduce attempt
+  if (window.otpAttemptsLeft === undefined) {
+    window.otpAttemptsLeft = 3;
+  }
+
+  window.otpAttemptsLeft--;
+
+  // update attempt text / retry panel if 0
+  updateAttemptInfo(globals);
+
+  // if attempts finished, stop here
+  if (window.otpAttemptsLeft <= 0) {
+    return "No attempts left";
+  }
+
+  // disable submit
+  globals.functions.setProperty(form.otp_verification.otp_submit, {
+    enabled: false
+  });
+
+  // enable resend
+  globals.functions.setProperty(form.otp_verification.resend_otp, {
+    visible: true,
+    enabled: true
+  });
+
+  // show invalid text in timer area
+  globals.functions.setProperty(form.otp_verification.timer, {
+    value: "Invalid OTP"
+  });
+
+  return "Invalid OTP";
+}
+
+/** 
+ * @param {scope} globals
+ */
 function debugForm(globals) {
   window.myForm = globals.form;
   // eslint-disable-next-line no-console
@@ -625,6 +714,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, 
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, 
 };
  
