@@ -768,7 +768,18 @@ function proceedApi(globals) {
           }
         );
 
-      
+        globals.functions.setProperty(form.personal_loan_offer.mobile,
+        {
+          value: data.data.mobileNumber
+        });
+
+        globals.functions.setProperty(form.personal_loan_offer.date_of_birth,{
+          value: data.data.dob
+        });
+
+  
+
+        
 
         // you can map more if needed
 
