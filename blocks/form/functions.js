@@ -597,16 +597,18 @@ function stopInvalidOtp(globals) {
 /**
  * @param {scope} globals
  */
-
 function verifyOtp(globals) {
   const form = globals.form;
 
   const mobile = String(form.personal_loan_offer.mobile?.$value || "").trim();
-  const otp = String(form.otp_verification.entered_otp?.$value || "")
-    .replace(/\s/g, "")
-    .trim();
 
-  console.log("VERIFY →", { mobile, otp });
+  // ✅ Read actual current typed/edited value from OTP box
+  const otp =
+    String(document.querySelector('input[name="entered_otp"]')?.value || "")
+      .replace(/\s/g, "")
+      .trim();
+
+  console.log("VERIFY OTP:", { mobile, otp });
 
   fetch("https://await-matchbox-certify.ngrok-free.dev/verify-otp", {
     method: "POST",
@@ -618,24 +620,23 @@ function verifyOtp(globals) {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("API RESPONSE:", data);
-
-      // ⛔ Always stop timer first
-      if (window.otpTimer) clearInterval(window.otpTimer);
+      console.log("Verify OTP response:", data);
 
       if (data.success === true) {
-        // ✅ VALID OTP → only here we go next
+        if (window.otpTimer) clearInterval(window.otpTimer);
+
         globals.functions.setProperty(form.otp_verification.otp_validation_message, {
           value: "Valid OTP",
           visible: true
         });
 
         setTimeout(() => {
-          stoptimer(globals);   // 🚀 move panel ONLY here
+          stoptimer(globals);
         }, 500);
 
       } else {
-        // ❌ INVALID OTP → DO NOT move panel
+        if (window.otpTimer) clearInterval(window.otpTimer);
+
         globals.functions.setProperty(form.otp_verification.otp_validation_message, {
           value: "Invalid OTP",
           visible: true
@@ -649,31 +650,7 @@ function verifyOtp(globals) {
         globals.functions.setProperty(form.otp_verification.otp_submit, {
           enabled: false
         });
-
-        // 🔻 reduce attempts
-        if (window.otpAttemptsLeft === undefined) {
-          window.otpAttemptsLeft = 3;
-        }
-
-        window.otpAttemptsLeft--;
-        updateAttemptInfo(globals);
-
-        // ❗ zero attempts
-        if (window.otpAttemptsLeft <= 0) {
-          globals.functions.setProperty(form.otp_verification, {
-            visible: false
-          });
-
-          globals.functions.setProperty(form.zerotry.retry, {
-            visible: true
-          });
-
-          window.otpAttemptsLeft = 3;
-        }
       }
-    })
-    .catch((err) => {
-      console.error("ERROR:", err);
     });
 
   return "Verifying OTP...";
