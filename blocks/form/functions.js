@@ -422,7 +422,7 @@ function restoreReviewLoanDetails(globals) {
   return '';
 }
 
-/** 
+/**
  * @param {scope} globals
  */
 function generateOtp(globals) {
@@ -432,9 +432,15 @@ function generateOtp(globals) {
   const dob = form.personal_loan_offer.date_of_birth?.$value || '';
   const pan = form.personal_loan_offer.pan?.$value || '';
 
-  console.log('mobile:', mobile);
-  console.log('dob:', dob);
-  console.log('pan:', pan);
+  const payload = { mobile };
+
+  if (pan) {
+    payload.pan = pan;
+  } else if (dob) {
+    payload.dob = dob;
+  }
+
+  console.log('PAYLOAD:', payload);
 
   fetch('https://await-matchbox-certify.ngrok-free.dev/generate-otp', {
     method: 'POST',
@@ -442,11 +448,7 @@ function generateOtp(globals) {
       'Content-Type': 'application/json',
       'ngrok-skip-browser-warning': 'true'
     },
-    body: JSON.stringify({
-      mobile,
-      dob,
-      pan
-    })
+    body: JSON.stringify(payload)
   })
   .then(res => res.json())
   .then(data => {
@@ -456,6 +458,9 @@ function generateOtp(globals) {
       globals.functions.setProperty(form.otp_verification.entered_otp, {
         value: data.otp
       });
+
+      window.otpAttemptsLeft = 3;
+      starttimer(globals);
     }
   });
 
@@ -478,7 +483,7 @@ function initOtpState(globals) {
 
 function updateAttemptInfo(globals) {
   const form = globals.form;
-  
+
   if (window.otpAttemptsLeft === undefined) {
     window.otpAttemptsLeft = 3;
   }
