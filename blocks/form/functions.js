@@ -421,6 +421,53 @@ function restoreReviewLoanDetails(globals) {
 
   return '';
 }
+
+/** 
+ * @param {scope} globals
+ */
+async function generateOtp(globals) {
+  const form = globals.form;
+
+  const mobile = form.mobile?.value || '';
+  const dob = form.date_of_birth?.value || '';
+  const pan = form.pan?.value || '';
+
+  try {
+    const response = await fetch('https://await-matchbox-certify.ngrok-free.dev/generate-otp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
+      },
+      body: JSON.stringify({
+        mobile,
+        dob,
+        pan
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+
+      // ✅ store OTP (optional for debug)
+      setProperty('generated_otp', data.otp, globals);
+
+      // ✅ show success message
+      setProperty('validation_message', 'OTP sent successfully', globals);
+
+      return data.otp;
+    }
+
+    setProperty('validation_message', data.message || 'OTP generation failed', globals);
+    return '';
+
+  } catch (error) {
+    console.error(error);
+    setProperty('validation_message', 'Server error', globals);
+    return '';
+  }
+}
 /** 
  * @param {scope} globals
  */
@@ -433,6 +480,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, debugForm,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,
 };
  
