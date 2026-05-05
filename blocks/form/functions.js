@@ -481,25 +481,39 @@ function initOtpState(globals) {
   return updateAttemptInfo(globals);
 }
  
- 
 /**
 * @param {scope} globals
-*/
-
+*/ 
 function updateAttemptInfo(globals) {
   const form = globals.form;
- 
+
   if (window.otpAttemptsLeft === undefined) {
     window.otpAttemptsLeft = 3;
   }
- 
+
+  // ✅ When no attempts left
+  if (window.otpAttemptsLeft <= 0) {
+    globals.functions.setProperty(form.otp_verification, {
+      visible: false
+    });
+
+    if (form.zerotry && form.zerotry.retry) {
+      globals.functions.setProperty(form.zerotry.retry, {
+        visible: true
+      });
+    }
+
+    return '';
+  }
+
+  // ✅ Normal attempt display
   globals.functions.setProperty(form.otp_verification.attempt_info, {
     value: `${window.otpAttemptsLeft}/3 attempts left`
   });
- 
+
   return '';
- }
- 
+}
+
 /**
 * @param {scope} globals
 */
@@ -620,22 +634,66 @@ function verifyOtp(globals) {
     .then((data) => {
       console.log("VERIFY RESPONSE:", data);
 
-      if (data.success === true) {
-        if (window.otpTimer) clearInterval(window.otpTimer);
-
-        stoptimer(globals);
-      } else {
-        if (window.otpTimer) clearInterval(window.otpTimer);
-
-        reduceOtpAttempt(globals, "invalid");
+      if (window.otpTimer) {
+        clearInterval(window.otpTimer);
       }
+
+      if (data.success === true) {
+        // ✅ Valid OTP only goes next panel
+        stoptimer(globals);
+        return;
+      }
+
+      // ❌ Invalid OTP stays same panel
+      if (window.otpAttemptsLeft === undefined) {
+        window.otpAttemptsLeft = 3;
+      }
+
+      window.otpAttemptsLeft--;
+
+      // ✅ This will also show retry panel if attempts become 0
+      updateAttemptInfo(globals);
+
+      globals.functions.setProperty(form.otp_verification.otp_submit, {
+        enabled: false
+      });
+
+      globals.functions.setProperty(form.otp_verification.resend_otp, {
+        visible: true,
+        enabled: true
+      });
+
+      globals.functions.setProperty(form.otp_verification.timer, {
+        value: "Invalid OTP. Please resend OTP"
+      });
     })
     .catch((error) => {
       console.error("VERIFY ERROR:", error);
 
-      if (window.otpTimer) clearInterval(window.otpTimer);
+      if (window.otpTimer) {
+        clearInterval(window.otpTimer);
+      }
 
-      reduceOtpAttempt(globals, "invalid");
+      if (window.otpAttemptsLeft === undefined) {
+        window.otpAttemptsLeft = 3;
+      }
+
+      window.otpAttemptsLeft--;
+
+      updateAttemptInfo(globals);
+
+      globals.functions.setProperty(form.otp_verification.otp_submit, {
+        enabled: false
+      });
+
+      globals.functions.setProperty(form.otp_verification.resend_otp, {
+        visible: true,
+        enabled: true
+      });
+
+      globals.functions.setProperty(form.otp_verification.timer, {
+        value: "Invalid OTP. Please resend OTP"
+      });
     });
 
   return "Verifying OTP...";
