@@ -513,6 +513,54 @@ function starttimer(globals) {
 /**
  * @param {scope} globals
  */
+function starttimer(globals) {
+  const form = globals.form;
+
+  let timeLeft = 10;
+
+  // stop previous timer
+  if (window.otpTimer) {
+    clearInterval(window.otpTimer);
+  }
+
+  // ❌ disable resend at start
+  globals.functions.setProperty(form.otp_verification.resend_otp, {
+    enabled: false,
+    visible: true
+  });
+
+  globals.functions.setProperty(form.otp_verification.timer, {
+    value: `Resend OTP in : ${timeLeft}`
+  });
+
+  window.otpTimer = setInterval(() => {
+    timeLeft--;
+
+    globals.functions.setProperty(form.otp_verification.timer, {
+      value: `Resend OTP in : ${timeLeft}`
+    });
+
+    if (timeLeft <= 0) {
+      clearInterval(window.otpTimer);
+
+      // ✅ enable resend ONLY now
+      globals.functions.setProperty(form.otp_verification.resend_otp, {
+        enabled: true,
+        visible: true
+      });
+
+      globals.functions.setProperty(form.otp_verification.timer, {
+        value: 'You can resend OTP now'
+      });
+    }
+  }, 1000);
+
+  return '';
+}
+
+/**
+ * @param {scope} globals
+ */
 function stoptimer(globals) {
   const form = globals.form;
 
