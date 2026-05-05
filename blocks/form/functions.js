@@ -570,8 +570,6 @@ function reduceOtpAttempt(globals, reason) {
   });
 
   if (window.otpAttemptsLeft <= 0) {
-    clearInterval(window.otpTimer);
-
     globals.functions.setProperty(form.otp_verification, {
       visible: false
     });
@@ -585,7 +583,15 @@ function reduceOtpAttempt(globals, reason) {
 
   return "";
 }
- 
+
+/**
+ * @param {scope} globals
+ */
+function initOtpState(globals) {
+  window.otpAttemptsLeft = 3;
+  return updateAttemptInfo(globals);
+}
+
 /**
  * @param {scope} globals
  */
@@ -606,7 +612,7 @@ function verifyOtp(globals) {
     .replace(/\s/g, "")
     .trim();
 
-  console.log("VERIFY OTP:", { mobile, otp });
+  console.log("VERIFY PAYLOAD:", { mobile, otp });
 
   fetch("https://await-matchbox-certify.ngrok-free.dev/verify-otp", {
     method: "POST",
@@ -618,7 +624,7 @@ function verifyOtp(globals) {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("VERIFY OTP RESPONSE:", data);
+      console.log("VERIFY RESPONSE:", data);
 
       if (data.success === true) {
         if (window.otpTimer) clearInterval(window.otpTimer);
@@ -631,7 +637,7 @@ function verifyOtp(globals) {
       }
     })
     .catch((error) => {
-      console.error("VERIFY OTP ERROR:", error);
+      console.error("VERIFY ERROR:", error);
 
       if (window.otpTimer) clearInterval(window.otpTimer);
 
@@ -640,6 +646,7 @@ function verifyOtp(globals) {
 
   return "Verifying OTP...";
 }
+
  
 /**
  * @param {scope} globals
