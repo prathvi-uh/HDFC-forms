@@ -422,51 +422,54 @@ function restoreReviewLoanDetails(globals) {
   return '';
 }
 
-/** 
+/**
  * @param {scope} globals
+ * @returns {string}
  */
-async function generateOtp(globals) {
+function generateOtp(globals) {
   const form = globals.form;
 
   const mobile = form.mobile?.value || '';
   const dob = form.date_of_birth?.value || '';
   const pan = form.pan?.value || '';
 
-  try {
-    const response = await fetch('https://await-matchbox-certify.ngrok-free.dev/generate-otp', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true'
-      },
-      body: JSON.stringify({
-        mobile,
-        dob,
-        pan
-      })
-    });
-
-    const data = await response.json();
+  fetch('https://await-matchbox-certify.ngrok-free.dev/generate-otp', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
+    },
+    body: JSON.stringify({
+      mobile,
+      dob,
+      pan
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
 
     if (data.success) {
 
-      // ✅ store OTP (optional for debug)
-      setProperty('generated_otp', data.otp, globals);
+      globals.functions.setProperty(form.validation_message, {
+        value: 'OTP sent successfully'
+      });
 
-      // ✅ show success message
-      setProperty('validation_message', 'OTP sent successfully', globals);
+      console.log('OTP:', data.otp); // debug only
 
-      return data.otp;
+    } else {
+      globals.functions.setProperty(form.validation_message, {
+        value: data.message || 'OTP generation failed'
+      });
     }
 
-    setProperty('validation_message', data.message || 'OTP generation failed', globals);
-    return '';
+  })
+  .catch(() => {
+    globals.functions.setProperty(form.validation_message, {
+      value: 'Server error'
+    });
+  });
 
-  } catch (error) {
-    console.error(error);
-    setProperty('validation_message', 'Server error', globals);
-    return '';
-  }
+  return 'Generating OTP...';
 }
 /** 
  * @param {scope} globals
