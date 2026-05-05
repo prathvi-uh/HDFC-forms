@@ -432,12 +432,16 @@ function generateOtp(globals) {
   const dob = form.personal_loan_offer.date_of_birth?.$value || '';
   const pan = form.personal_loan_offer.pan?.$value || '';
 
-  const payload = { mobile };
+  const payload = {
+    mobile
+  };
 
   if (pan) {
-    payload.pan = pan;
+    payload.loginType = "PAN";
+    payload.pan = pan.toUpperCase();
   } else if (dob) {
-    payload.dob = dob;
+    payload.loginType = "DOB";
+    payload.dateOfBirth = dob;
   }
 
   console.log('PAYLOAD:', payload);
@@ -450,19 +454,19 @@ function generateOtp(globals) {
     },
     body: JSON.stringify(payload)
   })
-  .then(res => res.json())
-  .then(data => {
-    console.log('API RESPONSE:', data);
+    .then(res => res.json())
+    .then(data => {
+      console.log('API RESPONSE:', data);
 
-    if (data.success) {
-      globals.functions.setProperty(form.otp_verification.entered_otp, {
-        value: data.otp
-      });
+      if (data.success) {
+        globals.functions.setProperty(form.otp_verification.entered_otp, {
+          value: data.otp
+        });
 
-      window.otpAttemptsLeft = 3;
-      starttimer(globals);
-    }
-  });
+        window.otpAttemptsLeft = 3;
+        starttimer(globals);
+      }
+    });
 
   return 'Generating OTP...';
 }
