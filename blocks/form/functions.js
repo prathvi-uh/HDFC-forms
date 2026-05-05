@@ -757,16 +757,18 @@ function proceedApi(globals) {
       if (data.success) {
 
         // ✅ map values
-        globals.functions.setProperty(globals.form.fullname, {
-          value: data.data.name
+        globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.processing_fee, {
+          value: data.data.processingFees
         });
 
         globals.functions.setProperty(
-          globals.form.info.addpanel.address_details.aadharadd,
+          form.review.view_details.loan_accordion.loan_details.schedule_of_charges,
           {
-            value: data.data.currentAddress
+            value: data.data.scheduleOfCharges
           }
         );
+
+      
 
         // you can map more if needed
 
