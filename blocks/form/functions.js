@@ -497,9 +497,15 @@ function updateAttemptInfo(globals) {
       visible: false
     });
 
-    if (form.zerotry && form.zerotry.retry) {
-      globals.functions.setProperty(form.zerotry.retry, {
-        visible: true
+    if (globals.form.zerotry) {
+      globals.functions.setProperty(globals.form.zerotry, {
+        visible: true,
+      });
+    }
+
+    if (globals.form.zerotry && globals.form.zerotry.retry) {
+      globals.functions.setProperty(globals.form.zerotry.retry, {
+        visible: true,
       });
     }
 
@@ -608,7 +614,7 @@ function stopInvalidOtp(globals) {
   return reduceOtpAttempt(globals, 'invalid');
 }
 
-/**
+/** 
 * @param {scope} globals
 */
 function verifyOtp(globals) {
@@ -616,11 +622,15 @@ function verifyOtp(globals) {
 
   const mobile = String(form.personal_loan_offer.mobile?.$value || "").trim();
 
-  const otp = String(form.otp_verification.entered_otp?.$value || "")
+  const otpInput = document.querySelector('input[name="entered_otp"]');
+
+  const otp = String(
+    otpInput?.value || form.otp_verification.entered_otp?.$value || ""
+  )
     .replace(/\s/g, "")
     .trim();
 
-  console.log("VERIFY PAYLOAD:", { mobile, otp });
+  console.log("VERIFY OTP SENT:", otp);
 
   fetch("https://await-matchbox-certify.ngrok-free.dev/verify-otp", {
     method: "POST",
@@ -634,52 +644,18 @@ function verifyOtp(globals) {
     .then((data) => {
       console.log("VERIFY RESPONSE:", data);
 
-      if (window.otpTimer) {
-        clearInterval(window.otpTimer);
-      }
+      if (window.otpTimer) clearInterval(window.otpTimer);
 
       if (data.success === true) {
-        // ✅ Valid OTP only goes next panel
         stoptimer(globals);
         return;
       }
 
-      // ❌ Invalid OTP stays same panel
       if (window.otpAttemptsLeft === undefined) {
         window.otpAttemptsLeft = 3;
       }
 
       window.otpAttemptsLeft--;
-
-      // ✅ This will also show retry panel if attempts become 0
-      updateAttemptInfo(globals);
-
-      globals.functions.setProperty(form.otp_verification.otp_submit, {
-        enabled: false
-      });
-
-      globals.functions.setProperty(form.otp_verification.resend_otp, {
-        visible: true,
-        enabled: true
-      });
-
-      globals.functions.setProperty(form.otp_verification.timer, {
-        value: "Invalid OTP. Please resend OTP"
-      });
-    })
-    .catch((error) => {
-      console.error("VERIFY ERROR:", error);
-
-      if (window.otpTimer) {
-        clearInterval(window.otpTimer);
-      }
-
-      if (window.otpAttemptsLeft === undefined) {
-        window.otpAttemptsLeft = 3;
-      }
-
-      window.otpAttemptsLeft--;
-
       updateAttemptInfo(globals);
 
       globals.functions.setProperty(form.otp_verification.otp_submit, {
@@ -697,30 +673,6 @@ function verifyOtp(globals) {
     });
 
   return "Verifying OTP...";
-}
-
- 
-/**
- * @param {scope} globals
- */
-function stoptimer(globals) {
-  const form = globals.form;
- 
-  if (window.otpTimer) clearInterval(window.otpTimer);
- 
-  globals.functions.setProperty(form.otp_verification.timer, {
-    value: ''
-  });
- 
-  globals.functions.setProperty(form.otp_verification, {
-    visible: false
-  });
- 
-  globals.functions.setProperty(form["e-income"], {
-    visible: true
-  });
- 
-  return '';
 }
 
 /** 
