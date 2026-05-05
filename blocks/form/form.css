@@ -2988,29 +2988,3 @@ fieldset.panel-wrapper.field-e-income
   height: 52px !important;
 }
 
-/* logo card - slightly reduced */
-fieldset.panel-wrapper.field-e-income 
-> .panel-wrapper.field-banklogo .image-wrapper,
-fieldset.panel-wrapper.field-e-income 
-> .panel-wrapper.field-banklogo .field-wrapper {
-
-  width: 72px !important;
-  height: 72px !important;
-  min-width: 72px !important;
-  padding: 10px !important;
-}
-
-/* logo image */
-fieldset.panel-wrapper.field-e-income 
-> .panel-wrapper.field-banklogo img {
-
-  width: 46px !important;
-  height: 46px !important;
-}
-
-/* spacing between logos */
-fieldset.panel-wrapper.field-e-income 
-> .panel-wrapper.field-banklogo {
-
-  gap: 18px !important;
-}
