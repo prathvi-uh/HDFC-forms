@@ -2968,11 +2968,3 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapp
   object-fit: contain !important;
 }
 
-div.button-wrapper.field-conbutton[data-visible="false"] {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
