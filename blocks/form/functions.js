@@ -652,13 +652,13 @@ function verifyOtp(globals) {
           visible: false
         });
         
-        globals.functions.setProperty(form.fullname, {
-          value: data.name
-        });
+        //globals.functions.setProperty(form.fullname, {
+          //value: data.name
+        //});
         
-        globals.functions.setProperty(globals.form.info.addpanel.address_details.aadharadd, {
-          value=data.address
-        });
+        //globals.functions.setProperty(globals.form.info.addpanel.address_details.aadharadd, {
+          //value=data.address
+        //});
         
         globals.functions.setProperty(form.info, {
           visible: true
