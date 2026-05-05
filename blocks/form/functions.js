@@ -422,11 +422,17 @@ function restoreReviewLoanDetails(globals) {
   return '';
 }
 
+/** 
+ * @param {scope} globals
+ */
 function generateOtp(globals) {
   const form = globals.form;
 
   const mobile = form.personal_loan_offer.mobile?.value || '';
   const pan = form.personal_loan_offer.pan?.value || '';
+
+  console.log('mobile:', mobile);
+  console.log('pan:', pan);
 
   fetch('https://await-matchbox-certify.ngrok-free.dev/generate-otp', {
     method: 'POST',
@@ -434,33 +440,17 @@ function generateOtp(globals) {
       'Content-Type': 'application/json',
       'ngrok-skip-browser-warning': 'true'
     },
-    body: JSON.stringify({
-      mobile,
-      pan
-    })
+    body: JSON.stringify({ mobile, pan })
   })
   .then(res => res.json())
   .then(data => {
+    console.log('API RESPONSE:', data);
+
     if (data.success) {
       globals.functions.setProperty(form.otp_verification.entered_otp, {
         value: data.otp
       });
-
-      globals.functions.setProperty(form.otp_verification.validation_message, {
-        value: 'OTP sent successfully'
-      });
-
-      console.log('OTP:', data.otp);
-    } else {
-      globals.functions.setProperty(form.otp_verification.validation_message, {
-        value: data.message || 'OTP generation failed'
-      });
     }
-  })
-  .catch(() => {
-    globals.functions.setProperty(form.otp_verification.validation_message, {
-      value: 'Server error'
-    });
   });
 
   return 'Generating OTP...';
