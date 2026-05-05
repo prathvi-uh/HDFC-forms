@@ -768,18 +768,22 @@ function proceedApi(globals) {
           }
         );
 
-        globals.functions.setProperty(form.personal_loan_offer.mobile,
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details,
         {
           value: data.data.mobileNumber
         });
 
-        globals.functions.setProperty(form.personal_loan_offer.date_of_birth,{
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details,{
           value: data.data.dob
         });
-
-  
-
         
+        globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.processing_fee, {
+          value:data.data.typeOfLoan
+        });
+
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details,{
+          value:data.name
+        });
 
         // you can map more if needed
 
