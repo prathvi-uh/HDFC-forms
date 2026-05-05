@@ -653,6 +653,10 @@ function verifyOtp(globals) {
         });
         
         globals.functions.setProperty(form.fullname, {
+          visible: true
+        });
+        
+        globals.functions.setProperty(form.fullname, {
           value: data.name
         });
         
