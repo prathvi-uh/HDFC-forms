@@ -462,20 +462,46 @@ function generateOtp(globals) {
   return 'Generating OTP...';
 }
 
-/**
+/** 
  * @param {scope} globals
  */
-function starttimer(globals) {
+
+function initOtpState(globals) {
+  window.otpAttemptsLeft = 3;
+  return updateAttemptInfo(globals);
+}
+
+function updateAttemptInfo(globals) {
   const form = globals.form;
 
+  globals.functions.setProperty(form.otp_verification.attempt_info, {
+    value: `${window.otpAttemptsLeft}/3 attempts left`
+  });
+
+  return '';
+}
+
+/** 
+ * @param {scope} globals
+ */
+
+function starttimer(globals) {
+  const form = globals.form;
   let timeLeft = 10;
 
-  // clear old timer if exists
-  if (window.otpTimer) {
-    clearInterval(window.otpTimer);
-  }
+  if (window.otpTimer) clearInterval(window.otpTimer);
 
-  // show initial value
+  globals.functions.setProperty(form.otp_verification.resend_otp, {
+    visible: false,
+    enabled: false
+  });
+
+  globals.functions.setProperty(form.otp_verification.otp_submit, {
+    enabled: true
+  });
+
+  updateAttemptInfo(globals);
+
   globals.functions.setProperty(form.otp_verification.timer, {
     value: `Resend OTP in : ${timeLeft}`
   });
@@ -489,51 +515,89 @@ function starttimer(globals) {
 
     if (timeLeft <= 0) {
       clearInterval(window.otpTimer);
-
-      globals.functions.setProperty(form.otp_verification.timer, {
-        value: 'You can resend OTP now'
-      });
-
-      // enable resend button
-      globals.functions.setProperty(form.otp_verification.resend_otp, {
-        visible: true,
-        enabled: true
-      });
+      reduceOtpAttempt(globals, 'timeout');
     }
   }, 1000);
 
   return '';
 }
 
-/**
+/** 
+ * @param {scope} globals
+ */
+function reduceOtpAttempt(globals, reason) {
+  const form = globals.form;
+
+  if (window.otpAttemptsLeft === undefined) {
+    window.otpAttemptsLeft = 3;
+  }
+
+  window.otpAttemptsLeft--;
+
+  updateAttemptInfo(globals);
+
+  globals.functions.setProperty(form.otp_verification.otp_submit, {
+    enabled: false
+  });
+
+  globals.functions.setProperty(form.otp_verification.resend_otp, {
+    visible: true,
+    enabled: true
+  });
+
+  globals.functions.setProperty(form.otp_verification.timer, {
+    value: reason === 'invalid'
+      ? 'Invalid OTP. Please resend OTP'
+      : 'Time expired. Please resend OTP'
+  });
+
+  if (window.otpAttemptsLeft <= 0) {
+    clearInterval(window.otpTimer);
+
+    globals.functions.setProperty(form.otp_verification, {
+      visible: false
+    });
+
+    globals.functions.setProperty(form.personal_loan_offer, {
+      visible: true
+    });
+
+    window.otpAttemptsLeft = 3;
+  }
+
+  return '';
+}
+
+/** 
+ * @param {scope} globals
+ */
+function stopInvalidOtp(globals) {
+  if (window.otpTimer) clearInterval(window.otpTimer);
+  return reduceOtpAttempt(globals, 'invalid');
+}
+
+/** 
  * @param {scope} globals
  */
 function stoptimer(globals) {
   const form = globals.form;
 
-  // stop timer
-  if (window.otpTimer) {
-    clearInterval(window.otpTimer);
-  }
+  if (window.otpTimer) clearInterval(window.otpTimer);
 
-  // clear timer text
   globals.functions.setProperty(form.otp_verification.timer, {
     value: ''
   });
 
-  // hide OTP panel
   globals.functions.setProperty(form.otp_verification, {
     visible: false
   });
 
-  // show next panel (CHANGE if needed)
   globals.functions.setProperty(form["e-income"], {
     visible: true
   });
 
   return '';
 }
-
 
 /** 
  * @param {scope} globals
@@ -547,6 +611,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer,stoptimer
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer,stoptimer, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState
 };
  
