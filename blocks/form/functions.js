@@ -470,12 +470,17 @@ function starttimer(globals) {
 
   let timeLeft = 10;
 
-  // clear old timer if exists
+  // stop previous timer
   if (window.otpTimer) {
     clearInterval(window.otpTimer);
   }
 
-  // show initial value
+  // ❌ disable resend at start
+  globals.functions.setProperty(form.otp_verification.resend_otp, {
+    enabled: false,
+    visible: true
+  });
+
   globals.functions.setProperty(form.otp_verification.timer, {
     value: `Resend OTP in : ${timeLeft}`
   });
@@ -490,14 +495,14 @@ function starttimer(globals) {
     if (timeLeft <= 0) {
       clearInterval(window.otpTimer);
 
-      globals.functions.setProperty(form.otp_verification.timer, {
-        value: 'You can resend OTP now'
+      // ✅ enable resend ONLY now
+      globals.functions.setProperty(form.otp_verification.resend_otp, {
+        enabled: true,
+        visible: true
       });
 
-      // enable resend button
-      globals.functions.setProperty(form.otp_verification.resend_otp, {
-        visible: true,
-        enabled: true
+      globals.functions.setProperty(form.otp_verification.timer, {
+        value: 'You can resend OTP now'
       });
     }
   }, 1000);
