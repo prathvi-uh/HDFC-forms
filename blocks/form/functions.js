@@ -474,9 +474,8 @@ function generateOtp(globals) {
 }
  
 /**
- * @param {scope} globals
- */
- 
+* @param {scope} globals
+*/ 
 function initOtpState(globals) {
   window.otpAttemptsLeft = 3;
   return updateAttemptInfo(globals);
@@ -484,9 +483,9 @@ function initOtpState(globals) {
  
  
 /**
- * @param {scope} globals
- */
- 
+* @param {scope} globals
+*/
+
 function updateAttemptInfo(globals) {
   const form = globals.form;
  
