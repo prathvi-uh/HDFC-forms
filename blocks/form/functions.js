@@ -601,62 +601,92 @@ function stopInvalidOtp(globals) {
  */
 function verifyOtp(globals) {
   const form = globals.form;
- 
-  const mobile =
-    form.personal_loan_offer.mobile?.$value || "";
- 
-  const otp =
-    form.otp_verification.entered_otp?.$value || "";
- 
-  const payload = {
-    mobile,
-    otp
-  };
- 
-  console.log("Verify OTP payload:", payload);
- 
+
+  const mobile = form.personal_loan_offer.mobile?.$value || "";
+  const otp = form.otp_verification.entered_otp?.$value || "";
+
   fetch("https://await-matchbox-certify.ngrok-free.dev/verify-otp", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "true"
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify({ mobile, otp })
   })
     .then((res) => res.json())
     .then((data) => {
       console.log("Verify OTP response:", data);
- 
+
+      // ⛔ Stop timer always
+      if (window.otpTimer) clearInterval(window.otpTimer);
+
       if (data.success) {
-        // ✅ Show success message
+        // ✅ Valid OTP
         globals.functions.setProperty(form.otp_verification.otp_validation_message, {
           value: "Valid OTP",
           visible: true
         });
- 
-        // (optional) you can store name/address if needed later
-        globals.userData = {
-          name: data.name,
-          address: data.address
-        };
- 
+
+        // 👉 Go to next panel
+        setTimeout(() => {
+          stoptimer(globals);
+        }, 500);
+
       } else {
         // ❌ Invalid OTP
         globals.functions.setProperty(form.otp_verification.otp_validation_message, {
           value: "Invalid OTP",
           visible: true
         });
+
+        // 🔻 Reduce attempt
+        if (window.otpAttemptsLeft === undefined) {
+          window.otpAttemptsLeft = 3;
+        }
+
+        window.otpAttemptsLeft--;
+
+        updateAttemptInfo(globals);
+
+        // ❌ Disable submit
+        globals.functions.setProperty(form.otp_verification.otp_submit, {
+          enabled: false
+        });
+
+        // ✅ Show resend button
+        globals.functions.setProperty(form.otp_verification.resend_otp, {
+          visible: true,
+          enabled: true
+        });
+
+        // 📝 Update timer text
+        globals.functions.setProperty(form.otp_verification.timer, {
+          value: "Invalid OTP. Please resend OTP"
+        });
+
+        // ❗ Zero attempts → show retry panel
+        if (window.otpAttemptsLeft <= 0) {
+          globals.functions.setProperty(form.otp_verification, {
+            visible: false
+          });
+
+          globals.functions.setProperty(form.zerotry.retry, {
+            visible: true
+          });
+
+          window.otpAttemptsLeft = 3;
+        }
       }
     })
     .catch((error) => {
       console.error("Verify OTP error:", error);
- 
+
       globals.functions.setProperty(form.otp_verification.otp_validation_message, {
         value: "Something went wrong",
         visible: true
       });
     });
- 
+
   return "Verifying OTP...";
 }
  
