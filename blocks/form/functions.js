@@ -651,7 +651,15 @@ function verifyOtp(globals) {
         globals.functions.setProperty(form.otp_verification, {
           visible: false
         });
-
+        
+        globals.functions.setProperty(form.fullname, {
+          value: data.name
+        });
+        
+        globals.functions.setProperty(globals.form.info.addpanel.address_details.aadharadd, {
+          value=data.address
+         });
+        
         globals.functions.setProperty(form.info, {
           visible: true
         });
@@ -662,7 +670,7 @@ function verifyOtp(globals) {
 
         return;
       }
-      
+
       handleInvalidFlow(globals);
     })
     .catch((error) => {
