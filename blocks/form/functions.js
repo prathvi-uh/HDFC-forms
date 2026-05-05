@@ -423,48 +423,67 @@ function restoreReviewLoanDetails(globals) {
 }
 
 /**
+ * Generate OTP API call
  * @param {scope} globals
+ * @returns {string}
  */
 function generateOtp(globals) {
   const form = globals.form;
+  const otpPanel = form.otp_verification;
 
-  const mobile = form.personal_loan_offer.mobile?.$value || '';
-  const dob = form.personal_loan_offer.date_of_birth?.$value || '';
-  const pan = form.personal_loan_offer.pan?.$value || '';
+  const mobile = form.personal_loan_offer.mobile?.$value || "";
+  const dob = form.personal_loan_offer.date_of_birth?.$value || "";
+  const pan = form.personal_loan_offer.pan?.$value || "";
 
   const payload = { mobile };
 
   if (pan) {
-    payload.pan = pan;
+    payload.pan = pan.toUpperCase();
   } else if (dob) {
     payload.dob = dob;
   }
 
-  console.log('PAYLOAD:', payload);
+  console.log("Generate OTP payload:", payload);
 
-  fetch('https://await-matchbox-certify.ngrok-free.dev/generate-otp', {
-    method: 'POST',
+  fetch("https://await-matchbox-certify.ngrok-free.dev/generate-otp", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'ngrok-skip-browser-warning': 'true'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(payload)
   })
-  .then(res => res.json())
-  .then(data => {
-    console.log('API RESPONSE:', data);
+    .then((res) => res.json())
+    .then((response) => {
+      console.log("Generate OTP response:", response);
 
-    if (data.success) {
-      globals.functions.setProperty(form.otp_verification.entered_otp, {
-        value: data.otp
-      });
+      if (otpPanel.validation_message) {
+        globals.functions.setProperty(otpPanel.validation_message, {
+          value: response.message,
+          visible: true
+        });
+      }
 
-      window.otpAttemptsLeft = 3;
-      starttimer(globals);
-    }
-  });
+      if (response.success) {
+        globals.functions.setProperty(otpPanel.entered_otp, {
+          value: response.otp
+        });
 
-  return 'Generating OTP...';
+        window.otpAttemptsLeft = 3;
+        starttimer(globals);
+      }
+    })
+    .catch((error) => {
+      console.error("Generate OTP error:", error);
+
+      if (otpPanel.validation_message) {
+        globals.functions.setProperty(otpPanel.validation_message, {
+          value: "OTP generation failed",
+          visible: true
+        });
+      }
+    });
+
+  return "OTP request sent";
 }
 
 /** 
