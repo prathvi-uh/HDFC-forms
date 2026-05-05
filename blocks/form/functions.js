@@ -586,8 +586,8 @@ function reduceOtpAttempt(globals, reason) {
 
   globals.functions.setProperty(form.otp_verification.timer, {
     value: reason === "invalid"
-      ? "Invalid OTP. Please resend OTP"
-      : "Time expired. Please resend OTP"
+      ? "Invalid OTP"
+      : "Time expired"
   });
 
   if (window.otpAttemptsLeft <= 0) {
