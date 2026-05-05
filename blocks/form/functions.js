@@ -593,7 +593,11 @@ function stopInvalidOtp(globals) {
   if (window.otpTimer) clearInterval(window.otpTimer);
   return reduceOtpAttempt(globals, 'invalid');
 }
- 
+
+/**
+ * @param {scope} globals
+ */
+
 function verifyOtp(globals) {
   const form = globals.form;
 
