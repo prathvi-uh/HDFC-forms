@@ -613,7 +613,7 @@ function stopInvalidOtp(globals) {
   return reduceOtpAttempt(globals, 'invalid');
 }
 
-/** 
+/**
  * @param {scope} globals
  */
 function verifyOtp(globals) {
@@ -642,15 +642,28 @@ function verifyOtp(globals) {
     .then((data) => {
       console.log("VERIFY RESPONSE:", data);
 
+      // ✅ VALID OTP
       if (data.success === true) {
         if (window.otpTimer) {
           clearInterval(window.otpTimer);
         }
 
-        stoptimer(globals);
-      } else {
-        handleInvalidFlow(globals);
+        globals.functions.setProperty(form.otp_verification, {
+          visible: false
+        });
+
+        globals.functions.setProperty(form.info, {
+          visible: true
+        });
+
+        globals.functions.setProperty(form.continue, {
+          visible: true
+        });
+
+        return;
       }
+      
+      handleInvalidFlow(globals);
     })
     .catch((error) => {
       console.error("VERIFY ERROR:", error);
@@ -659,7 +672,6 @@ function verifyOtp(globals) {
 
   return "Verifying OTP...";
 }
-
 /** 
  * @param {scope} globals
  */
