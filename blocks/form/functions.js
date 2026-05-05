@@ -423,8 +423,8 @@ function restoreReviewLoanDetails(globals) {
 }
 
 /**
- * @param {scope} globals
- */
+* @param {scope} globals
+*/
 function generateOtp(globals) {
   const form = globals.form;
  
