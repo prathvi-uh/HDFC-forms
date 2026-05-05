@@ -594,6 +594,72 @@ function stopInvalidOtp(globals) {
   return reduceOtpAttempt(globals, 'invalid');
 }
 
+/**
+ * Verify OTP API call
+ * @param {scope} globals
+ * @returns {string}
+ */
+function verifyOtp(globals) {
+  const form = globals.form;
+
+  const mobile =
+    form.personal_loan_offer.mobile?.$value || "";
+
+  const otp =
+    form.otp_verification.entered_otp?.$value || "";
+
+  const payload = {
+    mobile,
+    otp
+  };
+
+  console.log("Verify OTP payload:", payload);
+
+  fetch("https://await-matchbox-certify.ngrok-free.dev/verify-otp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify(payload)
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Verify OTP response:", data);
+
+      if (data.success) {
+        // ✅ Show success message
+        globals.functions.setProperty(form.otp_validation_message, {
+          value: "Valid OTP",
+          visible: true
+        });
+
+        // (optional) you can store name/address if needed later
+        globals.userData = {
+          name: data.name,
+          address: data.address
+        };
+
+      } else {
+        // ❌ Invalid OTP
+        globals.functions.setProperty(form.otp_validation_message, {
+          value: "Invalid OTP",
+          visible: true
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Verify OTP error:", error);
+
+      globals.functions.setProperty(form.otp_validation_message, {
+        value: "Something went wrong",
+        visible: true
+      });
+    });
+
+  return "Verifying OTP...";
+}
+
 /** 
  * @param {scope} globals
  */
@@ -629,6 +695,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer,stoptimer, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, handleOtpInvalid, calculateEMI, restoreReviewLoanDetails, generateOtp, debugForm,starttimer,stoptimer, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, verifyOtp;
 };
  
