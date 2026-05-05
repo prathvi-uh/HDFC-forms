@@ -773,15 +773,15 @@ function proceedApi(globals) {
           value: data.data.mobileNumber
         });
 
-        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details,{
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.date_of_birth,{
           value: data.data.dob
         });
         
-        globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.processing_fee, {
+        globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.type_of_loan, {
           value:data.data.typeOfLoan
         });
 
-        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details,{
+        globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.employer_name,{
           value:data.name
         });
 
