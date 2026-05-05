@@ -629,7 +629,7 @@ function verifyOtp(globals) {
 
       if (data.success) {
         // ✅ Show success message
-        globals.functions.setProperty(form.otp_validation_message, {
+        globals.functions.setProperty(form.otp_verification.otp_validation_message, {
           value: "Valid OTP",
           visible: true
         });
@@ -642,7 +642,7 @@ function verifyOtp(globals) {
 
       } else {
         // ❌ Invalid OTP
-        globals.functions.setProperty(form.otp_validation_message, {
+        globals.functions.setProperty(form.otp_verification.otp_validation_message, {
           value: "Invalid OTP",
           visible: true
         });
@@ -651,7 +651,7 @@ function verifyOtp(globals) {
     .catch((error) => {
       console.error("Verify OTP error:", error);
 
-      globals.functions.setProperty(form.otp_validation_message, {
+      globals.functions.setProperty(form.otp_verification.otp_validation_message, {
         value: "Something went wrong",
         visible: true
       });
