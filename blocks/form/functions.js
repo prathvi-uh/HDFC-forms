@@ -507,6 +507,8 @@ function starttimer(globals) {
   const form = globals.form;
   let timeLeft = 10;
 
+  window.otpExpired = false;
+
   if (window.otpTimer) clearInterval(window.otpTimer);
 
   globals.functions.setProperty(form.otp_verification.resend_otp, {
@@ -516,6 +518,11 @@ function starttimer(globals) {
 
   globals.functions.setProperty(form.otp_verification.otp_submit, {
     enabled: true
+  });
+
+  globals.functions.setProperty(form.otp_verification.otp_validation_message, {
+    value: "",
+    visible: false
   });
 
   updateAttemptInfo(globals);
@@ -533,11 +540,15 @@ function starttimer(globals) {
 
     if (timeLeft <= 0) {
       clearInterval(window.otpTimer);
-      reduceOtpAttempt(globals, 'timeout');
+      window.otpExpired = true;
+
+      globals.functions.setProperty(form.otp_verification.timer, {
+        value: "Time expired"
+      });
     }
   }, 1000);
 
-  return '';
+  return "";
 }
 
 /** 
@@ -563,10 +574,15 @@ function reduceOtpAttempt(globals, reason) {
     enabled: true
   });
 
+  globals.functions.setProperty(form.otp_verification.otp_validation_message, {
+    value: reason === "invalid" ? "Invalid OTP" : "OTP expired",
+    visible: true
+  });
+
   globals.functions.setProperty(form.otp_verification.timer, {
-    value: reason === 'invalid'
-      ? 'Invalid OTP. Please resend OTP'
-      : 'Time expired. Please resend OTP'
+    value: reason === "invalid"
+      ? "Invalid OTP. Please resend OTP"
+      : "Time expired. Please resend OTP"
   });
 
   if (window.otpAttemptsLeft <= 0) {
@@ -576,14 +592,14 @@ function reduceOtpAttempt(globals, reason) {
       visible: false
     });
 
-    globals.functions.setProperty(form.personal_loan_offer, {
+    globals.functions.setProperty(form.zerotry.retry, {
       visible: true
     });
 
     window.otpAttemptsLeft = 3;
   }
 
-  return '';
+  return "";
 }
 
 /** 
@@ -601,6 +617,10 @@ function stopInvalidOtp(globals) {
  */
 function verifyOtp(globals) {
   const form = globals.form;
+
+  if (window.otpExpired) {
+    return reduceOtpAttempt(globals, "timeout");
+  }
 
   const mobile =
     form.personal_loan_offer.mobile?.$value || "";
@@ -628,37 +648,37 @@ function verifyOtp(globals) {
       console.log("Verify OTP response:", data);
 
       if (data.success) {
-        // ✅ Show success message
+        if (window.otpTimer) clearInterval(window.otpTimer);
+
         globals.functions.setProperty(form.otp_verification.otp_validation_message, {
           value: "Valid OTP",
           visible: true
         });
 
-        // (optional) you can store name/address if needed later
         globals.userData = {
           name: data.name,
           address: data.address
         };
 
+        setTimeout(() => {
+          stoptimer(globals);
+        }, 700);
+
       } else {
-        // ❌ Invalid OTP
-        globals.functions.setProperty(form.otp_verification.otp_validation_message, {
-          value: "Invalid OTP",
-          visible: true
-        });
+        if (window.otpTimer) clearInterval(window.otpTimer);
+        reduceOtpAttempt(globals, "invalid");
       }
     })
     .catch((error) => {
       console.error("Verify OTP error:", error);
 
-      globals.functions.setProperty(form.otp_verification.otp_validation_message, {
-        value: "Something went wrong",
-        visible: true
-      });
+      if (window.otpTimer) clearInterval(window.otpTimer);
+      reduceOtpAttempt(globals, "invalid");
     });
 
   return "Verifying OTP...";
 }
+
 
 /** 
  * @param {scope} globals
