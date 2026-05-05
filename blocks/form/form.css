@@ -2852,8 +2852,14 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
   box-sizing: border-box !important;
 }
 
-/* MAIN PANEL */
-fieldset.panel-wrapper.field-e-income {
+/* HIDE AEM HIDDEN COMPONENTS */
+[data-visible="false"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* MAIN PANEL - ONLY WHEN VISIBLE */
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) {
   max-width: 900px !important;
   width: 100% !important;
   margin: 20px 0 !important;
@@ -2873,7 +2879,7 @@ fieldset.panel-wrapper.field-e-income {
 }
 
 /* HEADER */
-fieldset.panel-wrapper.field-e-income > legend.field-label {
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > legend.field-label {
   grid-column: 1 / -1 !important;
   width: calc(100% + 56px) !important;
   margin: 0 0 6px -28px !important;
@@ -2888,7 +2894,7 @@ fieldset.panel-wrapper.field-e-income > legend.field-label {
 }
 
 /* HEADER ICON */
-fieldset.panel-wrapper.field-e-income > legend.field-label::before {
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > legend.field-label::before {
   content: "";
   position: absolute;
   left: 28px;
@@ -2900,7 +2906,7 @@ fieldset.panel-wrapper.field-e-income > legend.field-label::before {
 }
 
 /* LOGOS LEFT */
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo {
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo {
   grid-column: 1 !important;
   grid-row: 2 !important;
   display: flex !important;
@@ -2912,7 +2918,7 @@ fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo {
 }
 
 /* DROPDOWN RIGHT */
-fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank {
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .drop-down-wrapper.field-bank {
   grid-column: 2 !important;
   grid-row: 2 !important;
   width: 100% !important;
@@ -2920,7 +2926,7 @@ fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank {
   padding: 0 !important;
 }
 
-fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select {
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .drop-down-wrapper.field-bank select {
   width: 100% !important;
   height: 54px !important;
   border: 1px solid #d6deea !important;
@@ -2933,8 +2939,8 @@ fieldset.panel-wrapper.field-e-income > .drop-down-wrapper.field-bank select {
 }
 
 /* LOGO CARD */
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .image-wrapper,
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .field-wrapper {
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo .image-wrapper,
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo .field-wrapper {
   width: 72px !important;
   height: 72px !important;
   min-width: 72px !important;
@@ -2950,17 +2956,8 @@ fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo .field-wra
 }
 
 /* LOGO IMAGE */
-fieldset.panel-wrapper.field-e-income > .panel-wrapper.field-banklogo img {
+fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo img {
   width: 46px !important;
   height: 46px !important;
   object-fit: contain !important;
-}
-
-/* Respect AEM hidden components */
-[data-visible="false"] {
-  display: none !important;
-}
-
-fieldset.field-e-income[data-visible="true"] {
-  display: grid !important;
 }
