@@ -782,7 +782,7 @@ function proceedApi(globals) {
         });
 
         globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.employer_name,{
-          value:data.name
+          value:data.data.name
         });
 
         // you can map more if needed
