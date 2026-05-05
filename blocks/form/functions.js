@@ -660,6 +660,9 @@ function verifyOtp(globals) {
   return "Verifying OTP...";
 }
 
+/** 
+ * @param {scope} globals
+ */
 function handleInvalidFlow(globals) {
   const form = globals.form;
 
