@@ -471,8 +471,17 @@ function initOtpState(globals) {
   return updateAttemptInfo(globals);
 }
 
+
+/** 
+ * @param {scope} globals
+ */
+
 function updateAttemptInfo(globals) {
   const form = globals.form;
+  
+  if (window.otpAttemptsLeft === undefined) {
+    window.otpAttemptsLeft = 3;
+  }
 
   globals.functions.setProperty(form.otp_verification.attempt_info, {
     value: `${window.otpAttemptsLeft}/3 attempts left`
