@@ -768,7 +768,7 @@ function proceedApi(globals) {
           }
         );
 
-        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details,
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.mobile_number,
         {
           value: data.data.mobileNumber
         });
