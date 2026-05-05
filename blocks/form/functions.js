@@ -462,6 +462,78 @@ function generateOtp(globals) {
   return 'Generating OTP...';
 }
 
+/**
+ * @param {scope} globals
+ */
+function starttimer(globals) {
+  const form = globals.form;
+
+  let timeLeft = 10;
+
+  // clear old timer if exists
+  if (window.otpTimer) {
+    clearInterval(window.otpTimer);
+  }
+
+  // show initial value
+  globals.functions.setProperty(form.otp_verification.timer, {
+    value: `Resend OTP in : ${timeLeft}`
+  });
+
+  window.otpTimer = setInterval(() => {
+    timeLeft--;
+
+    globals.functions.setProperty(form.otp_verification.timer, {
+      value: `Resend OTP in : ${timeLeft}`
+    });
+
+    if (timeLeft <= 0) {
+      clearInterval(window.otpTimer);
+
+      globals.functions.setProperty(form.otp_verification.timer, {
+        value: 'You can resend OTP now'
+      });
+
+      // enable resend button
+      globals.functions.setProperty(form.otp_verification.resend_otp, {
+        visible: true,
+        enabled: true
+      });
+    }
+  }, 1000);
+
+  return '';
+}
+
+/**
+ * @param {scope} globals
+ */
+function stoptimer(globals) {
+  const form = globals.form;
+
+  // stop timer
+  if (window.otpTimer) {
+    clearInterval(window.otpTimer);
+  }
+
+  // clear timer text
+  globals.functions.setProperty(form.otp_verification.timer, {
+    value: ''
+  });
+
+  // hide OTP panel
+  globals.functions.setProperty(form.otp_verification, {
+    visible: false
+  });
+
+  // show next panel (CHANGE if needed)
+  globals.functions.setProperty(form["e-income"], {
+    visible: true
+  });
+
+  return '';
+}
+
 
 /** 
  * @param {scope} globals
