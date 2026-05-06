@@ -58,269 +58,83 @@ main .form fieldset.accordion  fieldset.accordion-collapse {
 main .form fieldset.accordion {
     row-gap: 0;
 }
+/* =========================================
+   LOAN + PERSONAL DETAILS FINAL UI
+========================================= */
 
-/* ACCORDION CARD */
-main .form form .field-loan-details,
-main .form form .field-personal-details {
-  background: #f8faff;
-  border: 1px solid #edf0f5;
-  border-radius: 16px;
-  overflow: hidden;
-  padding-bottom: 16px;
-}
- 
-/* HEADER */
-main .form form .field-loan-details > legend.field-label.accordion-legend,
-main .form form .field-personal-details > legend.field-label.accordion-legend {
-  background: #e7eefc;
-  padding: 18px 20px 18px 46px;
-  border-radius: 0;
-  position: relative;
-  grid-column: 1 / -1;
-  box-sizing: border-box;
-  font-size: 18px;
-  font-weight: 600;
-  color: #3f4a5a;
-  margin: 0 0 8px;
-}
- 
-main .form form .field-personal-details > legend.field-label.accordion-legend::before {
-  content: "";
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%233b82f6' stroke-width='2' viewBox='0 0 24 24'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 4-6 8-6s8 2 8 6'/></svg>");
-}
-
-/* FIELD BLOCKS */
-main .form form .field-loan-details > .text-wrapper,
-main .form form .field-personal-details > .text-wrapper,
-main .form form .field-loan-details > .date-wrapper,
-main .form form .field-personal-details > .date-wrapper {
-  position: relative;
-  display: block;
-  padding: 0 16px 0 14px;
-  margin-top: 14px;
-}
- 
-/* BLUE LINE */
-main .form form .field-loan-details > .text-wrapper::before,
-main .form form .field-personal-details > .text-wrapper::before,
-main .form form .field-loan-details > .date-wrapper::before,  
-main .form form .field-personal-details > .date-wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 2px;
-  background: #8fb2ff;
-  border-radius: 2px;
-}
- 
-/* LABELS */
-main .form form .field-loan-details .field-label,
-main .form form .field-personal-details .field-label {
-  font-size: 13px;
-  font-weight: 400;
-  color: #7a8394;
-  margin-bottom: 6px;
-  display: block;
-}
- 
-/* MAKE INPUTS LOOK LIKE TEXT, NOT BOXES */
-main .form form .field-loan-details input,
-main .form form .field-personal-details input,
-main .form form .field-loan-details textarea,
-main .form form .field-personal-details textarea {
-  border: 0 !important;
-  outline: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  height: auto !important;
-  min-height: auto !important;
-  width: auto !important;
-  max-width: 100%;
-  font-size: 16px;
-  font-weight: 600;
-  color: #3f4a5a;
-  border-radius: 0 !important;
-}
- 
-/* DATE FIELDS ALSO LOOK LIKE TEXT */
-main .form form .field-loan-details .date-wrapper input,
-main .form form .field-personal-details .date-wrapper input {
-  letter-spacing: 0;
-}
- 
-/* REMOVE GENERIC FORM FOCUS STYLES */
-main .form form .field-loan-details input:focus,
-main .form form .field-personal-details input:focus,
-main .form form .field-loan-details textarea:focus,
-main .form form .field-personal-details textarea:focus {
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-}
- 
-/* OPTIONAL: LONG ADDRESS FULL WIDTH LOOK */
-main .form form .field-personal-details .field-current-address {
-  grid-column: 1 / -1;
-}
- 
-/* OPTIONAL: DOTTED SEPARATOR LIKE REFERENCE */
-main .form form .field-personal-details .field-current-address,
-main .form form .field-personal-details .field-residence-type {
-  border-top: 1px dashed #e4e8f0;
-  padding-top: 14px;
-  margin-top: 18px;
-}
- 
-/* HEADER ICONS */
-main .form form .field-loan-details > legend.field-label.accordion-legend::before {
-  content: "💰";
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-}
-
-/* make Loan Amount align like Rate of Interest */
-main .form form .field-loan-details > .field-loandisplay {
-  padding-left: 18px !important;   /* same as others */
-  margin-left: 0 !important;
-}
-
-/* fix blue line position */
-main .form form .field-loan-details > .field-loandisplay::before {
-  left: 10px !important;
-}
-
-/* ============================= */
-/* FIX BLUE LINE (ALL FIELDS)    */
-/* ============================= */
-
-main .form form .field-loan-details > .text-wrapper::before,
-main .form form .field-loan-details > .date-wrapper::before,
-main .form form .field-loan-details > .field-loandisplay::before {
-  top: 4px;
-  bottom: auto;
-  height: 40px;   /* same as personal details */
-}
-
-/* ============================= */
-/* FIX LOAN AMOUNT (FINAL TUNE)  */
-/* ============================= */
-
-main .form form .field-loan-details > .field-loandisplay {
-  padding: 0 18px 0 16px !important;   /* align left like others */
-  margin-top: 14px !important;         /* reduce gap */
-  height: 68px;                        /* slightly smaller */
-  min-height: 68px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-/* label spacing */
-main .form form .field-loan-details > .field-loandisplay .field-label {
-  margin-bottom: 4px;                  /* tighter like EMI */
-  line-height: 16px;
-}
-
-/* value alignment */
-main .form form .field-loan-details > .field-loandisplay input {
-  min-height: 22px;
-  line-height: 22px;
-  margin-top: 0;
-}
-
-/* fix blue line alignment */
-main .form form .field-loan-details > .field-loandisplay::before {
-  top: 2px;
-  height: 48px;                       /* match others */
-}
-
-/* Current Address + Residence Type full input width */
-
-.field-current-address,
-.field-residence-type {
-  width: 100% !important;
-  max-width: 100% !important;
-  flex: 0 0 100% !important;
-}
-
-/* actual textbox */
-.field-current-address input[type="text"],
-.field-residence-type input[type="text"] {
-  display: block !important;
-  width: calc(100vw - 260px) !important;
-  max-width: 100% !important;
-  min-width: 100% !important;
-  height: 55px !important;
-  box-sizing: border-box !important;
-}
-
-/* remove browser default input shrink */
-input[name="current_address"],
-input[name="residence_type"] {
-  width: 100% !important;
-  max-width: none !important;
-  min-width: 100% !important;
-}
-
-/* tier-1 modified*/
-/* MAKE LOAN + PERSONAL HEADERS LIKE OTHER COMPACT ACCORDIONS */
+/* MAIN CARD */
 main .form form .field-loan-details,
 main .form form .field-personal-details {
   max-width: 890px !important;
   margin: 18px auto !important;
   padding: 0 !important;
+
   background: #fff !important;
   border: 1px solid #e6eaf2 !important;
   border-radius: 14px !important;
+
   overflow: hidden !important;
   box-sizing: border-box !important;
 }
 
-/* HEADER ONLY */
+/* =========================================
+   HEADER / BANNER
+========================================= */
+
 main .form form .field-loan-details > legend.field-label.accordion-legend,
 main .form form .field-personal-details > legend.field-label.accordion-legend {
   width: 100% !important;
   margin: 0 !important;
-  padding: 10px 16px 10px 46px !important;
+
+  padding: 14px 18px 14px 50px !important;
 
   background: #dce8fb !important;
   border-radius: 14px 14px 0 0 !important;
 
-  font-size: 13.5px !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  font-size: 15px !important;
   font-weight: 700 !important;
   color: #14204a !important;
   line-height: 1.2 !important;
-
-  position: relative !important;
-  box-sizing: border-box !important;
 }
 
-/* KEEP EXISTING ICON POSITION */
-main .form form .field-loan-details > legend.field-label.accordion-legend::before,
+/* PERSONAL ICON */
 main .form form .field-personal-details > legend.field-label.accordion-legend::before {
-  left: 18px !important;
-  top: 50% !important;
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+
   transform: translateY(-50%) !important;
+
+  width: 16px;
+  height: 16px;
+
+  background:
+    no-repeat center/contain
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232f63e5' stroke-width='2' viewBox='0 0 24 24'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 4-6 8-6s8 2 8 6'/></svg>");
 }
 
-/* ARROW SAME AS OTHER SECTIONS */
+/* LOAN ICON */
+main .form form .field-loan-details > legend.field-label.accordion-legend::before {
+  content: "💰";
+
+  position: absolute;
+  left: 18px;
+  top: 50%;
+
+  transform: translateY(-50%) !important;
+
+  font-size: 16px;
+}
+
+/* ARROW */
 main .form form .field-loan-details > legend.field-label.accordion-legend::after,
 main .form form .field-personal-details > legend.field-label.accordion-legend::after {
   content: "";
+
   width: 10px;
   height: 10px;
 
@@ -334,10 +148,189 @@ main .form form .field-personal-details > legend.field-label.accordion-legend::a
   transform: translateY(-50%) rotate(45deg) !important;
 }
 
-/* REMOVE COLOUR UNDER HEADING WHEN COLLAPSED/EMPTY */
-main .form form .field-loan-details > legend.field-label.accordion-legend + *,
-main .form form .field-personal-details > legend.field-label.accordion-legend + * {
-  margin-top: 14px;
+/* =========================================
+   FIELD WRAPPERS
+========================================= */
+
+main .form form .field-loan-details > .text-wrapper,
+main .form form .field-personal-details > .text-wrapper,
+main .form form .field-loan-details > .date-wrapper,
+main .form form .field-personal-details > .date-wrapper,
+main .form form .field-loan-details > .field-loandisplay {
+  position: relative;
+  display: block;
+
+  margin: 12px 16px !important;
+  padding: 4px 0 4px 12px !important;
+
+  background: #fff !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  box-sizing: border-box !important;
+}
+
+/* =========================================
+   BLUE LEFT LINE
+========================================= */
+
+main .form form .field-loan-details > .text-wrapper::before,
+main .form form .field-personal-details > .text-wrapper::before,
+main .form form .field-loan-details > .date-wrapper::before,
+main .form form .field-personal-details > .date-wrapper::before,
+main .form form .field-loan-details > .field-loandisplay::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+
+  width: 3px;
+
+  background: #c8d6f8;
+  border-radius: 2px;
+}
+
+/* =========================================
+   LABELS
+========================================= */
+
+main .form form .field-loan-details .field-label,
+main .form form .field-personal-details .field-label {
+  display: block !important;
+
+  margin: 0 0 4px 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+
+  line-height: 1.2 !important;
+}
+
+/* =========================================
+   INPUTS
+========================================= */
+
+main .form form .field-loan-details input,
+main .form form .field-personal-details input,
+main .form form .field-loan-details textarea,
+main .form form .field-personal-details textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: 24px !important;
+  min-height: 24px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  resize: none !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #1f2a44 !important;
+
+  line-height: 1.2 !important;
+
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* REMOVE FOCUS EFFECTS */
+
+main .form form .field-loan-details input:focus,
+main .form form .field-personal-details input:focus,
+main .form form .field-loan-details textarea:focus,
+main .form form .field-personal-details textarea:focus {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* =========================================
+   LONG FIELDS
+========================================= */
+
+main .form form .field-personal-details .field-current-address,
+main .form form .field-personal-details .field-residence-type {
+  grid-column: 1 / -1 !important;
+
+  border-top: 1px dashed #e4e8f0;
+
+  padding-top: 14px !important;
+  margin-top: 18px !important;
+}
+
+/* FULL WIDTH INPUTS */
+
+.field-current-address,
+.field-residence-type {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+.field-current-address input[type="text"],
+.field-residence-type input[type="text"] {
+  display: block !important;
+
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+
+  height: 42px !important;
+
+  box-sizing: border-box !important;
+}
+
+/* =========================================
+   LOAN DISPLAY ALIGNMENT
+========================================= */
+
+main .form form .field-loan-details > .field-loandisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  min-height: 60px !important;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+
+  main .form form .field-loan-details,
+  main .form form .field-personal-details {
+    margin: 14px 10px !important;
+  }
+
+  main .form form .field-loan-details > legend.field-label.accordion-legend,
+  main .form form .field-personal-details > legend.field-label.accordion-legend {
+    font-size: 14px !important;
+    padding: 13px 16px 13px 46px !important;
+  }
+
+  main .form form .field-loan-details input,
+  main .form form .field-personal-details input,
+  main .form form .field-loan-details textarea,
+  main .form form .field-personal-details textarea {
+    font-size: 13px !important;
+  }
 }
 
 /*tier-2 */
@@ -359,7 +352,7 @@ fieldset.panel-wrapper.field-salary-account-details > legend.field-label,
 fieldset.panel-wrapper.field-office-address-panel > legend.field-label {
   width: 100% !important;
   margin: 0 !important;
-  padding: 10px 16px !important;
+  padding: 14px 18px !important;
 
   display: flex !important;
   align-items: center !important;
@@ -368,7 +361,7 @@ fieldset.panel-wrapper.field-office-address-panel > legend.field-label {
   background: #dce8fb !important;
   border-radius: 14px 14px 0 0 !important;
 
-  font-size: 13.5px !important;
+  font-size: 15px !important;
   font-weight: 700 !important;
   color: #14204a !important;
   line-height: 1.2 !important;
@@ -456,7 +449,7 @@ fieldset.panel-wrapper.field-salary-account-details label.field-label,
 fieldset.panel-wrapper.field-office-address-panel label.field-label {
   display: block !important;
 
-  font-size: 10.5px !important;
+  font-size: 14px !important;
   font-weight: 500 !important;
   color: #7a8494 !important;
   line-height: 1.2 !important;
@@ -472,8 +465,8 @@ fieldset.panel-wrapper.field-salary-account-details input,
 fieldset.panel-wrapper.field-office-address-panel input,
 fieldset.panel-wrapper.field-office-address-panel textarea {
   width: 100% !important;
-  height: 20px !important;
-  min-height: 20px !important;
+  height: 29px !important;
+  min-height: 29px !important;
 
   border: 0 !important;
   background: transparent !important;
@@ -482,7 +475,7 @@ fieldset.panel-wrapper.field-office-address-panel textarea {
   box-shadow: none !important;
   resize: none !important;
 
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
   color: #1f2a44 !important;
   line-height: 1.2 !important;
@@ -530,7 +523,7 @@ fieldset.panel-wrapper.field-reference-details-panel > legend.field-label {
   grid-column: 1 / -1 !important;
   width: 100% !important;
   margin: 0 !important;
-  padding: 10px 16px !important;
+  padding: 14px 18px !important;
 
   display: flex !important;
   align-items: center !important;
@@ -539,7 +532,7 @@ fieldset.panel-wrapper.field-reference-details-panel > legend.field-label {
   background: #dce8fb !important;
   border-radius: 14px 14px 0 0 !important;
 
-  font-size: 13.5px !important;
+  font-size: 15px !important;
   font-weight: 700 !important;
   color: #14204a !important;
   line-height: 1.2 !important;
@@ -596,7 +589,7 @@ fieldset.panel-wrapper.field-reference-details-panel > .field-wrapper {
 /* LABELS */
 fieldset.panel-wrapper.field-reference-details-panel label.field-label {
   display: block !important;
-  font-size: 10.5px !important;
+  font-size: 14px !important;
   font-weight: 500 !important;
   color: #7a8494 !important;
   line-height: 1.2 !important;
@@ -610,8 +603,8 @@ fieldset.panel-wrapper.field-reference-details-panel label.field-label {
 /* INPUT TEXT STYLE */
 fieldset.panel-wrapper.field-reference-details-panel input {
   width: 100% !important;
-  height: 20px !important;
-  min-height: 20px !important;
+  height: 28px !important;
+  min-height: 28px !important;
 
   border: 0 !important;
   background: transparent !important;
@@ -619,7 +612,7 @@ fieldset.panel-wrapper.field-reference-details-panel input {
   margin: 0 !important;
   box-shadow: none !important;
 
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
   color: #1f2a44 !important;
   line-height: 1.2 !important;
@@ -660,7 +653,7 @@ fieldset.panel-wrapper.field-verify-email-id-panel {
 fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label {
   width: calc(100% + 32px);
   margin: 0 0 14px -16px;
-  padding: 10px 16px;
+  padding: 14px 18px;
 
   display: flex;
   align-items: center;
@@ -669,7 +662,7 @@ fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label {
   background: #dce8fb;
   border-radius: 14px 14px 0 0;
 
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 700;
   color: #14204a;
 }
@@ -709,7 +702,7 @@ fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label::after {
 
 /* LABEL */
 .field-verify-email-id-panel label.field-label {
-  font-size: 12px;
+  font-size: 13px;
   color: #6b7280;
   font-weight: 500;
 }
@@ -724,11 +717,11 @@ fieldset.panel-wrapper.field-verify-email-id-panel > legend.field-label::after {
 /* INPUT */
 .field-verify-email-id-panel input {
   flex: 1;
-  height: 36px;
+  height: 38px;
   padding: 0 12px;
   border: 1px solid #dfe5ef;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
   color: #1f2a44;
 }
 
