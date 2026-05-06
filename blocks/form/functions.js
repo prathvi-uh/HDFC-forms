@@ -929,6 +929,62 @@ function generateEmailOtp(globals) {
   return "Generating Email OTP...";
 }
 
+/**
+ * @param {scope} globals
+ */
+function validateEmailOtp(globals) {
+
+  const form = globals.form;
+
+  const email =
+    form.personal_detail.mailid?.$value || "";
+
+  const otp =
+    form.personal_detail.email_otp?.$value || "";
+
+  console.log("VALIDATE EMAIL OTP PAYLOAD:", {
+    email,
+    otp
+  });
+
+  fetch("https://await-matchbox-certify.ngrok-free.dev/validateEmailOTP", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      email: email,
+      otp: otp
+    })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+
+      console.log("VALIDATE EMAIL OTP RESPONSE:", data);
+
+      if (data.success) {
+
+        alert("Email Verified Successfully");
+
+      } else {
+
+        alert("Invalid Email OTP");
+
+      }
+
+    })
+    .catch((err) => {
+
+      console.log("VALIDATE EMAIL OTP ERROR:", err);
+
+      alert("Unable to validate Email OTP");
+
+    });
+
+  return "Validating Email OTP...";
+}
+
 /** 
  * @param {scope} globals
  */
@@ -941,6 +997,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, proceedApi, handleOtpInvalid, calculateEMI,generateEmailOtp, restoreReviewLoanDetails, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo,reduceOtpAttempt, stopInvalidOtp,initOtpState, 
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, proceedApi, handleOtpInvalid, calculateEMI,generateEmailOtp, restoreReviewLoanDetails, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, stopInvalidOtp,initOtpState, 
 };
  
