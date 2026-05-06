@@ -809,7 +809,7 @@ function proceedApi(globals) {
         });
 
         globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.residence_type,{
-          value: data.data.officeAddress
+          value: data.data.residenceType
         });
 
         globals.functions.setProperty(
