@@ -3206,6 +3206,7 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
 .button-wrapper.field-confirm .button {
   width: 190px !important;
   height: 52px !important;
+
   background: #5f8dda !important;
   border: none !important;
   border-radius: 12px !important;
@@ -3219,14 +3220,46 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
   justify-content: center !important;
 
   padding: 0 24px !important;
+
   cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease !important;
 }
 
+/* ARROW */
 .button-wrapper.field-confirm button::after,
 .button-wrapper.field-confirm .button::after {
   content: "›";
   margin-left: 8px;
   font-size: 22px;
+
+  transition: transform 0.25s ease;
+}
+
+/* HOVER EFFECT */
+.button-wrapper.field-confirm button:hover,
+.button-wrapper.field-confirm .button:hover {
+  background: #4f7fd0 !important;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(95, 141, 218, 0.28) !important;
+}
+
+/* ARROW MOVE */
+.button-wrapper.field-confirm button:hover::after,
+.button-wrapper.field-confirm .button:hover::after {
+  transform: translateX(3px);
+}
+
+/* CLICK EFFECT */
+.button-wrapper.field-confirm button:active,
+.button-wrapper.field-confirm .button:active {
+  transform: translateY(0);
+  box-shadow: none !important;
 }
 
 
