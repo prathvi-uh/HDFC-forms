@@ -918,42 +918,40 @@ fieldset.panel-wrapper.field-verify-email-id-panel:not(.accordion-collapse) > le
 }
 
 /* =========================================
-   CLEAN COLLAPSED ACCORDION FIX
+   FINAL ACCORDION GAP FIX
 ========================================= */
 
-/* COLLAPSED ACCORDION = ONLY HEADER VISIBLE */
+/* SAME SPACING BETWEEN ALL ACCORDIONS */
+main .form form .field-loan-details,
+main .form form .field-personal-details,
+fieldset.panel-wrapper.field-salary-account-details,
+fieldset.panel-wrapper.field-office-address-panel,
+fieldset.panel-wrapper.field-reference-details-panel,
+fieldset.panel-wrapper.field-verify-email-id-panel {
+  margin: 18px auto !important;
+}
+
+/* REMOVE RANDOM EXTRA SPACE */
+main .form form .field-loan-details,
+main .form form .field-personal-details {
+  padding-bottom: 0 !important;
+}
+
+/* COLLAPSED ACCORDION CLEAN HEIGHT */
 main .form form .field-loan-details.accordion-collapse,
 main .form form .field-personal-details.accordion-collapse {
-  height: auto !important;
   min-height: auto !important;
-
-  padding: 0 !important;
-  overflow: hidden !important;
-
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+  height: auto !important;
 }
 
-/* HEADER LOOK */
-main .form form .field-loan-details.accordion-collapse
-  > legend.field-label.accordion-legend,
-
-main .form form .field-personal-details.accordion-collapse
-  > legend.field-label.accordion-legend {
-  margin: 0 !important;
-  border-radius: 14px !important;
-}
-
-/* HIDE EVERYTHING EXCEPT HEADER */
+/* HIDE INNER CONTENT COMPLETELY WHEN CLOSED */
 main .form form .field-loan-details.accordion-collapse > *:not(legend),
 main .form form .field-personal-details.accordion-collapse > *:not(legend) {
   display: none !important;
 }
 
-/* CONSISTENT GAP */
-main .form form .field-loan-details,
-main .form form .field-personal-details,
-fieldset.panel-wrapper {
-  margin: 18px auto !important;
+/* REMOVE EXTRA INTERNAL TOP GAP */
+main .form form .field-loan-details > legend.field-label.accordion-legend + *,
+main .form form .field-personal-details > legend.field-label.accordion-legend + * {
+  margin-top: 0 !important;
 }
