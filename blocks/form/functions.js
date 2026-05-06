@@ -969,18 +969,22 @@ function validateEmailOtp(globals) {
         globals.functions.setProperty(
           form.personal_detail.email_otp_status,
           {
-            value: "Verified",
+            value: "✔ Verified",
             visible: true
           }
         );
 
-        // ✅ Green color
-        document.querySelector('[data-cmp-visible="email_otp_status"]')
-          ?.style.setProperty("color", "green");
-
-        // ✅ Disable Verify button
+        // ✅ Hide verify button
         globals.functions.setProperty(
           form.personal_detail.verify,
+          {
+            visible: false
+          }
+        );
+
+        // ✅ Disable submit button
+        globals.functions.setProperty(
+          form.personal_detail.mail_submit,
           {
             enabled: false
           }
@@ -988,7 +992,7 @@ function validateEmailOtp(globals) {
 
       } else {
 
-        // ❌ Invalid OTP text
+        // ❌ Invalid OTP
         globals.functions.setProperty(
           form.personal_detail.email_otp_status,
           {
@@ -997,15 +1001,19 @@ function validateEmailOtp(globals) {
           }
         );
 
-        // ❌ Red color
-        document.querySelector('[data-cmp-visible="email_otp_status"]')
-          ?.style.setProperty("color", "red");
-
-        // ✅ Enable Verify again
+        // ✅ Enable verify again
         globals.functions.setProperty(
           form.personal_detail.verify,
           {
             enabled: true
+          }
+        );
+
+        // ❌ Disable submit
+        globals.functions.setProperty(
+          form.personal_detail.mail_submit,
+          {
+            enabled: false
           }
         );
 
