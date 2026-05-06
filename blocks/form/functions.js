@@ -969,7 +969,7 @@ function validateEmailOtp(globals) {
         globals.functions.setProperty(
           form.personal_detail.email_otp_status,
           {
-            value: "✔ Verified",
+            value: "✔",
             visible: true
           }
         );
