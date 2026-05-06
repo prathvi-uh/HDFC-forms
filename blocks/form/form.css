@@ -3278,3 +3278,15 @@ button[aria-label="Try Again"]::after {
 button[aria-label="Try Again"]:hover {
   background: #4e7ed0 !important;
 }
+
+
+main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
+  max-width: 890px !important;
+
+  margin: 22px auto 0 auto !important;
+
+  padding: 0 !important;
+
+  display: flex !important;
+  justify-content: flex-start !important;
+}
