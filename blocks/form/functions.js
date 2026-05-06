@@ -785,12 +785,16 @@ function proceedApi(globals) {
           value:data.data.name
         });
         
-        globals.functions.setProperty(form.thankyou.appnumber, {
+        globals.functions.setProperty(form.thankyou.appnumber,{
            value: data.data.loanApplicationNumber
         });      // you can map more if needed
 
       } else {
         console.log("PROCEED ERROR:", data.message);
+
+      globals.functions.setProperty(form.offer.proceed_success, {
+      value: String(data.success)
+      });
 
         if (!data.success) {
             globals.functions.setProperty(form.offer.error, {
