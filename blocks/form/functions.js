@@ -808,7 +808,7 @@ function proceedApi(globals) {
           value: data.data.bankName
         });
 
-        globals.functions.setProperty(form.redetails.halfreview.accdet.office_address_panel.curr_emp,{
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.residence_type,{
           value: data.data.officeAddress
         });
 
