@@ -793,7 +793,7 @@ function proceedApi(globals) {
         
         globals.functions.setProperty(form.thankyou.appnumber,{
            value: data.data.loanApplicationNumber
-        });      // you can map more if needed
+        });      
         
         globals.functions.setProperty(form.redetails.halfreview.accdet.salary_account_details.salary_ac_number, {
             value: data.data.salaryAccountNumber
@@ -808,8 +808,7 @@ function proceedApi(globals) {
           value: data.data.bankName
         });
 
-        globals.functions.setProperty(form.redetails.halfreview.accdet.office_address_panel.curr_emp,
-        {
+        globals.functions.setProperty(form.redetails.halfreview.accdet.office_address_panel.curr_emp,{
           value: data.data.officeAddress
         });
 
@@ -824,7 +823,7 @@ function proceedApi(globals) {
         {
           value: data.data.referenceMobileNumber
         });
-        
+
         globals.functions.setProperty(form.review, {
             visible: true
         });
