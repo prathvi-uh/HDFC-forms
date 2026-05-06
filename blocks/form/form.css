@@ -3280,13 +3280,25 @@ button[aria-label="Try Again"]:hover {
 }
 
 
+/* =========================================
+   FORCE LEFT ALIGN CONFIRM BUTTON
+========================================= */
+
 main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
-  max-width: 1200px !important;
+  width: 100% !important;
+  max-width: 100% !important;
 
-  margin: 22px auto 0 auto !important;
+  margin-top: 22px !important;
+  padding-left: 84px !important;
 
-  padding-left: 44px !important;
+  display: block !important;
+  text-align: left !important;
+}
 
-  display: flex !important;
-  justify-content: flex-start !important;
+/* BUTTON */
+main .form form .button-wrapper.field-confirm.field-wrapper.col-12 button,
+main .form form .button-wrapper.field-confirm.field-wrapper.col-12 .button,
+main .form form .button-wrapper.field-confirm.field-wrapper.col-12 input[type="submit"] {
+  margin: 0 !important;
+  display: inline-flex !important;
 }
