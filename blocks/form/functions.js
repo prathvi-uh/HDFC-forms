@@ -237,6 +237,12 @@ function handleResendOtp(globals) {
       });
     }
 
+    if(globals.form.tryagain) {
+      globals.functions.setProperty(globals.form.tryagain, {
+        visible:true
+      });
+    }
+
     return '';
   }
 
