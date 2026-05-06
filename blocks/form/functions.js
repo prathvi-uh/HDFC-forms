@@ -816,21 +816,12 @@ function proceedApi(globals) {
          value: data.data.officeAddress
         });
 
-        globals.functions.setProperty(
-          form.redetails.halfreview.accdet.reference_details_panel.fullname, {
-              value: data.data.referenceName
-          });
-
-
-        //globals.functions.setProperty(
-          //form.redetails.halfreview.accdet.reference_details_panel.mobile_number,
-        //{
-
-          //value: data.data.referenceMobileNumber
-        //});
+        globals.functions.setProperty( form.redetails.halfreview.accdet.reference_details_panel.fullname, {
+          value: data.data.referenceName
+        });
 
         globals.functions.setProperty(form.review, {
-            visible: true
+          visible: true
         });
 
         globals.functions.setProperty(form.offer, {
