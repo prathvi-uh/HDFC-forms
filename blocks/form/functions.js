@@ -788,13 +788,13 @@ function proceedApi(globals) {
         globals.functions.setProperty(form.thankyou.appnumber,{
            value: data.data.loanApplicationNumber
         });      // you can map more if needed
-
+        
+        globals.functions.setProperty(form.review, {
+          visible: true
+        });
+        
       } else {
         console.log("PROCEED ERROR:", data.message);
-
-      globals.functions.setProperty(form.offer.proceed_success, {
-      value: String(data.success)
-      });
 
         if (!data.success) {
             globals.functions.setProperty(form.offer.error, {
