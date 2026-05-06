@@ -774,11 +774,6 @@ function proceedApi(globals) {
           }
         );
 
-        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.mobile_no,
-        {
-          value: data.data.mobileNumber
-        });
-
         globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.date_of_birth,{
           value: data.data.dob
         });
