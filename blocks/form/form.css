@@ -3281,11 +3281,11 @@ button[aria-label="Try Again"]:hover {
 
 
 main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
-  max-width: 890px !important;
+  max-width: 1200px !important;
 
   margin: 22px auto 0 auto !important;
 
-  padding: 0 !important;
+  padding-left: 44px !important;
 
   display: flex !important;
   justify-content: flex-start !important;
