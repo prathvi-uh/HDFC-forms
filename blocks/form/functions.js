@@ -815,18 +815,19 @@ function proceedApi(globals) {
         globals.functions.setProperty(form.redetails.halfreview.accdet.office_address_panel.curr_emp, {
          value: data.data.officeAddress
         });
-        
+
         globals.functions.setProperty(
           form.redetails.halfreview.accdet.reference_details_panel.fullname, {
               value: data.data.referenceName
           });
 
 
-        globals.functions.setProperty(
-          form.redetails.halfreview.accdet.reference_details_panel.mobile_number,
-        {
-          value: data.data.referenceMobileNumber
-        });
+        //globals.functions.setProperty(
+          //form.redetails.halfreview.accdet.reference_details_panel.mobile_number,
+        //{
+
+          //value: data.data.referenceMobileNumber
+        //});
 
         globals.functions.setProperty(form.review, {
             visible: true
