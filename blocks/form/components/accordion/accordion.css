@@ -206,7 +206,7 @@ main .form form .field-personal-details .field-label {
 
   background: transparent !important;
 
-  font-size: 12px !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
   color: #7a8494 !important;
 
@@ -224,8 +224,8 @@ main .form form .field-personal-details textarea {
   width: 100% !important;
   max-width: 100% !important;
 
-  height: 24px !important;
-  min-height: 24px !important;
+  height: 28px !important;
+  min-height: 28px !important;
 
   border: 0 !important;
   outline: 0 !important;
