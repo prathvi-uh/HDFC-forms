@@ -668,11 +668,7 @@ function verifyOtp(globals) {
         
         globals.functions.setProperty(form.info.addpanel.address_details.aadharadd, {
         value: data.address
-        });
-        
-        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.mobile_number,{
-          value: data.mobile
-        });       
+        });     
 
         globals.functions.setProperty(form.info, {
           visible: true
@@ -815,6 +811,10 @@ function proceedApi(globals) {
           value: data.data.referenceName
         });
 
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.mobile_number,{
+          value: data.mobile
+        });  
+        
         globals.functions.setProperty(form.review, {
           visible: true
         });
