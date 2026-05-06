@@ -2971,3 +2971,134 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapp
 main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
   display: none !important;
 }
+
+/* VIEW LOAN ELIGIBILITY BUTTON */
+.button-wrapper.field-view-loan-eligibility {
+  margin-top: 22px !important;
+}
+
+/* BUTTON */
+.button-wrapper.field-view-loan-eligibility button,
+.button-wrapper.field-view-loan-eligibility .button {
+  width: 190px !important;
+  height: 48px !important;
+
+  background: #b8c7ff !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* HOVER */
+.button-wrapper.field-view-loan-eligibility button:hover,
+.button-wrapper.field-view-loan-eligibility .button:hover {
+  background: #a9bbff !important;
+}
+
+/* ARROW */
+.button-wrapper.field-view-loan-eligibility button::after,
+.button-wrapper.field-view-loan-eligibility .button::after {
+  content: "›";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* RESEND OTP BUTTON WRAPPER */
+.button-wrapper.field-resend-otp {
+  margin-top: 10px !important;
+}
+
+/* RESEND OTP BUTTON */
+.button-wrapper.field-resend-otp button,
+.button-wrapper.field-resend-otp .button {
+  width: 180px !important;
+  height: 48px !important;
+
+  background: #5f8dda !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  padding: 0 22px !important;
+  cursor: pointer;
+
+  box-shadow: none !important;
+  transition: 0.2s ease;
+}
+
+/* HOVER */
+.button-wrapper.field-resend-otp button:hover,
+.button-wrapper.field-resend-otp .button:hover {
+  background: #4e7ed0 !important;
+}
+
+/* ARROW */
+.button-wrapper.field-resend-otp button::after,
+.button-wrapper.field-resend-otp .button::after {
+  content: "›";
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+/* OTP SUBMIT BUTTON */
+.button-wrapper.field-otp-submit button,
+.button-wrapper.field-otp-submit .button {
+  width: 180px !important;
+  height: 48px !important;
+
+  background: #5f8dda !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  padding: 0 22px !important;
+  cursor: pointer;
+
+  box-shadow: none !important;
+  transition: 0.2s ease;
+}
+
+/* HOVER */
+.button-wrapper.field-otp-submit button:hover,
+.button-wrapper.field-otp-submit .button:hover {
+  background: #4e7ed0 !important;
+}
+
+/* ARROW */
+.button-wrapper.field-otp-submit button::after,
+.button-wrapper.field-otp-submit .button::after {
+  content: "›";
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 600;
+}
