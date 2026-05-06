@@ -3311,3 +3311,25 @@ button[aria-label="Try Again"]::after {
 button[aria-label="Try Again"]:hover {
   background: #4e7ed0 !important;
 }
+
+/* =========================================
+   CONFIRM BUTTON POSITION LIKE IMAGE 2
+========================================= */
+
+main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
+  width: 100% !important;
+
+  margin-top: 28px !important;
+
+  padding-left: 245px !important;  /* aligns with accordion */
+
+  display: block !important;
+
+  box-sizing: border-box !important;
+}
+
+/* BUTTON */
+.button-wrapper.field-confirm button,
+.button-wrapper.field-confirm .button {
+  margin: 0 !important;
+}
