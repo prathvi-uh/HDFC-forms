@@ -795,8 +795,38 @@ function proceedApi(globals) {
            value: data.data.loanApplicationNumber
         });      // you can map more if needed
         
+        globals.functions.setProperty(form.redetails.halfreview.accdet.salary_account_details.salary_ac_number, {
+            value: data.data.salaryAccountNumber
+          });
+            
+        globals.functions.setProperty( form.redetails.halfreview.accdet.salary_account_details.ifsc,
+         {
+          value: data.data.ifscCode
+        });
+
+        globals.functions.setProperty(form.redetails.halfreview.accdet.salary_account_details.bank_name,{
+          value: data.data.bankName
+        });
+
+        globals.functions.setProperty(form.redetails.halfreview.accdet.office_address_panel.curr_emp,
+        {
+          value: data.data.officeAddress
+        });
+
+        globals.functions.setProperty(
+          form.redetails.halfreview.accdet.reference_details_panel.fullname, {
+              value: data.data.referenceName
+          });
+
+
+        globals.functions.setProperty(
+          form.redetails.halfreview.accdet.reference_details_panel.mobile_number,
+        {
+          value: data.data.referenceMobileNumber
+        });
+        
         globals.functions.setProperty(form.review, {
-          visible: true
+            visible: true
         });
 
         globals.functions.setProperty(form.offer, {
