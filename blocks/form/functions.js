@@ -897,10 +897,11 @@ function generateEmailOtp(globals) {
 
       if (data.success) {
 
-        // ✅ Show OTP field
+        // ✅ Auto fill OTP field
         globals.functions.setProperty(
           form.personal_detail.email_otp,
           {
+            value: data.otp,
             visible: true
           }
         );
