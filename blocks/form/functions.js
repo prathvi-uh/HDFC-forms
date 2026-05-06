@@ -792,7 +792,27 @@ function proceedApi(globals) {
         globals.functions.setProperty(form.review, {
           visible: true
         });
+
+        globals.functions.setProperty(form.offer, {
+          visible:false
+        });
         
+        globals.functions.setProperty(form.discount, {
+          visible: false
+        });
+
+        globals.functions.setProperty(form.display, {
+          visible:false
+        });
+
+        globals.functions.setProperty(form.redetails, {
+          visible: true
+        });
+
+        globals.functions.setProperty(form.confirm, {
+          visible: true
+        });
+
       } else {
         console.log("PROCEED ERROR:", data.message);
 
@@ -801,6 +821,7 @@ function proceedApi(globals) {
             value: data.message,
             visible: true
           });
+          
          return false;
         }
       }
