@@ -784,8 +784,10 @@ function proceedApi(globals) {
         globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.employer_name,{
           value:data.data.name
         });
-
-        // you can map more if needed
+        
+        globals.functions.setProperty(form.thankyou.appnumber, {
+           value: data.data.loanApplicationNumber
+        });      // you can map more if needed
 
       } else {
         console.log("PROCEED ERROR:", data.message);
