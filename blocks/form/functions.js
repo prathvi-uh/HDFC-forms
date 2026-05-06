@@ -805,6 +805,10 @@ function proceedApi(globals) {
           visible:false
         });
 
+        globals.functions.setProperty(form.proceed,{
+          visible:false
+        });
+        
         globals.functions.setProperty(form.redetails, {
           visible: true
         });
