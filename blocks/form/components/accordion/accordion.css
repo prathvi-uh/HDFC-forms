@@ -918,36 +918,42 @@ fieldset.panel-wrapper.field-verify-email-id-panel:not(.accordion-collapse) > le
 }
 
 /* =========================================
-   FINAL PERSONAL DETAILS GAP FIX
+   CLEAN COLLAPSED ACCORDION FIX
 ========================================= */
 
-/* REMOVE HIDDEN FRAMEWORK HEIGHT */
-main .form form .field-loan-details,
-main .form form .field-personal-details {
-  min-height: unset !important;
-  height: auto !important;
-  padding-bottom: 0 !important;
-  margin: 18px auto !important;
-}
-
-/* COLLAPSED = HEADER ONLY */
+/* COLLAPSED ACCORDION = ONLY HEADER VISIBLE */
 main .form form .field-loan-details.accordion-collapse,
 main .form form .field-personal-details.accordion-collapse {
-  height: 62px !important;
-  min-height: 62px !important;
+  height: auto !important;
+  min-height: auto !important;
+
+  padding: 0 !important;
   overflow: hidden !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
-/* REMOVE ALL INNER SPACING */
+/* HEADER LOOK */
+main .form form .field-loan-details.accordion-collapse
+  > legend.field-label.accordion-legend,
+
+main .form form .field-personal-details.accordion-collapse
+  > legend.field-label.accordion-legend {
+  margin: 0 !important;
+  border-radius: 14px !important;
+}
+
+/* HIDE EVERYTHING EXCEPT HEADER */
 main .form form .field-loan-details.accordion-collapse > *:not(legend),
 main .form form .field-personal-details.accordion-collapse > *:not(legend) {
   display: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
-/* REMOVE EXTRA GAP AFTER HEADER */
-main .form form .field-loan-details > legend.field-label.accordion-legend + *,
-main .form form .field-personal-details > legend.field-label.accordion-legend + * {
-  margin-top: 0 !important;
+/* CONSISTENT GAP */
+main .form form .field-loan-details,
+main .form form .field-personal-details,
+fieldset.panel-wrapper {
+  margin: 18px auto !important;
 }
