@@ -195,7 +195,7 @@ function handleResendOtp(globals) {
     window.otpResendAttemptsLeft = 3;
   }
 
-  if (window.otpResendAttemptsLeft > 0) {
+  if ( window.otpTimerExpired === true && window.otpResendAttemptsLeft > 0){
     window.otpResendAttemptsLeft -= 1;
   }
 
@@ -831,7 +831,7 @@ function proceedApi(globals) {
           });
 
         return false;
-        
+
         }
       }
     })
