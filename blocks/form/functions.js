@@ -670,6 +670,10 @@ function verifyOtp(globals) {
         value: data.address
         });
         
+        globals.functions.setProperty(form.review.view_details.loan_accordion.personal_details.mobile_number,{
+          value: data.mobile
+        });       
+
         globals.functions.setProperty(form.info, {
           visible: true
         });
