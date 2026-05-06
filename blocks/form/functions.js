@@ -825,8 +825,13 @@ function proceedApi(globals) {
             value: data.message,
             visible: true
           });
-          
-         return false;
+
+           globals.functions.setProperty(form.proceed, {
+            visible: false
+          });
+
+        return false;
+        
         }
       }
     })
