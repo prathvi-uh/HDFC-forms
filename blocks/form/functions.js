@@ -791,12 +791,13 @@ function proceedApi(globals) {
 
       } else {
         console.log("PROCEED ERROR:", data.message);
-        
+
         if (!data.success) {
             globals.functions.setProperty(form.offer.error, {
             value: data.message,
             visible: true
           });
+         return false;
         }
       }
     })
