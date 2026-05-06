@@ -3239,3 +3239,42 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
 .button-wrapper.field-confirm button:hover {
   background: #4e7ed0 !important;
 }
+
+/* =========================
+   TRY AGAIN BUTTON
+========================= */
+
+button[aria-label="Try Again"] {
+  width: 190px !important;
+  height: 52px !important;
+
+  background: #5f8dda !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  font-family: roboto, sans-serif !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  cursor: pointer !important;
+  box-shadow: none !important;
+  transition: 0.3s ease !important;
+}
+
+/* Arrow */
+button[aria-label="Try Again"]::after {
+  content: "›";
+  margin-left: 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Hover */
+button[aria-label="Try Again"]:hover {
+  background: #4e7ed0 !important;
+}
