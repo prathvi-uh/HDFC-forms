@@ -918,39 +918,35 @@ fieldset.panel-wrapper.field-verify-email-id-panel:not(.accordion-collapse) > le
 }
 
 /* =========================================
-   FINAL ACCORDION GAP FIX
+   FINAL PERSONAL DETAILS GAP FIX
 ========================================= */
 
-/* SAME SPACING BETWEEN ALL ACCORDIONS */
+/* REMOVE HIDDEN FRAMEWORK HEIGHT */
 main .form form .field-loan-details,
-main .form form .field-personal-details,
-fieldset.panel-wrapper.field-salary-account-details,
-fieldset.panel-wrapper.field-office-address-panel,
-fieldset.panel-wrapper.field-reference-details-panel,
-fieldset.panel-wrapper.field-verify-email-id-panel {
+main .form form .field-personal-details {
+  min-height: unset !important;
+  height: auto !important;
+  padding-bottom: 0 !important;
   margin: 18px auto !important;
 }
 
-/* REMOVE RANDOM EXTRA SPACE */
-main .form form .field-loan-details,
-main .form form .field-personal-details {
-  padding-bottom: 0 !important;
-}
-
-/* COLLAPSED ACCORDION CLEAN HEIGHT */
+/* COLLAPSED = HEADER ONLY */
 main .form form .field-loan-details.accordion-collapse,
 main .form form .field-personal-details.accordion-collapse {
-  min-height: auto !important;
-  height: auto !important;
+  height: 62px !important;
+  min-height: 62px !important;
+  overflow: hidden !important;
 }
 
-/* HIDE INNER CONTENT COMPLETELY WHEN CLOSED */
+/* REMOVE ALL INNER SPACING */
 main .form form .field-loan-details.accordion-collapse > *:not(legend),
 main .form form .field-personal-details.accordion-collapse > *:not(legend) {
   display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* REMOVE EXTRA INTERNAL TOP GAP */
+/* REMOVE EXTRA GAP AFTER HEADER */
 main .form form .field-loan-details > legend.field-label.accordion-legend + *,
 main .form form .field-personal-details > legend.field-label.accordion-legend + * {
   margin-top: 0 !important;
