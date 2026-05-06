@@ -940,7 +940,7 @@ function validateEmailOtp(globals) {
     form.personal_detail.mailid?.$value || "";
 
   const otp =
-    form.personal_detail.email_otp?.$value || "";
+    String(form.personal_detail.email_otp?.$value || "").trim();
 
   console.log("VALIDATE EMAIL OTP PAYLOAD:", {
     email,
@@ -965,11 +965,49 @@ function validateEmailOtp(globals) {
 
       if (data.success) {
 
-        alert("Email Verified Successfully");
+        // ✅ Verified text
+        globals.functions.setProperty(
+          form.personal_detail.email_otp_status,
+          {
+            value: "Verified",
+            visible: true
+          }
+        );
+
+        // ✅ Green color
+        document.querySelector('[data-cmp-visible="email_otp_status"]')
+          ?.style.setProperty("color", "green");
+
+        // ✅ Disable Verify button
+        globals.functions.setProperty(
+          form.personal_detail.verify,
+          {
+            enabled: false
+          }
+        );
 
       } else {
 
-        alert("Invalid Email OTP");
+        // ❌ Invalid OTP text
+        globals.functions.setProperty(
+          form.personal_detail.email_otp_status,
+          {
+            value: "Invalid OTP",
+            visible: true
+          }
+        );
+
+        // ❌ Red color
+        document.querySelector('[data-cmp-visible="email_otp_status"]')
+          ?.style.setProperty("color", "red");
+
+        // ✅ Enable Verify again
+        globals.functions.setProperty(
+          form.personal_detail.verify,
+          {
+            enabled: true
+          }
+        );
 
       }
 
@@ -977,8 +1015,6 @@ function validateEmailOtp(globals) {
     .catch((err) => {
 
       console.log("VALIDATE EMAIL OTP ERROR:", err);
-
-      alert("Unable to validate Email OTP");
 
     });
 
