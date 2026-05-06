@@ -787,10 +787,6 @@ function proceedApi(globals) {
           value:data.data.typeOfLoan
         });
 
-        globals.functions.setProperty(form.review.view_details.loan_accordion.loan_details.employer_name,{
-          value:data.data.name
-        });
-        
         globals.functions.setProperty(form.thankyou.appnumber,{
            value: data.data.loanApplicationNumber
         });      
