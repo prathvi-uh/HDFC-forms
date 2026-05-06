@@ -3102,3 +3102,140 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
   line-height: 1;
   font-weight: 600;
 }
+
+
+/* =========================
+   CONTINUE BUTTON
+========================= */
+.button-wrapper.field-continue button,
+.button-wrapper.field-continue .button {
+  width: 190px !important;
+  height: 52px !important;
+  background: #5f8dda !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 24px !important;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.button-wrapper.field-continue button::after,
+.button-wrapper.field-continue .button::after {
+  content: "›";
+  margin-left: 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   CONBUTTON / CONTINUE
+========================= */
+.button-wrapper.field-conbutton button,
+.button-wrapper.field-conbutton .button {
+  width: 190px !important;
+  height: 52px !important;
+  background: #5f8dda !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 24px !important;
+  cursor: pointer;
+}
+
+.button-wrapper.field-conbutton button::after,
+.button-wrapper.field-conbutton .button::after {
+  content: "›";
+  margin-left: 8px;
+  font-size: 22px;
+}
+
+
+/* =========================
+   PROCEED BUTTON
+========================= */
+.button-wrapper.field-proceed button,
+.button-wrapper.field-proceed .button {
+  width: 190px !important;
+  height: 52px !important;
+  background: #5f8dda !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 24px !important;
+  cursor: pointer;
+}
+
+.button-wrapper.field-proceed button::after,
+.button-wrapper.field-proceed .button::after {
+  content: "›";
+  margin-left: 8px;
+  font-size: 22px;
+}
+
+
+/* =========================
+   CONFIRM BUTTON
+========================= */
+.button-wrapper.field-confirm button,
+.button-wrapper.field-confirm .button {
+  width: 190px !important;
+  height: 52px !important;
+  background: #5f8dda !important;
+  border: none !important;
+  border-radius: 12px !important;
+
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 24px !important;
+  cursor: pointer;
+}
+
+.button-wrapper.field-confirm button::after,
+.button-wrapper.field-confirm .button::after {
+  content: "›";
+  margin-left: 8px;
+  font-size: 22px;
+}
+
+
+/* =========================
+   HOVER EFFECT FOR ALL
+========================= */
+.button-wrapper.field-continue button:hover,
+.button-wrapper.field-conbutton button:hover,
+.button-wrapper.field-proceed button:hover,
+.button-wrapper.field-confirm button:hover {
+  background: #4e7ed0 !important;
+}
