@@ -2865,7 +2865,7 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
 }
 
 /* MAIN PANEL - ONLY WHEN VISIBLE */
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) {
   max-width: 900px !important;
   width: 100% !important;
   margin: 20px 0 !important;
@@ -2885,7 +2885,7 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) {
 }
 
 /* HEADER */
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > legend.field-label {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-label {
   grid-column: 1 / -1 !important;
   width: calc(100% + 56px) !important;
   margin: 0 0 6px -28px !important;
@@ -2900,7 +2900,7 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > legend.field
 }
 
 /* HEADER ICON */
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > legend.field-label::before {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-label::before {
   content: "";
   position: absolute;
   left: 28px;
@@ -2912,7 +2912,7 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > legend.field
 }
 
 /* LOGOS LEFT */
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo {
   grid-column: 1 !important;
   grid-row: 2 !important;
   display: flex !important;
@@ -2924,7 +2924,7 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapp
 }
 
 /* DROPDOWN RIGHT */
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .drop-down-wrapper.field-bank {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .drop-down-wrapper.field-bank {
   grid-column: 2 !important;
   grid-row: 2 !important;
   width: 100% !important;
@@ -2932,7 +2932,7 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .drop-down-w
   padding: 0 !important;
 }
 
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .drop-down-wrapper.field-bank select {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .drop-down-wrapper.field-bank select {
   width: 100% !important;
   height: 54px !important;
   border: 1px solid #d6deea !important;
@@ -2945,8 +2945,8 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .drop-down-w
 }
 
 /* LOGO CARD */
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo .image-wrapper,
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo .field-wrapper {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo .image-wrapper,
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo .field-wrapper {
   width: 72px !important;
   height: 72px !important;
   min-width: 72px !important;
@@ -2962,7 +2962,7 @@ fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapp
 }
 
 /* LOGO IMAGE */
-fieldset.panel-wrapper.field-e-income:not([data-visible="false"]) > .panel-wrapper.field-banklogo img {
+fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo img {
   width: 46px !important;
   height: 46px !important;
   object-fit: contain !important;
