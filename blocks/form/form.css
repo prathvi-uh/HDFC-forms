@@ -3646,3 +3646,86 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
 .field-full-name .field {
   background: #f4efff !important;
 }
+
+/* ===== OVERRIDE TO MATCH BELOW PANEL STYLE ===== */
+
+.field-full-name {
+  background: #f4efff !important;
+
+  border-radius: 18px !important;
+  border: none !important;
+
+  width: calc(100% - 80px) !important;
+  max-width: 1180px !important;
+
+  margin: 24px 40px 34px 40px !important;
+
+  padding: 22px 28px !important;
+
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+/* remove internal backgrounds */
+.field-full-name *,
+.field-full-name .text-wrapper,
+.field-full-name .field-wrapper,
+.field-full-name .field {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* heading */
+.field-full-name::before {
+  content: "Customer Details";
+
+  display: block;
+
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #082b63 !important;
+
+  margin-bottom: 20px !important;
+}
+
+/* left purple line */
+.field-full-name::after {
+  content: "";
+
+  position: absolute;
+
+  left: 28px;
+  top: 72px;
+
+  width: 3px;
+  height: 48px;
+
+  border-radius: 10px;
+  background: #c8b6ff;
+}
+
+/* label */
+.field-full-name label,
+.field-full-name .label {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+
+  color: #8b8b8b !important;
+
+  margin-left: 18px !important;
+  margin-bottom: 6px !important;
+
+  display: block;
+}
+
+/* value */
+.field-full-name input,
+.field-full-name textarea {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+
+  color: #2b2b2b !important;
+
+  padding-left: 18px !important;
+}
