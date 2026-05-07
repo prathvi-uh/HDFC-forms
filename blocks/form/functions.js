@@ -658,11 +658,11 @@ function verifyOtp(globals) {
           visible: false
         });
         
-        globals.functions.setProperty(form.full, {
+        globals.functions.setProperty(form.nameaadhar.aadharname, {
           visible: true
         });
 
-        globals.functions.setProperty(form.customer.full, {
+        globals.functions.setProperty(form.nameaadhar.aadharname, {
           value: data.name
         });
         
