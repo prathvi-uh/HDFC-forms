@@ -3569,17 +3569,28 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
   padding: 0 !important;
 }
 
+/* ===== CUSTOMER DETAILS FINAL CLEAN ===== */
+
+.field-full-name {
+  width: 1185px !important;
+
+  margin-left: 54px !important;
+  margin-top: 20px !important;
+  margin-bottom: 36px !important;
+
+  border: none !important;
+  background: transparent !important;
+}
+
 /* Heading */
 .field-full-name::before {
   content: "Customer Details";
 
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: block;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  color: #1c1c1c;
+  color: #082b63;
 
   margin-bottom: 14px;
 }
@@ -3588,227 +3599,62 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
 .field-full-name .text-wrapper {
   background: #f4efff !important;
 
-  border-radius: 14px;
-  padding: 14px 18px 14px 20px !important;
-
-  border: none !important;
+  border-radius: 16px;
+  padding: 18px 22px 18px 22px !important;
 
   position: relative;
+
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Left vertical line */
+/* Left line */
 .field-full-name .text-wrapper::before {
   content: "";
 
   position: absolute;
 
-  left: 12px;
-  top: 16px;
+  left: 14px;
+  top: 18px;
 
   width: 3px;
-  height: 40px;
+  height: 44px;
 
   border-radius: 10px;
   background: #c7b4ff;
 }
 
+/* Remove AEM defaults */
+.field-full-name *,
+.field-full-name .field-wrapper,
+.field-full-name .field {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /* Label */
 .field-full-name label,
 .field-full-name .label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  color: #8d8d8d;
+  color: #8a8a8a;
 
-  margin-bottom: 4px;
-  margin-left: 12px;
+  margin-left: 14px;
+  margin-bottom: 6px;
 
   display: block;
+
+  background: transparent !important;
 }
 
 /* Value */
 .field-full-name input,
 .field-full-name textarea {
-  border: none !important;
   background: transparent !important;
-  box-shadow: none !important;
-
-  padding-left: 12px !important;
-  padding-top: 0 !important;
 
   font-size: 16px;
   font-weight: 700;
   color: #222;
-}
 
-.field-full-name,
-.field-full-name .text-wrapper,
-.field-full-name .field-wrapper,
-.field-full-name .field {
-  background: #f4efff !important;
-}
-
-/* ===== OVERRIDE TO MATCH BELOW PANEL STYLE ===== */
-
-.field-full-name {
-  background: #f4efff !important;
-
-  border-radius: 18px !important;
-  border: none !important;
-
-  width: calc(100% - 80px) !important;
-  max-width: 1180px !important;
-
-  margin: 24px 40px 34px 40px !important;
-
-  padding: 22px 28px !important;
-
-  box-sizing: border-box !important;
-  position: relative !important;
-}
-
-/* remove internal backgrounds */
-.field-full-name *,
-.field-full-name .text-wrapper,
-.field-full-name .field-wrapper,
-.field-full-name .field {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* heading */
-.field-full-name::before {
-  content: "Customer Details";
-
-  display: block;
-
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  color: #082b63 !important;
-
-  margin-bottom: 20px !important;
-}
-
-/* left purple line */
-.field-full-name::after {
-  content: "";
-
-  position: absolute;
-
-  left: 28px;
-  top: 72px;
-
-  width: 3px;
-  height: 48px;
-
-  border-radius: 10px;
-  background: #c8b6ff;
-}
-
-/* label */
-.field-full-name label,
-.field-full-name .label {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-
-  color: #8b8b8b !important;
-
-  margin-left: 18px !important;
-  margin-bottom: 6px !important;
-
-  display: block;
-}
-
-/* value */
-.field-full-name input,
-.field-full-name textarea {
-  font-size: 17px !important;
-  font-weight: 700 !important;
-
-  color: #2b2b2b !important;
-
-  padding-left: 18px !important;
-}
-
-/* ===== MATCH LOWER PANEL WIDTH ===== */
-
-.field-full-name {
-  background: #f4efff !important;
-
-  border-radius: 18px !important;
-  border: none !important;
-
-  width: 1200px !important;
-
-  margin-left: 54px !important;
-  margin-top: 20px !important;
-  margin-bottom: 34px !important;
-
-  padding: 26px 32px !important;
-
-  box-sizing: border-box !important;
-  position: relative !important;
-}
-
-/* clear defaults */
-.field-full-name *,
-.field-full-name .text-wrapper,
-.field-full-name .field-wrapper {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* heading */
-.field-full-name::before {
-  content: "Customer Details";
-
-  display: block;
-
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  color: #082b63 !important;
-
-  margin-bottom: 22px !important;
-}
-
-/* left line */
-.field-full-name::after {
-  content: "";
-
-  position: absolute;
-
-  left: 40px;
-  top: 98px;
-
-  width: 4px;
-  height: 62px;
-
-  border-radius: 10px;
-  background: #c7b5ff;
-}
-
-/* label */
-.field-full-name label,
-.field-full-name .label {
-  font-size: 13px !important;
-  font-weight: 500 !important;
-
-  color: #8b8b8b !important;
-
-  margin-left: 28px !important;
-  margin-bottom: 10px !important;
-
-  display: block;
-}
-
-/* value */
-.field-full-name input,
-.field-full-name textarea {
-  font-size: 18px !important;
-  font-weight: 700 !important;
-
-  color: #222 !important;
-
-  padding-left: 28px !important;
+  padding-left: 14px !important;
 }
