@@ -1069,6 +1069,61 @@ setTimeout(() => {
   return "Validating Email OTP...";
 }
 
+/**
+ * @param {scope} globals
+ */
+function getBureauOffer(globals) {
+
+  const form = globals.form;
+
+  const mobile =
+    form.customer_details.mobile?.$value || "";
+
+  fetch("https://await-matchbox-certify.ngrok-free.dev/GetBureauOffer", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      mobile
+    })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+
+      console.log("BUREAU OFFER RESPONSE:", data);
+
+      if (data.success) {
+
+        // ✅ Offer Amount
+        globals.functions.setProperty(
+          form.display.loandisplay,
+          {
+            value: data.data.offerAmount
+          }
+        );
+
+        // ✅ EMI
+        globals.functions.setProperty(
+          form.display.emi,
+          {
+            value: data.data.emiAmount
+          }
+        );
+
+      }
+
+    })
+    .catch((err) => {
+
+      console.log("BUREAU OFFER ERROR:", err);
+
+    });
+
+  return "Fetching Bureau Offer...";
+}
+
 /** 
  * @param {scope} globals
  */
