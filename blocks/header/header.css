@@ -285,8 +285,8 @@ header nav .nav-tools {
 /* left logo */
 .header::before {
   content: "";
-  width: 120px;
-  height: 70px;
+  width: 180px;
+  height: 65px;
   background-image: url("/content/dam/puh-logo/bank1.png");
   background-repeat: no-repeat;
   background-size: contain;
