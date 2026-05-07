@@ -1073,12 +1073,8 @@ setTimeout(() => {
  * @param {scope} globals
  */
 function getBureauOffer(globals) {
-  debugger;
-  console.log("GET BUREAU OFFER FUNCTION CALLED");
-  const form = globals.form;
 
-  const mobile =
-    form.customer_details.mobile?.$value || "";
+  const form = globals.form;
 
   fetch("https://await-matchbox-certify.ngrok-free.dev/GetBureauOffer", {
     method: "POST",
@@ -1086,28 +1082,24 @@ function getBureauOffer(globals) {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "true"
     },
-    body: JSON.stringify({
-      mobile
-    })
+    body: JSON.stringify({})
   })
     .then((res) => res.json())
     .then((data) => {
 
-      console.log("BUREAU OFFER RESPONSE:", data);
+      console.log("BUREAU RESPONSE:", data);
 
-      if (data.success) {
+      if (data.success === true) {
 
-        // ✅ Offer Amount
         globals.functions.setProperty(
-          globals.form.display.loandisplay,
+          form.display.loandisplay,
           {
             value: data.data.offerAmount
           }
         );
 
-        // ✅ EMI
         globals.functions.setProperty(
-          globals.form.display.emi,
+          form.display.emi,
           {
             value: data.data.emiAmount
           }
@@ -1116,14 +1108,15 @@ function getBureauOffer(globals) {
       }
 
     })
-    .catch((err) => {
+    .catch((error) => {
 
-      console.log("BUREAU OFFER ERROR:", err);
+      console.log("BUREAU ERROR:", error);
 
     });
 
   return "Fetching Bureau Offer...";
 }
+
 
 /** 
  * @param {scope} globals
