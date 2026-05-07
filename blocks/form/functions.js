@@ -876,7 +876,7 @@ function generateEmailOtp(globals) {
   const form = globals.form;
 
   const email =
-    form.personal_detail.mailid?.$value || "";
+    form.info.addpanel.personal_detail.mailid?.$value || "";
 
   console.log("EMAIL OTP PAYLOAD:", { email });
 
@@ -899,7 +899,7 @@ function generateEmailOtp(globals) {
 
         // ✅ Auto fill OTP field
         globals.functions.setProperty(
-          form.personal_detail.email_otp,
+          form.info.addpanel.personal_detail.email_otp,
           {
             value: data.otp,
             visible: true
@@ -908,7 +908,7 @@ function generateEmailOtp(globals) {
 
         // ✅ Show submit button
         globals.functions.setProperty(
-          form.personal_detail.mail_submit,
+          form.info.addpanel.personal_detail.mail_submit,
           {
             visible: true
           }
@@ -937,10 +937,10 @@ function validateEmailOtp(globals) {
   const form = globals.form;
 
   const email =
-    form.personal_detail.mailid?.$value || "";
+    form.info.addpanel.personal_detail.mailid?.$value || "";
 
   const otp =
-    String(form.personal_detail.email_otp?.$value || "").trim();
+    String(form.info.addpanel.personal_detail.email_otp?.$value || "").trim();
 
   fetch("https://await-matchbox-certify.ngrok-free.dev/validateEmailOTP", {
     method: "POST",
@@ -993,7 +993,7 @@ function validateEmailOtp(globals) {
 
         // ✅ hide otp field
         globals.functions.setProperty(
-          form.personal_detail.email_otp,
+          form.info.addpanel.personal_detail.email_otp,
           {
             visible: false
           }
@@ -1001,7 +1001,7 @@ function validateEmailOtp(globals) {
 
         // ✅ hide submit button
         globals.functions.setProperty(
-          form.personal_detail.mail_submit,
+          form.info.addpanel.personal_detail.mail_submit,
           {
             visible: false
           }
