@@ -3639,3 +3639,10 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
   font-weight: 700;
   color: #222;
 }
+
+.field-full-name,
+.field-full-name .text-wrapper,
+.field-full-name .field-wrapper,
+.field-full-name .field {
+  background: #f4efff !important;
+}
