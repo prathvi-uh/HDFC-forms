@@ -2084,16 +2084,16 @@ fieldset.panel-wrapper.field-personal-detail select {
   box-sizing: border-box !important;
 }
 
-fieldset.panel-wrapper.field-personal-detail .field-verify-email button {
-  width: 100% !important;
-  height: 42px !important;
+/*fieldset.panel-wrapper.field-personal-detail .field-verify-email button {
+  width: 60% !important;
+  height: 35px !important;
   border: 0 !important;
   border-radius: 10px !important;
   background: #5f8dda !important;
   color: #fff !important;
   font-size: 14px !important;
-  font-weight: 700 !important;
-}
+  font-weight: 500 !important;
+}*/
 
 /* ADDRESS DETAILS CARD */
 fieldset.panel-wrapper.field-address-details {
@@ -3329,33 +3329,79 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
 }
 
 
+
 /* =========================================
-   REMOVE TEXTBOX LOOK FROM TICK
+   EMAIL LABEL ON TOP
+========================================= */
+
+.field-mailid {
+    grid-column: 1 / 4 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.field-mailid .field-label {
+    display: block !important;
+
+    margin-bottom: 10px !important;
+
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #7b8794 !important;
+
+    white-space: nowrap !important;
+}
+
+.field-mailid input {
+    width: 100% !important;
+    height: 52px !important;
+
+    padding: 0 18px !important;
+
+    border-radius: 14px !important;
+    border: 1px solid #d9e2ef !important;
+
+    background: #fff !important;
+
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+/* =========================================
+   GREEN TICK CLEAN
 ========================================= */
 
 .field-email-otp-status {
-    width: 34px !important;
-    min-width: 34px !important;
-
-    margin-left: 8px !important;
-    margin-right: 14px !important;
+    grid-column: 4 / 5 !important;
 
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    position: relative !important;
-    top: 8px !important;
+    margin-top: 42px !important;
+
+    width: 42px !important;
+    height: 52px !important;
+
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.field-email-otp-status .field-label {
+    display: none !important;
 }
 
 .field-email-otp-status input {
+    width: auto !important;
+    height: auto !important;
+
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
     outline: none !important;
-
-    width: auto !important;
-    height: auto !important;
 
     padding: 0 !important;
 
@@ -3364,62 +3410,148 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
     font-size: 28px !important;
     font-weight: 700 !important;
 
-    text-align: center !important;
+    line-height: 1 !important;
 }
 
 
 /* =========================================
-   EMAIL ROW ALIGN
+   VERIFY BUTTON
 ========================================= */
 
-.field-mailid,
-.field-email-otp-status,
 .field-verify-email {
-    display: inline-flex !important;
+    grid-column: 5 / 7 !important;
+
+    display: flex !important;
     align-items: center !important;
-    vertical-align: middle !important;
+
+    margin-top: 42px !important;
 }
-
-
-/* =========================================
-   VERIFY BUTTON SMALL
-========================================= */
 
 .field-verify-email button {
-    width: 130px !important;
-    height: 44px !important;
+    min-width: 110px !important;
+    height: 40px !important;
 
-    border-radius: 10px !important;
+    padding: 0 24px !important;
 
-    font-size: 16px !important;
-    font-weight: 700 !important;
+    border-radius: 12px !important;
+    border: 1px solid #c7d2fe !important;
+
+    background: #fff !important;
+    color: #2563eb !important;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
+
+    white-space: nowrap !important;
 }
 
 
 /* =========================================
-   SUBMIT BUTTON FIX
+   OTP FIELD
+========================================= */
+
+.field-email-otp {
+    grid-column: 1 / 4 !important;
+}
+
+.field-email-otp .field-label {
+    display: block !important;
+
+    margin-bottom: 10px !important;
+
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #7b8794 !important;
+}
+
+.field-email-otp input {
+    width: 100% !important;
+    height: 52px !important;
+
+    padding: 0 18px !important;
+
+    border-radius: 14px !important;
+    border: 1px solid #d9e2ef !important;
+
+    background: #fff !important;
+
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+/* =========================================
+   SUBMIT BUTTON
 ========================================= */
 
 .field-mail-submit {
-    display: inline-block !important;
-    margin-left: 16px !important;
-    vertical-align: bottom !important;
+    grid-column: 4 / 5 !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    margin-top: 42px !important;
 }
 
 .field-mail-submit button {
-    width: 140px !important;
-    min-width: 140px !important;
+    min-width: 110px !important;
+    height: 40px !important;
 
-    height: 44px !important;
+    padding: 0 24px !important;
 
-    border-radius: 10px !important;
+    border-radius: 12px !important;
+    border: 1px solid #c7d2fe !important;
 
-    font-size: 16px !important;
-    font-weight: 700 !important;
+    background: #fff !important;
+    color: #2563eb !important;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
 
     white-space: nowrap !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
+}
 
-    padding: 0 20px !important;
+/* FINAL TICK FIX */
+
+.field-email-otp-status {
+    position: absolute !important;
+
+    left: 365px !important;
+    top: 282px !important;
+
+    width: 24px !important;
+    height: 24px !important;
+
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    z-index: 10 !important;
+}
+
+.field-email-otp-status .field-label {
+    display: none !important;
+}
+
+.field-email-otp-status input {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+
+    width: 24px !important;
+    height: 24px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    color: #22c55e !important;
+
+    font-size: 26px !important;
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
 }

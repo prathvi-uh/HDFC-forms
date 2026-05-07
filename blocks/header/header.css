@@ -284,21 +284,14 @@ header nav .nav-tools {
 
 /* left logo */
 .header::before {
-  content: "HDFC BANK";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #0a2d7c;
-  color: #fff;
-  font-size: 14px;      
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  height: 28px;         
-  padding: 0 14px 0 24px; 
-  border: 1px solid #ffffff;
-  box-sizing: border-box;
-  position: relative;
-  box-shadow: inset 10px 0 0 #e21b23; 
+  content: "";
+  width: 120px;
+  height: 70px;
+  background-image: url("/content/dam/puh-logo/bank1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left center;
+  display: block;
 }
 
 /* ✅ FIXED: right secure pill (moved outside) */
