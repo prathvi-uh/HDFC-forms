@@ -942,11 +942,6 @@ function validateEmailOtp(globals) {
   const otp =
     String(form.personal_detail.email_otp?.$value || "").trim();
 
-  console.log("VALIDATE EMAIL OTP PAYLOAD:", {
-    email,
-    otp
-  });
-
   fetch("https://await-matchbox-certify.ngrok-free.dev/validateEmailOTP", {
     method: "POST",
     headers: {
@@ -954,68 +949,113 @@ function validateEmailOtp(globals) {
       "ngrok-skip-browser-warning": "true"
     },
     body: JSON.stringify({
-      email: email,
-      otp: otp
+      email,
+      otp
     })
   })
     .then((res) => res.json())
     .then((data) => {
 
-      console.log("VALIDATE EMAIL OTP RESPONSE:", data);
+      console.log("EMAIL OTP VALIDATION:", data);
 
       if (data.success) {
 
-        // ✅ Verified text
-        globals.functions.setProperty(
-          form.personal_detail.email_otp_status,
-          {
-            value: "✔",
-            visible: true
-          }
-        );
+        // ✅ style verify button as verified
+        setTimeout(() => {
 
-        // ✅ Hide verify button
+          const verifyBtn = document.querySelector(
+            ".field-verify-email button"
+          );
+
+          if (verifyBtn) {
+
+            verifyBtn.innerText = "Verified ✔";
+
+            verifyBtn.style.background = "#16a34a";
+            verifyBtn.style.color = "#ffffff";
+
+            verifyBtn.style.border =
+              "1px solid #16a34a";
+
+            verifyBtn.style.borderRadius = "12px";
+
+            verifyBtn.style.fontWeight = "700";
+
+            verifyBtn.style.cursor = "default";
+
+            verifyBtn.style.boxShadow =
+              "0 2px 8px rgba(22,163,74,0.25)";
+
+            verifyBtn.disabled = true;
+          }
+
+        }, 200);
+
+        // ✅ hide otp field
         globals.functions.setProperty(
-          form.personal_detail.verify,
+          form.personal_detail.email_otp,
           {
             visible: false
           }
         );
 
-        // ✅ Disable submit button
+        // ✅ hide submit button
         globals.functions.setProperty(
           form.personal_detail.mail_submit,
           {
-            enabled: false
+            visible: false
           }
         );
 
       } else {
 
-        // ❌ Invalid OTP
-        globals.functions.setProperty(
-          form.personal_detail.email_otp_status,
-          {
-            value: "Invalid OTP",
-            visible: true
-          }
+        setTimeout(() => {
+
+          const verifyBtn = document.querySelector(
+          ".field-verify-email button"
         );
 
-        // ✅ Enable verify again
-        globals.functions.setProperty(
-          form.personal_detail.verify,
-          {
-            enabled: true
-          }
-        );
+        if (verifyBtn) {
 
-        // ❌ Disable submit
-        globals.functions.setProperty(
-          form.personal_detail.mail_submit,
-          {
-            enabled: false
-          }
-        );
+          verifyBtn.innerText = "Invalid OTP ✖";
+
+          verifyBtn.style.background = "#dc2626";
+          verifyBtn.style.color = "#ffffff";
+
+          verifyBtn.style.border =
+            "1px solid #dc2626";
+
+          verifyBtn.style.borderRadius = "12px";
+
+          verifyBtn.style.fontWeight = "700";
+
+          verifyBtn.style.boxShadow =
+            "0 2px 8px rgba(220,38,38,0.25)";
+        }
+}, 200);
+
+// after 2 sec restore verify button
+setTimeout(() => {
+
+  const verifyBtn = document.querySelector(
+    ".field-verify-email button"
+  );
+
+  if (verifyBtn) {
+
+    verifyBtn.innerText = "Verify";
+
+    verifyBtn.style.background = "#ffffff";
+    verifyBtn.style.color = "#2563eb";
+
+    verifyBtn.style.border =
+      "1px solid #c7d2fe";
+
+    verifyBtn.style.boxShadow = "none";
+
+  }
+
+}, 2000);
 
       }
 
