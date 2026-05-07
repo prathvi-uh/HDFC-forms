@@ -3316,18 +3316,18 @@ button[aria-label="Try Again"]:hover {
    CONFIRM BUTTON POSITION LIKE IMAGE 2
 ========================================= */
 
-main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
+/* main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
   width: 100% !important;
 
   margin-top: 28px !important;
 
   padding-left: 245px !important;  /* aligns with accordion */
 
-  display: block !important;
+ 
 
-  box-sizing: border-box !important;
+  /*box-sizing: border-box !important;
 }
-
+*/
 /* =========================================
    VERIFY BUTTON
 ========================================= */
