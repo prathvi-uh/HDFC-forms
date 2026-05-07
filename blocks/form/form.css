@@ -3729,3 +3729,86 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
 
   padding-left: 18px !important;
 }
+
+/* ===== MATCH LOWER PANEL WIDTH ===== */
+
+.field-full-name {
+  background: #f4efff !important;
+
+  border-radius: 18px !important;
+  border: none !important;
+
+  width: 1200px !important;
+
+  margin-left: 54px !important;
+  margin-top: 20px !important;
+  margin-bottom: 34px !important;
+
+  padding: 26px 32px !important;
+
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+/* clear defaults */
+.field-full-name *,
+.field-full-name .text-wrapper,
+.field-full-name .field-wrapper {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* heading */
+.field-full-name::before {
+  content: "Customer Details";
+
+  display: block;
+
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #082b63 !important;
+
+  margin-bottom: 22px !important;
+}
+
+/* left line */
+.field-full-name::after {
+  content: "";
+
+  position: absolute;
+
+  left: 40px;
+  top: 98px;
+
+  width: 4px;
+  height: 62px;
+
+  border-radius: 10px;
+  background: #c7b5ff;
+}
+
+/* label */
+.field-full-name label,
+.field-full-name .label {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+
+  color: #8b8b8b !important;
+
+  margin-left: 28px !important;
+  margin-bottom: 10px !important;
+
+  display: block;
+}
+
+/* value */
+.field-full-name input,
+.field-full-name textarea {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+
+  color: #222 !important;
+
+  padding-left: 28px !important;
+}
