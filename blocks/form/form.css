@@ -3556,50 +3556,73 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
     line-height: 1 !important;
 }
 
-/* Customer Details heading */
-.field-full-name::before {
-  content: "Customer Details";
-  display: block;
-  font-size: 18px;
-  font-weight: 600;
-  color: #1f1f1f;
-  margin-bottom: 14px;
-}
-
-/* Main card */
+/* Main wrapper */
 .field-full-name {
-  background: #f3efff;
-  border-radius: 14px;
-  padding: 18px 20px;
-  margin-top: 16px;
-  border: none;
-}
-
-/* Remove old borders/background */
-.field-full-name .text-wrapper {
+  margin-top: 20px;
   border: none !important;
   background: transparent !important;
   padding: 0 !important;
+}
+
+/* Heading outside card */
+.field-full-name::before {
+  content: "Customer Details";
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f1f1f;
+
+  margin-bottom: 14px;
+  padding-left: 6px;
+}
+
+/* Purple card */
+.field-full-name .text-wrapper {
+  background: #f4efff !important;
+  border-radius: 16px;
+  padding: 18px 20px !important;
+  border: none !important;
+
+  position: relative;
+}
+
+/* Vertical line */
+.field-full-name .text-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  bottom: 18px;
+  width: 3px;
+  border-radius: 4px;
+  background: #c8b6ff;
 }
 
 /* Label */
 .field-full-name label,
 .field-full-name .label {
   font-size: 12px;
-  color: #7d7d7d;
+  color: #7a7a7a;
   font-weight: 500;
+
+  margin-left: 14px;
   margin-bottom: 6px;
   display: block;
 }
 
-/* Value/Input */
+/* Value */
 .field-full-name input,
 .field-full-name textarea {
   border: none !important;
   background: transparent !important;
-  font-size: 16px;
-  font-weight: 600;
-  color: #222;
-  padding: 0 !important;
   box-shadow: none !important;
+
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+
+  padding-left: 14px !important;
 }
