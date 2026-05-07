@@ -1098,7 +1098,7 @@ function getBureauOffer(globals) {
 
         // ✅ Offer Amount
         globals.functions.setProperty(
-          form.display.loandisplay,
+          globals.form.display.loandisplay,
           {
             value: data.data.offerAmount
           }
@@ -1106,7 +1106,7 @@ function getBureauOffer(globals) {
 
         // ✅ EMI
         globals.functions.setProperty(
-          form.display.emi,
+          globals.form.display.emi,
           {
             value: data.data.emiAmount
           }
