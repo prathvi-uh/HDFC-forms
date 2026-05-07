@@ -663,6 +663,7 @@ function verifyOtp(globals) {
        // });
 
         globals.functions.setProperty(form.nameaadhar.aadharname.customer.full,{
+          visible:true,
           value: data.name
         });
         
