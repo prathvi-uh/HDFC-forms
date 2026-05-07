@@ -1074,6 +1074,7 @@ setTimeout(() => {
  */
 function getBureauOffer(globals) {
   debugger;
+  console.log("GET BUREAU OFFER FUNCTION CALLED");
   const form = globals.form;
 
   const mobile =
