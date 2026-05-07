@@ -3415,96 +3415,77 @@ main .form form .button-wrapper.field-confirm.field-wrapper.col-12 {
     font-weight: 600 !important;
 }
 
+/* ===== CUSTOMER DETAIL SECTION ===== */
+.panel-wrapper.field-customer.field-wrapper.col-12 {
+    width: 86%;
+    margin-left: 15px;
+    margin-bottom: 30px;
 
-
-/* ===== CUSTOMER DETAILS FINAL ===== */
-
-.field-full-name {
-  width: 1185px !important;
-
-  margin-left: 54px !important;
-  margin-top: 20px !important;
-  margin-bottom: 36px !important;
-
-  border: none !important;
-  background: transparent !important;
+    border: none;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
-/* Heading */
-.field-full-name::before {
-  content: "Customer Details";
+/* ===== TITLE ===== */
+.panel-wrapper.field-customer.field-wrapper.col-12 > legend.field-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1f2937;
 
-  display: block;
-
-  font-size: 18px;
-  font-weight: 700;
-  color: #082b63;
-
-  margin-bottom: 14px;
+    margin-bottom: 12px;
+    padding: 0;
 }
 
-/* Purple card */
-.field-full-name .text-wrapper {
-  background: #f4efff !important;
+/* ===== PURPLE CARD ===== */
+.panel-wrapper.field-customer.field-wrapper.col-12 .text-wrapper {
+    width: 90%;
 
-  border-radius: 16px !important;
-  padding: 18px 22px 18px 22px !important;
+    background: #f4efff !important;
 
-  position: relative;
+    border-left: 3px solid #b9a5ff;
+    border-radius: 14px;
 
-  width: 100%;
-  box-sizing: border-box;
+    padding: 18px 24px !important;
+
+    box-sizing: border-box;
 }
 
-/* Left purple line */
-.field-full-name .text-wrapper::before {
-  content: "";
+/* ===== LABEL ===== */
+.panel-wrapper.field-customer.field-wrapper.col-12 label {
+    display: block;
 
-  position: absolute;
+    font-size: 11px;
+    font-weight: 500;
+    color: #7c8594;
 
-  left: 14px;
-  top: 18px;
-
-  width: 3px;
-  height: 44px;
-
-  border-radius: 10px;
-  background: #c7b4ff;
+    margin-bottom: 6px;
 }
 
-/* Remove AEM defaults */
-.field-full-name .field-wrapper,
-.field-full-name .field {
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
+/* ===== INPUT ===== */
+.panel-wrapper.field-customer.field-wrapper.col-12 input,
+.panel-wrapper.field-customer.field-wrapper.col-12 .form-control {
+    border: none !important;
+    background: transparent !important;
+
+    box-shadow: none !important;
+    outline: none !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+
+    height: auto !important;
 }
 
-/* Label */
-.field-full-name label,
-.field-full-name .label {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  color: #8a8a8a !important;
-
-  margin-left: 14px !important;
-  margin-bottom: 6px !important;
-
-  display: block;
-
-  background: transparent !important;
-}
-
-/* Value */
-.field-full-name input,
-.field-full-name textarea {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  color: #222 !important;
-
-  padding-left: 14px !important;
+/* ===== REMOVE FRAMEWORK DEFAULTS ===== */
+.panel-wrapper.field-customer.field-wrapper.col-12 fieldset,
+.panel-wrapper.field-customer.field-wrapper.col-12 .field-wrapper {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
 }
