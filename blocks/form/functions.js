@@ -662,7 +662,7 @@ function verifyOtp(globals) {
           visible: true
         });
 
-        globals.functions.setProperty(form.full, {
+        globals.functions.setProperty(form.customer.full, {
           value: data.name
         });
         
