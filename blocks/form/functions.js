@@ -1073,7 +1073,7 @@ setTimeout(() => {
  * @param {scope} globals
  */
 function getBureauOffer(globals) {
-
+  debugger;
   const form = globals.form;
 
   const mobile =
