@@ -2990,6 +2990,19 @@ fieldset.panel-wrapper.field-eincome
   transition: all 0.25s ease;
 }
 
+/* hide all logos first */
+
+.field-banklogo .field-wrapper,
+.field-banklogo .image-wrapper {
+    display: none !important;
+}
+
+/* only active logo visible */
+
+.field-banklogo .active-bank {
+    display: flex !important;
+}
+
 /* VIEW LOAN ELIGIBILITY BUTTON */
 .button-wrapper.field-view-loan-eligibility {
   margin-top: 22px !important;
