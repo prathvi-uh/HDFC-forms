@@ -3430,11 +3430,12 @@ button[aria-label="Try Again"]:hover {
 
     border-radius: 12px !important;
 
+    background: #22c55e !important;
     background-color: #22c55e !important;
 
     border: 1px solid #22c55e !important;
 
-    color: #111827 !important;
+    color: #ffffff !important;
 
     font-size: 15px !important;
     font-weight: 700 !important;
@@ -3443,7 +3444,7 @@ button[aria-label="Try Again"]:hover {
     align-items: center !important;
     justify-content: center !important;
 
-    box-shadow: 0 2px 8px rgba(34,197,94,0.18) !important;
+    box-shadow: 0 2px 8px rgba(34,197,94,0.20) !important;
 
     white-space: nowrap !important;
 }
