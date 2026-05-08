@@ -1194,7 +1194,6 @@ function generateWorkEmailOtp(globals) {
   return "Generating Work Email OTP...";
 }
 
-
 /**
  * @param {scope} globals
  */
@@ -1232,7 +1231,7 @@ function validateWorkEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-            ".field-verify-work-email-button .button"
+            ".field-verify-work-email-button button"
           );
 
           if (verifyBtn) {
@@ -1240,7 +1239,6 @@ function validateWorkEmailOtp(globals) {
             verifyBtn.innerText = "Verified ✔";
 
             verifyBtn.style.background = "#ffffff";
-
             verifyBtn.style.color = "#2563eb";
 
             verifyBtn.style.border =
@@ -1252,9 +1250,9 @@ function validateWorkEmailOtp(globals) {
 
             verifyBtn.style.fontSize = "16px";
 
-            verifyBtn.style.height = "48px";
+            verifyBtn.style.height = "50px";
 
-            verifyBtn.style.minWidth = "160px";
+            verifyBtn.style.width = "160px";
 
             verifyBtn.style.padding = "0 28px";
 
@@ -1268,6 +1266,10 @@ function validateWorkEmailOtp(globals) {
             verifyBtn.style.justifyContent = "center";
 
             verifyBtn.style.cursor = "default";
+
+            verifyBtn.style.whiteSpace = "nowrap";
+
+            verifyBtn.disabled = true;
           }
 
         }, 200);
@@ -1296,7 +1298,7 @@ function validateWorkEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-            ".field-verify-work-email-button .button"
+            ".field-verify-work-email-button button"
           );
 
           if (verifyBtn) {
@@ -1324,7 +1326,7 @@ function validateWorkEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-            ".field-verify-work-email-button .button"
+            ".field-verify-work-email-button button"
           );
 
           if (verifyBtn) {
