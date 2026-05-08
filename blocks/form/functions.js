@@ -979,7 +979,7 @@ function validateEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-            ".field-verify-email button"
+           ".field-verify-work-email-button .button"
           );
 
           if (verifyBtn) {
@@ -1027,7 +1027,7 @@ function validateEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-          ".field-verify-email button"
+          ".field-verify-work-email-button .button"
         );
 
         if (verifyBtn) {
@@ -1053,7 +1053,7 @@ function validateEmailOtp(globals) {
 setTimeout(() => {
 
   const verifyBtn = document.querySelector(
-    ".field-verify-email button"
+    ".field-verify-work-email-button .button"
   );
 
   if (verifyBtn) {
