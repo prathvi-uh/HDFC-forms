@@ -863,25 +863,20 @@ function proceedApi(globals) {
             visible: false
           });
 
-          globals.functions.setProperty(form.plain_text1776842284462,{
+          globals.functions.setProperty(form.offer.plain_text1776842284462,{
             visible:false
           });
 
-          globals.functions.setProperty(form.display,{
+          globals.functions.setProperty(form.offer.display,{
             visible:false
           });
 
-          globals.functions.setProperty(form.loanamt,{
+          globals.functions.setProperty(form.offer.loanamt,{
             visible:false
           });
 
-          globals.functions.setProperty(form.loantenure,{
+          globals.functions.setProperty(form.offer.loantenure,{
             visible:false
-          });
-
-
-          globals.functions.setProperty(form.display, {
-            visible: false
           });
 
           globals.functions.setProperty(form.proceed, {
