@@ -1117,7 +1117,61 @@ function getBureauOffer(globals) {
   return "Fetching Bureau Offer...";
 }
 
+/**
+ * @param {scope} globals
+ */
+export function highlightBank(globals) {
 
+  const form = globals.form;
+
+  // Default HDFC on load
+  if (!form.eincome.bank?.$value) {
+
+    globals.functions.setProperty(
+      form.eincome.bank,
+      {
+        value: "HDFC"
+      }
+    );
+  }
+
+  setTimeout(() => {
+
+    const selectedBank =
+      form.eincome.bank?.$value || "HDFC";
+
+    console.log("SELECTED BANK:", selectedBank);
+
+    // remove old highlights
+    document.querySelectorAll(".bank-active")
+      .forEach((el) => {
+        el.classList.remove("bank-active");
+      });
+
+    // all bank logos
+    const logos =
+      document.querySelectorAll(
+        '[data-name="banklogo"] img'
+      );
+
+    logos.forEach((logo) => {
+
+      const alt =
+        (logo.alt || "").toLowerCase();
+
+      if (
+        selectedBank.toLowerCase().includes(alt)
+      ) {
+
+        logo.closest("div")
+          ?.classList.add("bank-active");
+      }
+    });
+
+  }, 300);
+
+  return "Bank Highlighted";
+}
 
 /** 
  * @param {scope} globals
@@ -1131,6 +1185,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, proceedApi, handleOtpInvalid, calculateEMI,generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, stopInvalidOtp,initOtpState, 
+  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, highlightBank, handleOtpSuccess, proceedApi, handleOtpInvalid, calculateEMI,generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, stopInvalidOtp,initOtpState, 
 };
  
