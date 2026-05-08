@@ -979,7 +979,7 @@ function validateEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-           ".field-verify-work-email-button .button"
+           ".field-verify-email button"
           );
 
           if (verifyBtn) {
@@ -1027,7 +1027,7 @@ function validateEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-          ".field-verify-work-email-button .button"
+          ".field-verify-email button"
         );
 
         if (verifyBtn) {
@@ -1053,7 +1053,7 @@ function validateEmailOtp(globals) {
 setTimeout(() => {
 
   const verifyBtn = document.querySelector(
-    ".field-verify-work-email-button .button"
+    ".field-verify-email button"
   );
 
   if (verifyBtn) {
@@ -1232,7 +1232,7 @@ function validateWorkEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-            ".verify_work_email_button button"
+            ".field-verify-work-email-button .button"
           );
 
           if (verifyBtn) {
@@ -1283,7 +1283,7 @@ function validateWorkEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-            ".verify_work_email_button button"
+            ".field-verify-work-email-button .button"
           );
 
           if (verifyBtn) {
@@ -1310,7 +1310,7 @@ function validateWorkEmailOtp(globals) {
         setTimeout(() => {
 
           const verifyBtn = document.querySelector(
-            ".verify_work_email_button button"
+            ".field-verify-work-email-button .button"
           );
 
           if (verifyBtn) {
