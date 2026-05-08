@@ -867,7 +867,7 @@ function proceedApi(globals) {
             visible:false
           });
 
-          globals.functions.setProperty(form.plain_text1776842284462,{
+          globals.functions.setProperty(form.display,{
             visible:false
           });
 
