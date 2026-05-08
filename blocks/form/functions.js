@@ -847,11 +847,11 @@ function proceedApi(globals) {
         console.log("PROCEED ERROR:", data.message);
 
         if (!data.success) {
-            globals.functions.setProperty(form.offer.error, {
+            globals.functions.setProperty(form.error, {
             visible: true
           });
 
-            globals.functions.setProperty(form.offer.error, {
+            globals.functions.setProperty(form.error, {
             value: data.message,
           });
 
@@ -863,23 +863,7 @@ function proceedApi(globals) {
             visible: false
           });
 
-          globals.functions.setProperty(form.offer.plain_text1776842284462,{
-            visible:false
-          });
-
-          globals.functions.setProperty(form.offer.display,{
-            visible:false
-          });
-
-          globals.functions.setProperty(form.offer.loanamt,{
-            visible:false
-          });
-
-          globals.functions.setProperty(form.offer.loantenure,{
-            visible:false
-          });
-
-          globals.functions.setProperty(form.proceed, {
+          globals.functions.setProperty(form.offer,{
             visible:false
           });
 
