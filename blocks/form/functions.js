@@ -848,8 +848,11 @@ function proceedApi(globals) {
 
         if (!data.success) {
             globals.functions.setProperty(form.offer.error, {
-            value: data.message,
             visible: true
+          });
+
+            globals.functions.setProperty(form.offer.error, {
+            value: data.message,
           });
 
            globals.functions.setProperty(form.proceed, {
