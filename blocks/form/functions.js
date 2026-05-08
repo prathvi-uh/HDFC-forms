@@ -863,6 +863,10 @@ function proceedApi(globals) {
             visible: false
           });
 
+          globals.functions.setProperty(form.display, {
+            visible: false
+          });
+
           globals.functions.setProperty(form.offer,{
             visible:false
           });
