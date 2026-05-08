@@ -1140,7 +1140,7 @@ function generateWorkEmailOtp(globals) {
   const form = globals.form;
 
   const email =
-    form.info.addpanel.det.work_email_id_panel.work_email?.$value || "";
+    form.info.addpanel.det.work_email_id_panel.work_email_id?.$value || "";
 
   console.log("WORK EMAIL OTP PAYLOAD:", { email });
 
@@ -1203,7 +1203,7 @@ function validateWorkEmailOtp(globals) {
   const form = globals.form;
 
   const email =
-    form.info.addpanel.det.work_email_id_panel.work_email?.$value || "";
+    form.info.addpanel.det.work_email_id_panel.work_email_id?.$value || "";
 
   const otp =
     String(
