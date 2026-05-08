@@ -3489,3 +3489,10 @@ button[aria-label="Try Again"]:hover {
     margin: 0;
     background: transparent;
 }
+
+.bank-active {
+  border: 2px solid #2563eb !important;
+  border-radius: 14px !important;
+  box-shadow: 0 0 0 3px #dbeafe !important;
+  transform: scale(1.03);
+}
