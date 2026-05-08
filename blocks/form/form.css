@@ -3415,6 +3415,37 @@ button[aria-label="Try Again"]:hover {
     font-weight: 600 !important;
 }
 
+/* =========================================
+   WORK EMAIL VERIFY BUTTON
+========================================= */
+
+.field-verify-work-email-button {
+    grid-column: 5 / 7 !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    margin-top: 42px !important;
+}
+
+.field-verify-work-email-button button {
+    min-width: 110px !important;
+    height: 40px !important;
+
+    padding: 0 24px !important;
+
+    border-radius: 12px !important;
+    border: 1px solid #c7d2fe !important;
+
+    background: #fff !important;
+    color: #2563eb !important;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
+
+    white-space: nowrap !important;
+}
+
 /* ===== CUSTOMER DETAIL SECTION ===== */
 .panel-wrapper.field-customer.field-wrapper.col-12 {
     width: 86%;
