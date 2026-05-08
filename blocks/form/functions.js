@@ -1261,7 +1261,7 @@ function validateWorkEmailOtp(globals) {
             verifyBtn.style.boxShadow =
               "0 2px 10px rgba(37,99,235,0.12)";
 
-            verifyBtn.style.display = "flex";
+            verifyBtn.style.display = "inline-flex";
 
             verifyBtn.style.alignItems = "center";
 
