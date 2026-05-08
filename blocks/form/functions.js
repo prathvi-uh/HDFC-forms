@@ -1361,6 +1361,43 @@ function validateWorkEmailOtp(globals) {
   return "Validating Work Email OTP...";
 }
 
+/**
+ * @param {scope} globals
+ */
+function selectBankLogo(globals) {
+
+  const form = globals.form;
+
+  const selectedBank =
+    form.eincome.bank?.$value || "HDFC";
+
+  // remove old active
+  document.querySelectorAll(".bank-logo").forEach((el) => {
+    el.classList.remove("active-bank");
+  });
+
+  // map dropdown value → logo class
+  const bankMap = {
+    "HDFC": ".logo-hdfc",
+    "ICIC": ".logo-icic",
+    "Axis": ".logo-axis",
+    "Kotak": ".logo-kotak",
+    "SBI": ".logo-sbi",
+    "Baroda": ".logo-baroda",
+    "First Bank": ".logo-firstbank"
+  };
+
+  const target = document.querySelector(
+    bankMap[selectedBank]
+  );
+
+  if (target) {
+    target.classList.add("active-bank");
+  }
+
+  return selectedBank;
+}
+
 /** 
  * @param {scope} globals
  */
@@ -1373,6 +1410,6 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, proceedApi, handleOtpInvalid, generateWorkEmailOtp,validateWorkEmailOtp, calculateEMI,generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, stopInvalidOtp,initOtpState, 
+  getFullName, days, submitFormArrayToString, selectBankLogo, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, proceedApi, handleOtpInvalid, generateWorkEmailOtp,validateWorkEmailOtp, calculateEMI,generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, stopInvalidOtp,initOtpState, 
 };
  

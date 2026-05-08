@@ -2972,6 +2972,24 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
   display: none !important;
 }
 
+/* ACTIVE BANK LOGO */
+
+fieldset.panel-wrapper.field-eincome
+  > .panel-wrapper.field-banklogo
+  .active-bank {
+
+  border: 2px solid #2563eb !important;
+
+  background: #eef4ff !important;
+
+  box-shadow:
+    0 4px 14px rgba(37, 99, 235, 0.18) !important;
+
+  transform: translateY(-2px);
+
+  transition: all 0.25s ease;
+}
+
 /* VIEW LOAN ELIGIBILITY BUTTON */
 .button-wrapper.field-view-loan-eligibility {
   margin-top: 22px !important;
