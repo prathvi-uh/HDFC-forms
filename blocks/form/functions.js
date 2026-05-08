@@ -863,6 +863,23 @@ function proceedApi(globals) {
             visible: false
           });
 
+          globals.functions.setProperty(form.plain_text1776842284462,{
+            visible:false
+          });
+
+          globals.functions.setProperty(form.plain_text1776842284462,{
+            visible:false
+          });
+
+          globals.functions.setProperty(form.loanamt,{
+            visible:false
+          });
+
+          globals.functions.setProperty(form.loantenure,{
+            visible:false
+          });
+
+
           globals.functions.setProperty(form.display, {
             visible: false
           });
