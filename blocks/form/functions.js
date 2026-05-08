@@ -1132,6 +1132,214 @@ function getBureauOffer(globals) {
   return "Fetching Bureau Offer...";
 }
 
+/**
+ * @param {scope} globals
+ */
+function generateWorkEmailOtp(globals) {
+
+  const form = globals.form;
+
+  const email =
+    form.info.addpanel.det.work_email_id_panel.work_email?.$value || "";
+
+  console.log("WORK EMAIL OTP PAYLOAD:", { email });
+
+  fetch("https://await-matchbox-certify.ngrok-free.dev/generateEmailOTP", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      email: email
+    })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+
+      console.log("WORK EMAIL OTP RESPONSE:", data);
+
+      if (data.success) {
+
+        // ✅ Auto fill OTP field
+        globals.functions.setProperty(
+          form.info.addpanel.det.work_email_id_panel.otp_work,
+          {
+            value: data.otp,
+            visible: true
+          }
+        );
+
+        // ✅ Show submit button
+        globals.functions.setProperty(
+          form.info.addpanel.det.work_email_id_panel.mail_submits,
+          {
+            visible: true
+          }
+        );
+
+      } else {
+
+        console.log("WORK EMAIL OTP ERROR:", data.message);
+
+      }
+
+    })
+    .catch((err) => {
+
+      console.log("WORK EMAIL OTP API ERROR:", err);
+
+    });
+
+  return "Generating Work Email OTP...";
+}
+
+
+/**
+ * @param {scope} globals
+ */
+function validateWorkEmailOtp(globals) {
+
+  const form = globals.form;
+
+  const email =
+    form.info.addpanel.det.work_email_id_panel.work_email?.$value || "";
+
+  const otp =
+    String(
+      form.info.addpanel.det.work_email_id_panel.otp_work?.$value || ""
+    ).trim();
+
+  fetch("https://await-matchbox-certify.ngrok-free.dev/validateEmailOTP", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      email,
+      otp
+    })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+
+      console.log("WORK EMAIL OTP VALIDATION:", data);
+
+      // ✅ SUCCESS
+      if (data.success) {
+
+        setTimeout(() => {
+
+          const verifyBtn = document.querySelector(
+            ".verify_work_email_button button"
+          );
+
+          if (verifyBtn) {
+
+            verifyBtn.innerText = "Verified ✔";
+
+            verifyBtn.style.background = "#16a34a";
+            verifyBtn.style.color = "#ffffff";
+
+            verifyBtn.style.border =
+              "1px solid #16a34a";
+
+            verifyBtn.style.borderRadius = "12px";
+
+            verifyBtn.style.fontWeight = "700";
+
+            verifyBtn.style.cursor = "default";
+
+            verifyBtn.style.boxShadow =
+              "0 2px 8px rgba(22,163,74,0.25)";
+
+            verifyBtn.disabled = true;
+          }
+
+        }, 200);
+
+        // ✅ hide otp field
+        globals.functions.setProperty(
+          form.info.addpanel.det.work_email_id_panel.otp_work,
+          {
+            visible: false
+          }
+        );
+
+        // ✅ hide submit button
+        globals.functions.setProperty(
+          form.info.addpanel.det.work_email_id_panel.mail_submits,
+          {
+            visible: false
+          }
+        );
+
+      }
+
+      // ❌ INVALID OTP
+      else {
+
+        setTimeout(() => {
+
+          const verifyBtn = document.querySelector(
+            ".verify_work_email_button button"
+          );
+
+          if (verifyBtn) {
+
+            verifyBtn.innerText = "Invalid OTP ✖";
+
+            verifyBtn.style.background = "#dc2626";
+            verifyBtn.style.color = "#ffffff";
+
+            verifyBtn.style.border =
+              "1px solid #dc2626";
+
+            verifyBtn.style.borderRadius = "12px";
+
+            verifyBtn.style.fontWeight = "700";
+
+            verifyBtn.style.boxShadow =
+              "0 2px 8px rgba(220,38,38,0.25)";
+          }
+
+        }, 200);
+
+        // restore button
+        setTimeout(() => {
+
+          const verifyBtn = document.querySelector(
+            ".verify_work_email_button button"
+          );
+
+          if (verifyBtn) {
+
+            verifyBtn.innerText = "Verify";
+
+            verifyBtn.style.background = "#ffffff";
+            verifyBtn.style.color = "#2563eb";
+
+            verifyBtn.style.border =
+              "1px solid #c7d2fe";
+
+            verifyBtn.style.boxShadow = "none";
+          }
+
+        }, 2000);
+
+      }
+
+    })
+    .catch((err) => {
+
+      console.log("VALIDATE WORK EMAIL OTP ERROR:", err);
+
+    });
+
+  return "Validating Work Email OTP...";
+}
+
 
 /** 
  * @param {scope} globals
