@@ -2864,7 +2864,7 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
   visibility: hidden !important;
 }
 
-/* MAIN PANEL - ONLY WHEN VISIBLE */
+/* MAIN PANEL - ONLY WHEN VISIBLE 
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) {
   max-width: 900px !important;
   width: 100% !important;
@@ -2884,7 +2884,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) {
   align-items: center !important;
 }
 
-/* HEADER */
+/* HEADER 
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-label {
   grid-column: 1 / -1 !important;
   width: calc(100% + 56px) !important;
@@ -2899,7 +2899,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-
   box-sizing: border-box !important;
 }
 
-/* HEADER ICON */
+/* HEADER ICON 
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-label::before {
   content: "";
   position: absolute;
@@ -2911,7 +2911,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
-/* LOGOS LEFT */
+/* LOGOS LEFT 
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo {
   grid-column: 1 !important;
   grid-row: 2 !important;
@@ -2923,7 +2923,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrappe
   padding: 0 !important;
 }
 
-/* DROPDOWN RIGHT */
+/* DROPDOWN RIGHT 
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .drop-down-wrapper.field-bank {
   grid-column: 2 !important;
   grid-row: 2 !important;
@@ -2944,7 +2944,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .drop-down-wr
   box-sizing: border-box !important;
 }
 
-/* LOGO CARD */
+/* LOGO CARD 
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo .image-wrapper,
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo .field-wrapper {
   width: 72px !important;
@@ -2961,7 +2961,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrappe
   box-sizing: border-box !important;
 }
 
-/* LOGO IMAGE */
+/* LOGO IMAGE 
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo img {
   width: 46px !important;
   height: 46px !important;
@@ -2972,31 +2972,6 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
   display: none !important;
 }
 
-/* ACTIVE BANK LOGO */
-
-fieldset.panel-wrapper.field-eincome
-  > .panel-wrapper.field-banklogo
-  .active-bank {
-
-  border: 2px solid #2563eb !important;
-
-  background: #eef4ff !important;
-
-  box-shadow:
-    0 4px 14px rgba(37, 99, 235, 0.18) !important;
-
-  transform: translateY(-2px);
-
-  transition: all 0.25s ease;
-
-  display: flex !important;
-}
-
-/* hide all logos */
-
-.field-banklogo .image-wrapper {
-    display: none !important;
-}
 
 /* VIEW LOAN ELIGIBILITY BUTTON */
 .button-wrapper.field-view-loan-eligibility {
@@ -3550,3 +3525,85 @@ button[aria-label="Try Again"]:hover {
     background: transparent;
 }
 
+/* LOGO CONTAINER */
+
+.field-logoburrae .plain-text-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    flex-wrap: wrap !important;
+}
+
+/* COMMON LOGO STYLE */
+
+.field-logoburrae .bank-logo {
+
+    width: 72px !important;
+    height: 72px !important;
+
+    border: 1px solid #dfe6f2 !important;
+    border-radius: 14px !important;
+
+    background-color: #fff !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 46px 46px !important;
+
+    transition: all 0.25s ease !important;
+}
+
+/* HDFC */
+
+.field-logoburrae .hdfc-logo {
+    background-image: url("/content/dam/puh-logo/hdfc3.png") !important;
+}
+
+/* ICICI */
+
+.field-logoburrae .icic-logo {
+    background-image: url("/content/dam/puh-logo/icic.png") !important;
+}
+
+/* AXIS */
+
+.field-logoburrae .axis-logo {
+    background-image: url("/content/dam/puh-logo/axis.png") !important;
+}
+
+/* KOTAK */
+
+.field-logoburrae .kotak-logo {
+    background-image: url("/content/dam/puh-logo/kotak1.jpeg") !important;
+}
+
+/* SBI */
+
+.field-logoburrae .sbi-logo {
+    background-image: url("/content/dam/puh-logo/sbi.png") !important;
+}
+
+/* BARODA */
+
+.field-logoburrae .baroda-logo {
+    background-image: url("/content/dam/puh-logo/baroda.png") !important;
+}
+
+/* IDFC */
+
+.field-logoburrae .idfc-logo {
+    background-image: url("/content/dam/puh-logo/idfc1.png") !important;
+}
+
+/* ACTIVE */
+
+.field-logoburrae .active-bank {
+
+    border: 2px solid #2563eb !important;
+
+    background-color: #eef4ff !important;
+
+    box-shadow:
+      0 4px 14px rgba(37,99,235,0.18) !important;
+
+    transform: translateY(-2px);
+}
