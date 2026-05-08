@@ -1239,22 +1239,35 @@ function validateWorkEmailOtp(globals) {
 
             verifyBtn.innerText = "Verified ✔";
 
-            verifyBtn.style.background = "#16a34a";
-            verifyBtn.style.color = "#ffffff";
+            verifyBtn.style.background = "#ffffff";
+
+            verifyBtn.style.color = "#2563eb";
 
             verifyBtn.style.border =
-              "1px solid #16a34a";
+              "1px solid #c7d2fe";
 
-            verifyBtn.style.borderRadius = "12px";
+            verifyBtn.style.borderRadius = "16px";
 
             verifyBtn.style.fontWeight = "700";
 
-            verifyBtn.style.cursor = "default";
+            verifyBtn.style.fontSize = "16px";
+
+            verifyBtn.style.height = "48px";
+
+            verifyBtn.style.minWidth = "160px";
+
+            verifyBtn.style.padding = "0 28px";
 
             verifyBtn.style.boxShadow =
-              "0 2px 8px rgba(22,163,74,0.25)";
+              "0 2px 10px rgba(37,99,235,0.12)";
 
-            verifyBtn.disabled = true;
+            verifyBtn.style.display = "flex";
+
+            verifyBtn.style.alignItems = "center";
+
+            verifyBtn.style.justifyContent = "center";
+
+            verifyBtn.style.cursor = "default";
           }
 
         }, 200);
@@ -1291,6 +1304,7 @@ function validateWorkEmailOtp(globals) {
             verifyBtn.innerText = "Invalid OTP ✖";
 
             verifyBtn.style.background = "#dc2626";
+
             verifyBtn.style.color = "#ffffff";
 
             verifyBtn.style.border =
@@ -1318,10 +1332,15 @@ function validateWorkEmailOtp(globals) {
             verifyBtn.innerText = "Verify";
 
             verifyBtn.style.background = "#ffffff";
+
             verifyBtn.style.color = "#2563eb";
 
             verifyBtn.style.border =
               "1px solid #c7d2fe";
+
+            verifyBtn.style.borderRadius = "12px";
+
+            verifyBtn.style.fontWeight = "600";
 
             verifyBtn.style.boxShadow = "none";
           }
@@ -1339,7 +1358,6 @@ function validateWorkEmailOtp(globals) {
 
   return "Validating Work Email OTP...";
 }
-
 
 /** 
  * @param {scope} globals
