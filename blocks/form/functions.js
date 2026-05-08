@@ -1366,37 +1366,44 @@ function validateWorkEmailOtp(globals) {
  */
 function selectBankLogo(globals) {
 
-  const form = globals.form;
+  const bank =
+    String(globals.form.eincome.bank?.$value || "")
+      .toLowerCase()
+      .trim();
 
-  const selectedBank =
-    form.eincome.bank?.$value || "HDFC";
+  // remove previous active
+  document
+    .querySelectorAll(".field-banklogo .image-wrapper")
+    .forEach((el) => {
+      el.classList.remove("active-bank");
+    });
 
-  // remove old active
-  document.querySelectorAll(".bank-logo").forEach((el) => {
-    el.classList.remove("active-bank");
-  });
-
-  // map dropdown value → logo class
-  const bankMap = {
-    "HDFC": ".logo-hdfc",
-    "ICIC": ".logo-icic",
-    "Axis": ".logo-axis",
-    "Kotak": ".logo-kotak",
-    "SBI": ".logo-sbi",
-    "Baroda": ".logo-baroda",
-    "First Bank": ".logo-firstbank"
+  // map dropdown value to class
+  const map = {
+    hdfc: ".field-hdfc",
+    icic: ".field-icic",
+    axis: ".field-axis",
+    kotak: ".field-kotak",
+    sbi: ".field-sbi",
+    baroda: ".field-baroda",
+    "first bank": ".field-first"
   };
 
-  const target = document.querySelector(
-    bankMap[selectedBank]
-  );
+  const selector = map[bank];
 
-  if (target) {
-    target.classList.add("active-bank");
+  if (selector) {
+
+    const logo =
+      document.querySelector(selector);
+
+    if (logo) {
+      logo.classList.add("active-bank");
+    }
   }
 
-  return selectedBank;
+  return bank;
 }
+
 
 /** 
  * @param {scope} globals

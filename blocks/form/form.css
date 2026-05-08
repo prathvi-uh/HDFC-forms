@@ -2988,19 +2988,14 @@ fieldset.panel-wrapper.field-eincome
   transform: translateY(-2px);
 
   transition: all 0.25s ease;
+
+  display: flex !important;
 }
 
-/* hide all logos first */
+/* hide all logos */
 
-.field-banklogo .field-wrapper,
 .field-banklogo .image-wrapper {
     display: none !important;
-}
-
-/* only active logo visible */
-
-.field-banklogo .active-bank {
-    display: flex !important;
 }
 
 /* VIEW LOAN ELIGIBILITY BUTTON */
