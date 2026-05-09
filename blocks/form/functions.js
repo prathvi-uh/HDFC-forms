@@ -738,6 +738,34 @@ function handleInvalidFlow(globals) {
 /**
  * @param {scope} globals
  */
+function retryOtpFlow(globals) {
+
+  const form = globals.form;
+
+  // reset attempts
+  window.otpAttemptsLeft = 3;
+
+  // hide zero try panel
+  globals.functions.setProperty(form.zerotry, {
+    visible: false
+  });
+
+  // hide tryagain button
+  globals.functions.setProperty(form.tryagain, {
+    visible: false
+  });
+
+  // show first page
+  globals.functions.setProperty(form.personal_loan_offer, {
+    visible: true
+  });
+
+  return "Retry Started";
+}
+
+/**
+ * @param {scope} globals
+ */
 function proceedApi(globals) {
   const form = globals.form;
 
@@ -1385,6 +1413,6 @@ export {
   generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, 
   generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, 
   updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, 
-  stopInvalidOtp,initOtpState, 
+  stopInvalidOtp,initOtpState, retryOtpFlow,
 };
  
