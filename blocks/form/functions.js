@@ -1366,18 +1366,22 @@ function validateWorkEmailOtp(globals) {
  */
 function selectBankLogo(globals) {
 
+  alert("function called");
+
   setTimeout(() => {
 
     const hdfc =
-      document.querySelector(".field-hdfc.image-wrapper");
+      document.querySelector(".field-hdfc");
+
+    console.log(hdfc);
 
     if (hdfc) {
 
-      hdfc.classList.add("active-bank");
+      hdfc.style.border = "3px solid blue";
 
     }
 
-  }, 500);
+  }, 2000);
 
   return "done";
 }
@@ -1394,6 +1398,13 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, selectBankLogo, maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp, handleOtpSuccess, proceedApi, handleOtpInvalid, generateWorkEmailOtp,validateWorkEmailOtp, calculateEMI,generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, stopInvalidOtp,initOtpState, 
+  getFullName, days, submitFormArrayToString, selectBankLogo,
+  maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp,
+  handleOtpSuccess, proceedApi, handleOtpInvalid, 
+  generateWorkEmailOtp,validateWorkEmailOtp, calculateEMI,
+  generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, 
+  generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, 
+  updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, 
+  stopInvalidOtp,initOtpState, 
 };
  
