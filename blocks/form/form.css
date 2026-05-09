@@ -3746,14 +3746,4 @@ button[aria-label="Try Again"]:hover {
       0 0 0 3px rgba(37,99,235,0.08) !important;
 }
 
-/* SHOW ONLY HDFC INITIALLY */
 
-.field-icic,
-.field-axis,
-.field-kotak,
-.field-sbi,
-.field-baroda,
-.field-idfc {
-
-    display: none !important;
-}

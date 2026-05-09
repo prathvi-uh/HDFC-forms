@@ -605,6 +605,10 @@ function reduceOtpAttempt(globals, reason) {
       visible: true
     });
 
+    globals.functions.setProperty(form.tryagain, {
+      visible: true,
+    });
+    
     window.otpAttemptsLeft = undefined;
   }
 
@@ -853,6 +857,10 @@ function proceedApi(globals) {
 
             globals.functions.setProperty(form.error, {
             value: data.message,
+          });
+
+          globals.functions.setProperty(form.tryagain, {
+            visible: true,
           });
 
            globals.functions.setProperty(form.proceed, {
