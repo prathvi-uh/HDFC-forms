@@ -514,7 +514,12 @@ function updateAttemptInfo(globals) {
         visible: true,
       });
     }
-
+    
+    if (globals.form.tryyagain) {
+      globals.functions.setProperty(globals.form.tryagain, {
+        visible: true,
+      });
+    }
     return '';
   }
 
@@ -605,6 +610,10 @@ function reduceOtpAttempt(globals, reason) {
       visible: true
     });
 
+    globals.functions.setProperty(form.tryyagain, {
+      visible: true
+    });
+    
     window.otpAttemptsLeft = undefined;
   }
 
