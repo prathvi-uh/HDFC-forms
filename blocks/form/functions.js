@@ -516,7 +516,7 @@ function updateAttemptInfo(globals) {
     }
     
     if (globals.form.tryyagain) {
-      globals.functions.setProperty(globals.form.tryagain, {
+      globals.functions.setProperty(globals.form.tryyagain, {
         visible: true,
       });
     }
@@ -613,7 +613,7 @@ function reduceOtpAttempt(globals, reason) {
     globals.functions.setProperty(form.tryyagain, {
       visible: true
     });
-    
+
     window.otpAttemptsLeft = undefined;
   }
 
