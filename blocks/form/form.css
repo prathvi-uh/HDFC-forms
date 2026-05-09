@@ -3525,85 +3525,223 @@ button[aria-label="Try Again"]:hover {
     background: transparent;
 }
 
-/* LOGO CONTAINER */
+/* MAIN PANEL */
 
-.field-logoburrae .plain-text-wrapper {
+.field-burrae {
+
     display: flex !important;
-    align-items: center !important;
-    gap: 18px !important;
+
     flex-wrap: wrap !important;
+
+    align-items: center !important;
+
+    gap: 14px !important;
+
+    padding: 22px !important;
+
+    background: #eef3ff !important;
+
+    border: 1px solid #dde6f4 !important;
+
+    border-radius: 18px !important;
 }
 
-/* COMMON LOGO STYLE */
+/* TITLE FULL WIDTH */
 
-.field-logoburrae .bank-logo {
+.field-saltext {
+
+    width: 100% !important;
+
+    margin: 0 0 18px 0 !important;
+}
+
+/* REMOVE INPUT */
+
+.field-saltext input {
+
+    display: none !important;
+}
+
+/* TITLE LABEL */
+
+.field-saltext .field-label {
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 10px !important;
+
+    font-size: 19px !important;
+
+    font-weight: 600 !important;
+
+    color: #233a66 !important;
+
+    margin: 0 !important;
+}
+
+/* ICON */
+
+.field-saltext .field-label::before {
+
+    content: "🏦";
+
+    font-size: 16px !important;
+}
+
+/* LOGO CARD */
+
+.field-burrae .image-wrapper {
 
     width: 72px !important;
+
     height: 72px !important;
 
-    border: 1px solid #dfe6f2 !important;
-    border-radius: 14px !important;
+    min-width: 72px !important;
 
-    background-color: #fff !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: 46px 46px !important;
+    border: 1px solid #dbe3f0 !important;
+
+    border-radius: 10px !important;
+
+    background: #ffffff !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    padding: 8px !important;
+
+    box-sizing: border-box !important;
 
     transition: all 0.25s ease !important;
+
+    cursor: pointer !important;
 }
 
-/* HDFC */
+/* HOVER */
 
-.field-logoburrae .hdfc-logo {
-    background-image: url("/content/dam/puh-logo/hdfc3.png") !important;
+.field-burrae .image-wrapper:hover {
+
+    transform: translateY(-2px) !important;
+
+    box-shadow:
+      0 4px 10px rgba(37,99,235,0.08) !important;
 }
 
-/* ICICI */
+/* DEFAULT LOGO */
 
-.field-logoburrae .icic-logo {
-    background-image: url("/content/dam/puh-logo/icic.png") !important;
+.field-burrae .image-wrapper img {
+
+    width: 42px !important;
+
+    height: 42px !important;
+
+    object-fit: contain !important;
 }
 
-/* AXIS */
+/* CUSTOM SIZES */
 
-.field-logoburrae .axis-logo {
-    background-image: url("/content/dam/puh-logo/axis.png") !important;
+.field-hdfc img {
+
+    width: 50px !important;
+    height: 50px !important;
 }
 
-/* KOTAK */
+.field-icic img {
 
-.field-logoburrae .kotak-logo {
-    background-image: url("/content/dam/puh-logo/kotak1.jpeg") !important;
+    width: 60px !important;
+    height: 60px !important;
 }
 
-/* SBI */
+.field-axis img {
 
-.field-logoburrae .sbi-logo {
-    background-image: url("/content/dam/puh-logo/sbi.png") !important;
+    width: 36px !important;
+    height: 36px !important;
 }
 
-/* BARODA */
+.field-kotak img {
 
-.field-logoburrae .baroda-logo {
-    background-image: url("/content/dam/puh-logo/baroda.png") !important;
+    width: 30px !important;
+    height: 30px !important;
 }
 
-/* IDFC */
+.field-sbi img {
 
-.field-logoburrae .idfc-logo {
-    background-image: url("/content/dam/puh-logo/idfc1.png") !important;
+    width: 36px !important;
+    height: 36px !important;
+}
+
+.field-baroda img {
+
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.field-idfc img {
+
+    width: 60px !important;
+    height: 60px !important;
 }
 
 /* ACTIVE */
 
-.field-logoburrae .active-bank {
+.field-burrae .active-bank {
 
     border: 2px solid #2563eb !important;
 
-    background-color: #eef4ff !important;
+    background: #eef4ff !important;
 
     box-shadow:
-      0 4px 14px rgba(37,99,235,0.18) !important;
+      0 4px 10px rgba(37,99,235,0.14) !important;
+}
 
-    transform: translateY(-2px);
+/* DROPDOWN */
+
+.field-burraecard {
+
+    margin-left: 12px !important;
+
+    width: 320px !important;
+
+    min-width: 320px !important;
+}
+
+/* SELECT */
+
+.field-burraecard select {
+
+    width: 100% !important;
+
+    height: 46px !important;
+
+    border: 1px solid #d6deea !important;
+
+    border-radius: 10px !important;
+
+    background: #ffffff !important;
+
+    padding: 0 16px !important;
+
+    font-size: 14px !important;
+
+    font-weight: 500 !important;
+
+    color: #667085 !important;
+
+    box-sizing: border-box !important;
+}
+
+/* FOCUS */
+
+.field-burraecard select:focus {
+
+    border: 1px solid #2563eb !important;
+
+    outline: none !important;
+
+    box-shadow:
+      0 0 0 3px rgba(37,99,235,0.08) !important;
 }
