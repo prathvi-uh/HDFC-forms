@@ -608,7 +608,7 @@ function reduceOtpAttempt(globals, reason) {
     globals.functions.setProperty(form.tryagain, {
       visible: true,
     });
-    
+
     window.otpAttemptsLeft = undefined;
   }
 
@@ -1369,32 +1369,7 @@ function validateWorkEmailOtp(globals) {
   return "Validating Work Email OTP...";
 }
 
-/**
-* @param {scope} globals
-*/
-function selectBankLogo(globals) {
 
-  setTimeout(() => {
-
-    const hdfc =
-      document.querySelector(".field-hdfc");
-
-    if (hdfc) {
-
-      hdfc.classList.add("active-bank");
-
-      console.log("HDFC highlighted");
-
-    } else {
-
-      console.log("HDFC not found");
-
-    }
-
-  }, 1000);
-
-  return "bank selected";
-}
 /** 
  * @param {scope} globals
  */
@@ -1407,7 +1382,7 @@ function debugForm(globals) {
  
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, selectBankLogo,
+  getFullName, days, submitFormArrayToString, 
   maskMobileNumber, startOtpTimer, stopOtpTimer, handleResendOtp,
   handleOtpSuccess, proceedApi, handleOtpInvalid, 
   generateWorkEmailOtp,validateWorkEmailOtp, calculateEMI,
