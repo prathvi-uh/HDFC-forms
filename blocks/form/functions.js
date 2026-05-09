@@ -1366,44 +1366,100 @@ function validateWorkEmailOtp(globals) {
  */
 function selectBankLogo(globals) {
 
-  const bank =
-    String(globals.form.eincome.bank?.$value || "")
-      .toLowerCase()
-      .trim();
+  const dropdown =
+    document.querySelector(".field-burraecard select");
 
-  // remove previous active
-  document
-    .querySelectorAll(".field-banklogo .image-wrapper")
-    .forEach((el) => {
-      el.classList.remove("active-bank");
-    });
-
-  // map dropdown value to class
-  const map = {
-    hdfc: ".field-hdfc",
-    icic: ".field-icic",
-    axis: ".field-axis",
-    kotak: ".field-kotak",
-    sbi: ".field-sbi",
-    baroda: ".field-baroda",
-    "first bank": ".field-first"
-  };
-
-  const selector = map[bank];
-
-  if (selector) {
-
-    const logo =
-      document.querySelector(selector);
-
-    if (logo) {
-      logo.classList.add("active-bank");
-    }
+  if (!dropdown) {
+    return "";
   }
 
-  return bank;
-}
+  const logos = {
+    HDFC: document.querySelector(".field-hdfc .image-wrapper"),
 
+    ICIC: document.querySelector(".field-icic .image-wrapper"),
+
+    Axis: document.querySelector(".field-axis .image-wrapper"),
+
+    Kotak: document.querySelector(".field-kotak .image-wrapper"),
+
+    SBI: document.querySelector(".field-sbi .image-wrapper"),
+
+    Baroda: document.querySelector(".field-baroda .image-wrapper"),
+
+    IDFC: document.querySelector(".field-idfc .image-wrapper")
+  };
+
+  // remove all active
+  function clearActive() {
+
+    Object.values(logos).forEach((logo) => {
+
+      if (logo) {
+        logo.classList.remove("active-bank");
+      }
+
+    });
+
+  }
+
+  // set active
+  function setActive(bank) {
+
+    clearActive();
+
+    if (logos[bank]) {
+      logos[bank].classList.add("active-bank");
+    }
+
+  }
+
+  // DEFAULT LOAD
+  if (!dropdown.dataset.loaded) {
+
+    dropdown.innerHTML = `
+      <option value="HDFC">HDFC</option>
+      <option value="Other Bank">Other Bank</option>
+    `;
+
+    dropdown.value = "HDFC";
+
+    setActive("HDFC");
+
+    dropdown.dataset.loaded = "true";
+  }
+
+  // ON CHANGE
+  dropdown.addEventListener("change", function () {
+
+    const value = dropdown.value;
+
+    // when other bank selected
+    if (value === "Other Bank") {
+
+      dropdown.innerHTML = `
+        <option value="HDFC">HDFC</option>
+        <option value="ICIC">ICIC</option>
+        <option value="Axis">Axis</option>
+        <option value="Kotak">Kotak</option>
+        <option value="SBI">SBI</option>
+        <option value="Baroda">Baroda</option>
+        <option value="IDFC">IDFC</option>
+      `;
+
+      dropdown.value = "HDFC";
+
+      setActive("HDFC");
+
+      return;
+    }
+
+    // highlight selected bank
+    setActive(value);
+
+  });
+
+  return "Bank Logo Updated";
+}
 
 /** 
  * @param {scope} globals
