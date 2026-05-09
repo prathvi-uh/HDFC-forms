@@ -605,10 +605,6 @@ function reduceOtpAttempt(globals, reason) {
       visible: true
     });
 
-    globals.functions.setProperty(form.tryyagain,{
-      visible:true
-    });
-
     window.otpAttemptsLeft = undefined;
   }
 
