@@ -1362,8 +1362,8 @@ function validateWorkEmailOtp(globals) {
 }
 
 /**
- * @param {scope} globals
- */
+* @param {scope} globals
+*/
 function selectBankLogo(globals) {
 
   setTimeout(() => {
