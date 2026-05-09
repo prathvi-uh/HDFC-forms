@@ -1366,26 +1366,27 @@ function validateWorkEmailOtp(globals) {
  */
 function selectBankLogo(globals) {
 
-  alert("function called");
-
   setTimeout(() => {
 
     const hdfc =
       document.querySelector(".field-hdfc");
 
-    console.log(hdfc);
-
     if (hdfc) {
 
-      hdfc.style.border = "3px solid blue";
+      hdfc.classList.add("active-bank");
+
+      console.log("HDFC highlighted");
+
+    } else {
+
+      console.log("HDFC not found");
 
     }
 
-  }, 2000);
+  }, 1000);
 
-  return "done";
+  return "bank selected";
 }
-
 /** 
  * @param {scope} globals
  */
