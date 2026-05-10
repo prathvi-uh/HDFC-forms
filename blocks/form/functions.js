@@ -1416,8 +1416,13 @@ function validateDob(globals) {
     return "";
   }
 
-  const dob = new Date(dobValue);
+  const parts = dobValue.split("/");
 
+  const month = parseInt(parts[0], 10) - 1;
+  const day = parseInt(parts[1], 10);
+  const year = parseInt(parts[2], 10);
+
+  const dob = new Date(year, month, day);
   const today = new Date();
 
   // REMOVE TIME
