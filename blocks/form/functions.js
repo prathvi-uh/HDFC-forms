@@ -1429,11 +1429,12 @@ function validateDob(globals) {
     globals.functions.setProperty(
       form.personal_loan_offer.date_of_birth,
       {
+        valid: false,
         errorMessage: "Invalid date"
       }
     );
 
-    return "Invalid DOB";
+    return "";
   }
 
   // AGE CALCULATION
@@ -1458,22 +1459,24 @@ function validateDob(globals) {
     globals.functions.setProperty(
       form.personal_loan_offer.date_of_birth,
       {
+        valid: false,
         errorMessage: "Age is less than 18"
       }
     );
 
-    return "Age invalid";
+    return "";
   }
 
-  // CLEAR ERROR
+  // VALID DOB
   globals.functions.setProperty(
     form.personal_loan_offer.date_of_birth,
     {
+      valid: true,
       errorMessage: ""
     }
   );
 
-  return "Valid DOB";
+  return "";
 }
 
 /** 
