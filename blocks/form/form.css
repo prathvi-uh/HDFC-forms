@@ -2980,344 +2980,211 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
 
 }
 
-/* VIEW LOAN ELIGIBILITY BUTTON */
-.button-wrapper.field-view-loan-eligibility {
-  margin-top: 22px !important;
-}
 
-/* BUTTON */
+/* =========================================================
+   ALL PRIMARY BUTTONS
+========================================================= */
+
 .button-wrapper.field-view-loan-eligibility button,
-.button-wrapper.field-view-loan-eligibility .button {
-  width: 190px !important;
-  height: 48px !important;
+.button-wrapper.field-view-loan-eligibility .button,
 
-  background: #b8c7ff !important;
-  border: none !important;
-  border-radius: 12px !important;
-
-  color: #ffffff !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-
-  box-shadow: none !important;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-/* HOVER */
-.button-wrapper.field-view-loan-eligibility button:hover,
-.button-wrapper.field-view-loan-eligibility .button:hover {
-  background: #5f8dda !important;
-}
-
-/* ARROW */
-.button-wrapper.field-view-loan-eligibility button::after,
-.button-wrapper.field-view-loan-eligibility .button::after {
-  content: "›";
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1;
-}
-
-/* RESEND OTP BUTTON WRAPPER */
-.button-wrapper.field-resend-otp {
-  margin-top: 10px !important;
-}
-
-/* RESEND OTP BUTTON */
 .button-wrapper.field-resend-otp button,
-.button-wrapper.field-resend-otp .button {
-  width: 180px !important;
-  height: 48px !important;
+.button-wrapper.field-resend-otp .button,
 
-  background: #5f8dda !important;
-  border: none !important;
-  border-radius: 12px !important;
-
-  color: #ffffff !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-
-  padding: 0 22px !important;
-  cursor: pointer;
-
-  box-shadow: none !important;
-  transition: 0.2s ease;
-}
-
-/* HOVER */
-.button-wrapper.field-resend-otp button:hover,
-.button-wrapper.field-resend-otp .button:hover {
-  background: #4e7ed0 !important;
-}
-
-/* ARROW */
-.button-wrapper.field-resend-otp button::after,
-.button-wrapper.field-resend-otp .button::after {
-  content: "›";
-  font-size: 22px;
-  line-height: 1;
-  font-weight: 600;
-}
-
-/* OTP SUBMIT BUTTON */
 .button-wrapper.field-otp-submit button,
-.button-wrapper.field-otp-submit .button {
-  width: 180px !important;
-  height: 48px !important;
+.button-wrapper.field-otp-submit .button,
 
-  background: #5f8dda !important;
-  border: none !important;
-  border-radius: 12px !important;
-
-  color: #ffffff !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-
-  padding: 0 22px !important;
-  cursor: pointer;
-
-  box-shadow: none !important;
-  transition: 0.2s ease;
-}
-
-/* HOVER */
-.button-wrapper.field-otp-submit button:hover,
-.button-wrapper.field-otp-submit .button:hover {
-  background: #4e7ed0 !important;
-}
-
-/* ARROW */
-.button-wrapper.field-otp-submit button::after,
-.button-wrapper.field-otp-submit .button::after {
-  content: "›";
-  font-size: 22px;
-  line-height: 1;
-  font-weight: 600;
-}
-
-
-/* =========================
-   CONTINUE BUTTON
-========================= */
 .button-wrapper.field-continue button,
-.button-wrapper.field-continue .button {
-  width: 190px !important;
-  height: 52px !important;
-  background: #5f8dda !important;
-  border: none !important;
-  border-radius: 12px !important;
+.button-wrapper.field-continue .button,
 
-  color: #fff !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  padding: 0 24px !important;
-  cursor: pointer;
-  box-shadow: none !important;
-}
-
-.button-wrapper.field-continue button::after,
-.button-wrapper.field-continue .button::after {
-  content: "›";
-  margin-left: 8px;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-
-/* =========================
-   CONBUTTON / CONTINUE
-========================= */
 .button-wrapper.field-conbutton button,
-.button-wrapper.field-conbutton .button {
-  width: 190px !important;
-  height: 52px !important;
-  background: #5f8dda !important;
-  border: none !important;
-  border-radius: 12px !important;
+.button-wrapper.field-conbutton .button,
 
-  color: #fff !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  padding: 0 24px !important;
-  cursor: pointer;
-}
-
-.button-wrapper.field-conbutton button::after,
-.button-wrapper.field-conbutton .button::after {
-  content: "›";
-  margin-left: 8px;
-  font-size: 22px;
-}
-
-
-/* =========================
-   PROCEED BUTTON
-========================= */
 .button-wrapper.field-proceed button,
-.button-wrapper.field-proceed .button {
-  width: 190px !important;
-  height: 52px !important;
-  background: #5f8dda !important;
-  border: none !important;
-  border-radius: 12px !important;
+.button-wrapper.field-proceed .button,
 
-  color: #fff !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  padding: 0 24px !important;
-  cursor: pointer;
-}
-
-.button-wrapper.field-proceed button::after,
-.button-wrapper.field-proceed .button::after {
-  content: "›";
-  margin-left: 8px;
-  font-size: 22px;
-}
-
-
-/* =========================
-   CONFIRM BUTTON
-========================= */
 .button-wrapper.field-confirm button,
 .button-wrapper.field-confirm .button {
-  width: 190px !important;
-  height: 52px !important;
 
-  background: #5f8dda !important;
+  /* SIZE */
+  min-width: 220px !important;
+  height: 56px !important;
+  padding: 0 30px !important;
+
+  /* STYLE */
+  background: #0b57a4 !important;
   border: none !important;
-  border-radius: 12px !important;
+  border-radius: 18px !important;
 
-  color: #fff !important;
-  font-size: 18px !important;
+  /* TEXT */
+  color: #ffffff !important;
+  font-size: 17px !important;
   font-weight: 700 !important;
+  letter-spacing: 0px !important;
 
-  display: flex !important;
+  /* LAYOUT */
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 14px !important;
 
-  padding: 0 24px !important;
-
-  cursor: pointer;
-
+  /* EFFECTS */
+  cursor: pointer !important;
+  box-shadow: none !important;
   transition:
     background 0.25s ease,
-    transform 0.2s ease,
-    box-shadow 0.25s ease !important;
+    transform 0.18s ease,
+    opacity 0.2s ease !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
 
-/* ARROW */
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.button-wrapper.field-view-loan-eligibility button::after,
+.button-wrapper.field-view-loan-eligibility .button::after,
+
+.button-wrapper.field-resend-otp button::after,
+.button-wrapper.field-resend-otp .button::after,
+
+.button-wrapper.field-otp-submit button::after,
+.button-wrapper.field-otp-submit .button::after,
+
+.button-wrapper.field-continue button::after,
+.button-wrapper.field-continue .button::after,
+
+.button-wrapper.field-conbutton button::after,
+.button-wrapper.field-conbutton .button::after,
+
+.button-wrapper.field-proceed button::after,
+.button-wrapper.field-proceed .button::after,
+
 .button-wrapper.field-confirm button::after,
 .button-wrapper.field-confirm .button::after {
+
   content: "›";
-  margin-left: 8px;
-  font-size: 22px;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
 
   transition: transform 0.25s ease;
 }
 
-/* HOVER EFFECT */
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.button-wrapper.field-view-loan-eligibility button:hover,
+.button-wrapper.field-view-loan-eligibility .button:hover,
+
+.button-wrapper.field-resend-otp button:hover,
+.button-wrapper.field-resend-otp .button:hover,
+
+.button-wrapper.field-otp-submit button:hover,
+.button-wrapper.field-otp-submit .button:hover,
+
+.button-wrapper.field-continue button:hover,
+.button-wrapper.field-continue .button:hover,
+
+.button-wrapper.field-conbutton button:hover,
+.button-wrapper.field-conbutton .button:hover,
+
+.button-wrapper.field-proceed button:hover,
+.button-wrapper.field-proceed .button:hover,
+
 .button-wrapper.field-confirm button:hover,
 .button-wrapper.field-confirm .button:hover {
-  background: #4f7fd0 !important;
 
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 20px rgba(95, 141, 218, 0.28) !important;
+  background: #0a4b8f !important;
+  transform: translateY(-1px);
 }
 
-/* ARROW MOVE */
+
+/* ARROW MOVE ON HOVER */
+
+.button-wrapper.field-view-loan-eligibility button:hover::after,
+.button-wrapper.field-view-loan-eligibility .button:hover::after,
+
+.button-wrapper.field-resend-otp button:hover::after,
+.button-wrapper.field-resend-otp .button:hover::after,
+
+.button-wrapper.field-otp-submit button:hover::after,
+.button-wrapper.field-otp-submit .button:hover::after,
+
+.button-wrapper.field-continue button:hover::after,
+.button-wrapper.field-continue .button:hover::after,
+
+.button-wrapper.field-conbutton button:hover::after,
+.button-wrapper.field-conbutton .button:hover::after,
+
+.button-wrapper.field-proceed button:hover::after,
+.button-wrapper.field-proceed .button:hover::after,
+
 .button-wrapper.field-confirm button:hover::after,
 .button-wrapper.field-confirm .button:hover::after {
+
   transform: translateX(3px);
 }
 
-/* CLICK EFFECT */
-.button-wrapper.field-confirm button:active,
-.button-wrapper.field-confirm .button:active {
-  transform: translateY(0);
+
+/* =========================================================
+   ACTIVE / CLICK
+========================================================= */
+
+.button-wrapper button:active,
+.button-wrapper .button:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================================================
+   DISABLED STATE
+========================================================= */
+
+.button-wrapper button:disabled,
+.button-wrapper .button.disabled,
+.button-wrapper .button[disabled] {
+
+  background: #0b57a4 !important;
+  opacity: 0.55 !important;
+
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+
+  transform: none !important;
   box-shadow: none !important;
 }
 
 
-/* =========================
-   HOVER EFFECT FOR ALL
-========================= */
-.button-wrapper.field-continue button:hover,
-.button-wrapper.field-conbutton button:hover,
-.button-wrapper.field-proceed button:hover,
-.button-wrapper.field-confirm button:hover {
-  background: #4e7ed0 !important;
+/* DISABLED ARROW */
+
+.button-wrapper button:disabled::after,
+.button-wrapper .button.disabled::after,
+.button-wrapper .button[disabled]::after {
+
+  transform: none !important;
+  opacity: 0.9;
 }
 
-/* =========================
-   TRY AGAIN BUTTON
-========================= */
 
-button[aria-label="Try Again"] {
-  width: 190px !important;
-  height: 52px !important;
+/* =========================================================
+   OPTIONAL SPACING
+========================================================= */
 
-  background: #5f8dda !important;
-  border: none !important;
-  border-radius: 12px !important;
+.button-wrapper.field-view-loan-eligibility,
+.button-wrapper.field-resend-otp,
+.button-wrapper.field-otp-submit,
+.button-wrapper.field-continue,
+.button-wrapper.field-conbutton,
+.button-wrapper.field-proceed,
+.button-wrapper.field-confirm {
 
-  color: #ffffff !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  font-family: roboto, sans-serif !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  cursor: pointer !important;
-  box-shadow: none !important;
-  transition: 0.3s ease !important;
-}
-
-/* Arrow */
-button[aria-label="Try Again"]::after {
-  content: "›";
-  margin-left: 8px;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-/* Hover */
-button[aria-label="Try Again"]:hover {
-  background: #4e7ed0 !important;
+  margin-top: 14px !important;
 }
 
 /* =========================================
