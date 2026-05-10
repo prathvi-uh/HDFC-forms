@@ -1402,6 +1402,69 @@ function validateWorkEmailOtp(globals) {
   return "Validating Work Email OTP...";
 }
 
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
+function validateDob(globals) {
+
+  const dobField = globals.form.personal_loan_offer.date_of_birth;
+
+  if (!dobField || !dobField.$value) {
+    return '';
+  }
+
+  const dobValue = dobField.$value;
+  const dob = new Date(dobValue);
+  const today = new Date();
+
+  /* RESET ERROR */
+  globals.functions.setProperty(dobField, {
+    errorMessage: '',
+  });
+
+  /* INVALID DATE */
+  if (isNaN(dob.getTime())) {
+    globals.functions.setProperty(dobField, {
+      errorMessage: 'Invalid date of birth',
+    });
+
+    return '';
+  }
+
+  /* FUTURE DATE CHECK */
+  if (dob > today) {
+    globals.functions.setProperty(dobField, {
+      errorMessage: 'Invalid date of birth',
+    });
+
+    return '';
+  }
+
+  /* AGE CALCULATION */
+  let age = today.getFullYear() - dob.getFullYear();
+
+  const monthDifference = today.getMonth() - dob.getMonth();
+
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < dob.getDate())
+  ) {
+    age--;
+  }
+
+  /* AGE VALIDATION */
+  if (age < 18) {
+    globals.functions.setProperty(dobField, {
+      errorMessage: 'Age must be above 18',
+    });
+
+    return '';
+  }
+
+  return '';
+}
+
 
 /** 
  * @param {scope} globals
@@ -1422,6 +1485,6 @@ export {
   generateEmailOtp, restoreReviewLoanDetails,getBureauOffer, 
   generateOtp, debugForm,starttimer, verifyOtp,handleInvalidFlow, 
   updateAttemptInfo, reduceOtpAttempt, validateEmailOtp, 
-  stopInvalidOtp,initOtpState, retryOtpFlow,
+  stopInvalidOtp,initOtpState, retryOtpFlow, validateDob,
 };
  
