@@ -1401,7 +1401,6 @@ function validateWorkEmailOtp(globals) {
 
   return "Validating Work Email OTP...";
 }
-
 /**
  * @param {scope} globals
  * @returns {string}
@@ -1410,61 +1409,82 @@ function validateDob(globals) {
 
   const dobField = globals.form.personal_loan_offer.date_of_birth;
 
-  if (!dobField || !dobField.$value) {
+  if (!dobField) {
     return '';
   }
 
   const dobValue = dobField.$value;
+
+  /* EMPTY */
+  if (!dobValue) {
+
+    globals.functions.setProperty(dobField, {
+      valid: false,
+      errorMessage: 'Enter Date of Birth',
+    });
+
+    return '';
+  }
+
   const dob = new Date(dobValue);
   const today = new Date();
 
-  /* RESET ERROR */
-  globals.functions.setProperty(dobField, {
-    errorMessage: '',
-  });
-
   /* INVALID DATE */
   if (isNaN(dob.getTime())) {
+
     globals.functions.setProperty(dobField, {
+      valid: false,
       errorMessage: 'Invalid date of birth',
     });
 
     return '';
   }
 
-  /* FUTURE DATE CHECK */
+  /* FUTURE DATE */
   if (dob > today) {
+
     globals.functions.setProperty(dobField, {
+      valid: false,
       errorMessage: 'Invalid date of birth',
     });
 
     return '';
   }
 
-  /* AGE CALCULATION */
+  /* AGE */
   let age = today.getFullYear() - dob.getFullYear();
 
   const monthDifference = today.getMonth() - dob.getMonth();
 
   if (
     monthDifference < 0 ||
-    (monthDifference === 0 && today.getDate() < dob.getDate())
+    (
+      monthDifference === 0 &&
+      today.getDate() < dob.getDate()
+    )
   ) {
     age--;
   }
 
-  /* AGE VALIDATION */
+  /* BELOW 18 */
   if (age < 18) {
+
     globals.functions.setProperty(dobField, {
+      valid: false,
       errorMessage: 'Age must be above 18',
     });
 
     return '';
   }
 
+  /* VALID */
+  globals.functions.setProperty(dobField, {
+    valid: true,
+    errorMessage: '',
+  });
+
   return '';
 }
-
 
 /** 
  * @param {scope} globals
