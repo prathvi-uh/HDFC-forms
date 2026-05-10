@@ -760,7 +760,7 @@ function retryOtpFlow(globals) {
   });
 
   // hide tryagain button
-  globals.functions.setProperty(form.tryagain, {
+  globals.functions.setProperty(form.tryyagain, {
     visible: false
   });
 
