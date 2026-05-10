@@ -2864,7 +2864,7 @@ fieldset.panel-wrapper.field-type-of-loan-panel {
   visibility: hidden !important;
 }
 
-/* MAIN PANEL - ONLY WHEN VISIBLE 
+/* MAIN PANEL - ONLY WHEN VISIBLE */
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) {
   max-width: 900px !important;
   width: 100% !important;
@@ -2884,7 +2884,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) {
   align-items: center !important;
 }
 
-/* HEADER 
+/* HEADER */
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-label {
   grid-column: 1 / -1 !important;
   width: calc(100% + 56px) !important;
@@ -2899,7 +2899,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-
   box-sizing: border-box !important;
 }
 
-/* HEADER ICON 
+/* HEADER ICON */
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-label::before {
   content: "";
   position: absolute;
@@ -2911,7 +2911,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > legend.field-
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232f63e5' viewBox='0 0 24 24'%3E%3Cpath d='M3 7l9-4 9 4v2H3V7zm2 4h14v8H5v-8zm-2 10h18v2H3v-2z'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
-/* LOGOS LEFT 
+/* LOGOS LEFT */
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo {
   grid-column: 1 !important;
   grid-row: 2 !important;
@@ -2923,7 +2923,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrappe
   padding: 0 !important;
 }
 
-/* DROPDOWN RIGHT 
+/* DROPDOWN RIGHT */
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .drop-down-wrapper.field-bank {
   grid-column: 2 !important;
   grid-row: 2 !important;
@@ -2944,7 +2944,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .drop-down-wr
   box-sizing: border-box !important;
 }
 
-/* LOGO CARD 
+/* LOGO CARD */
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo .image-wrapper,
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo .field-wrapper {
   width: 72px !important;
@@ -2961,7 +2961,7 @@ fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrappe
   box-sizing: border-box !important;
 }
 
-/* LOGO IMAGE 
+/* LOGO IMAGE */
 fieldset.panel-wrapper.field-eincome:not([data-visible="false"]) > .panel-wrapper.field-banklogo img {
   width: 46px !important;
   height: 46px !important;
@@ -3525,225 +3525,5 @@ button[aria-label="Try Again"]:hover {
     background: transparent;
 }
 
-/* MAIN PANEL */
-
-.field-burrae {
-
-    display: flex !important;
-
-    flex-wrap: wrap !important;
-
-    align-items: center !important;
-
-    gap: 14px !important;
-
-    padding: 22px !important;
-
-    background: #eef3ff !important;
-
-    border: 1px solid #dde6f4 !important;
-
-    border-radius: 18px !important;
-}
-
-/* TITLE FULL WIDTH */
-
-.field-saltext {
-
-    width: 100% !important;
-
-    margin: 0 0 18px 0 !important;
-}
-
-/* REMOVE INPUT */
-
-.field-saltext input {
-
-    display: none !important;
-}
-
-/* TITLE LABEL */
-
-.field-saltext .field-label {
-
-    display: flex !important;
-
-    align-items: center !important;
-
-    gap: 10px !important;
-
-    font-size: 19px !important;
-
-    font-weight: 600 !important;
-
-    color: #233a66 !important;
-
-    margin: 0 !important;
-}
-
-/* ICON */
-
-.field-saltext .field-label::before {
-
-    content: "🏦";
-
-    font-size: 16px !important;
-}
-
-/* LOGO CARD */
-
-.field-burrae .image-wrapper {
-
-    width: 72px !important;
-
-    height: 72px !important;
-
-    min-width: 72px !important;
-
-    border: 1px solid #dbe3f0 !important;
-
-    border-radius: 10px !important;
-
-    background: #ffffff !important;
-
-    display: flex !important;
-
-    align-items: center !important;
-
-    justify-content: center !important;
-
-    padding: 8px !important;
-
-    box-sizing: border-box !important;
-
-    transition: all 0.25s ease !important;
-
-    cursor: pointer !important;
-}
-
-/* HOVER */
-
-.field-burrae .image-wrapper:hover {
-
-    transform: translateY(-2px) !important;
-
-    box-shadow:
-      0 4px 10px rgba(37,99,235,0.08) !important;
-}
-
-/* DEFAULT LOGO */
-
-.field-burrae .image-wrapper img {
-
-    width: 42px !important;
-
-    height: 42px !important;
-
-    object-fit: contain !important;
-}
-
-/* CUSTOM SIZES */
-
-.field-hdfc img {
-
-    width: 50px !important;
-    height: 50px !important;
-}
-
-.field-icic img {
-
-    width: 60px !important;
-    height: 60px !important;
-}
-
-.field-axis img {
-
-    width: 36px !important;
-    height: 36px !important;
-}
-
-.field-kotak img {
-
-    width: 30px !important;
-    height: 30px !important;
-}
-
-.field-sbi img {
-
-    width: 36px !important;
-    height: 36px !important;
-}
-
-.field-baroda img {
-
-    width: 40px !important;
-    height: 40px !important;
-}
-
-.field-idfc img {
-
-    width: 60px !important;
-    height: 60px !important;
-}
-
-/* ACTIVE */
-
-.field-burrae .active-bank {
-
-    border: 2px solid #2563eb !important;
-
-    background: #eef4ff !important;
-
-    box-shadow:
-      0 4px 10px rgba(37,99,235,0.14) !important;
-}
-
-/* DROPDOWN */
-
-.field-burraecard {
-
-    margin-left: 12px !important;
-
-    width: 320px !important;
-
-    min-width: 320px !important;
-}
-
-/* SELECT */
-
-.field-burraecard select {
-
-    width: 100% !important;
-
-    height: 46px !important;
-
-    border: 1px solid #d6deea !important;
-
-    border-radius: 10px !important;
-
-    background: #ffffff !important;
-
-    padding: 0 16px !important;
-
-    font-size: 14px !important;
-
-    font-weight: 500 !important;
-
-    color: #667085 !important;
-
-    box-sizing: border-box !important;
-}
-
-/* FOCUS */
-
-.field-burraecard select:focus {
-
-    border: 1px solid #2563eb !important;
-
-    outline: none !important;
-
-    box-shadow:
-      0 0 0 3px rgba(37,99,235,0.08) !important;
-}
 
 
