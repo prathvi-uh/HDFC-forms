@@ -892,8 +892,8 @@ function proceedApi(globals) {
             value: data.message,
           });
 
-          globals.functions.setProperty(form.tryagain, {
-            visible: true,
+          globals.functions.setProperty(form.tryyagain, {
+            visible: true
           });
 
            globals.functions.setProperty(form.proceed, {
