@@ -1404,78 +1404,77 @@ function validateWorkEmailOtp(globals) {
 
 /**
  * @param {scope} globals
- * @returns {string}
  */
 function validateDob(globals) {
 
-  const dob = globals.form.personal_loan_offer.date_of_birth?.$value || '';
+  const form = globals.form;
 
-  /* LET REQUIRED VALIDATION HANDLE EMPTY */
-  if (!dob) {
-    return '';
+  const dobValue =
+    form.personal_loan_offer.date_of_birth?.$value;
+
+  if (!dobValue) {
+    return "";
   }
 
-  const selectedDate = new Date(dob);
+  const dob = new Date(dobValue);
+
   const today = new Date();
 
-  /* FUTURE / INVALID DATE */
-  if (
-    isNaN(selectedDate.getTime()) ||
-    selectedDate > today
-  ) {
+  // REMOVE TIME
+  today.setHours(0, 0, 0, 0);
+
+  // FUTURE DATE
+  if (dob > today) {
 
     globals.functions.setProperty(
-      globals.form.personal_loan_offer.date_of_birth,
+      form.personal_loan_offer.date_of_birth,
       {
-        value: '',
-        errorMessage: 'Invalid date of birth',
+        errorMessage: "Invalid date"
       }
     );
 
-    return '';
+    return "Invalid DOB";
   }
 
-  /* AGE CALCULATION */
-  let age = today.getFullYear() - selectedDate.getFullYear();
+  // AGE CALCULATION
+  let age = today.getFullYear() - dob.getFullYear();
 
-  const monthDifference =
-    today.getMonth() - selectedDate.getMonth();
+  const monthDiff =
+    today.getMonth() - dob.getMonth();
 
   if (
-    monthDifference < 0 ||
+    monthDiff < 0 ||
     (
-      monthDifference === 0 &&
-      today.getDate() < selectedDate.getDate()
+      monthDiff === 0 &&
+      today.getDate() < dob.getDate()
     )
   ) {
     age--;
   }
 
-  /* BELOW 18 */
+  // LESS THAN 18
   if (age < 18) {
 
     globals.functions.setProperty(
-      globals.form.personal_loan_offer.date_of_birth,
+      form.personal_loan_offer.date_of_birth,
       {
-        value: '',
-        errorMessage: 'Age must be above 18',
+        errorMessage: "Age is less than 18"
       }
     );
 
-    return '';
+    return "Age invalid";
   }
 
-  /* VALID DOB */
+  // CLEAR ERROR
   globals.functions.setProperty(
-    globals.form.personal_loan_offer.date_of_birth,
+    form.personal_loan_offer.date_of_birth,
     {
-      errorMessage: '',
+      errorMessage: ""
     }
   );
 
-  return '';
+  return "Valid DOB";
 }
-
 
 /** 
  * @param {scope} globals
