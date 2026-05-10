@@ -2973,6 +2973,7 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
 }
 
 .field-tryagain button {
+    background: #0b57a4 !important;
 
     border-radius: 18px !important;
 
