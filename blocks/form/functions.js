@@ -1484,13 +1484,13 @@ function validateDob(globals) {
   }
 
   // VALID DOB
-  globals.functions.setProperty(
-    form.personal_loan_offer.date_of_birth,
-    {
-      valid: true,
-      errorMessage: ""
-    }
-  );
+ // globals.functions.setProperty(
+    //form.personal_loan_offer.date_of_birth,
+    //{
+     // valid: true,
+     // errorMessage: ""
+    //}
+  //);
 
   return "";
 }
