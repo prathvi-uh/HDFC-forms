@@ -1409,21 +1409,28 @@ function validateDob(globals) {
 
   const form = globals.form;
 
-  const dobValue =
-    form.personal_loan_offer.date_of_birth?.$value;
+  const dobField =
+    form.personal_loan_offer.date_of_birth;
 
-  if (!dobValue) {
+  const dobVal =
+    dobField?.$value
+      ? dobField.$value.toString().trim()
+      : "";
+
+  // EMPTY
+  if (dobVal === "") {
     return "";
   }
 
-  // SAFE DATE PARSE
-  const dob = new Date(dobValue);
+  const birthDate = new Date(dobVal);
 
-  // INVALID DATE CHECK
-  if (isNaN(dob.getTime())) {
+  const today = new Date();
+
+  // INVALID DATE
+  if (isNaN(birthDate.getTime())) {
 
     globals.functions.setProperty(
-      form.personal_loan_offer.date_of_birth,
+      dobField,
       {
         valid: false,
         errorMessage: "Invalid date"
@@ -1433,16 +1440,14 @@ function validateDob(globals) {
     return "";
   }
 
-  const today = new Date();
-
-  // REMOVE TIME
+  birthDate.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
   // FUTURE DATE
-  if (dob > today) {
+  if (birthDate > today) {
 
     globals.functions.setProperty(
-      form.personal_loan_offer.date_of_birth,
+      dobField,
       {
         valid: false,
         errorMessage: "Invalid date"
@@ -1454,26 +1459,26 @@ function validateDob(globals) {
 
   // AGE CALCULATION
   let age =
-    today.getFullYear() - dob.getFullYear();
+    today.getFullYear() - birthDate.getFullYear();
 
   const monthDiff =
-    today.getMonth() - dob.getMonth();
+    today.getMonth() - birthDate.getMonth();
 
   if (
     monthDiff < 0 ||
     (
       monthDiff === 0 &&
-      today.getDate() < dob.getDate()
+      today.getDate() < birthDate.getDate()
     )
   ) {
     age--;
   }
 
-  // AGE BELOW 18
+  // AGE LESS THAN 18
   if (age < 18) {
 
     globals.functions.setProperty(
-      form.personal_loan_offer.date_of_birth,
+      dobField,
       {
         valid: false,
         errorMessage: "Age is less than 18"
@@ -1483,18 +1488,16 @@ function validateDob(globals) {
     return "";
   }
 
-  // VALID DOB
- // globals.functions.setProperty(
-    //form.personal_loan_offer.date_of_birth,
-    //{
-     // valid: true,
-     // errorMessage: ""
-    //}
-  //);
+  // CLEAR ERROR ONLY
+  globals.functions.setProperty(
+    dobField,
+    {
+      errorMessage: ""
+    }
+  );
 
   return "";
 }
-
 /** 
  * @param {scope} globals
  */
