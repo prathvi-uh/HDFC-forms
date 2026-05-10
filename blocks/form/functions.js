@@ -1488,13 +1488,6 @@ function validateDob(globals) {
     return "";
   }
 
-  // CLEAR ERROR ONLY
-  globals.functions.setProperty(
-    dobField,
-    {
-      errorMessage: ""
-    }
-  );
 
   return "";
 }
