@@ -2972,6 +2972,13 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
   display: none !important;
 }
 
+.field-tryagain button {
+
+    border-radius: 18px !important;
+
+    padding: 14px 40px !important;
+
+}
 
 /* VIEW LOAN ELIGIBILITY BUTTON */
 .button-wrapper.field-view-loan-eligibility {
@@ -3197,6 +3204,60 @@ main .form form div.button-wrapper.field-conbutton[data-visible="false"] {
   content: "›";
   margin-left: 8px;
   font-size: 22px;
+}
+
+/* ========================================
+   REMOVE ALL HOVER / EFFECTS
+======================================== */
+
+button,
+.button {
+
+    transition: none !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+}
+
+/* NO HOVER EFFECT */
+
+button:hover,
+.button:hover {
+
+    background: inherit !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+
+    filter: none !important;
+}
+
+/* ========================================
+   COMMON BUTTON STYLE
+======================================== */
+
+button,
+.button {
+
+    border-radius: 18px !important;
+}
+
+/* KEEP ONLY ARROW */
+
+button::after,
+.button::after {
+
+    content: "›";
+
+    margin-left: 8px !important;
+
+    font-size: 22px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1 !important;
 }
 
 
