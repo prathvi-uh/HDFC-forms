@@ -1416,13 +1416,23 @@ function validateDob(globals) {
     return "";
   }
 
-  const parts = dobValue.split("/");
+  // SAFE DATE PARSE
+  const dob = new Date(dobValue);
 
-  const month = parseInt(parts[0], 10) - 1;
-  const day = parseInt(parts[1], 10);
-  const year = parseInt(parts[2], 10);
+  // INVALID DATE CHECK
+  if (isNaN(dob.getTime())) {
 
-  const dob = new Date(year, month, day);
+    globals.functions.setProperty(
+      form.personal_loan_offer.date_of_birth,
+      {
+        valid: false,
+        errorMessage: "Invalid date"
+      }
+    );
+
+    return "";
+  }
+
   const today = new Date();
 
   // REMOVE TIME
@@ -1443,7 +1453,8 @@ function validateDob(globals) {
   }
 
   // AGE CALCULATION
-  let age = today.getFullYear() - dob.getFullYear();
+  let age =
+    today.getFullYear() - dob.getFullYear();
 
   const monthDiff =
     today.getMonth() - dob.getMonth();
@@ -1458,7 +1469,7 @@ function validateDob(globals) {
     age--;
   }
 
-  // LESS THAN 18
+  // AGE BELOW 18
   if (age < 18) {
 
     globals.functions.setProperty(
